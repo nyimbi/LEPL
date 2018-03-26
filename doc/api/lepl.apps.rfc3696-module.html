@@ -1,0 +1,757 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lepl.apps.rfc3696</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lepl-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lepl-module.html">Package&nbsp;lepl</a> ::
+        <a href="lepl.apps-module.html">Package&nbsp;apps</a> ::
+        Module&nbsp;rfc3696
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lepl.apps.rfc3696-module.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module rfc3696</h1><p class="nomargin-top"><span class="codelink"><a href="lepl.apps.rfc3696-pysrc.html">source&nbsp;code</a></span></p>
+<p>Matchers for validating URIs and related objects, taken from RFC3696.</p>
+<p>IMPORTANT - the emphasis here is on validation of user input.
+These matchers are not exact matches for the underlying specs - they are
+just useful practical approximations.  Read RFC3696 to see what I mean
+(or the quotes from that doc in the source below).</p>
+
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Functions</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Functions"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_guarantee_bool"></a><span class="summary-sig-name">_guarantee_bool</span>(<span class="summary-sig-arg">function</span>)</span><br />
+      A decorator that guarantees a true/false response.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.apps.rfc3696-pysrc.html#_guarantee_bool">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_matcher_to_validator"></a><span class="summary-sig-name">_matcher_to_validator</span>(<span class="summary-sig-arg">factory</span>)</span><br />
+      Generate a validator based on the given matcher factory.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.apps.rfc3696-pysrc.html#_matcher_to_validator">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_LimitLength"></a><span class="summary-sig-name">_LimitLength</span>(<span class="summary-sig-arg">matcher</span>,
+        <span class="summary-sig-arg">length</span>)</span><br />
+      Reject a match if it exceeds a certain length.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.apps.rfc3696-pysrc.html#_LimitLength">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_RejectRegexp"></a><span class="summary-sig-name">_RejectRegexp</span>(<span class="summary-sig-arg">matcher</span>,
+        <span class="summary-sig-arg">pattern</span>)</span><br />
+      Reject a match if it matches a (ie some other) regular expression</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.apps.rfc3696-pysrc.html#_RejectRegexp">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_LimitIntValue"></a><span class="summary-sig-name">_LimitIntValue</span>(<span class="summary-sig-arg">matcher</span>,
+        <span class="summary-sig-arg">max</span>)</span><br />
+      Reject a match if the value exceeds some value.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.apps.rfc3696-pysrc.html#_LimitIntValue">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_LimitCount"></a><span class="summary-sig-name">_LimitCount</span>(<span class="summary-sig-arg">matcher</span>,
+        <span class="summary-sig-arg">char</span>,
+        <span class="summary-sig-arg">max</span>)</span><br />
+      Reject a match if the number of times a particular character occurs exceeds
+some value.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.apps.rfc3696-pysrc.html#_LimitCount">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.apps.rfc3696-module.html#_PreferredFullyQualifiedDnsName" class="summary-sig-name" onclick="show_private();">_PreferredFullyQualifiedDnsName</a>()</span><br />
+      A matcher for DNS names.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.apps.rfc3696-pysrc.html#_PreferredFullyQualifiedDnsName">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.apps.rfc3696-module.html#_IpV4Address" class="summary-sig-name" onclick="show_private();">_IpV4Address</a>()</span><br />
+      A matcher for IPv4 addresses.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.apps.rfc3696-pysrc.html#_IpV4Address">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.apps.rfc3696-module.html#_Ipv6Address" class="summary-sig-name" onclick="show_private();">_Ipv6Address</a>()</span><br />
+      A matcher for IPv6 addresses.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.apps.rfc3696-pysrc.html#_Ipv6Address">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.apps.rfc3696-module.html#_EmailLocalPart" class="summary-sig-name" onclick="show_private();">_EmailLocalPart</a>()</span><br />
+      A matcher for the local part (&quot;username&quot;) of an email address.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.apps.rfc3696-pysrc.html#_EmailLocalPart">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_Email"></a><span class="summary-sig-name">_Email</span>()</span><br />
+      A matcher for email addresses.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.apps.rfc3696-pysrc.html#_Email">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="Email"></a><span class="summary-sig-name">Email</span>()</span><br />
+      Generate a validator for emails, according to RFC3696, which returns True
+if the email is valid, and False otherwise.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.apps.rfc3696-pysrc.html#Email">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.apps.rfc3696-module.html#_HttpUrl" class="summary-sig-name" onclick="show_private();">_HttpUrl</a>()</span><br />
+      A matcher for HTTP URLs.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.apps.rfc3696-pysrc.html#_HttpUrl">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="HttpUrl"></a><span class="summary-sig-name">HttpUrl</span>()</span><br />
+      Generate a validator for HTTP URLs, according to RFC3696, which returns
+True if the email is valid, and False otherwise.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.apps.rfc3696-pysrc.html#HttpUrl">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.apps.rfc3696-module.html#MailToUrl" class="summary-sig-name">MailToUrl</a>()</span><br />
+      Generate a validator for email addresses, according to RFC3696, which 
+returns True if the URL is valid, and False otherwise.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.apps.rfc3696-pysrc.html#MailToUrl">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== VARIABLES ==================== -->
+<a name="section-Variables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Variables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_HEX"></a><span class="summary-name">_HEX</span> = <code title="digits+ 'abcdef'+ 'ABCDEF'">digits+ 'abcdef'+ 'ABCDEF'</code>
+    </td>
+  </tr>
+</table>
+<!-- ==================== FUNCTION DETAILS ==================== -->
+<a name="section-FunctionDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Function Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-FunctionDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="_PreferredFullyQualifiedDnsName"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_PreferredFullyQualifiedDnsName</span>()</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.apps.rfc3696-pysrc.html#_PreferredFullyQualifiedDnsName">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>A matcher for DNS names.</p>
+<p>RFC 3696:</p>
+<p>Any characters, or combination of bits (as octets), are permitted in
+DNS names.  However, there is a preferred form that is required by
+most applications.  This preferred form has been the only one
+permitted in the names of top-level domains, or TLDs.  In general, it
+is also the only form permitted in most second-level names registered
+in TLDs, although some names that are normally not seen by users obey
+other rules.  It derives from the original ARPANET rules for the
+naming of hosts (i.e., the &quot;hostname&quot; rule) and is perhaps better
+described as the &quot;LDH rule&quot;, after the characters that it permits.
+The LDH rule, as updated, provides that the labels (words or strings
+separated by periods) that make up a domain name must consist of only
+the ASCII [ASCII] alphabetic and numeric characters, plus the hyphen.
+No other symbols or punctuation characters are permitted, nor is
+blank space.  If the hyphen is used, it is not permitted to appear at
+either the beginning or end of a label.  There is an additional rule
+that essentially requires that top-level domain names not be all-
+numeric.
+[...]</p>
+<p>Most internet applications that reference other hosts or systems
+assume they will be supplied with &quot;fully-qualified&quot; domain names,
+i.e., ones that include all of the labels leading to the root,
+including the TLD name.  Those fully-qualified domain names are then
+passed to either the domain name resolution protocol itself or to the
+remote systems.  Consequently, purported DNS names to be used in
+applications and to locate resources generally must contain at least
+one period (&quot;.&quot;) character.
+[...]</p>
+<p>[...]It is
+likely that the better strategy has now become to make the &quot;at least
+one period&quot; test, to verify LDH conformance (including verification
+that the apparent TLD name is not all-numeric), and then to use the
+DNS to determine domain name validity, rather than trying to maintain
+a local list of valid TLD names.
+[...]</p>
+<p>A DNS label may be no more than 63 octets long.  This is in the form
+actually stored; if a non-ASCII label is converted to encoded
+&quot;punycode&quot; form (see Section 5), the length of that form may restrict
+the number of actual characters (in the original character set) that
+can be accommodated.  A complete, fully-qualified, domain name must
+not exceed 255 octets.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="_IpV4Address"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_IpV4Address</span>()</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.apps.rfc3696-pysrc.html#_IpV4Address">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>A matcher for IPv4 addresses.</p>
+<p>RFC 3696 doesn't say much about these; RFC 2396 doesn't mention limits
+on numerical values, but it must be 255.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="_Ipv6Address"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_Ipv6Address</span>()</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.apps.rfc3696-pysrc.html#_Ipv6Address">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>A matcher for IPv6 addresses.</p>
+<p>Again, RFC 3696 says little; RFC 2373 (addresses) and 2732 (URLs) have
+much more information:</p>
+<p>1. The preferred form is x:x:x:x:x:x:x:x, where the 'x's are the
+hexadecimal values of the eight 16-bit pieces of the address.
+Examples:</p>
+<blockquote>
+<p>FEDC:BA98:7654:3210:FEDC:BA98:7654:3210</p>
+<p>1080:0:0:0:8:800:200C:417A</p>
+</blockquote>
+<p>Note that it is not necessary to write the leading zeros in an
+individual field, but there must be at least one numeral in every
+field (except for the case described in 2.).</p>
+<p>2. Due to some methods of allocating certain styles of IPv6
+addresses, it will be common for addresses to contain long strings
+of zero bits.  In order to make writing addresses containing zero
+bits easier a special syntax is available to compress the zeros.
+The use of &quot;::&quot; indicates multiple groups of 16-bits of zeros.
+The &quot;::&quot; can only appear once in an address.  The &quot;::&quot; can also be
+used to compress the leading and/or trailing zeros in an address.</p>
+<p>For example the following addresses:</p>
+<blockquote>
+1080:0:0:0:8:800:200C:417A  a unicast address
+FF01:0:0:0:0:0:0:101        a multicast address
+0:0:0:0:0:0:0:1             the loopback address
+0:0:0:0:0:0:0:0             the unspecified addresses</blockquote>
+<p>may be represented as:</p>
+<blockquote>
+1080::8:800:200C:417A       a unicast address
+FF01::101                   a multicast address
+::1                         the loopback address
+::                          the unspecified addresses</blockquote>
+<p>3. An alternative form that is sometimes more convenient when dealing
+with a mixed environment of IPv4 and IPv6 nodes is
+x:x:x:x:x:x:d.d.d.d, where the 'x's are the hexadecimal values of
+the six high-order 16-bit pieces of the address, and the 'd's are
+the decimal values of the four low-order 8-bit pieces of the
+address (standard IPv4 representation).  Examples:</p>
+<blockquote>
+<p>0:0:0:0:0:0:13.1.68.3</p>
+<p>0:0:0:0:0:FFFF:129.144.52.38</p>
+</blockquote>
+<p>or in compressed form:</p>
+<blockquote>
+<p>::13.1.68.3</p>
+<p>::FFFF:129.144.52.38</p>
+</blockquote>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="_EmailLocalPart"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_EmailLocalPart</span>()</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.apps.rfc3696-pysrc.html#_EmailLocalPart">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>A matcher for the local part (&quot;username&quot;) of an email address.</p>
+<p>RFC 3696:</p>
+<p>Contemporary email addresses consist of a &quot;local part&quot; separated from
+a &quot;domain part&quot; (a fully-qualified domain name) by an at-sign (&quot;&#64;&quot;).
+The syntax of the domain part corresponds to that in the previous
+section.  The concerns identified in that section about filtering and
+lists of names apply to the domain names used in an email context as
+well.  The domain name can also be replaced by an IP address in
+square brackets, but that form is strongly discouraged except for
+testing and troubleshooting purposes.</p>
+<p>The local part may appear using the quoting conventions described
+below.  The quoted forms are rarely used in practice, but are
+required for some legitimate purposes.  Hence, they should not be
+rejected in filtering routines but, should instead be passed to the
+email system for evaluation by the destination host.</p>
+<p>The exact rule is that any ASCII character, including control
+characters, may appear quoted, or in a quoted string.  When quoting
+is needed, the backslash character is used to quote the following
+character.
+[...]
+In addition to quoting using the backslash character, conventional
+double-quote characters may be used to surround strings.
+[...]
+Without quotes, local-parts may consist of any combination of
+alphabetic characters, digits, or any of the special characters</p>
+<p>! # $ % &amp; ' * + - / = ?  ^ _ ` . { | } ~</p>
+<p>period (&quot;.&quot;) may also appear, but may not be used to start or end the
+local part, nor may two or more consecutive periods appear.  Stated
+differently, any ASCII graphic (printing) character other than the
+at-sign (&quot;&#64;&quot;), backslash, double quote, comma, or square brackets may
+appear without quoting.  If any of that list of excluded characters
+are to appear, they must be quoted.
+[...]
+In addition to restrictions on syntax, there is a length limit on
+email addresses.  That limit is a maximum of 64 characters (octets)
+in the &quot;local part&quot; (before the &quot;&#64;&quot;) and a maximum of 255 characters
+(octets) in the domain part (after the &quot;&#64;&quot;) for a total length of 320
+characters.  Systems that handle email should be prepared to process
+addresses which are that long, even though they are rarely
+encountered.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="_HttpUrl"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_HttpUrl</span>()</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.apps.rfc3696-pysrc.html#_HttpUrl">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>A matcher for HTTP URLs.</p>
+<p>RFC 3696:</p>
+<p>The following characters are reserved in many URIs -- they must be
+used for either their URI-intended purpose or must be encoded.  Some
+particular schemes may either broaden or relax these restrictions
+(see the following sections for URLs applicable to &quot;web pages&quot; and
+electronic mail), or apply them only to particular URI component
+parts.</p>
+<blockquote>
+; / ? : &#64; &amp; = + $ , ?</blockquote>
+<p>In addition, control characters, the space character, the double-
+quote (&quot;) character, and the following special characters</p>
+<blockquote>
+&lt; &gt; # %</blockquote>
+<p>are generally forbidden and must either be avoided or escaped, as
+discussed below.
+[...]
+When it is necessary to encode these, or other, characters, the
+method used is to replace it with a percent-sign (&quot;%&quot;) followed by
+two hexidecimal digits representing its octet value.  See section
+2.4.1 of [RFC2396] for an exact definition.  Unless it is used as a
+delimiter of the URI scheme itself, any character may optionally be
+encoded this way; systems that are testing URI syntax should be
+prepared for these encodings to appear in any component of the URI
+except the scheme name itself.
+[...]
+Absolute HTTP URLs consist of the scheme name, a host name (expressed
+as a domain name or IP address), and optional port number, and then,
+optionally, a path, a search part, and a fragment identifier.  These
+are separated, respectively, by a colon and the two slashes that
+precede the host name, a colon, a slash, a question mark, and a hash
+mark (&quot;#&quot;).  So we have</p>
+<blockquote>
+<p><a class="rst-reference external" href="http://host:port/path?search#fragment" target="_top">http://host:port/path?search#fragment</a></p>
+<p><a class="rst-reference external" href="http://host/path/" target="_top">http://host/path/</a></p>
+<p><a class="rst-reference external" href="http://host/path#fragment" target="_top">http://host/path#fragment</a></p>
+<p><a class="rst-reference external" href="http://host/path?search" target="_top">http://host/path?search</a></p>
+<p><a class="rst-reference external" href="http://host" target="_top">http://host</a></p>
+</blockquote>
+<p>and other variations on that form.  There is also a &quot;relative&quot; form,
+but it almost never appears in text that a user might, e.g., enter
+into a form.  See [RFC2616] for details.
+[...]
+The characters</p>
+<blockquote>
+/ ; ?</blockquote>
+<p>are reserved within the path and search parts and must be encoded;
+the first of these may be used unencoded, and is often used within
+the path, to designate hierarchy.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="MailToUrl"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">MailToUrl</span>()</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.apps.rfc3696-pysrc.html#MailToUrl">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+Generate a validator for email addresses, according to RFC3696, which 
+returns True if the URL is valid, and False otherwise.
+
+RFC 3696:
+
+The following characters may appear in MAILTO URLs only with the
+specific defined meanings given.  If they appear in an email address
+(i.e., for some other purpose), they must be encoded:
+
+   :       The colon in &quot;mailto:&quot;
+
+   &lt; &gt; # &quot; % { } | \ ^ ~ `
+
+   These characters are &quot;unsafe&quot; in any URL, and must always be
+   encoded.
+
+The following characters must also be encoded if they appear in a
+MAILTO URL
+
+   ? &amp; =
+      Used to delimit headers and their values when these are encoded
+      into URLs.
+----------
+The RFC isn't that great a guide here.  The best approach, I think, is
+to check the URL for &quot;forbidden&quot; characters, then decode it, and finally
+validate the decoded email.  So we implement the validator directly (ie
+this is not a matcher).
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lepl-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sun May 13 16:30:59 2012
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

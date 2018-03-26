@@ -1,0 +1,507 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Examples &mdash; LEPL 5.1.2 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '5.1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="LEPL 5.1.2 documentation" href="index.html" />
+    <link rel="up" title="Lepl Manual" href="manual.html" />
+    <link rel="next" title="Closing Remarks" href="closing.html" />
+    <link rel="prev" title="Binary Data" href="binary.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="closing.html" title="Closing Remarks"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="binary.html" title="Binary Data"
+             accesskey="P">previous</a> |</li>
+        <li><a href="contents.html">LEPL 5.1.2 documentation</a> &raquo;</li>
+          <li><a href="manual.html" accesskey="U">Lepl Manual</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="examples">
+<span id="index-0"></span><span id="id1"></span><h1>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="parsing-a-python-argument-list">
+<h2>Parsing a Python Argument List<a class="headerlink" href="#parsing-a-python-argument-list" title="Permalink to this headline">¶</a></h2>
+<p>This problem was discussed on <a class="reference external" href="http://groups.google.com/group/comp.lang.python/msg/3d0aedf525030865">comp.lang.python</a>,
+where a pyparsing solution was posted.  The following is the equivalent Lepl
+solution:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">comma</span>  <span class="o">=</span> <span class="n">Drop</span><span class="p">(</span><span class="s">&#39;,&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">none</span>   <span class="o">=</span> <span class="n">Literal</span><span class="p">(</span><span class="s">&#39;None&#39;</span><span class="p">)</span>                        <span class="o">&gt;&gt;</span> <span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="bp">None</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span>   <span class="o">=</span> <span class="p">(</span><span class="n">Literal</span><span class="p">(</span><span class="s">&#39;True&#39;</span><span class="p">)</span> <span class="o">|</span> <span class="n">Literal</span><span class="p">(</span><span class="s">&#39;False&#39;</span><span class="p">))</span>   <span class="o">&gt;&gt;</span> <span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">==</span> <span class="s">&#39;True&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ident</span>  <span class="o">=</span> <span class="n">Word</span><span class="p">(</span><span class="n">Letter</span><span class="p">()</span> <span class="o">|</span> <span class="s">&#39;_&#39;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>              <span class="n">Letter</span><span class="p">()</span> <span class="o">|</span> <span class="s">&#39;_&#39;</span> <span class="o">|</span> <span class="n">Digit</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">float_</span> <span class="o">=</span> <span class="n">Float</span><span class="p">()</span>                                <span class="o">&gt;&gt;</span> <span class="nb">float</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">int_</span>   <span class="o">=</span> <span class="n">Integer</span><span class="p">()</span>                              <span class="o">&gt;&gt;</span> <span class="nb">int</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">str_</span>   <span class="o">=</span> <span class="n">String</span><span class="p">()</span> <span class="o">|</span> <span class="n">String</span><span class="p">(</span><span class="s">&quot;&#39;&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">item</span>   <span class="o">=</span> <span class="n">str_</span> <span class="o">|</span> <span class="n">int_</span> <span class="o">|</span> <span class="n">float_</span> <span class="o">|</span> <span class="n">none</span> <span class="o">|</span> <span class="nb">bool</span> <span class="o">|</span> <span class="n">ident</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">Separator</span><span class="p">(</span><span class="o">~</span><span class="n">Regexp</span><span class="p">(</span><span class="s">r&#39;\s*&#39;</span><span class="p">)):</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">value</span>  <span class="o">=</span> <span class="n">Delayed</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">list_</span>  <span class="o">=</span> <span class="n">Drop</span><span class="p">(</span><span class="s">&#39;[&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">value</span><span class="p">[:,</span> <span class="n">comma</span><span class="p">]</span> <span class="o">&amp;</span> <span class="n">Drop</span><span class="p">(</span><span class="s">&#39;]&#39;</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">list</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">tuple_</span> <span class="o">=</span> <span class="n">Drop</span><span class="p">(</span><span class="s">&#39;(&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">value</span><span class="p">[:,</span> <span class="n">comma</span><span class="p">]</span> <span class="o">&amp;</span> <span class="n">Drop</span><span class="p">(</span><span class="s">&#39;)&#39;</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">tuple</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">value</span> <span class="o">+=</span> <span class="n">list_</span> <span class="o">|</span> <span class="n">tuple_</span> <span class="o">|</span> <span class="n">item</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">arg</span>    <span class="o">=</span> <span class="n">value</span>                                   <span class="o">&gt;&gt;</span> <span class="s">&#39;arg&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">karg</span>   <span class="o">=</span> <span class="p">(</span><span class="n">ident</span> <span class="o">&amp;</span> <span class="n">Drop</span><span class="p">(</span><span class="s">&#39;=&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">value</span>              <span class="o">&gt;</span> <span class="nb">tuple</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="s">&#39;karg&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">expr</span>   <span class="o">=</span> <span class="p">(</span><span class="n">karg</span> <span class="o">|</span> <span class="n">arg</span><span class="p">)[:,</span> <span class="n">comma</span><span class="p">]</span> <span class="o">&amp;</span> <span class="n">Drop</span><span class="p">(</span><span class="n">Eos</span><span class="p">())</span>    <span class="o">&gt;</span> <span class="n">Node</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">expr</span><span class="o">.</span><span class="n">get_parse_string</span><span class="p">()</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ast</span> <span class="o">=</span> <span class="n">parser</span><span class="p">(</span><span class="s">&#39;True, type=rect, sizes=[3, 4], coords = ([1,2],[3,4])&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">ast</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="go">Node</span>
+<span class="go"> +- arg True</span>
+<span class="go"> +- karg (&#39;type&#39;, &#39;rect&#39;)</span>
+<span class="go"> +- karg (&#39;sizes&#39;, [3, 4])</span>
+<span class="go"> `- karg (&#39;coords&#39;, ([1, 2], [3, 4]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ast</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">arg</span>
+<span class="go">[True]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ast</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">karg</span>
+<span class="go">[(&#39;type&#39;, &#39;rect&#39;), (&#39;sizes&#39;, [3, 4]), (&#39;coords&#39;, ([1, 2], [3, 4]))]</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ast</span> <span class="o">=</span> <span class="n">parser</span><span class="p">(</span><span class="s">&#39;None, str=&quot;a string&quot;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">ast</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="go">Node</span>
+<span class="go"> +- arg None</span>
+<span class="go"> `- karg (&#39;str&#39;, &#39;a string&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ast</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">arg</span>
+<span class="go">[None]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ast</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">karg</span>
+<span class="go">[(&#39;str&#39;, &#39;a string&#39;)]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="configuration-and-efficiency">
+<span id="config-example"></span><span id="index-1"></span><h2>Configuration and Efficiency<a class="headerlink" href="#configuration-and-efficiency" title="Permalink to this headline">¶</a></h2>
+<p>This example shows how different choices of <a class="reference internal" href="advanced.html#configuration"><em>Configuration</em></a> can change
+the compilation and parsing times.  Lepl 5 introduces <a class="reference external" href="api/redirect.html#lepl.support.timer.print_timing">print_timing()</a> which
+makes this example much simpler than in previous versions:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">matcher</span><span class="p">():</span>
+    <span class="sd">&#39;&#39;&#39;A simple parser we&#39;ll use as an example.&#39;&#39;&#39;</span>
+
+    <span class="k">class</span> <span class="nc">Term</span><span class="p">(</span><span class="n">List</span><span class="p">):</span> <span class="k">pass</span>
+    <span class="k">class</span> <span class="nc">Factor</span><span class="p">(</span><span class="n">List</span><span class="p">):</span> <span class="k">pass</span>
+    <span class="k">class</span> <span class="nc">Expression</span><span class="p">(</span><span class="n">List</span><span class="p">):</span> <span class="k">pass</span>
+
+    <span class="n">expr</span>   <span class="o">=</span> <span class="n">Delayed</span><span class="p">()</span>
+    <span class="n">number</span> <span class="o">=</span> <span class="n">Float</span><span class="p">()</span>                                <span class="o">&gt;&gt;</span> <span class="nb">float</span>
+
+    <span class="k">with</span> <span class="n">DroppedSpace</span><span class="p">():</span>
+        <span class="n">term</span>    <span class="o">=</span> <span class="n">number</span> <span class="o">|</span> <span class="s">&#39;(&#39;</span> <span class="o">&amp;</span> <span class="n">expr</span> <span class="o">&amp;</span> <span class="s">&#39;)&#39;</span>         <span class="o">&gt;</span> <span class="n">Term</span>
+        <span class="n">muldiv</span>  <span class="o">=</span> <span class="n">Any</span><span class="p">(</span><span class="s">&#39;*/&#39;</span><span class="p">)</span>
+        <span class="n">factor</span>  <span class="o">=</span> <span class="n">term</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">muldiv</span> <span class="o">&amp;</span> <span class="n">term</span><span class="p">)[:]</span>         <span class="o">&gt;</span> <span class="n">Factor</span>
+        <span class="n">addsub</span>  <span class="o">=</span> <span class="n">Any</span><span class="p">(</span><span class="s">&#39;+-&#39;</span><span class="p">)</span>
+        <span class="n">expr</span>   <span class="o">+=</span> <span class="n">factor</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">addsub</span> <span class="o">&amp;</span> <span class="n">factor</span><span class="p">)[:]</span>     <span class="o">&gt;</span> <span class="n">Expression</span>
+        <span class="n">line</span>    <span class="o">=</span> <span class="n">expr</span> <span class="o">&amp;</span> <span class="n">Eos</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">line</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">ERROR</span><span class="p">)</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">matcher</span><span class="p">()</span>
+    <span class="n">print_timing</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">fmt</span><span class="p">(</span><span class="s">&#39;{0:4.2f} + {1:4.2f} * ({2:4.2f} + {3:4.2f} - {4:4.2f})&#39;</span><span class="p">,</span>
+                             <span class="n">random</span><span class="p">(),</span> <span class="n">random</span><span class="p">(),</span> <span class="n">random</span><span class="p">(),</span> <span class="n">random</span><span class="p">(),</span> <span class="n">random</span><span class="p">()),</span>
+                 <span class="p">{</span><span class="s">&#39;default&#39;</span><span class="p">:</span> <span class="n">m</span><span class="o">.</span><span class="n">clone</span><span class="p">(),</span>
+                  <span class="s">&#39;clear&#39;</span><span class="p">:</span> <span class="n">m</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span><span class="o">.</span><span class="n">matcher</span><span class="p">,</span>
+                  <span class="s">&#39;no memo&#39;</span><span class="p">:</span> <span class="n">m</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">no_memoize</span><span class="p">()</span><span class="o">.</span><span class="n">matcher</span><span class="p">,</span>
+                  <span class="s">&#39;low memory&#39;</span><span class="p">:</span> <span class="n">m</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">low_memory</span><span class="p">()</span><span class="o">.</span><span class="n">matcher</span><span class="p">,</span>
+                  <span class="s">&#39;nfa&#39;</span><span class="p">:</span> <span class="n">m</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span><span class="o">.</span><span class="n">compile_to_nfa</span><span class="p">()</span><span class="o">.</span><span class="n">matcher</span><span class="p">,</span>
+                  <span class="s">&#39;dfa&#39;</span><span class="p">:</span> <span class="n">m</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span><span class="o">.</span><span class="n">compile_to_dfa</span><span class="p">()</span><span class="o">.</span><span class="n">matcher</span><span class="p">,</span>
+                  <span class="s">&#39;re&#39;</span><span class="p">:</span> <span class="n">m</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span><span class="o">.</span><span class="n">compile_to_re</span><span class="p">()</span><span class="o">.</span><span class="n">matcher</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>Running that program gives:</p>
+<div class="highlight-python"><pre>Timing Results (ms)
+-------------------
+
+Compiling:  best of 3 averages over 10 repetition(s)
+Parse only: best of 3 averages over 10 repetition(s)
+
+             Matcher           Compiling | Parse only
+-----------------------------------------+------------------
+             default   167.30            |   5.86
+               clear     7.84  (x   0.0) |   7.80  (x   1.3)
+                 dfa    59.27  (x   0.4) |   2.39  (x   0.4)
+          low memory   151.84  (x   0.9) |  22.82  (x   3.9)
+                 nfa    59.25  (x   0.4) |   3.55  (x   0.6)
+             no memo   143.76  (x   0.9) |   3.46  (x   0.6)
+                  re    58.21  (x   0.3) |   2.32  (x   0.4)</pre>
+</div>
+<p>The first column describes the configuration &#8212; you can check the code to see
+exactly what was used.  Note that we use a function to generate the input from
+random data; that makes sure that memoisation does not artificially improve
+the speeds when tests are repeated.</p>
+<p>The second two columns are the time (and the ratio of that time relative to
+the default) for using a parser that is re&#8211;compiled for each parse.  The time
+includes the work needed to compile the parser and is appropriate when you&#8217;re
+only using a matcher once.</p>
+<p>The final two columns are the time (and the ratio of that time relative to the
+default) for re&#8211;using a cached parser.  This doesn&#8217;t include the time needed
+to compile the parser and is appropriate for when you&#8217;re using the same
+matcher many times (in which case the compilation time is relatively
+unimportant).</p>
+<p>Note that you don&#8217;t need to worry about caching parsers yourself &#8212; a matcher
+will automatically cache the parser when it is used.  The test code is complex
+because it is trying to <em>disable</em> caching in various places.</p>
+<p>What can we learn from these results?</p>
+<ol class="arabic simple">
+<li>Compilation isn&#8217;t cheap.  The &#8220;re-compiled&#8221; times are, except for &#8220;clear&#8221;,
+much larger than the &#8220;cached&#8221; times.  So if you are dynamically generating
+matchers and using each one just once, you might want to use
+<a class="reference external" href="api/redirect.html#lepl.core.config.ConfigBuilder.clear">.config.clear()</a>.</li>
+<li>But compilation isn&#8217;t hugely expensive either.  If you&#8217;re using a matcher
+more than about 20 times, it&#8217;s worth using the default configuration
+(rather than <a class="reference external" href="api/redirect.html#lepl.core.config.ConfigBuilder.clear">.config.clear()</a>) to get better peformance.</li>
+<li>Disabling memoisation made the cached parser faster, but you should only do
+this once (1) you are sure you don&#8217;t have a left-recursive grammar (if you
+do, the default configuration, with caching, will warn you) and (2) you&#8217;ve
+tested it for your particular case.</li>
+<li>Low memory use is slow, but this is a specialised configuration that you
+won&#8217;t need in normal use.</li>
+</ol>
+<p>For anyone interested in absolute speed, the values above are milliseconds
+required per iteration on a Dual Core laptop (a Lenovo X60, a couple of years
+old), with sufficient memory to avoid paging.</p>
+<p>It would be interesting to compare this with different versions.
+Unfortunately the table wasn&#8217;t updated regularly in previous manuals, but when
+I re-ran the Lepl 4 code I found that Lepl 5 was typically around 20% faster.</p>
+</div>
+<div class="section" id="tabular-data">
+<span id="table-example"></span><span id="index-2"></span><h2>Tabular Data<a class="headerlink" href="#tabular-data" title="Permalink to this headline">¶</a></h2>
+<p>This is a simple example that shows how to parse data in a fixed, tabular
+format using the <a class="reference external" href="api/redirect.html#lepl.matchers.complex.Columns">Columns()</a> matcher:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">columns_example</span><span class="p">():</span>
+    <span class="c"># http://www.swivel.com/data_sets/spreadsheet/1002196</span>
+    <span class="n">table</span> <span class="o">=</span> <span class="s">&#39;&#39;&#39;</span>
+<span class="s">    US Foreign Aid, top recipients, constant dollars</span>
+<span class="s">    Year            Iraq          Israel           Egypt</span>
+<span class="s">    2005   6,981,200,000   2,684,100,000   1,541,900,000</span>
+<span class="s">    2004   8,333,400,000   2,782,400,000   2,010,600,000</span>
+<span class="s">    2003   4,150,000,000   3,878,300,000   1,849,600,000</span>
+<span class="s">    2002      41,600,000   2,991,200,000   2,362,800,000</span>
+<span class="s">    &#39;&#39;&#39;</span>
+    <span class="n">spaces</span> <span class="o">=</span> <span class="o">~</span><span class="n">Space</span><span class="p">()[:]</span>
+    <span class="n">integer</span> <span class="o">=</span> <span class="p">(</span><span class="n">spaces</span> <span class="o">&amp;</span> <span class="n">Digit</span><span class="p">()[</span><span class="mi">1</span><span class="p">:,</span> <span class="o">~</span><span class="n">Optional</span><span class="p">(</span><span class="s">&#39;,&#39;</span><span class="p">),</span> <span class="o">...</span><span class="p">]</span> <span class="o">&amp;</span> <span class="n">spaces</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="nb">int</span>
+    <span class="n">cols</span> <span class="o">=</span> <span class="n">Columns</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span>  <span class="n">integer</span><span class="p">),</span>
+               <span class="c"># if we give widths, they follow on from each other</span>
+               <span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="n">integer</span><span class="p">),</span>
+               <span class="c"># we can also specify column indices</span>
+               <span class="p">((</span><span class="mi">23</span><span class="p">,</span> <span class="mi">36</span><span class="p">),</span> <span class="n">integer</span><span class="p">),</span>
+               <span class="c"># and then start with widths again</span>
+               <span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="n">integer</span><span class="p">))</span>
+    <span class="c"># by default, Columns consumes a whole line (see skip argument), so</span>
+    <span class="c"># for the whole table we only need to (1) drop the text and (2) put</span>
+    <span class="c"># each row in a separate list.</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="o">~</span><span class="n">SkipTo</span><span class="p">(</span><span class="n">Digit</span><span class="p">(),</span> <span class="n">include</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">cols</span> <span class="o">&gt;</span> <span class="nb">list</span><span class="p">)[:]</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+
+<span class="n">columns_example</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Which prints:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">[[</span><span class="mi">2005</span><span class="p">,</span> <span class="mi">6981200000</span><span class="p">,</span> <span class="mi">2684100000</span><span class="p">,</span> <span class="mi">1541900000</span><span class="p">],</span>
+ <span class="p">[</span><span class="mi">2004</span><span class="p">,</span> <span class="mi">8333400000</span><span class="p">,</span> <span class="mi">2782400000</span><span class="p">,</span> <span class="mi">2010600000</span><span class="p">],</span>
+ <span class="p">[</span><span class="mi">2003</span><span class="p">,</span> <span class="mi">4150000000</span><span class="p">,</span> <span class="mi">3878300000</span><span class="p">,</span> <span class="mi">1849600000</span><span class="p">],</span>
+ <span class="p">[</span><span class="mi">2002</span><span class="p">,</span> <span class="mi">41600000</span><span class="p">,</span> <span class="mi">2991200000</span><span class="p">,</span> <span class="mi">2362800000</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="simpler-offside-example">
+<span id="index-3"></span><h2>Simpler Offside Example<a class="headerlink" href="#simpler-offside-example" title="Permalink to this headline">¶</a></h2>
+<p>Here&#8217;s a simpler example of how to use offside parsing, as described in
+<a class="reference internal" href="offside.html#offside"><em>Line&#8211;Aware Parsing and the Offside Rule</em></a>.  The idea is that we have a configuration file format with
+named sections and subsections; in the subsections are name/value pairs:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">string</span> <span class="kn">import</span> <span class="n">ascii_letters</span>
+<span class="kn">from</span> <span class="nn">lepl</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="k">def</span> <span class="nf">config_parser</span><span class="p">():</span>
+    <span class="n">word</span>        <span class="o">=</span> <span class="n">Token</span><span class="p">(</span><span class="n">Any</span><span class="p">(</span><span class="n">ascii_letters</span><span class="p">)[</span><span class="mi">1</span><span class="p">:,</span> <span class="o">...</span><span class="p">])</span>
+    <span class="n">key_value</span>   <span class="o">=</span> <span class="p">(</span><span class="n">word</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">Token</span><span class="p">(</span><span class="s">&#39;:&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">word</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">tuple</span>
+    <span class="n">subsection</span>  <span class="o">=</span> <span class="n">Line</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">Block</span><span class="p">(</span><span class="n">Line</span><span class="p">(</span><span class="n">key_value</span><span class="p">)[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">&gt;</span> <span class="nb">dict</span><span class="p">))</span> <span class="o">&gt;</span> <span class="nb">list</span>
+    <span class="n">section</span>     <span class="o">=</span> <span class="n">Line</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">Block</span><span class="p">(</span><span class="n">subsection</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span> <span class="o">&gt;</span> <span class="nb">list</span>
+    <span class="n">config_file</span> <span class="o">=</span> <span class="p">(</span><span class="n">section</span> <span class="o">|</span> <span class="o">~</span><span class="n">Line</span><span class="p">(</span><span class="n">Empty</span><span class="p">(),</span> <span class="n">indent</span><span class="o">=</span><span class="bp">False</span><span class="p">))[:]</span> <span class="o">&gt;</span> <span class="nb">list</span>
+    <span class="n">config_file</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">lines</span><span class="p">(</span><span class="n">block_policy</span><span class="o">=</span><span class="n">explicit</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">config_file</span><span class="o">.</span><span class="n">get_parse</span><span class="p">()</span>
+
+<span class="n">parser</span> <span class="o">=</span> <span class="n">config_parser</span><span class="p">()</span>
+<span class="n">parser</span><span class="p">(</span><span class="s">&#39;&#39;&#39;</span>
+<span class="s">one</span>
+<span class="s">   a</span>
+<span class="s">      foo: bar</span>
+<span class="s">      baz: poop</span>
+<span class="s">   b</span>
+<span class="s">      snozzle: berry</span>
+
+<span class="s">two</span>
+<span class="s">   c</span>
+<span class="s">      apple: orange</span>
+<span class="s">&#39;&#39;&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Which prints:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">[[</span><span class="s">&#39;one&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;foo&#39;</span><span class="p">:</span> <span class="s">&#39;bar&#39;</span><span class="p">,</span> <span class="s">&#39;baz&#39;</span><span class="p">:</span> <span class="s">&#39;poop&#39;</span><span class="p">}],</span> <span class="p">[</span><span class="s">&#39;b&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;snozzle&#39;</span><span class="p">:</span> <span class="s">&#39;berry&#39;</span><span class="p">}]],</span> <span class="p">[</span><span class="s">&#39;two&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s">&#39;c&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;apple&#39;</span><span class="p">:</span> <span class="s">&#39;orange&#39;</span><span class="p">}]]]</span>
+</pre></div>
+</div>
+<p>Note that the name/value pairs are in dictionaries; this is because we passed
+a list of tuples to <tt class="docutils literal"><span class="pre">dict()</span></tt>.</p>
+</div>
+<div class="section" id="parsing-lines-of-words">
+<span id="index-4"></span><h2>Parsing Lines of Words<a class="headerlink" href="#parsing-lines-of-words" title="Permalink to this headline">¶</a></h2>
+<p>Here are a set of progressively more complex parsers that split each line into
+a list of words.</p>
+<p>We start with a simple parser that explicitly manages spaces:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">DroppedSpace</span><span class="p">():</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">line</span> <span class="o">=</span> <span class="p">(</span><span class="n">Word</span><span class="p">()[:]</span> <span class="o">&amp;</span> <span class="n">Drop</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">))</span> <span class="o">&gt;</span> <span class="nb">list</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">lines</span> <span class="o">=</span> <span class="n">line</span><span class="p">[:]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lines</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;abc de f</span><span class="se">\n</span><span class="s"> pqr</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
+<span class="go">[[&#39;abc&#39;, &#39;de&#39;, &#39;f&#39;], [&#39;pqr&#39;]]</span>
+</pre></div>
+</div>
+<p>Next, we use tokens (and spaces are handled automatically):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">word</span> <span class="o">=</span> <span class="n">Token</span><span class="p">(</span><span class="n">Word</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">newline</span> <span class="o">=</span> <span class="o">~</span><span class="n">Token</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">line</span> <span class="o">=</span> <span class="p">(</span><span class="n">word</span><span class="p">[:]</span> <span class="o">&amp;</span> <span class="n">newline</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">list</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lines</span> <span class="o">=</span> <span class="n">line</span><span class="p">[:]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lines</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;abc de f</span><span class="se">\n</span><span class="s"> pqr</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
+<span class="go">[[&#39;abc&#39;, &#39;de&#39;, &#39;f&#39;], [&#39;pqr&#39;]]</span>
+</pre></div>
+</div>
+<p>We can also use line-aware parsing with tokens to handle the newline:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">word</span> <span class="o">=</span> <span class="n">Token</span><span class="p">(</span><span class="n">Word</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">line</span> <span class="o">=</span> <span class="n">Line</span><span class="p">(</span><span class="n">word</span><span class="p">[:])</span> <span class="o">&gt;</span> <span class="nb">list</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lines</span> <span class="o">=</span> <span class="n">line</span><span class="p">[:]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lines</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">lines</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lines</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;abc de f</span><span class="se">\n</span><span class="s"> pqr</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
+<span class="go">[[&#39;abc&#39;, &#39;de&#39;, &#39;f&#39;], [&#39;pqr&#39;]]</span>
+</pre></div>
+</div>
+<span class="target" id="low-memory"></span></div>
+<div class="section" id="low-memory-use">
+<span id="index-5"></span><h2>Low Memory Use<a class="headerlink" href="#low-memory-use" title="Permalink to this headline">¶</a></h2>
+<p>This next example shows how data larger than the available memory can be
+parsed by Lepl.  Since Lepl is written in Python this is an unusual
+requirement (if a task is that large Lepl will probably be too slow), but it
+may be useful in some cases:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">sys</span> <span class="kn">import</span> <span class="n">getsizeof</span>
+<span class="kn">from</span> <span class="nn">logging</span> <span class="kn">import</span> <span class="n">basicConfig</span><span class="p">,</span> <span class="n">DEBUG</span><span class="p">,</span> <span class="n">ERROR</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">count</span><span class="p">,</span> <span class="n">takewhile</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">imap</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">imap</span> <span class="o">=</span> <span class="nb">map</span>
+
+<span class="kn">from</span> <span class="nn">lepl</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">lepl.support.lib</span> <span class="kn">import</span> <span class="n">fmt</span>
+<span class="kn">from</span> <span class="nn">lepl.stream.iter</span> <span class="kn">import</span> <span class="n">Cons</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="nf">source</span><span class="p">(</span><span class="n">n_max</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        A source of integers from 1 to n_max inclusive.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="n">imap</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">takewhile</span><span class="p">(</span><span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="n">n_max</span><span class="p">,</span> <span class="n">count</span><span class="p">(</span><span class="mi">1</span><span class="p">)))</span>
+
+
+    <span class="nd">@sequence_matcher</span>
+    <span class="k">def</span> <span class="nf">Digits</span><span class="p">(</span><span class="n">support</span><span class="p">,</span> <span class="n">stream</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        A matcher that returns each digit (as an int) in turn.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="p">(</span><span class="n">number</span><span class="p">,</span> <span class="n">next_stream</span><span class="p">)</span> <span class="o">=</span> <span class="n">s_line</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">digit</span> <span class="ow">in</span> <span class="n">number</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="p">([</span><span class="nb">int</span><span class="p">(</span><span class="n">digit</span><span class="p">)],</span> <span class="n">next_stream</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">parser</span><span class="p">():</span>
+
+        <span class="c"># a reduce function and the associated zero - this will sum the values</span>
+        <span class="c"># returned by Digit() instead of appending them to a list.  this is</span>
+        <span class="c"># to avoid generating a large result that may confuse measurements of</span>
+        <span class="c"># how much memory the parser is using.</span>
+        <span class="nb">sum</span> <span class="o">=</span> <span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="p">[</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+
+        <span class="k">with</span> <span class="n">Override</span><span class="p">(</span><span class="nb">reduce</span><span class="o">=</span><span class="nb">sum</span><span class="p">):</span>
+            <span class="n">total</span> <span class="o">=</span> <span class="n">Digits</span><span class="p">()[:]</span> <span class="o">&amp;</span> <span class="n">Eos</span><span class="p">()</span>
+
+        <span class="c"># configure for reduced memory use</span>
+        <span class="n">total</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">low_memory</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">total</span>
+
+    <span class="c"># some basic tests to make sure everything works</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">source</span><span class="p">(</span><span class="mi">9</span><span class="p">))</span>
+    <span class="k">assert</span> <span class="n">l</span> <span class="o">==</span> <span class="p">[</span><span class="s">&#39;1&#39;</span><span class="p">,</span> <span class="s">&#39;2&#39;</span><span class="p">,</span> <span class="s">&#39;3&#39;</span><span class="p">,</span> <span class="s">&#39;4&#39;</span><span class="p">,</span> <span class="s">&#39;5&#39;</span><span class="p">,</span> <span class="s">&#39;6&#39;</span><span class="p">,</span> <span class="s">&#39;7&#39;</span><span class="p">,</span> <span class="s">&#39;8&#39;</span><span class="p">,</span> <span class="s">&#39;9&#39;</span><span class="p">],</span> <span class="n">l</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">parser</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">tree</span><span class="p">())</span>
+
+    <span class="n">r</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">parse_iterable_all</span><span class="p">(</span><span class="n">source</span><span class="p">(</span><span class="mi">9</span><span class="p">)))</span>
+    <span class="c"># the sum of digits 1-9 is 45</span>
+    <span class="k">assert</span> <span class="n">r</span> <span class="o">==</span> <span class="p">[[</span><span class="mi">45</span><span class="p">]],</span> <span class="n">r</span>
+
+    <span class="n">r</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">parse_iterable_all</span><span class="p">(</span><span class="n">source</span><span class="p">(</span><span class="mi">10</span><span class="p">)))</span>
+    <span class="c"># the digits in 1-10 can sum to 45 or 46 depending on whether we use the</span>
+    <span class="c"># &#39;1&#39; or the &#39;0&#39; from 10.</span>
+    <span class="k">assert</span> <span class="n">r</span> <span class="o">==</span> <span class="p">[[</span><span class="mi">46</span><span class="p">],[</span><span class="mi">45</span><span class="p">]],</span> <span class="n">r</span>
+
+    <span class="c"># if we have 10^n numbers then we have about 10^n * n characters which</span>
+    <span class="c"># is 2 * 10^n * n bytes for UTF16</span>
+    <span class="k">def</span> <span class="nf">size</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">gb</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="n">n</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">getsizeof</span><span class="p">(</span><span class="n">Cons</span><span class="p">(</span><span class="bp">None</span><span class="p">)))</span> <span class="o">/</span> <span class="mi">1024</span><span class="o">**</span><span class="mf">3.0</span>
+        <span class="k">return</span> <span class="n">fmt</span><span class="p">(</span><span class="s">&#39;{0:4.2f}&#39;</span><span class="p">,</span> <span class="n">gb</span><span class="p">)</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">size</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">s</span> <span class="o">==</span> <span class="s">&#39;8.94&#39;</span><span class="p">,</span> <span class="n">s</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">size</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">s</span> <span class="o">==</span> <span class="s">&#39;0.88&#39;</span><span class="p">,</span> <span class="n">s</span>
+
+    <span class="c"># we&#39;ll test with 10**7 - just under a GB of data, according to the above</span>
+    <span class="c"># (on python2.6)</span>
+
+    <span class="c"># guppy only works for python 2 afaict</span>
+    <span class="c"># and it&#39;s broken for 2.7</span>
+    <span class="kn">from</span> <span class="nn">guppy</span> <span class="kn">import</span> <span class="n">hpy</span>
+    <span class="kn">from</span> <span class="nn">gc</span> <span class="kn">import</span> <span class="n">get_count</span><span class="p">,</span> <span class="n">get_threshold</span><span class="p">,</span> <span class="n">set_threshold</span><span class="p">,</span> <span class="n">collect</span>
+    <span class="c">#basicConfig(level=DEBUG)</span>
+    <span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">ERROR</span><span class="p">)</span>
+
+    <span class="n">r</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">parse_iterable_all</span><span class="p">(</span><span class="n">source</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">7</span><span class="p">))</span>
+    <span class="nb">next</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="c"># force the parser to run once, but keep the parser in memory</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="n">hpy</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">heap</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>This generates the following output:</p>
+<div class="highlight-python"><pre>Partition of a set of 50077 objects. Total size = 6924832 bytes.
+ Index  Count   %     Size   % Cumulative  % Kind (class / dict of class)
+     0  19758  39  1790456  26   1790456  26 str
+     1  11926  24   958744  14   2749200  40 tuple
+     2    149   0   444152   6   3193352  46 dict of module
+     3   3011   6   361320   5   3554672  51 types.CodeType
+     4    604   1   359584   5   3914256  57 dict (no owner)
+     5   2918   6   350160   5   4264416  62 function
+     6    334   1   303568   4   4567984  66 dict of type
+     7    334   1   299256   4   4867240  70 type
+     8    150   0   157200   2   5024440  73 dict of lepl.core.config.ConfigBuilder
+     9    140   0   149792   2   5174232  75 dict of class
+&lt;178 more rows. Type e.g. '_.more' to view.&gt;</pre>
+</div>
+<p>The output is generated by the Guppy library and shows memory use.  The
+simplest thing to note is that there are no objects with a count of 10,000,000
+even though that many values were parsed.  That means that parsed data are
+garbage-collected as they are processed, which is critical for parsing large
+data sets.</p>
+<p>For a longer discussion of this work see the <a class="reference external" href="http://www.acooke.org/cute/Processing1.html">notes I made during development</a> (the syntax improved since
+that was written, but the motivation and general details for the test are
+still very relevant).</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="contents.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Examples</a><ul>
+<li><a class="reference internal" href="#parsing-a-python-argument-list">Parsing a Python Argument List</a></li>
+<li><a class="reference internal" href="#configuration-and-efficiency">Configuration and Efficiency</a></li>
+<li><a class="reference internal" href="#tabular-data">Tabular Data</a></li>
+<li><a class="reference internal" href="#simpler-offside-example">Simpler Offside Example</a></li>
+<li><a class="reference internal" href="#parsing-lines-of-words">Parsing Lines of Words</a></li>
+<li><a class="reference internal" href="#low-memory-use">Low Memory Use</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="binary.html"
+                        title="previous chapter">Binary Data</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="closing.html"
+                        title="next chapter">Closing Remarks</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/examples.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="closing.html" title="Closing Remarks"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="binary.html" title="Binary Data"
+             >previous</a> |</li>
+        <li><a href="contents.html">LEPL 5.1.2 documentation</a> &raquo;</li>
+          <li><a href="manual.html" >Lepl Manual</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2009-2011, Andrew Cooke.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

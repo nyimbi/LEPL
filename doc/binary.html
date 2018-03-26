@@ -1,0 +1,486 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Binary Data &mdash; LEPL 5.1.2 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '5.1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="LEPL 5.1.2 documentation" href="index.html" />
+    <link rel="up" title="Lepl Manual" href="manual.html" />
+    <link rel="next" title="Examples" href="examples.html" />
+    <link rel="prev" title="Resource Management" href="resources.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="examples.html" title="Examples"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="resources.html" title="Resource Management"
+             accesskey="P">previous</a> |</li>
+        <li><a href="contents.html">LEPL 5.1.2 documentation</a> &raquo;</li>
+          <li><a href="manual.html" accesskey="U">Lepl Manual</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="binary-data">
+<span id="binary"></span><h1>Binary Data<a class="headerlink" href="#binary-data" title="Permalink to this headline">¶</a></h1>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>This package does not work with Python 2.6 or 2.7 (and never will do so -
+the <tt class="docutils literal"><span class="pre">bytes()</span></tt> type is not usable until version 3.0).</p>
+<p class="last">This documentation is rather short and incomplete; it will be extended as
+the package is developed further.</p>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">bin</span></tt> package supports both parsing and (re-)constructing binary data.
+It uses the core Lepl engine which, because of Python&#8217;s relaxed typing and
+calling conventions, is not restricted to parsing text.  But it also adds
+additional support to help address problems that are unique to handling binary
+data.</p>
+<p>The first few sections below discuss the representation of data.  This (rather
+tedious) detail is necessary to precisely define how binary values are handled
+by Lepl.</p>
+<div class="section" id="abstract-model">
+<h2>Abstract Model<a class="headerlink" href="#abstract-model" title="Permalink to this headline">¶</a></h2>
+<p>Lepl models binary data as an array of bits, visualised from left to right.
+The zeroth index is the least significant bit and is visualised as being
+&#8220;leftmost&#8221;.  For a value with <cite>n</cite> bits, the <cite>n-1</cite> index is the most
+significant bit, visualised as being &#8220;rightmost&#8221;.</p>
+<p>In the API and documentation, <cite>byte</cite> refers to 8 bits (an octet).</p>
+</div>
+<div class="section" id="literal-representation">
+<h2>Literal Representation<a class="headerlink" href="#literal-representation" title="Permalink to this headline">¶</a></h2>
+<p>Binary values can be expressed in a variety of ways.  Conversion from a
+literal form to Lepl&#8217;s internal model may require passing through an
+intermediate byte-based form.  If so, Lepl preserves bit order within a byte
+(ie the least significant bit of a Python <tt class="docutils literal"><span class="pre">byte</span></tt> corresponds to the least
+significant bit in Lepl&#8217;s abstract model).  However, the <cite>order of bytes</cite> will
+vary, depending on whether the encoding is little- or big-endian.</p>
+<p>The following table summarises the representations support by Lepl:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="11%" />
+<col width="57%" />
+<col width="16%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Base</th>
+<th class="head">Notation</th>
+<th class="head">Description</th>
+<th class="head">n(bits)</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td rowspan="3">2 binary</td>
+<td>0b010</td>
+<td>Native Python int with prefix -
+converted to an integer according to
+Python&#8217;s own rules.
+Resulting bytes stored little-endian.</td>
+<td>32</td>
+</tr>
+<tr class="row-odd"><td>&#8216;0b010&#8217;</td>
+<td>String, converted by Lepl using Python&#8217;s
+int() function, but with length from
+number of characters following &#8216;0b&#8217;.
+Resulting bytes stored little-endian.</td>
+<td>n(digits)</td>
+</tr>
+<tr class="row-even"><td>&#8216;010b0&#8217;</td>
+<td>String, taken as <strong>literal
+representation of a series of bits</strong>
+(lsb to left).</td>
+<td>n(digits)</td>
+</tr>
+<tr class="row-odd"><td rowspan="3">8 octal</td>
+<td>0o073</td>
+<td>Native Python int with prefix -
+converted to an integer according to
+Python&#8217;s own rules.
+Resulting bytes stored little-endian.</td>
+<td>32</td>
+</tr>
+<tr class="row-even"><td>&#8216;0o073&#8217;</td>
+<td>String, converted by Lepl using Python&#8217;s
+int() function, but with length from
+number of characters following &#8216;0o&#8217;.
+Resulting bytes stored little-endian.</td>
+<td>3*n(digits)</td>
+</tr>
+<tr class="row-odd"><td>&#8216;073o0&#8217;</td>
+<td>String, converted by Lepl using Python&#8217;s
+int() function, but with length from
+number of characters preceding &#8216;o0&#8217;.
+Resulting bytes stored <strong>big-endian</strong>.
+Note: Number of bits must be a multiple
+of 8 (ie whole number of bytes).</td>
+<td>3*n(digits)</td>
+</tr>
+<tr class="row-even"><td rowspan="3">10 decimal</td>
+<td>1980</td>
+<td>Native Python int -
+converted to an integer according to
+Python&#8217;s own rules.
+Resulting bytes stored little-endian.</td>
+<td>32</td>
+</tr>
+<tr class="row-odd"><td>&#8216;0d1980&#8217;
+&#8216;1980&#8217;</td>
+<td>String, converted by Lepl using Python&#8217;s
+int() function.
+Resulting bytes stored little-endian.</td>
+<td>32</td>
+</tr>
+<tr class="row-even"><td>&#8216;1980d0&#8217;</td>
+<td>String, converted by Lepl using Python&#8217;s
+int() function.
+Resulting bytes stored <strong>big-endian</strong>.</td>
+<td>32</td>
+</tr>
+<tr class="row-odd"><td rowspan="3">16
+hexadecimal</td>
+<td>0xfe01</td>
+<td>Native Python int with prefix -
+converted to an integer according to
+Python&#8217;s own rules.
+Resulting bytes stored little-endian.</td>
+<td>32</td>
+</tr>
+<tr class="row-even"><td>&#8216;0xfe01&#8217;</td>
+<td>String, converted by Lepl using Python&#8217;s
+int() function, but with length from
+number of characters following &#8216;0o&#8217;.
+Resulting bytes stored little-endian.</td>
+<td>4*n(digits)</td>
+</tr>
+<tr class="row-odd"><td>&#8216;fe01x0&#8217;</td>
+<td>String, converted by Lepl using Python&#8217;s
+int() function, but with length from
+number of characters preceding &#8216;o0&#8217;.
+Resulting bytes stored <strong>big-endian</strong>.
+Note: Number of bits must be a multiple
+of 8 (ie whole number of bytes).</td>
+<td>4*n(digits)</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Big-endian encoded values must be a whole number of bytes.  This is because
+the byte order must be reversed during translation to Lepl&#8217;s internal
+model, and this process is undefined if the data do not completely define a
+series of bytes.</p>
+<p class="last">In contrast, little-endian encoded data match Lepl&#8217;s abstract model and
+so the value can be truncated directly at the given number of bits.</p>
+</div>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>The table below shows, for various representations, the corresponding binary
+data in Lepl&#8217;s internal model.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="75%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Literal Value</th>
+<th class="head">Internal Model (length)</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0b101100</td>
+<td>00110100 00000000 00000000 00000000 (32)</td>
+</tr>
+<tr class="row-odd"><td>&#8216;0b101100&#8217;</td>
+<td>001101 (6)</td>
+</tr>
+<tr class="row-even"><td>&#8216;001101b0&#8217;</td>
+<td>001101 (6)</td>
+</tr>
+<tr class="row-odd"><td>0o073</td>
+<td>11011100 00000000 00000000 00000000 (32)</td>
+</tr>
+<tr class="row-even"><td>&#8216;0o073&#8217;</td>
+<td>11011100 0 (9)</td>
+</tr>
+<tr class="row-odd"><td>&#8216;073o0&#8217;</td>
+<td>Error</td>
+</tr>
+<tr class="row-even"><td>&#8216;0o01234567&#8217;</td>
+<td>11101110 10011100 10100000 (24)</td>
+</tr>
+<tr class="row-odd"><td>&#8216;01234567o0&#8217;</td>
+<td>10100000 10011100 11101110 (24)</td>
+</tr>
+<tr class="row-even"><td>1980</td>
+<td>00111101 11100000 00000000 00000000 (32)</td>
+</tr>
+<tr class="row-odd"><td>&#8216;0d1980&#8217;</td>
+<td>00111101 11100000 00000000 00000000 (32)</td>
+</tr>
+<tr class="row-even"><td>&#8216;1980&#8217;</td>
+<td>00111101 11100000 00000000 00000000 (32)</td>
+</tr>
+<tr class="row-odd"><td>&#8216;1980d0&#8217;</td>
+<td>00000000 00000000 11100000 00111101 (32)</td>
+</tr>
+<tr class="row-even"><td>0xfe01</td>
+<td>10000000 01111111 00000000 00000000 (32)</td>
+</tr>
+<tr class="row-odd"><td>&#8216;0xfe01&#8217;</td>
+<td>10000000 01111111 (16)</td>
+</tr>
+<tr class="row-even"><td>&#8216;fe01x0&#8217;</td>
+<td>01111111 10000000 (16)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="lengths">
+<h2>Lengths<a class="headerlink" href="#lengths" title="Permalink to this headline">¶</a></h2>
+<p>In various parts of the API it is necessary to specify the length of binary
+data (eg. when matching).  If an integer value is given, it is taken as the
+number of bits.  A float value, however, is taken as bytes, with the <cite>decimal
+portion as the number of bits</cite>.  So, for example, <tt class="docutils literal"><span class="pre">3.4</span></tt> is equivalent to 28
+bits (3x8+4).</p>
+</div>
+<div class="section" id="bitstring">
+<h2>BitString<a class="headerlink" href="#bitstring" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference external" href="api/redirect.html#lepl.bin.bits.BitString">BitString()</a> class is an
+implementation of Lepl&#8217;s abstract model described above.  It has similar
+semantics to Python&#8217;s strings, in that a single entry (a bit - the equivalent
+of a character in a string) is still a <a class="reference external" href="api/redirect.html#lepl.bin.bits.BitString">BitString()</a>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">lepl.bin.bits</span> <span class="kn">import</span> <span class="n">BitString</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">BitString</span><span class="o">.</span><span class="n">from_int</span><span class="p">(</span><span class="s">&#39;00110101b0&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">str</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="go">&#39;00110101b0/8&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="go">&lt;class &#39;lepl.bin.bits.BitString&#39;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">str</span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="go">&#39;0b0/1&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="go">&lt;class &#39;lepl.bin.bits.BitString&#39;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">str</span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">])</span>
+<span class="go">&#39;011b0/3&#39;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="s">&#39;abc&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="go">&lt;class &#39;str&#39;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="go">&#39;a&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="go">&lt;class &#39;str&#39;&gt;</span>
+</pre></div>
+</div>
+<p>The static method <tt class="docutils literal"><span class="pre">BitString.from_int()</span></tt> understands all the representations
+described earlier.</p>
+</div>
+<div class="section" id="matching">
+<h2>Matching<a class="headerlink" href="#matching" title="Permalink to this headline">¶</a></h2>
+<p>A <a class="reference external" href="api/redirect.html#lepl.bin.bits.BitString">BitString()</a> can be passed to a Lepl matcher in the same way as a Python
+string.  The matchers will &#8220;automatically&#8221; match and construct the binary data.</p>
+<p>The <a class="reference external" href="api/redirect.html#lepl.bin.matchers">lepl.bin.matchers</a> package defines some additional matchers to help
+match literal binary values.  These include <a class="reference external" href="api/redirect.html#lepl.bin.matchers.Const">Const()</a> for matching a
+constant value, and <tt class="docutils literal"><span class="pre">BEnd(length)</span></tt> for matching a big-endian value of a
+certain length (<tt class="docutils literal"><span class="pre">LEnd(length)</span></tt> is similar for little-endian values).</p>
+<p>The example below is rather detailed, but it shows <a class="reference external" href="api/redirect.html#lepl.bin.matchers.Const">Const()</a> and <a class="reference external" href="api/redirect.html#lepl.bin.matchers.BEnd">BEnd()</a>
+in use:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">lepl.bin.bits</span> <span class="kn">import</span> <span class="n">BitString</span>
+<span class="kn">from</span> <span class="nn">lepl.bin.encode</span> <span class="kn">import</span> <span class="n">dispatch_table</span><span class="p">,</span> <span class="n">simple_serialiser</span>
+<span class="kn">from</span> <span class="nn">lepl.bin.literal</span> <span class="kn">import</span> <span class="n">parse</span>
+<span class="kn">from</span> <span class="nn">lepl.bin.matchers</span> <span class="kn">import</span> <span class="n">BEnd</span><span class="p">,</span> <span class="n">Const</span>
+<span class="kn">from</span> <span class="nn">lepl.node</span> <span class="kn">import</span> <span class="n">Node</span>
+
+<span class="c"># first, define some test data - we&#39;ll use a simple definition</span>
+<span class="c"># language, but you could also construct this directly in Python</span>
+<span class="c"># (Frame, Header etc are auto-generated subclasses of Node).</span>
+<span class="n">mac</span> <span class="o">=</span> <span class="n">parse</span><span class="p">(</span><span class="s">&#39;&#39;&#39;</span>
+<span class="s">Frame(</span>
+<span class="s">  Header(</span>
+<span class="s">    preamble  = 0b10101010*7,</span>
+<span class="s">    start     = 0b10101011,</span>
+<span class="s">    destn     = 010203040506x0,</span>
+<span class="s">    source    = 0708090a0b0cx0,</span>
+<span class="s">    ethertype = 0800x0</span>
+<span class="s">  ),</span>
+<span class="s">  Data(1/8,2/8,3/8,4/8),</span>
+<span class="s">  CRC(234d0/4.)</span>
+<span class="s">)</span>
+<span class="s">&#39;&#39;&#39;</span><span class="p">)</span>
+
+<span class="c"># next, define a parser for the header structure</span>
+<span class="c"># this is mainly literal values, but we make the two addresses</span>
+<span class="c"># big-endian integers, which will be read from the data</span>
+
+<span class="c"># this looks very like &quot;normal&quot; lepl because it is - there&#39;s</span>
+<span class="c"># nothing in lepl that forces the data being parsed to be text.</span>
+
+<span class="n">preamble</span>  <span class="o">=</span> <span class="o">~</span><span class="n">Const</span><span class="p">(</span><span class="s">&#39;0b10101010&#39;</span><span class="p">)[</span><span class="mi">7</span><span class="p">]</span>
+<span class="n">start</span>     <span class="o">=</span> <span class="o">~</span><span class="n">Const</span><span class="p">(</span><span class="s">&#39;0b10101011&#39;</span><span class="p">)</span>
+<span class="n">destn</span>     <span class="o">=</span> <span class="n">BEnd</span><span class="p">(</span><span class="mf">6.0</span><span class="p">)</span>                <span class="o">&gt;</span> <span class="s">&#39;destn&#39;</span>
+<span class="n">source</span>    <span class="o">=</span> <span class="n">BEnd</span><span class="p">(</span><span class="mf">6.0</span><span class="p">)</span>                <span class="o">&gt;</span> <span class="s">&#39;source&#39;</span>
+<span class="n">ethertype</span> <span class="o">=</span> <span class="o">~</span><span class="n">Const</span><span class="p">(</span><span class="s">&#39;0800x0&#39;</span><span class="p">)</span>
+<span class="n">header</span>    <span class="o">=</span> <span class="n">preamble</span> <span class="o">&amp;</span> <span class="n">start</span> <span class="o">&amp;</span> <span class="n">destn</span> <span class="o">&amp;</span> <span class="n">source</span> <span class="o">&amp;</span> <span class="n">ethertype</span> <span class="o">&gt;</span> <span class="n">Node</span>
+
+<span class="c"># so, what do the test data look like?</span>
+<span class="k">print</span><span class="p">(</span><span class="n">mac</span><span class="p">)</span>
+<span class="c"># Frame</span>
+<span class="c">#  +- Header</span>
+<span class="c">#  |   +- preamble BitString(b&#39;\xaa\xaa\xaa\xaa\xaa\xaa\xaa&#39;, 56, 0)</span>
+<span class="c">#  |   +- start BitString(b&#39;\xab&#39;, 8, 0)</span>
+<span class="c">#  |   +- destn BitString(b&#39;\x01\x02\x03\x04\x05\x06&#39;, 48, 0)</span>
+<span class="c">#  |   +- source BitString(b&#39;\x07\x08\t\n\x0b\x0c&#39;, 48, 0)</span>
+<span class="c">#  |   `- ethertype BitString(b&#39;\x08\x00&#39;, 16, 0)</span>
+<span class="c">#  +- Data</span>
+<span class="c">#  |   +- BitString(b&#39;\x01&#39;, 8, 0)</span>
+<span class="c">#  |   +- BitString(b&#39;\x02&#39;, 8, 0)</span>
+<span class="c">#  |   +- BitString(b&#39;\x03&#39;, 8, 0)</span>
+<span class="c">#  |   `- BitString(b&#39;\x04&#39;, 8, 0)</span>
+<span class="c">#  `- CRC</span>
+<span class="c">#      `- BitString(b&#39;\x00\x00\x00\xea&#39;, 32, 0)</span>
+
+<span class="c"># we can serialise that to a BitString</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">simple_serialiser</span><span class="p">(</span><span class="n">mac</span><span class="p">,</span> <span class="n">dispatch_table</span><span class="p">())</span>
+<span class="k">assert</span> <span class="nb">str</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">==</span> <span class="s">&#39;aaaaaaaaaaaaaaab123456789abc801234000eax0/240&#39;</span>
+
+<span class="c"># and then we can parse it</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">header</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">b</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="c"># Node</span>
+<span class="c">#  +- destn Int(1108152157446,48)</span>
+<span class="c">#  `- source Int(7731092785932,48)</span>
+
+<span class="c"># the destination address</span>
+<span class="k">assert</span> <span class="nb">hex</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">destn</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="s">&#39;0x10203040506&#39;</span>
+
+<span class="c"># the source address</span>
+<span class="k">assert</span> <span class="nb">hex</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">source</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="s">&#39;0x708090a0b0c&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="binary-literals">
+<h2>Binary Literals<a class="headerlink" href="#binary-literals" title="Permalink to this headline">¶</a></h2>
+<p>The first part of the example above shows how a binary data structure
+(<tt class="docutils literal"><span class="pre">mac</span></tt>) can be generated from a string representation.</p>
+</div>
+<div class="section" id="serialisation">
+<h2>Serialisation<a class="headerlink" href="#serialisation" title="Permalink to this headline">¶</a></h2>
+<p>The package also contains support for serialising data (<tt class="docutils literal"><span class="pre">simple_serialiser</span></tt>
+in the example above).</p>
+</div>
+<div class="section" id="sized-integers">
+<h2>Sized Integers<a class="headerlink" href="#sized-integers" title="Permalink to this headline">¶</a></h2>
+<p>The results of the parsing are sized integers (<a class="reference external" href="api/redirect.html#lepl.bin.bits.Int">Int()</a>).  These include both
+an integer value and a bit count.  They are subclasses of Python&#8217;s <a href="#id5"><span class="problematic" id="id6">``</span></a>int`</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="contents.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Binary Data</a><ul>
+<li><a class="reference internal" href="#abstract-model">Abstract Model</a></li>
+<li><a class="reference internal" href="#literal-representation">Literal Representation</a></li>
+<li><a class="reference internal" href="#examples">Examples</a></li>
+<li><a class="reference internal" href="#lengths">Lengths</a></li>
+<li><a class="reference internal" href="#bitstring">BitString</a></li>
+<li><a class="reference internal" href="#matching">Matching</a></li>
+<li><a class="reference internal" href="#binary-literals">Binary Literals</a></li>
+<li><a class="reference internal" href="#serialisation">Serialisation</a></li>
+<li><a class="reference internal" href="#sized-integers">Sized Integers</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="resources.html"
+                        title="previous chapter">Resource Management</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="examples.html"
+                        title="next chapter">Examples</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/binary.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="examples.html" title="Examples"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="resources.html" title="Resource Management"
+             >previous</a> |</li>
+        <li><a href="contents.html">LEPL 5.1.2 documentation</a> &raquo;</li>
+          <li><a href="manual.html" >Lepl Manual</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2009-2011, Andrew Cooke.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

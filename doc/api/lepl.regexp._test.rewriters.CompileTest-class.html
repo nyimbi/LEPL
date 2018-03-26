@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lepl.regexp._test.rewriters.CompileTest</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lepl-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lepl-module.html">Package&nbsp;lepl</a> ::
+        <a href="lepl.regexp-module.html">Package&nbsp;regexp</a> ::
+        <a href="lepl.regexp._test-module.html">Package&nbsp;_test</a> ::
+        <a href="lepl.regexp._test.rewriters-module.html">Module&nbsp;rewriters</a> ::
+        Class&nbsp;CompileTest
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lepl.regexp._test.rewriters.CompileTest-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class CompileTest</h1><p class="nomargin-top"><span class="codelink"><a href="lepl.regexp._test.rewriters-pysrc.html#CompileTest">source&nbsp;code</a></span></p>
+<center>
+<center>  <map id="uml_class_diagram_for_lepl_reg_8" name="uml_class_diagram_for_lepl_reg_8">
+<area shape="rect" id="node1_7" href="lepl.regexp._test.rewriters.CompileTest-class.html#assert_regexp" title="lepl.regexp._test.rewriters.CompileTest.assert_regexp" alt="" coords="17,39,237,57"/>
+<area shape="rect" id="node1_8" href="lepl.regexp._test.rewriters.CompileTest-class.html#test_any" title="lepl.regexp._test.rewriters.CompileTest.test_any" alt="" coords="17,57,237,76"/>
+<area shape="rect" id="node1_9" href="lepl.regexp._test.rewriters.CompileTest-class.html#test_literal" title="lepl.regexp._test.rewriters.CompileTest.test_literal" alt="" coords="17,76,237,95"/>
+<area shape="rect" id="node1_10" href="lepl.regexp._test.rewriters.CompileTest-class.html#test_repeat" title="lepl.regexp._test.rewriters.CompileTest.test_repeat" alt="" coords="17,95,237,113"/>
+<area shape="rect" id="node1_11" href="lepl.regexp._test.rewriters.CompileTest-class.html#test_and" title="lepl.regexp._test.rewriters.CompileTest.test_and" alt="" coords="17,113,237,132"/>
+<area shape="rect" id="node1_12" href="lepl.regexp._test.rewriters.CompileTest-class.html#test_or" title="lepl.regexp._test.rewriters.CompileTest.test_or" alt="" coords="17,132,237,151"/>
+<area shape="rect" id="node1_13" href="lepl.regexp._test.rewriters.CompileTest-class.html#test_complex" title="lepl.regexp._test.rewriters.CompileTest.test_complex" alt="" coords="17,151,237,169"/>
+<area shape="rect" id="node1" href="lepl.regexp._test.rewriters.CompileTest-class.html" title="Test the rewrite routine directly." alt="" coords="5,6,249,175"/>
+</map>
+  <img src="uml_class_diagram_for_lepl_reg_8.gif" alt='' usemap="#uml_class_diagram_for_lepl_reg_8" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
+<hr />
+Test the rewrite routine directly.
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="assert_regexp"></a><span class="summary-sig-name">assert_regexp</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">matcher</span>,
+        <span class="summary-sig-arg">regexp</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.regexp._test.rewriters-pysrc.html#CompileTest.assert_regexp">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="test_any"></a><span class="summary-sig-name">test_any</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.regexp._test.rewriters-pysrc.html#CompileTest.test_any">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="test_literal"></a><span class="summary-sig-name">test_literal</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.regexp._test.rewriters-pysrc.html#CompileTest.test_literal">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="test_repeat"></a><span class="summary-sig-name">test_repeat</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.regexp._test.rewriters-pysrc.html#CompileTest.test_repeat">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="test_and"></a><span class="summary-sig-name">test_and</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.regexp._test.rewriters-pysrc.html#CompileTest.test_and">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="test_or"></a><span class="summary-sig-name">test_or</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.regexp._test.rewriters-pysrc.html#CompileTest.test_or">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="test_complex"></a><span class="summary-sig-name">test_complex</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.regexp._test.rewriters-pysrc.html#CompileTest.test_complex">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lepl-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sun May 13 16:31:05 2012
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

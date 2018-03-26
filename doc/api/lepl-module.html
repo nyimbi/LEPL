@@ -1,0 +1,1440 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lepl</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th bgcolor="#70b0f0" class="navbar-select"
+          >&nbsp;&nbsp;&nbsp;Home&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;lepl
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lepl-module.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PACKAGE DESCRIPTION ==================== -->
+<h1 class="epydoc">Package lepl</h1><p class="nomargin-top"><span class="codelink"><a href="lepl-pysrc.html">source&nbsp;code</a></span></p>
+<p>Lepl is a parser library written in Python.</p>
+<p>This is the API documentation; the module index is at the bottom of this page.
+There is also a <a class="rst-reference external" href="../index.html" target="_top">manual</a> which gives a higher level
+overview.</p>
+<p>The home page for this package is the
+<a class="rst-reference external" href="http://www.acooke.org/lepl" target="_top">Lepl website</a>.</p>
+<div class="rst-section" id="rst-example">
+<h1 class="heading">Example</h1>
+<p>A simple example of how to use Lepl:</p>
+<pre class="rst-literal-block">
+from lepl import *
+
+# For a simpler result these could be replaced with 'list', giving
+# an AST as a set of nested lists
+# (ie replace '&gt; Term' etc with '&gt; list' below).
+
+class Term(List): pass
+class Factor(List): pass
+class Expression(List): pass
+
+def build():
+
+    # Here we define the grammar
+
+    # A delayed value is defined later (see penultimate line in block)
+    expr   = Delayed()
+    number = Digit()[1:,...]                        &gt;&gt; int
+
+    # Allow spaces between items
+    with DroppedSpace():
+        term    = number | '(' &amp; expr &amp; ')'         &gt; Term
+        muldiv  = Any('*/')
+        factor  = term &amp; (muldiv &amp; term)[:]         &gt; Factor
+        addsub  = Any('+-')
+        expr   += factor &amp; (addsub &amp; factor)[:]     &gt; Expression
+        line    = Trace(expr) &amp; Eos()
+
+    return line.get_parse()
+
+if __name__ == '__main__':
+    parser = build()
+    # parser returns a list of tokens, but line
+    # returns a single value, so take the first entry
+    print(parser('1 + 2 * (3 + 4 - 5)')[0])
+</pre>
+<p>Running this gives the result:</p>
+<pre class="rst-literal-block">
+Expression
+ +- Factor
+ |   `- Term
+ |       `- 1
+ +- '+'
+ `- Factor
+     +- Term
+     |   `- 2
+     +- '*'
+     `- Term
+         +- '('
+         +- Expression
+         |   +- Factor
+         |   |   `- Term
+         |   |       `- 3
+         |   +- '+'
+         |   +- Factor
+         |   |   `- Term
+         |   |       `- 4
+         |   +- '-'
+         |   `- Factor
+         |       `- Term
+         |           `- 5
+         `- ')'
+</pre>
+</div>
+
+<hr />
+<div class="fields">      <p><strong>Version:</strong>
+        5.1.2
+      </p>
+</div><!-- ==================== SUBMODULES ==================== -->
+<a name="section-Submodules"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Submodules</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Submodules"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr><td class="summary">
+  <ul class="nomargin">
+    <li class="private"> <strong class="uidlink"><a href="lepl._test-module.html">lepl._test</a></strong>: <em class="summary">Tests for the lepl package.</em>
+    <ul class="private">
+    <li> <strong class="uidlink"><a href="lepl._test.base-module.html">lepl._test.base</a></strong>: <em class="summary">Support for matcher tests.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl._test.bug_stalled_parser-module.html">lepl._test.bug_stalled_parser</a></strong>: <em class="summary">Tests for a regexp bug.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl._test.magus-module.html">lepl._test.magus</a></strong>: <em class="summary">Tests for a bug reported for 3.2, 3.2.1</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl._test.wrong_cache_bug-module.html">lepl._test.wrong_cache_bug</a></strong>    </li>
+    <li> <strong class="uidlink"><a href="lepl._test.wrong_depth_bug-module.html">lepl._test.wrong_depth_bug</a></strong>: <em class="summary">Depth warning gets to end of string.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl._test.wrong_regexp_bug-module.html">lepl._test.wrong_regexp_bug</a></strong>: <em class="summary">The regexp example from the tutorial is returning an error indicating that
+Dfa or NfaRegexp is being called.</em>    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="lepl.apps-module.html">lepl.apps</a></strong>
+    <ul>
+    <li class="private"> <strong class="uidlink"><a href="lepl.apps._test-module.html">lepl.apps._test</a></strong>: <em class="summary">Tests for the lepl.apps package.</em>
+    <ul class="private">
+    <li> <strong class="uidlink"><a href="lepl.apps._test.json-module.html">lepl.apps._test.json</a></strong>    </li>
+    <li> <strong class="uidlink"><a href="lepl.apps._test.rfc3696-module.html">lepl.apps._test.rfc3696</a></strong>: <em class="summary">Tests for the lepl.apps.rfc3696 module.</em>    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="lepl.apps.json-module.html">lepl.apps.json</a></strong>: <em class="summary">Punt to the contrib package (this is just to keep copyright clear).</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.apps.rfc3696-module.html">lepl.apps.rfc3696</a></strong>: <em class="summary">Matchers for validating URIs and related objects, taken from RFC3696.</em>    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="lepl.bin-module.html">lepl.bin</a></strong>: <em class="summary">Parse (and construct) binary data.</em>
+    <ul>
+    <li class="private"> <strong class="uidlink"><a href="lepl.bin._test-module.html">lepl.bin._test</a></strong>: <em class="summary">Tests for the lepl.bin package.</em>
+    <ul class="private">
+    <li> <strong class="uidlink"><a href="lepl.bin._test.bits-module.html">lepl.bin._test.bits</a></strong>: <em class="summary">Tests for the lepl.bin.bits module.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.bin._test.encode-module.html">lepl.bin._test.encode</a></strong>: <em class="summary">Tests for the lepl.bin.encode module.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.bin._test.literal-module.html">lepl.bin._test.literal</a></strong>: <em class="summary">Tests for the lepl.bin.literal module.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.bin._test.matchers-module.html">lepl.bin._test.matchers</a></strong>: <em class="summary">Tests for the lepl.bin.matchers module.</em>    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="lepl.bin.bits-module.html">lepl.bin.bits</a></strong>: <em class="summary">Storage of binary values of arbitrary length.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.bin.encode-module.html">lepl.bin.encode</a></strong>: <em class="summary">Convert structured Python data to a binary stream.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.bin.literal-module.html">lepl.bin.literal</a></strong>: <em class="summary">Specify and construct binary structures.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.bin.matchers-module.html">lepl.bin.matchers</a></strong>: <em class="summary">Matchers specifically for binary data (most LEPL matchers can be used with
+binary data, but additional support is needed when the matching involves a
+literal comparison or generation of a binary result).</em>    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="lepl.cairo-module.html">lepl.cairo</a></strong>: <em class="summary">This is a possibly temporary addition to lepl - a higher level wrapper to the
+pycairo library.</em>
+    <ul>
+    <li class="private"> <strong class="uidlink"><a href="lepl.cairo._test-module.html">lepl.cairo._test</a></strong>: <em class="summary">Tests for the lepl.cairo package.</em>
+    <ul class="private">
+    <li> <strong class="uidlink"><a href="lepl.cairo._test.colour-module.html">lepl.cairo._test.colour</a></strong>: <em class="summary">Test the Colour class.</em>    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="lepl.cairo.colour-module.html">lepl.cairo.colour</a></strong>: <em class="summary">Provide some short-hand colour definitions for cairo.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.cairo.context-module.html">lepl.cairo.context</a></strong>: <em class="summary">Provide a with-context syntax for cairo.</em>    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="lepl.contrib-module.html">lepl.contrib</a></strong>: <em class="summary">Contributed code.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="lepl.contrib.json-module.html">lepl.contrib.json</a></strong>: <em class="summary"><a class="rst-rst-reference external rst-reference external" href="http://www.ietf.org/rfc/rfc4627.txt" target="_top">http://www.ietf.org/rfc/rfc4627.txt</a></em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.contrib.matchers-module.html">lepl.contrib.matchers</a></strong>: <em class="summary">Contributed matchers.</em>    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="lepl.core-module.html">lepl.core</a></strong>: <em class="summary">Core classes, related to parsing, config etc.</em>
+    <ul>
+    <li class="private"> <strong class="uidlink"><a href="lepl.core._test-module.html">lepl.core._test</a></strong>: <em class="summary">Tests for the lepl.core package.</em>
+    <ul class="private">
+    <li> <strong class="uidlink"><a href="lepl.core._test.clone-module.html">lepl.core._test.clone</a></strong>    </li>
+    <li> <strong class="uidlink"><a href="lepl.core._test.config-module.html">lepl.core._test.config</a></strong>: <em class="summary">Tests for the lepl.core.config module.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.core._test.dynamic-module.html">lepl.core._test.dynamic</a></strong>: <em class="summary">Initial, minimal support for dynamic variables.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.core._test.manager-module.html">lepl.core._test.manager</a></strong>: <em class="summary">Tests for the lepl.core.manager module.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.core._test.parser-module.html">lepl.core._test.parser</a></strong>: <em class="summary">Tests for the lepl.core.parser module.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.core._test.rewrite_delayed_bug-module.html">lepl.core._test.rewrite_delayed_bug</a></strong>: <em class="summary">Tests for bug reprted on the mailing list.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.core._test.rewrite_repeat_bug-module.html">lepl.core._test.rewrite_repeat_bug</a></strong>: <em class="summary">Tests for bug reprted on the mailing list.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.core._test.rewriters-module.html">lepl.core._test.rewriters</a></strong>: <em class="summary">Tests for the lepl.core.rewriters module.</em>    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="lepl.core.config-module.html">lepl.core.config</a></strong>: <em class="summary">The main configuration object and various standard configurations.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.core.dynamic-module.html">lepl.core.dynamic</a></strong>    </li>
+    <li> <strong class="uidlink"><a href="lepl.core.manager-module.html">lepl.core.manager</a></strong>: <em class="summary">Manage resources.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.core.monitor-module.html">lepl.core.monitor</a></strong>: <em class="summary">Support for classes that monitor the execution process (for example, managing
+resources and tracing program flow).</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.core.parser-module.html">lepl.core.parser</a></strong>: <em class="summary">Create and evaluate parsers.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.core.rewriters-module.html">lepl.core.rewriters</a></strong>: <em class="summary">Rewriters modify the graph of matchers before it is used to generate a
+parser.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.core.trace-module.html">lepl.core.trace</a></strong>: <em class="summary">Tools for logging and tracing.</em>    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="lepl.lexer-module.html">lepl.lexer</a></strong>: <em class="summary">A lexer (tokenizer) for Lepl.</em>
+    <ul>
+    <li class="private"> <strong class="uidlink"><a href="lepl.lexer._test-module.html">lepl.lexer._test</a></strong>: <em class="summary">Tests for the lepl.lexer package.</em>
+    <ul class="private">
+    <li> <strong class="uidlink"><a href="lepl.lexer._test.matchers-module.html">lepl.lexer._test.matchers</a></strong>: <em class="summary">Wide range of tests for lexer.</em>    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="lepl.lexer.lexer-module.html">lepl.lexer.lexer</a></strong>    </li>
+    <li> <strong class="uidlink"><a href="lepl.lexer.lines-module.html">lepl.lexer.lines</a></strong>
+    <ul>
+    <li class="private"> <strong class="uidlink"><a href="lepl.lexer.lines._test-module.html">lepl.lexer.lines._test</a></strong>: <em class="summary">Tests for the lepl.lexer.lines package.</em>
+    <ul class="private">
+    <li> <strong class="uidlink"><a href="lepl.lexer.lines._test.closed_bug-module.html">lepl.lexer.lines._test.closed_bug</a></strong>: <em class="summary">Tests related to a now-forgotten bug.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.lexer.lines._test.errors-module.html">lepl.lexer.lines._test.errors</a></strong>: <em class="summary">A test related to error handling, based on a bug report.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.lexer.lines._test.indentation-module.html">lepl.lexer.lines._test.indentation</a></strong>: <em class="summary">Tests for indentation aware parsing.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.lexer.lines._test.left_bug-module.html">lepl.lexer.lines._test.left_bug</a></strong>: <em class="summary">See <a class="rst-rst-reference external rst-reference external" href="http://groups.google.com/group/lepl/browse_thread/thread/79e39e03a03718cc?hl=en_US" target="_top">http://groups.google.com/group/lepl/browse_thread/thread/79e39e03a03718cc?hl=en_US</a></em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.lexer.lines._test.offside-module.html">lepl.lexer.lines._test.offside</a></strong>: <em class="summary">Tests for offside parsing.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.lexer.lines._test.pithon-module.html">lepl.lexer.lines._test.pithon</a></strong>    </li>
+    <li> <strong class="uidlink"><a href="lepl.lexer.lines._test.stream-module.html">lepl.lexer.lines._test.stream</a></strong>: <em class="summary">Tests for the lepl.lexer.lines.stream module.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.lexer.lines._test.text-module.html">lepl.lexer.lines._test.text</a></strong>: <em class="summary">An example that avoids using tokens with the line aware parsing (you'd have
+to be crazy to want to do this, but it's possible).</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.lexer.lines._test.word_bug-module.html">lepl.lexer.lines._test.word_bug</a></strong>: <em class="summary">Tests related to a bug when Word() was specified inside Token() with
+line-aware parsing.</em>    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="lepl.lexer.lines.lexer-module.html">lepl.lexer.lines.lexer</a></strong>: <em class="summary">A lexer that adds line start and end tokens.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.lexer.lines.matchers-module.html">lepl.lexer.lines.matchers</a></strong>    </li>
+    <li> <strong class="uidlink"><a href="lepl.lexer.lines.monitor-module.html">lepl.lexer.lines.monitor</a></strong>: <em class="summary">Support the stack-scoped tracking of indent level blocks.</em>    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="lepl.lexer.matchers-module.html">lepl.lexer.matchers</a></strong>: <em class="summary">Generate and match a stream of tokens that are identified by regular
+expressions.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.lexer.operators-module.html">lepl.lexer.operators</a></strong>: <em class="summary">Operators for tokens.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.lexer.rewriters-module.html">lepl.lexer.rewriters</a></strong>: <em class="summary">Rewrite a matcher graph to include lexing.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.lexer.stream-module.html">lepl.lexer.stream</a></strong>: <em class="summary">Stream support for lexers.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.lexer.support-module.html">lepl.lexer.support</a></strong>: <em class="summary">Support classes for the lexer.</em>    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="lepl.matchers-module.html">lepl.matchers</a></strong>: <em class="summary">Matchers form the basis of the library; they are used to define the grammar
+and do the work of parsing the input.</em>
+    <ul>
+    <li class="private"> <strong class="uidlink"><a href="lepl.matchers._test-module.html">lepl.matchers._test</a></strong>: <em class="summary">Tests for the lepl.matchers package.</em>
+    <ul class="private">
+    <li> <strong class="uidlink"><a href="lepl.matchers._test.combine-module.html">lepl.matchers._test.combine</a></strong>: <em class="summary">Tests for the combining matchers.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.matchers._test.core-module.html">lepl.matchers._test.core</a></strong>: <em class="summary">Tests for the lepl.matchers.core module.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.matchers._test.derived-module.html">lepl.matchers._test.derived</a></strong>    </li>
+    <li> <strong class="uidlink"><a href="lepl.matchers._test.error-module.html">lepl.matchers._test.error</a></strong>: <em class="summary">Tests for the lepl.matchers.error module.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.matchers._test.float_bug-module.html">lepl.matchers._test.float_bug</a></strong>: <em class="summary">Tests for a weird bug when writing the float (rational at the time) matcher.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.matchers._test.memo-module.html">lepl.matchers._test.memo</a></strong>    </li>
+    <li> <strong class="uidlink"><a href="lepl.matchers._test.operators-module.html">lepl.matchers._test.operators</a></strong>: <em class="summary">Tests for the lepl.matchers.operators module.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.matchers._test.separators-module.html">lepl.matchers._test.separators</a></strong>: <em class="summary">Tests for the lepl.matchers.separators module.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.matchers._test.support-module.html">lepl.matchers._test.support</a></strong>    </li>
+    <li> <strong class="uidlink"><a href="lepl.matchers._test.transform-module.html">lepl.matchers._test.transform</a></strong>: <em class="summary">Tests for the lepl.matchers.transform module</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.matchers._test.variables-module.html">lepl.matchers._test.variables</a></strong>: <em class="summary">Tests for the lepl.matchers.variables module.</em>    </li>
+    </ul>
+    </li>
+    <li class="private"> <strong class="uidlink"><a href="lepl.matchers._test3-module.html">lepl.matchers._test3</a></strong>: <em class="summary">Tests for the lepl.matchers package
+(Python 3 only - not include in final release)</em>
+    <ul class="private">
+    <li> <strong class="uidlink"><a href="lepl.matchers._test3.support-module.html">lepl.matchers._test3.support</a></strong>: <em class="summary">Tests for the lepl.matchers.support module (duplicate, including Python 3
+only syntax)</em>    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="lepl.matchers.combine-module.html">lepl.matchers.combine</a></strong>: <em class="summary">Matchers that combine sub-matchers (And, Or etc).</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.matchers.complex-module.html">lepl.matchers.complex</a></strong>: <em class="summary">Complex matchers that are rearely used.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.matchers.core-module.html">lepl.matchers.core</a></strong>: <em class="summary">Matchers that embody fundamental, common actions.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.matchers.derived-module.html">lepl.matchers.derived</a></strong>: <em class="summary">Matchers that are defined in terms of other matchers (ie the majority).</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.matchers.error-module.html">lepl.matchers.error</a></strong>: <em class="summary">Error handling (generating an error while parsing).</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.matchers.matcher-module.html">lepl.matchers.matcher</a></strong>: <em class="summary">Base class for matchers.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.matchers.memo-module.html">lepl.matchers.memo</a></strong>: <em class="summary">Memoisation (both as described by Norvig 1991, giving Packrat
+parsers for non-left recursive grammars, and the equivalent described by
+Frost and Hafiz 2006 which allows left-recursive grammars to be used).</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.matchers.monitor-module.html">lepl.matchers.monitor</a></strong>: <em class="summary">Matchers that interact with monitors.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.matchers.operators-module.html">lepl.matchers.operators</a></strong>: <em class="summary">Support for operator syntactic sugar (and operator redefinition).</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.matchers.support-module.html">lepl.matchers.support</a></strong>: <em class="summary">Support classes for matchers.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.matchers.transform-module.html">lepl.matchers.transform</a></strong>: <em class="summary">A transformation is a function that modifies the result of calling a matcher
+once.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.matchers.variables-module.html">lepl.matchers.variables</a></strong>: <em class="summary">Display information when matchers that are bound to variables are called.</em>    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="lepl.regexp-module.html">lepl.regexp</a></strong>: <em class="summary">Pure Python regular expression support.</em>
+    <ul>
+    <li class="private"> <strong class="uidlink"><a href="lepl.regexp._test-module.html">lepl.regexp._test</a></strong>: <em class="summary">Tests for the lepl.regexp package.</em>
+    <ul class="private">
+    <li> <strong class="uidlink"><a href="lepl.regexp._test.binary-module.html">lepl.regexp._test.binary</a></strong>: <em class="summary">Tests for the lepl.regexp.binary module.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.regexp._test.core-module.html">lepl.regexp._test.core</a></strong>: <em class="summary">Tests for the lepl.regexp.matchers module.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.regexp._test.interval-module.html">lepl.regexp._test.interval</a></strong>: <em class="summary">Tests for the lepl.regexp.interval module.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.regexp._test.matchers-module.html">lepl.regexp._test.matchers</a></strong>: <em class="summary">Tests for the lepl.regexp.matchers module.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.regexp._test.random-module.html">lepl.regexp._test.random</a></strong>: <em class="summary">Tests for the lepl.regexp package.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.regexp._test.rewriters-module.html">lepl.regexp._test.rewriters</a></strong>    </li>
+    <li> <strong class="uidlink"><a href="lepl.regexp._test.unicode-module.html">lepl.regexp._test.unicode</a></strong>: <em class="summary">Tests for the lepl.regexp.unicode module.</em>    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="lepl.regexp.binary-module.html">lepl.regexp.binary</a></strong>: <em class="summary">A proof-of-concept regexp implementation for binary data strings.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.regexp.core-module.html">lepl.regexp.core</a></strong>: <em class="summary">A simple regular expression engine in pure Python.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.regexp.interval-module.html">lepl.regexp.interval</a></strong>    </li>
+    <li> <strong class="uidlink"><a href="lepl.regexp.matchers-module.html">lepl.regexp.matchers</a></strong>: <em class="summary">Matchers that call the regular expression engine.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.regexp.rewriters-module.html">lepl.regexp.rewriters</a></strong>: <em class="summary">Rewrite the tree of matchers from the bottom up (as far as possible)
+using regular expressions.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.regexp.str-module.html">lepl.regexp.str</a></strong>: <em class="summary">Some intermediate classes that support parsers for objects that can be
+converted to strings using str().</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.regexp.unicode-module.html">lepl.regexp.unicode</a></strong>: <em class="summary">A regexp implementation for unicode strings.</em>    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="lepl.stream-module.html">lepl.stream</a></strong>
+    <ul>
+    <li class="private"> <strong class="uidlink"><a href="lepl.stream._test-module.html">lepl.stream._test</a></strong>: <em class="summary">Tests for the lepl.stream package.</em>
+    <ul class="private">
+    <li> <strong class="uidlink"><a href="lepl.stream._test.file-module.html">lepl.stream._test.file</a></strong>    </li>
+    <li> <strong class="uidlink"><a href="lepl.stream._test.iter-module.html">lepl.stream._test.iter</a></strong>    </li>
+    <li> <strong class="uidlink"><a href="lepl.stream._test.simple-module.html">lepl.stream._test.simple</a></strong>    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="lepl.stream.core-module.html">lepl.stream.core</a></strong>: <em class="summary">Default implementations of the stream classes.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.stream.facade-module.html">lepl.stream.facade</a></strong>: <em class="summary">A facade that delegates all methods to an embedded instance.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.stream.factory-module.html">lepl.stream.factory</a></strong>    </li>
+    <li> <strong class="uidlink"><a href="lepl.stream.iter-module.html">lepl.stream.iter</a></strong>: <em class="summary">A stream for iterable sources.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.stream.maxdepth-module.html">lepl.stream.maxdepth</a></strong>: <em class="summary">Raise an exception if the stream is not consumed entirely.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.stream.simple-module.html">lepl.stream.simple</a></strong>: <em class="summary">Default implementation of the helper classes for sequences (strings and lists).</em>    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="lepl.support-module.html">lepl.support</a></strong>: <em class="summary">Various support classes.</em>
+    <ul>
+    <li class="private"> <strong class="uidlink"><a href="lepl.support._test-module.html">lepl.support._test</a></strong>: <em class="summary">Tests for the lepl.matchers package.</em>
+    <ul class="private">
+    <li> <strong class="uidlink"><a href="lepl.support._test.graph-module.html">lepl.support._test.graph</a></strong>: <em class="summary">Tests for the lepl.support.graph module.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.support._test.lib-module.html">lepl.support._test.lib</a></strong>: <em class="summary">Tests for the lepl.support.lib module.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.support._test.list-module.html">lepl.support._test.list</a></strong>: <em class="summary">Tests for the lepl.support.list module.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.support._test.node-module.html">lepl.support._test.node</a></strong>: <em class="summary">Tests for the lepl.support.node module.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.support._test.timer-module.html">lepl.support._test.timer</a></strong>: <em class="summary">Tests for the lepl.support.timer module.</em>    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="lepl.support.context-module.html">lepl.support.context</a></strong>: <em class="summary">Allow global per-thread values to be defined within a certain scope in a
+way that supports multiple values, temporary changes inside with contexts,
+etc.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.support.graph-module.html">lepl.support.graph</a></strong>: <em class="summary">Graph traversal - supports generic Python classes, but has extensions for
+classes that record their own constructor arguments (and so allow deep
+cloning of graphs).</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.support.lib-module.html">lepl.support.lib</a></strong>: <em class="summary">Library routines / utilities (some unused).</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.support.list-module.html">lepl.support.list</a></strong>: <em class="summary">Support for S-expression ASTs using subclasses of Python's list class.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.support.node-module.html">lepl.support.node</a></strong>: <em class="summary">Base classes for AST nodes (and associated functions).</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.support.state-module.html">lepl.support.state</a></strong>: <em class="summary">Encapsulate global (per thread) state.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.support.timer-module.html">lepl.support.timer</a></strong>: <em class="summary">Support for measuring the speed of different parsers and configurations.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.support.warn-module.html">lepl.support.warn</a></strong>: <em class="summary">A mechanism to associate warnings with certain classes (eg for deprecation)
+and to disable those warnings.</em>    </li>
+    </ul>
+    </li>
+  </ul></td></tr>
+</table>
+
+<br />
+<!-- ==================== VARIABLES ==================== -->
+<a name="section-Variables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Variables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="SmartSeparator2"></a><span class="summary-name">SmartSeparator2</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Configuration"></a><span class="summary-name">Configuration</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="ConfigBuilder"></a><span class="summary-name">ConfigBuilder</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="GeneratorManager"></a><span class="summary-name">GeneratorManager</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="RecordDeepest"></a><span class="summary-name">RecordDeepest</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="TraceStack"></a><span class="summary-name">TraceStack</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="And"></a><span class="summary-name">And</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Or"></a><span class="summary-name">Or</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="First"></a><span class="summary-name">First</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Difference"></a><span class="summary-name">Difference</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Limit"></a><span class="summary-name">Limit</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Any"></a><span class="summary-name">Any</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Delayed"></a><span class="summary-name">Delayed</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Literal"></a><span class="summary-name">Literal</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Empty"></a><span class="summary-name">Empty</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Lookahead"></a><span class="summary-name">Lookahead</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Regexp"></a><span class="summary-name">Regexp</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="PostMatch"></a><span class="summary-name">PostMatch</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Columns"></a><span class="summary-name">Columns</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Iterate"></a><span class="summary-name">Iterate</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Trace"></a><span class="summary-name">Trace</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Apply"></a><span class="summary-name">Apply</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="args"></a><span class="summary-name">args</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="KApply"></a><span class="summary-name">KApply</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Join"></a><span class="summary-name">Join</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="AnyBut"></a><span class="summary-name">AnyBut</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Optional"></a><span class="summary-name">Optional</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Star"></a><span class="summary-name">Star</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="ZeroOrMore"></a><span class="summary-name">ZeroOrMore</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Map"></a><span class="summary-name">Map</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Add"></a><span class="summary-name">Add</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Drop"></a><span class="summary-name">Drop</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Repeat"></a><span class="summary-name">Repeat</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Plus"></a><span class="summary-name">Plus</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="OneOrMore"></a><span class="summary-name">OneOrMore</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Substitute"></a><span class="summary-name">Substitute</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Name"></a><span class="summary-name">Name</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Eof"></a><span class="summary-name">Eof</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Eos"></a><span class="summary-name">Eos</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Identity"></a><span class="summary-name">Identity</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Newline"></a><span class="summary-name">Newline</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Space"></a><span class="summary-name">Space</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Whitespace"></a><span class="summary-name">Whitespace</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Digit"></a><span class="summary-name">Digit</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Letter"></a><span class="summary-name">Letter</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Upper"></a><span class="summary-name">Upper</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Lower"></a><span class="summary-name">Lower</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Printable"></a><span class="summary-name">Printable</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Punctuation"></a><span class="summary-name">Punctuation</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="UnsignedInteger"></a><span class="summary-name">UnsignedInteger</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="SignedInteger"></a><span class="summary-name">SignedInteger</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Integer"></a><span class="summary-name">Integer</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="UnsignedFloat"></a><span class="summary-name">UnsignedFloat</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="SignedFloat"></a><span class="summary-name">SignedFloat</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="UnsignedEFloat"></a><span class="summary-name">UnsignedEFloat</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="SignedEFloat"></a><span class="summary-name">SignedEFloat</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Float"></a><span class="summary-name">Float</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="UnsignedReal"></a><span class="summary-name">UnsignedReal</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="SignedReal"></a><span class="summary-name">SignedReal</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="UnsignedEReal"></a><span class="summary-name">UnsignedEReal</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="SignedEReal"></a><span class="summary-name">SignedEReal</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Real"></a><span class="summary-name">Real</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Word"></a><span class="summary-name">Word</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="DropEmpty"></a><span class="summary-name">DropEmpty</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Literals"></a><span class="summary-name">Literals</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="String"></a><span class="summary-name">String</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="SingleLineString"></a><span class="summary-name">SingleLineString</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="SkipString"></a><span class="summary-name">SkipString</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="SkipTo"></a><span class="summary-name">SkipTo</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Error"></a><span class="summary-name">Error</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="make_error"></a><span class="summary-name">make_error</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="raise_error"></a><span class="summary-name">raise_error</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="RMemo"></a><span class="summary-name">RMemo</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="LMemo"></a><span class="summary-name">LMemo</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="MemoException"></a><span class="summary-name">MemoException</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Override"></a><span class="summary-name">Override</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Separator"></a><span class="summary-name">Separator</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="SmartSeparator1"></a><span class="summary-name">SmartSeparator1</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="GREEDY"></a><span class="summary-name">GREEDY</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="NON_GREEDY"></a><span class="summary-name">NON_GREEDY</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="DEPTH_FIRST"></a><span class="summary-name">DEPTH_FIRST</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="BREADTH_FIRST"></a><span class="summary-name">BREADTH_FIRST</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="DroppedSpace"></a><span class="summary-name">DroppedSpace</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="REDUCE"></a><span class="summary-name">REDUCE</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="function_matcher"></a><span class="summary-name">function_matcher</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="function_matcher_factory"></a><span class="summary-name">function_matcher_factory</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="sequence_matcher"></a><span class="summary-name">sequence_matcher</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="sequence_matcher_factory"></a><span class="summary-name">sequence_matcher_factory</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="trampoline_matcher"></a><span class="summary-name">trampoline_matcher</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="trampoline_matcher_factory"></a><span class="summary-name">trampoline_matcher_factory</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="PostCondition"></a><span class="summary-name">PostCondition</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Transform"></a><span class="summary-name">Transform</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Assert"></a><span class="summary-name">Assert</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="TraceVariables"></a><span class="summary-name">TraceVariables</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Token"></a><span class="summary-name">Token</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="LexerError"></a><span class="summary-name">LexerError</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="RuntimeLexerError"></a><span class="summary-name">RuntimeLexerError</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Block"></a><span class="summary-name">Block</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Line"></a><span class="summary-name">Line</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="LineStart"></a><span class="summary-name">LineStart</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="LineEnd"></a><span class="summary-name">LineEnd</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="constant_indent"></a><span class="summary-name">constant_indent</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="explicit"></a><span class="summary-name">explicit</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="to_right"></a><span class="summary-name">to_right</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="ContinuedLineFactory"></a><span class="summary-name">ContinuedLineFactory</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Extend"></a><span class="summary-name">Extend</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="NO_BLOCKS"></a><span class="summary-name">NO_BLOCKS</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="DEFAULT_POLICY"></a><span class="summary-name">DEFAULT_POLICY</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="RegexpError"></a><span class="summary-name">RegexpError</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="NfaRegexp"></a><span class="summary-name">NfaRegexp</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="DfaRegexp"></a><span class="summary-name">DfaRegexp</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="UnicodeAlphabet"></a><span class="summary-name">UnicodeAlphabet</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="s_debug"></a><span class="summary-name">s_debug</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="s_deepest"></a><span class="summary-name">s_deepest</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="s_delta"></a><span class="summary-name">s_delta</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="s_empty"></a><span class="summary-name">s_empty</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="s_eq"></a><span class="summary-name">s_eq</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="s_factory"></a><span class="summary-name">s_factory</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="s_fmt"></a><span class="summary-name">s_fmt</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="s_global_kargs"></a><span class="summary-name">s_global_kargs</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="s_id"></a><span class="summary-name">s_id</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="s_join"></a><span class="summary-name">s_join</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="s_kargs"></a><span class="summary-name">s_kargs</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="s_key"></a><span class="summary-name">s_key</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="s_len"></a><span class="summary-name">s_len</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="s_line"></a><span class="summary-name">s_line</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="s_max"></a><span class="summary-name">s_max</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="s_next"></a><span class="summary-name">s_next</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="s_stream"></a><span class="summary-name">s_stream</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="FullFirstMatchException"></a><span class="summary-name">FullFirstMatchException</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="DEFAULT_STREAM_FACTORY"></a><span class="summary-name">DEFAULT_STREAM_FACTORY</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="List"></a><span class="summary-name">List</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="sexpr_fold"></a><span class="summary-name">sexpr_fold</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="sexpr_throw"></a><span class="summary-name">sexpr_throw</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="sexpr_flatten"></a><span class="summary-name">sexpr_flatten</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="sexpr_to_tree"></a><span class="summary-name">sexpr_to_tree</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Node"></a><span class="summary-name">Node</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="make_dict"></a><span class="summary-name">make_dict</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="join_with"></a><span class="summary-name">join_with</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="node_throw"></a><span class="summary-name">node_throw</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="print_timing"></a><span class="summary-name">print_timing</span>
+    </td>
+  </tr>
+</table>
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th bgcolor="#70b0f0" class="navbar-select"
+          >&nbsp;&nbsp;&nbsp;Home&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sun May 13 16:30:59 2012
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

@@ -1,0 +1,177 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>A Tutorial for Lepl &mdash; LEPL 5.1.2 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '5.1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="LEPL 5.1.2 documentation" href="index.html" />
+    <link rel="next" title="Part 1 - Basic Matching" href="intro-1.html" />
+    <link rel="prev" title="Features" href="features.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="intro-1.html" title="Part 1 - Basic Matching"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="features.html" title="Features"
+             accesskey="P">previous</a> |</li>
+        <li><a href="contents.html">LEPL 5.1.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="a-tutorial-for-lepl">
+<span id="tutorial"></span><span id="index-0"></span><h1>A Tutorial for Lepl<a class="headerlink" href="#a-tutorial-for-lepl" title="Permalink to this headline">¶</a></h1>
+<p>Hi.  Thanks for considering Lepl &#8212; I hope you find it useful.</p>
+<p>In this tutorial I will try to explain what parsing is and how Lepl can help.
+Even if you already understand the basics of parsing you should probably skim
+through the different sections, looking at the examples, so that you can see
+Lepl in use.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="intro-1.html">Part 1 - Basic Matching</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="intro-1.html#what-is-parsing">What is Parsing?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro-1.html#recognising-a-number">Recognising a Number</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro-1.html#ambiguity">Ambiguity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro-1.html#more-ambiguity-integers-and-floats">More Ambiguity - Integers and Floats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro-1.html#matching-a-sum">Matching a Sum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro-1.html#implicit-literals">Implicit Literals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro-1.html#ignoring-values">Ignoring Values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro-1.html#creating-numbers">Creating Numbers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro-1.html#adding-values">Adding Values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro-1.html#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="intro-2.html">Part 2 - Handling Spaces, Repetition</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="intro-2.html#recap">Recap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro-2.html#explicit-spaces">Explicit Spaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro-2.html#the-star-matcher">The Star Matcher</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro-2.html#repetition">Repetition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro-2.html#more-repetition">More Repetition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro-2.html#separators">Separators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro-2.html#regular-expressions">Regular Expressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro-2.html#regexp">Regexp()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro-2.html#dfaregexp">DfaRegexp()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro-2.html#nfaregexp">NfaRegexp()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro-2.html#tokens-first-attempt">Tokens (First Attempt)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro-2.html#debugging">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro-2.html#tokens-second-attempt">Tokens (Second Attempt)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro-2.html#alternative-spaces">Alternative Spaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro-2.html#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="intro-3.html">Part 3 - Recursion, Abstract Syntax Trees</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="intro-3.html#recap">Recap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro-3.html#back-to-basics">Back to Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro-3.html#adding-subtraction">Adding Subtraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro-3.html#recursion">Recursion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro-3.html#delayed-matchers">Delayed Matchers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro-3.html#building-an-ast-with-list">Building an AST with List</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro-3.html#lists-s-expressions-and-nodes">Lists, S-Expressions, and Nodes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro-3.html#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="intro-4.html">Part 4 - Evaluation, Efficiency</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="intro-4.html#recap">Recap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro-4.html#operator-precedence">Operator Precedence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro-4.html#ambiguity-and-left-recursion">Ambiguity and Left Recursion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro-4.html#subclassing-list">Subclassing List</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro-4.html#evaluation">Evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro-4.html#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="features.html"
+                        title="previous chapter">Features</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="intro-1.html"
+                        title="next chapter">Part 1 - Basic Matching</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/intro.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="intro-1.html" title="Part 1 - Basic Matching"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="features.html" title="Features"
+             >previous</a> |</li>
+        <li><a href="contents.html">LEPL 5.1.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2009-2011, Andrew Cooke.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,707 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lepl.core.monitor.MultipleValueMonitors</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lepl-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lepl-module.html">Package&nbsp;lepl</a> ::
+        <a href="lepl.core-module.html">Package&nbsp;core</a> ::
+        <a href="lepl.core.monitor-module.html">Module&nbsp;monitor</a> ::
+        Class&nbsp;MultipleValueMonitors
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lepl.core.monitor.MultipleValueMonitors-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class MultipleValueMonitors</h1><p class="nomargin-top"><span class="codelink"><a href="lepl.core.monitor-pysrc.html#MultipleValueMonitors">source&nbsp;code</a></span></p>
+<center>
+<center>  <map id="uml_class_diagram_for_lepl_cor_27" name="uml_class_diagram_for_lepl_cor_27">
+<area shape="rect" id="node1_13" href="lepl.core.monitor.MultipleValueMonitors-class.html#__init__" title="x.__init__(...) initializes x; see help(type(x)) for signature" alt="" coords="17,103,317,121"/>
+<area shape="rect" id="node1_14" href="lepl.core.monitor.MultipleValueMonitors-class.html#append" title="Add another monitor to the chain." alt="" coords="17,121,317,140"/>
+<area shape="rect" id="node1_15" href="lepl.core.monitor.MultipleValueMonitors-class.html#__len__" title="lepl.core.monitor.MultipleValueMonitors.__len__" alt="" coords="17,140,317,159"/>
+<area shape="rect" id="node1_16" href="lepl.core.monitor.MultipleValueMonitors-class.html#next_iteration" title="Called at the start of each iteration." alt="" coords="17,159,317,177"/>
+<area shape="rect" id="node1_17" href="lepl.core.monitor.MultipleValueMonitors-class.html#before_next" title="Called before invoking next on a generator." alt="" coords="17,177,317,196"/>
+<area shape="rect" id="node1_18" href="lepl.core.monitor.MultipleValueMonitors-class.html#after_next" title="Called after invoking next on a generator." alt="" coords="17,196,317,215"/>
+<area shape="rect" id="node1_19" href="lepl.core.monitor.MultipleValueMonitors-class.html#before_throw" title="Called before invoking throw on a generator." alt="" coords="17,215,317,233"/>
+<area shape="rect" id="node1_20" href="lepl.core.monitor.MultipleValueMonitors-class.html#after_throw" title="Called after invoking throw on a generator." alt="" coords="17,233,317,252"/>
+<area shape="rect" id="node1_21" href="lepl.core.monitor.MultipleValueMonitors-class.html#before_send" title="Called before invoking send on a generator." alt="" coords="17,252,317,271"/>
+<area shape="rect" id="node1_22" href="lepl.core.monitor.MultipleValueMonitors-class.html#after_send" title="Called after invoking send on a generator." alt="" coords="17,271,317,289"/>
+<area shape="rect" id="node1_23" href="lepl.core.monitor.MultipleValueMonitors-class.html#exception" title="Called when an exception is caught (instead of any &#39;after&#39; method)." alt="" coords="17,289,317,308"/>
+<area shape="rect" id="node1_24" href="lepl.core.monitor.MultipleValueMonitors-class.html#raise_" title="Called before raising an exception to the caller." alt="" coords="17,308,317,327"/>
+<area shape="rect" id="node1_25" href="lepl.core.monitor.MultipleValueMonitors-class.html#yield_" title="Called before yielding a value to the caller." alt="" coords="17,327,317,345"/>
+<area shape="rect" id="node1" href="lepl.core.monitor.MultipleValueMonitors-class.html" title="Combine several value monitors into one." alt="" coords="5,70,329,351"/>
+<area shape="rect" id="node2" href="lepl.core.monitor.ValueMonitor-class.html" title="An interface expected by trampoline(), called to track data flow." alt="" coords="115,6,218,50"/>
+</map>
+  <img src="uml_class_diagram_for_lepl_cor_27.gif" alt='' usemap="#uml_class_diagram_for_lepl_cor_27" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
+<hr />
+Combine several value monitors into one.
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.monitor.MultipleValueMonitors-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">monitors</span>=<span class="summary-sig-default">None</span>)</span><br />
+      x.__init__(...) initializes x; see help(type(x)) for signature</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.monitor-pysrc.html#MultipleValueMonitors.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="append"></a><span class="summary-sig-name">append</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">monitor</span>)</span><br />
+      Add another monitor to the chain.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.monitor-pysrc.html#MultipleValueMonitors.append">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__len__"></a><span class="summary-sig-name">__len__</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.monitor-pysrc.html#MultipleValueMonitors.__len__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.monitor.MultipleValueMonitors-class.html#next_iteration" class="summary-sig-name">next_iteration</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">epoch</span>,
+        <span class="summary-sig-arg">value</span>,
+        <span class="summary-sig-arg">exception</span>,
+        <span class="summary-sig-arg">stack</span>)</span><br />
+      Called at the start of each iteration.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.monitor-pysrc.html#MultipleValueMonitors.next_iteration">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.monitor.MultipleValueMonitors-class.html#before_next" class="summary-sig-name">before_next</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">generator</span>)</span><br />
+      Called before invoking <tt class="rst-docutils literal">next</tt> on a generator.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.monitor-pysrc.html#MultipleValueMonitors.before_next">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.monitor.MultipleValueMonitors-class.html#after_next" class="summary-sig-name">after_next</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">value</span>)</span><br />
+      Called after invoking <tt class="rst-docutils literal">next</tt> on a generator.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.monitor-pysrc.html#MultipleValueMonitors.after_next">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.monitor.MultipleValueMonitors-class.html#before_throw" class="summary-sig-name">before_throw</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">generator</span>,
+        <span class="summary-sig-arg">value</span>)</span><br />
+      Called before invoking <tt class="rst-docutils literal">throw</tt> on a generator.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.monitor-pysrc.html#MultipleValueMonitors.before_throw">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.monitor.MultipleValueMonitors-class.html#after_throw" class="summary-sig-name">after_throw</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">value</span>)</span><br />
+      Called after invoking <tt class="rst-docutils literal">throw</tt> on a generator.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.monitor-pysrc.html#MultipleValueMonitors.after_throw">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.monitor.MultipleValueMonitors-class.html#before_send" class="summary-sig-name">before_send</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">generator</span>,
+        <span class="summary-sig-arg">value</span>)</span><br />
+      Called before invoking <tt class="rst-docutils literal">send</tt> on a generator.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.monitor-pysrc.html#MultipleValueMonitors.before_send">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.monitor.MultipleValueMonitors-class.html#after_send" class="summary-sig-name">after_send</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">value</span>)</span><br />
+      Called after invoking <tt class="rst-docutils literal">send</tt> on a generator.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.monitor-pysrc.html#MultipleValueMonitors.after_send">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.monitor.MultipleValueMonitors-class.html#exception" class="summary-sig-name">exception</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">value</span>)</span><br />
+      Called when an exception is caught (instead of any 'after' method).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.monitor-pysrc.html#MultipleValueMonitors.exception">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.monitor.MultipleValueMonitors-class.html#raise_" class="summary-sig-name">raise_</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">value</span>)</span><br />
+      Called before raising an exception to the caller.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.monitor-pysrc.html#MultipleValueMonitors.raise_">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.monitor.MultipleValueMonitors-class.html#yield_" class="summary-sig-name">yield_</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">value</span>)</span><br />
+      Called before yielding a value to the caller.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.monitor-pysrc.html#MultipleValueMonitors.yield_">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__str__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">monitors</span>=<span class="sig-default">None</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.monitor-pysrc.html#MultipleValueMonitors.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  x.__init__(...) initializes x; see help(type(x)) for signature
+  <dl class="fields">
+    <dt>Overrides:
+        object.__init__
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="next_iteration"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">next_iteration</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">epoch</span>,
+        <span class="sig-arg">value</span>,
+        <span class="sig-arg">exception</span>,
+        <span class="sig-arg">stack</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.monitor-pysrc.html#MultipleValueMonitors.next_iteration">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Called at the start of each iteration.
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="lepl.core.monitor.ValueMonitor-class.html#next_iteration">ValueMonitor.next_iteration</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="before_next"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">before_next</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">generator</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.monitor-pysrc.html#MultipleValueMonitors.before_next">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Called before invoking <tt class="rst-rst-docutils literal rst-docutils literal">next</tt> on a generator.
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="lepl.core.monitor.ValueMonitor-class.html#before_next">ValueMonitor.before_next</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="after_next"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">after_next</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">value</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.monitor-pysrc.html#MultipleValueMonitors.after_next">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Called after invoking <tt class="rst-rst-docutils literal rst-docutils literal">next</tt> on a generator.
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="lepl.core.monitor.ValueMonitor-class.html#after_next">ValueMonitor.after_next</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="before_throw"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">before_throw</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">generator</span>,
+        <span class="sig-arg">value</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.monitor-pysrc.html#MultipleValueMonitors.before_throw">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Called before invoking <tt class="rst-rst-docutils literal rst-docutils literal">throw</tt> on a generator.
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="lepl.core.monitor.ValueMonitor-class.html#before_throw">ValueMonitor.before_throw</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="after_throw"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">after_throw</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">value</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.monitor-pysrc.html#MultipleValueMonitors.after_throw">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Called after invoking <tt class="rst-rst-docutils literal rst-docutils literal">throw</tt> on a generator.
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="lepl.core.monitor.ValueMonitor-class.html#after_throw">ValueMonitor.after_throw</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="before_send"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">before_send</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">generator</span>,
+        <span class="sig-arg">value</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.monitor-pysrc.html#MultipleValueMonitors.before_send">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Called before invoking <tt class="rst-rst-docutils literal rst-docutils literal">send</tt> on a generator.
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="lepl.core.monitor.ValueMonitor-class.html#before_send">ValueMonitor.before_send</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="after_send"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">after_send</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">value</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.monitor-pysrc.html#MultipleValueMonitors.after_send">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Called after invoking <tt class="rst-rst-docutils literal rst-docutils literal">send</tt> on a generator.
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="lepl.core.monitor.ValueMonitor-class.html#after_send">ValueMonitor.after_send</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="exception"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">exception</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">value</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.monitor-pysrc.html#MultipleValueMonitors.exception">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Called when an exception is caught (instead of any 'after' method).
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="lepl.core.monitor.ValueMonitor-class.html#exception">ValueMonitor.exception</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="raise_"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">raise_</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">value</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.monitor-pysrc.html#MultipleValueMonitors.raise_">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Called before raising an exception to the caller.
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="lepl.core.monitor.ValueMonitor-class.html#raise_">ValueMonitor.raise_</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="yield_"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">yield_</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">value</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.monitor-pysrc.html#MultipleValueMonitors.yield_">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Called before yielding a value to the caller.
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="lepl.core.monitor.ValueMonitor-class.html#yield_">ValueMonitor.yield_</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lepl-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sun May 13 16:31:01 2012
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

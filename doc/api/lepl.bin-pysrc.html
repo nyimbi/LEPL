@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lepl.bin</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lepl-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lepl-module.html">Package&nbsp;lepl</a> ::
+        Package&nbsp;bin
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lepl.bin-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="lepl.bin-module.html">Package lepl.bin</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-comment"># The contents of this file are subject to the Mozilla Public License</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-comment"># (MPL) Version 1.1 (the "License"); you may not use this file except</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-comment"># in compliance with the License. You may obtain a copy of the License</tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-comment"># at http://www.mozilla.org/MPL/</tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-comment"># Software distributed under the License is distributed on an "AS IS"</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-comment"># basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See</tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-comment"># the License for the specific language governing rights and</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt class="py-comment"># limitations under the License.</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"><tt class="py-comment"># The Original Code is LEPL (http://www.acooke.org/lepl)</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"><tt class="py-comment"># The Initial Developer of the Original Code is Andrew Cooke.</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"><tt class="py-comment"># Portions created by the Initial Developer are Copyright (C) 2009-2010</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"><tt class="py-comment"># Andrew Cooke (andrew@acooke.org). All Rights Reserved.</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"><tt class="py-comment"># Alternatively, the contents of this file may be used under the terms</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"><tt class="py-comment"># of the LGPL license (the GNU Lesser General Public License,</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"><tt class="py-comment"># http://www.gnu.org/licenses/lgpl.html), in which case the provisions</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"><tt class="py-comment"># of the LGPL License are applicable instead of those above.</tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line"><tt class="py-comment"># If you wish to allow use of your version of this file only under the</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line"><tt class="py-comment"># terms of the LGPL License and not to allow others to use your version</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"><tt class="py-comment"># of this file under the MPL, indicate your decision by deleting the</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line"><tt class="py-comment"># provisions above and replace them with the notice and other provisions</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line"><tt class="py-comment"># required by the LGPL License.  If you do not delete the provisions</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line"><tt class="py-comment"># above, a recipient may use your version of this file under either the</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line"><tt class="py-comment"># MPL or the LGPL License.</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line"> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line"><tt class="py-docstring">'''</tt> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line"><tt class="py-docstring">Parse (and construct) binary data.</tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line"><tt class="py-docstring">Only Python 3.0+ is supported. </tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line"><tt class="py-docstring">'''</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line"> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line"><tt class="py-keyword">if</tt> <tt id="link-0" class="py-name" targets="Method lepl.bin.bits.BitString.bytes()=lepl.bin.bits.BitString-class.html#bytes"><a title="lepl.bin.bits.BitString.bytes" class="py-name" href="#" onclick="return doclink('link-0', 'bytes', 'link-0');">bytes</a></tt> <tt class="py-keyword">is</tt> <tt id="link-1" class="py-name" targets="Module lepl.regexp.str=lepl.regexp.str-module.html"><a title="lepl.regexp.str" class="py-name" href="#" onclick="return doclink('link-1', 'str', 'link-1');">str</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">'Binary parsing unsupported in this Python version'</tt><tt class="py-op">)</tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line"><tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">    <tt class="py-keyword">from</tt> <tt id="link-2" class="py-name" targets="Package lepl=lepl-module.html"><a title="lepl" class="py-name" href="#" onclick="return doclink('link-2', 'lepl', 'link-2');">lepl</a></tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Package lepl.bin=lepl.bin-module.html"><a title="lepl.bin" class="py-name" href="#" onclick="return doclink('link-3', 'bin', 'link-3');">bin</a></tt><tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Module lepl.bin._test.bits=lepl.bin._test.bits-module.html,Module lepl.bin.bits=lepl.bin.bits-module.html,Method lepl.bin.bits.BitString.bits()=lepl.bin.bits.BitString-class.html#bits"><a title="lepl.bin._test.bits
+lepl.bin.bits
+lepl.bin.bits.BitString.bits" class="py-name" href="#" onclick="return doclink('link-4', 'bits', 'link-4');">bits</a></tt> <tt class="py-keyword">import</tt> <tt id="link-5" class="py-name" targets="Class lepl.bin.bits.Int=lepl.bin.bits.Int-class.html"><a title="lepl.bin.bits.Int" class="py-name" href="#" onclick="return doclink('link-5', 'Int', 'link-5');">Int</a></tt><tt class="py-op">,</tt> <tt id="link-6" class="py-name" targets="Function lepl.bin.bits.unpack_length()=lepl.bin.bits-module.html#unpack_length"><a title="lepl.bin.bits.unpack_length" class="py-name" href="#" onclick="return doclink('link-6', 'unpack_length', 'link-6');">unpack_length</a></tt><tt class="py-op">,</tt> <tt id="link-7" class="py-name" targets="Class lepl.bin.bits.BitString=lepl.bin.bits.BitString-class.html"><a title="lepl.bin.bits.BitString" class="py-name" href="#" onclick="return doclink('link-7', 'BitString', 'link-7');">BitString</a></tt><tt class="py-op">,</tt> <tt id="link-8" class="py-name" targets="Function lepl.bin.bits.swap_table()=lepl.bin.bits-module.html#swap_table"><a title="lepl.bin.bits.swap_table" class="py-name" href="#" onclick="return doclink('link-8', 'swap_table', 'link-8');">swap_table</a></tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line">    <tt class="py-keyword">from</tt> <tt id="link-9" class="py-name"><a title="lepl" class="py-name" href="#" onclick="return doclink('link-9', 'lepl', 'link-2');">lepl</a></tt><tt class="py-op">.</tt><tt id="link-10" class="py-name"><a title="lepl.bin" class="py-name" href="#" onclick="return doclink('link-10', 'bin', 'link-3');">bin</a></tt><tt class="py-op">.</tt><tt id="link-11" class="py-name" targets="Module lepl.bin._test.literal=lepl.bin._test.literal-module.html,Module lepl.bin.literal=lepl.bin.literal-module.html"><a title="lepl.bin._test.literal
+lepl.bin.literal" class="py-name" href="#" onclick="return doclink('link-11', 'literal', 'link-11');">literal</a></tt> <tt class="py-keyword">import</tt> <tt id="link-12" class="py-name" targets="Function lepl.bin.literal.parse()=lepl.bin.literal-module.html#parse,Method lepl.core.config.ParserMixin.parse()=lepl.core.config.ParserMixin-class.html#parse,Method lepl.regexp.core.Alphabet.parse()=lepl.regexp.core.Alphabet-class.html#parse,Method lepl.regexp.str.StrAlphabet.parse()=lepl.regexp.str.StrAlphabet-class.html#parse"><a title="lepl.bin.literal.parse
+lepl.core.config.ParserMixin.parse
+lepl.regexp.core.Alphabet.parse
+lepl.regexp.str.StrAlphabet.parse" class="py-name" href="#" onclick="return doclink('link-12', 'parse', 'link-12');">parse</a></tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line">    <tt class="py-keyword">from</tt> <tt id="link-13" class="py-name"><a title="lepl" class="py-name" href="#" onclick="return doclink('link-13', 'lepl', 'link-2');">lepl</a></tt><tt class="py-op">.</tt><tt id="link-14" class="py-name"><a title="lepl.bin" class="py-name" href="#" onclick="return doclink('link-14', 'bin', 'link-3');">bin</a></tt><tt class="py-op">.</tt><tt id="link-15" class="py-name" targets="Module lepl.bin._test.encode=lepl.bin._test.encode-module.html,Module lepl.bin.encode=lepl.bin.encode-module.html"><a title="lepl.bin._test.encode
+lepl.bin.encode" class="py-name" href="#" onclick="return doclink('link-15', 'encode', 'link-15');">encode</a></tt> <tt class="py-keyword">import</tt> <tt id="link-16" class="py-name" targets="Function lepl.bin.encode.dispatch_table()=lepl.bin.encode-module.html#dispatch_table"><a title="lepl.bin.encode.dispatch_table" class="py-name" href="#" onclick="return doclink('link-16', 'dispatch_table', 'link-16');">dispatch_table</a></tt><tt class="py-op">,</tt> <tt id="link-17" class="py-name" targets="Function lepl.bin.encode.simple_serialiser()=lepl.bin.encode-module.html#simple_serialiser"><a title="lepl.bin.encode.simple_serialiser" class="py-name" href="#" onclick="return doclink('link-17', 'simple_serialiser', 'link-17');">simple_serialiser</a></tt> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line">    <tt class="py-keyword">from</tt> <tt id="link-18" class="py-name"><a title="lepl" class="py-name" href="#" onclick="return doclink('link-18', 'lepl', 'link-2');">lepl</a></tt><tt class="py-op">.</tt><tt id="link-19" class="py-name"><a title="lepl.bin" class="py-name" href="#" onclick="return doclink('link-19', 'bin', 'link-3');">bin</a></tt><tt class="py-op">.</tt><tt id="link-20" class="py-name" targets="Module lepl.bin._test.matchers=lepl.bin._test.matchers-module.html,Module lepl.bin.matchers=lepl.bin.matchers-module.html,Module lepl.contrib.matchers=lepl.contrib.matchers-module.html,Module lepl.lexer._test.matchers=lepl.lexer._test.matchers-module.html,Module lepl.lexer.lines.matchers=lepl.lexer.lines.matchers-module.html,Module lepl.lexer.matchers=lepl.lexer.matchers-module.html,Package lepl.matchers=lepl.matchers-module.html,Module lepl.regexp._test.matchers=lepl.regexp._test.matchers-module.html,Module lepl.regexp.matchers=lepl.regexp.matchers-module.html"><a title="lepl.bin._test.matchers
+lepl.bin.matchers
+lepl.contrib.matchers
+lepl.lexer._test.matchers
+lepl.lexer.lines.matchers
+lepl.lexer.matchers
+lepl.matchers
+lepl.regexp._test.matchers
+lepl.regexp.matchers" class="py-name" href="#" onclick="return doclink('link-20', 'matchers', 'link-20');">matchers</a></tt> <tt class="py-keyword">import</tt> <tt id="link-21" class="py-name" targets="Class lepl.bin.matchers.BEnd=lepl.bin.matchers.BEnd-class.html"><a title="lepl.bin.matchers.BEnd" class="py-name" href="#" onclick="return doclink('link-21', 'BEnd', 'link-21');">BEnd</a></tt><tt class="py-op">,</tt> <tt id="link-22" class="py-name" targets="Class lepl.bin.matchers.Const=lepl.bin.matchers.Const-class.html"><a title="lepl.bin.matchers.Const" class="py-name" href="#" onclick="return doclink('link-22', 'Const', 'link-22');">Const</a></tt> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line"> </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line">    <tt class="py-name">__all__</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line">            </tt>
+<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line">           <tt class="py-string">'Int'</tt><tt class="py-op">,</tt> </tt>
+<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line">           <tt class="py-string">'BitString'</tt><tt class="py-op">,</tt> </tt>
+<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line">           <tt class="py-string">'unpack_length'</tt><tt class="py-op">,</tt> </tt>
+<a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line">           <tt class="py-string">'swap_table'</tt><tt class="py-op">,</tt> </tt>
+<a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line">            </tt>
+<a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line">           <tt class="py-string">'parse'</tt><tt class="py-op">,</tt> </tt>
+<a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line">            </tt>
+<a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line">           <tt class="py-string">'dispatch_table'</tt><tt class="py-op">,</tt> </tt>
+<a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line">           <tt class="py-string">'simple_serialiser'</tt><tt class="py-op">,</tt> </tt>
+<a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line">            </tt>
+<a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line">           <tt class="py-string">'BEnd'</tt><tt class="py-op">,</tt> </tt>
+<a name="L57"></a><tt class="py-lineno">57</tt>  <tt class="py-line">           <tt class="py-string">'Const'</tt> </tt>
+<a name="L58"></a><tt class="py-lineno">58</tt>  <tt class="py-line">    <tt class="py-op">]</tt> </tt>
+<a name="L59"></a><tt class="py-lineno">59</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lepl-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sun May 13 16:31:11 2012
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

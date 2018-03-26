@@ -1,0 +1,536 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lepl.matchers.support.BaseMatcher</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lepl-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lepl-module.html">Package&nbsp;lepl</a> ::
+        <a href="lepl.matchers-module.html">Package&nbsp;matchers</a> ::
+        <a href="lepl.matchers.support-module.html">Module&nbsp;support</a> ::
+        Class&nbsp;BaseMatcher
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lepl.matchers.support.BaseMatcher-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class BaseMatcher</h1><p class="nomargin-top"><span class="codelink"><a href="lepl.matchers.support-pysrc.html#BaseMatcher">source&nbsp;code</a></span></p>
+<center>
+<center>  <map id="uml_class_diagram_for_lepl_mat_69" name="uml_class_diagram_for_lepl_mat_69">
+<area shape="rect" id="node1" href="lepl.support.lib.LogMixin-class.html" title="Add standard Python logging to a class." alt="" coords="5,86,147,130"/>
+<area shape="rect" id="node5_10" href="lepl.matchers.support.BaseMatcher-class.html#__repr__" title="repr(x)" alt="" coords="380,199,468,217"/>
+<area shape="rect" id="node5_11" href="lepl.matchers.support.BaseMatcher-class.html#__str__" title="str(x)" alt="" coords="380,217,468,236"/>
+<area shape="rect" id="node5_12" href="lepl.matchers.support.BaseMatcher-class.html#kargs" title="lepl.matchers.support.BaseMatcher.kargs" alt="" coords="380,236,468,255"/>
+<area shape="rect" id="node5_13" href="lepl.matchers.support.BaseMatcher-class.html#tree" title="An ASCII tree for display." alt="" coords="380,255,468,273"/>
+<area shape="rect" id="node5_14" href="lepl.matchers.support.BaseMatcher-class.html#tree_repr" title="The text to display via tree()" alt="" coords="380,273,468,292"/>
+<area shape="rect" id="node5_15" href="lepl.matchers.support.BaseMatcher-class.html#clone" title="Clone this matcher (and associated graph)." alt="" coords="380,292,468,311"/>
+<area shape="rect" id="node5" href="lepl.matchers.support.BaseMatcher-class.html" title="A base class that provides support to all matchers." alt="" coords="368,166,480,317"/>
+<area shape="rect" id="node2_16" href="lepl.support.graph.ArgAsAttributeMixin-class.html#__init__" title="x.__init__(...) initializes x; see help(type(x)) for signature" alt="" coords="189,103,391,121"/>
+<area shape="rect" id="node2_17" href="lepl.support.graph.ArgAsAttributeMixin-class.html#__iter__" title="Return all children, in order." alt="" coords="189,121,391,140"/>
+<area shape="rect" id="node2" href="lepl.support.graph.ArgAsAttributeMixin-class.html" title="Constructor arguments are stored as attributes; their names are also stored in order so that the arguments can be constructed." alt="" coords="177,70,402,146"/>
+<area shape="rect" id="node3_18" href="lepl.matchers.matcher.Matcher-class.html#indented_repr" title="Called by repr; should recursively call contents." alt="" coords="444,112,669,131"/>
+<area shape="rect" id="node3" href="lepl.matchers.matcher.Matcher-class.html" title="lepl.matchers.matcher.Matcher" alt="" coords="431,79,681,137"/>
+<area shape="rect" id="node4_19" href="lepl.support.graph.PostorderWalkerMixin-class.html#postorder" title="A shortcut that allows a visitor to be applied postorder." alt="" coords="721,112,935,131"/>
+<area shape="rect" id="node4" href="lepl.support.graph.PostorderWalkerMixin-class.html" title="Add a &#39;postorder&#39; method." alt="" coords="709,79,947,137"/>
+<area shape="rect" id="node6" href="lepl.support.graph.ConstructorGraphNode-class.html" title="An interface that provides information on constructor arguments." alt="" coords="169,6,412,50"/>
+</map>
+  <img src="uml_class_diagram_for_lepl_mat_69.gif" alt='' usemap="#uml_class_diagram_for_lepl_mat_69" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
+<hr />
+A base class that provides support to all matchers.
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.matchers.support.BaseMatcher-class.html#__repr__" class="summary-sig-name">__repr__</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      repr(x)</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.matchers.support-pysrc.html#BaseMatcher.__repr__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_fmt_repr"></a><span class="summary-sig-name">_fmt_repr</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">indent</span>,
+        <span class="summary-sig-arg">value</span>,
+        <span class="summary-sig-arg">visited</span>,
+        <span class="summary-sig-arg">key</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.matchers.support-pysrc.html#BaseMatcher._fmt_repr">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_format_repr"></a><span class="summary-sig-name">_format_repr</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">indent</span>,
+        <span class="summary-sig-arg">key</span>,
+        <span class="summary-sig-arg">contents</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.matchers.support-pysrc.html#BaseMatcher._format_repr">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_indented_repr"></a><span class="summary-sig-name">_indented_repr</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">indent0</span>,
+        <span class="summary-sig-arg">visited</span>,
+        <span class="summary-sig-arg">key</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.matchers.support-pysrc.html#BaseMatcher._indented_repr">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.matchers.support.BaseMatcher-class.html#_fmt_compact" class="summary-sig-name" onclick="show_private();">_fmt_compact</a>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.matchers.support-pysrc.html#BaseMatcher._fmt_compact">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_fmt_str"></a><span class="summary-sig-name">_fmt_str</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">value</span>,
+        <span class="summary-sig-arg">key</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.matchers.support-pysrc.html#BaseMatcher._fmt_str">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.matchers.support.BaseMatcher-class.html#__str__" class="summary-sig-name">__str__</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      str(x)</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.matchers.support-pysrc.html#BaseMatcher.__str__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.matchers.support.BaseMatcher-class.html#kargs" class="summary-sig-name">kargs</a>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.matchers.support-pysrc.html#BaseMatcher.kargs">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="tree"></a><span class="summary-sig-name">tree</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      An ASCII tree for display.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.matchers.support-pysrc.html#BaseMatcher.tree">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="tree_repr"></a><span class="summary-sig-name">tree_repr</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      The text to display via <a href="lepl.matchers.support.BaseMatcher-class.html#tree" class="link">tree()</a></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.matchers.support-pysrc.html#BaseMatcher.tree_repr">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.matchers.support.BaseMatcher-class.html#clone" class="summary-sig-name">clone</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Clone this matcher (and associated graph).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.matchers.support-pysrc.html#BaseMatcher.clone">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lepl.support.graph.ArgAsAttributeMixin-class.html">support.graph.ArgAsAttributeMixin</a></code></b>:
+      <code><a href="lepl.support.graph.ArgAsAttributeMixin-class.html#__init__">__init__</a></code>,
+      <code><a href="lepl.support.graph.ArgAsAttributeMixin-class.html#__iter__">__iter__</a></code>
+      </p>
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lepl.support.graph.ArgAsAttributeMixin-class.html">support.graph.ArgAsAttributeMixin</a></code></b> (private):
+      <code><a href="lepl.support.graph.ArgAsAttributeMixin-class.html#_arg" onclick="show_private();">_arg</a></code>,
+      <code><a href="lepl.support.graph.ArgAsAttributeMixin-class.html#_args" onclick="show_private();">_args</a></code>,
+      <code><a href="lepl.support.graph.ArgAsAttributeMixin-class.html#_constructor_args" onclick="show_private();">_constructor_args</a></code>,
+      <code><a href="lepl.support.graph.ArgAsAttributeMixin-class.html#_karg" onclick="show_private();">_karg</a></code>,
+      <code><a href="lepl.support.graph.ArgAsAttributeMixin-class.html#_kargs" onclick="show_private();">_kargs</a></code>
+      </p></div>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lepl.support.graph.PostorderWalkerMixin-class.html">support.graph.PostorderWalkerMixin</a></code></b>:
+      <code><a href="lepl.support.graph.PostorderWalkerMixin-class.html#postorder">postorder</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lepl.matchers.matcher.Matcher-class.html">matcher.Matcher</a></code></b>:
+      <code><a href="lepl.matchers.matcher.Matcher-class.html#indented_repr">indented_repr</a></code>
+      </p>
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lepl.matchers.matcher.Matcher-class.html">matcher.Matcher</a></code></b> (private):
+      <code><a href="lepl.matchers.matcher.Matcher-class.html#_match" onclick="show_private();">_match</a></code>
+      </p></div>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__repr__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__repr__</span>(<span class="sig-arg">self</span>)</span>
+    <br /><em class="fname">(Representation operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.matchers.support-pysrc.html#BaseMatcher.__repr__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  repr(x)
+  <dl class="fields">
+    <dt>Overrides:
+        object.__repr__
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="_fmt_compact"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_fmt_compact</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.matchers.support-pysrc.html#BaseMatcher._fmt_compact">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@property</code></li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__str__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__str__</span>(<span class="sig-arg">self</span>)</span>
+    <br /><em class="fname">(Informal representation operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.matchers.support-pysrc.html#BaseMatcher.__str__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  str(x)
+  <dl class="fields">
+    <dt>Overrides:
+        object.__str__
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="kargs"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">kargs</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.matchers.support-pysrc.html#BaseMatcher.kargs">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@property</code></li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="clone"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">clone</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.matchers.support-pysrc.html#BaseMatcher.clone">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Clone this matcher (and associated graph).  This is currently only used
+when we want to test different configurations.
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lepl-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sun May 13 16:31:04 2012
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

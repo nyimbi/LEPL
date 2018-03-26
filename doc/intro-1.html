@@ -1,0 +1,420 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Part 1 - Basic Matching &mdash; LEPL 5.1.2 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '5.1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="LEPL 5.1.2 documentation" href="index.html" />
+    <link rel="up" title="A Tutorial for Lepl" href="intro.html" />
+    <link rel="next" title="Part 2 - Handling Spaces, Repetition" href="intro-2.html" />
+    <link rel="prev" title="A Tutorial for Lepl" href="intro.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="intro-2.html" title="Part 2 - Handling Spaces, Repetition"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="intro.html" title="A Tutorial for Lepl"
+             accesskey="P">previous</a> |</li>
+        <li><a href="contents.html">LEPL 5.1.2 documentation</a> &raquo;</li>
+          <li><a href="intro.html" accesskey="U">A Tutorial for Lepl</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="part-1-basic-matching">
+<span id="tutorial1"></span><h1>Part 1 - Basic Matching<a class="headerlink" href="#part-1-basic-matching" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="what-is-parsing">
+<span id="index-0"></span><h2>What is Parsing?<a class="headerlink" href="#what-is-parsing" title="Permalink to this headline">¶</a></h2>
+<p>When we talk about &#8220;parsing something&#8221; we generally have some data (often in
+the form of text) and a description of the way that data is organised, and we
+want to bring those two together so that we can break the data into known
+pieces.</p>
+<p>For example, we might want to write a program that lists the prices of various
+items on Amazon&#8217;s web site.  We can get the web page for each item (maybe
+using Python&#8217;s <a class="reference external" href="http://docs.python.org/3.0/library/http.client.html">HTTP client</a>), and we know that all
+the pages have the same structure &#8212; but how do we extract the price?  This is
+where the parser comes in.  We give the parser a description of the page
+structure, together with a web page, and it will return the price as a result.</p>
+<p>That example is a little ambitious for a simple introduction.  Here we will
+look at a simpler problem.  We will write a program that can take a simple
+mathematical expression, like &#8220;1+2*3&#8221;, understand the structure, and work out
+the answer.  For example, when given &#8220;2+2&#8221; we want the result &#8220;4&#8221; (so we not
+only break the input into pieces, but do something useful with it to get a
+final result).</p>
+</div>
+<div class="section" id="recognising-a-number">
+<span id="index-1"></span><h2>Recognising a Number<a class="headerlink" href="#recognising-a-number" title="Permalink to this headline">¶</a></h2>
+<p>Lepl has built&#8211;in support for parsing a number.  We can see this by typing
+the following at a Python prompt:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">lepl</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Real</span><span class="p">()</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;123&#39;</span><span class="p">)</span>
+<span class="go">[&#39;123&#39;]</span>
+</pre></div>
+</div>
+<p>What is happening here?</p>
+<p>The first line imports the contents of Lepl&#8217;s main module.  Lepl is structured
+as a collection of different packages, but the important functions and classes
+are collected together in the <a class="reference external" href="api/redirect.html#lepl">lepl</a> module &#8212; for most work this is all
+you will need.</p>
+<p>In the rest of the examples below I will assume that you have already imported
+this module.</p>
+<p>The second line creates a matcher &#8212; <a class="reference external" href="api/redirect.html#lepl.matchers.derived.Real">Real()</a> (clicking on that link
+will take you to the <a class="reference external" href="api">API documentation</a> that describes all Lepl&#8217;s
+modules, including the source code) &#8212; and uses it to match the text &#8220;123&#8221;.
+The result is a list that contains the text &#8220;123&#8221;.</p>
+<p>In other words, <a class="reference external" href="api/redirect.html#lepl.matchers.derived.Real">Real()</a> looked at &#8220;123&#8221; and
+recognised that it was a number.</p>
+<p>What would happen if we gave <a class="reference external" href="api/redirect.html#lepl.matchers.derived.Real">Real()</a> something that wasn&#8217;t
+a number?  We can try it and see:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">Real</span><span class="p">()</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;cabbage&#39;</span><span class="p">)</span>
+<span class="go">[...]</span>
+<span class="go">lepl.stream.maxdepth.FullFirstMatchException: The match failed in &lt;string&gt; at &#39;abbage&#39; (line 1, character 2).</span>
+</pre></div>
+</div>
+<p>Which is reasonable enough &#8212; &#8220;cabbage&#8221; is not a number.</p>
+<p>But things are often not as simple as they first appear.  For example: why is
+&#8220;123&#8221; a single number, and not three different numbers joined together?</p>
+</div>
+<div class="section" id="ambiguity">
+<span id="index-2"></span><h2>Ambiguity<a class="headerlink" href="#ambiguity" title="Permalink to this headline">¶</a></h2>
+<p>In fact, Lepl doesn&#8217;t know that &#8220;123&#8221; is a single number.  Because of the way
+<a class="reference external" href="api/redirect.html#lepl.matchers.derived.Real">Real()</a> is defined
+internally, it gives the <cite>longest</cite> number it can find.  But that doesn&#8217;t mean
+it is the only result.  We can see all the different possibilities by calling
+<a class="reference external" href="api/redirect.html#lepl.core.config.ParserMixin.parse_all">parse_all()</a> instead of <a class="reference external" href="api/redirect.html#lepl.core.config.ParserMixin.parse">parse()</a>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">Real</span><span class="p">()</span><span class="o">.</span><span class="n">parse_all</span><span class="p">(</span><span class="s">&#39;123&#39;</span><span class="p">)</span>
+<span class="go">&lt;map object at 0xdec950&gt;</span>
+</pre></div>
+</div>
+<p>That will not seem very useful unless you already understand Python&#8217;s
+<a class="reference external" href="http://docs.python.org/3.0/glossary.html#term-generator">generators</a>.  A
+generator is something like a list that hasn&#8217;t been built yet.  We can use it
+in a <tt class="docutils literal"><span class="pre">for</span></tt> loop just like a list, for example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">Real</span><span class="p">()</span><span class="o">.</span><span class="n">parse_all</span><span class="p">(</span><span class="s">&#39;123&#39;</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="go">[&#39;123&#39;]</span>
+<span class="go">[&#39;12&#39;]</span>
+<span class="go">[&#39;1&#39;]</span>
+</pre></div>
+</div>
+<p>Or we can create a list directly:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">Real</span><span class="p">()</span><span class="o">.</span><span class="n">parse_all</span><span class="p">(</span><span class="s">&#39;123&#39;</span><span class="p">))</span>
+<span class="go">[[&#39;123&#39;], [&#39;12&#39;], [&#39;1&#39;]]</span>
+</pre></div>
+</div>
+<p>Either way we can see that <a class="reference external" href="api/redirect.html#lepl.matchers.derived.Real">Real()</a> is giving us a choice
+of different results.  It can match the number &#8220;123&#8221;, or the number &#8220;12&#8221;, or
+the number &#8220;1&#8221;.  Those are all the different numbers possible if you start
+with the first character.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">In the <a class="reference external" href="api/redirect.html#lepl.core.config.ParserMixin.parse_all">parse_all()</a> examples we don&#8217;t get an error, even though the
+second and third matches don&#8217;t match the whole stream.  That&#8217;s because only
+the <em>first</em> match is checked to make sure that it consumes all the data
+(this is both for technical reasons and also because it&#8217;s usually what you
+want).</p>
+</div>
+</div>
+<div class="section" id="more-ambiguity-integers-and-floats">
+<span id="index-3"></span><h2>More Ambiguity - Integers and Floats<a class="headerlink" href="#more-ambiguity-integers-and-floats" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes we want a little less ambiguity when we are parsing numbers.  We may
+want to match only Integers, or exclude integral values from reals.  We can do
+both of these using <cite>Integer()</cite> and <cite>Float()</cite>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">Integer</span><span class="p">()</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;1&#39;</span><span class="p">)</span>
+<span class="go">[&#39;1&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Integer</span><span class="p">()</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;1.2&#39;</span><span class="p">)</span>
+<span class="go">lepl.stream.maxdepth.FullFirstMatchException: The match failed in &lt;string&gt; at &#39;2&#39; (line 1, character 3).</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Float</span><span class="p">()</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;1&#39;</span><span class="p">)</span>
+<span class="go">lepl.stream.maxdepth.FullFirstMatchException: The match failed in &lt;string&gt; at &#39;&#39; (line 1, character 2).</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Float</span><span class="p">()</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;1.2&#39;</span><span class="p">)</span>
+<span class="go">[&#39;1.2&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Real</span><span class="p">()</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;1&#39;</span><span class="p">)</span>
+<span class="go">[&#39;1&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Real</span><span class="p">()</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;1.2&#39;</span><span class="p">)</span>
+<span class="go">[&#39;1.2&#39;]</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The behaviour described above changed in version 4.4.  Before that,
+<a class="reference external" href="api/redirect.html#lepl.support.warn.Float">Float()</a> also matched integers.  To convert code from before version 4.4
+replace <a class="reference external" href="api/redirect.html#lepl.support.warn.Float">Float()</a> with <a class="reference external" href="api/redirect.html#lepl.matchers.derived.Real">Real()</a>.</p>
+</div>
+</div>
+<div class="section" id="matching-a-sum">
+<span id="index-4"></span><h2>Matching a Sum<a class="headerlink" href="#matching-a-sum" title="Permalink to this headline">¶</a></h2>
+<p>So how do we extend matching a number to match a sum?</p>
+<p>Here&#8217;s the answer:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">add</span> <span class="o">=</span> <span class="n">Real</span><span class="p">()</span> <span class="o">&amp;</span> <span class="n">Literal</span><span class="p">(</span><span class="s">&#39;+&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">Real</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;12+30&#39;</span><span class="p">)</span>
+<span class="go">[&#39;12&#39;, &#39;+&#39;, &#39;30&#39;]</span>
+</pre></div>
+</div>
+<p>In Lepl all that is necessary to join matchers together is <tt class="docutils literal"><span class="pre">&amp;</span></tt>.  This is
+shorthand for:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">add</span> <span class="o">=</span> <span class="n">And</span><span class="p">(</span><span class="n">Real</span><span class="p">(),</span> <span class="n">Literal</span><span class="p">(</span><span class="s">&#39;+&#39;</span><span class="p">),</span> <span class="n">Real</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;12+30&#39;</span><span class="p">)</span>
+<span class="go">[&#39;12&#39;, &#39;+&#39;, &#39;30&#39;]</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Later, when we meet <a class="reference internal" href="intro-2.html#separators"><em>separators</em></a>, we&#8217;ll see that <a class="reference external" href="api/redirect.html#lepl.matchers.combine.And">And()</a> and <tt class="docutils literal"><span class="pre">&amp;</span></tt> aren&#8217;t always
+exactly the same.  That&#8217;s because <tt class="docutils literal"><span class="pre">&amp;</span></tt> is an operator and operators can be
+redefined in Lepl (in the case of separators, for example, we redefine
+<tt class="docutils literal"><span class="pre">&amp;</span></tt> to add extra spaces).</p>
+</div>
+<p>The parser above also used <a class="reference external" href="api/redirect.html#lepl.matchers.core.Literal">Literal()</a>.  Like its name suggests,
+this matches whatever value it is given:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span> <span class="o">=</span> <span class="n">Literal</span><span class="p">(</span><span class="s">&#39;hello&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">no_full_first_match</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;hello world&#39;</span><span class="p">)</span>
+<span class="go">[&#39;hello&#39;]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="implicit-literals">
+<h2>Implicit Literals<a class="headerlink" href="#implicit-literals" title="Permalink to this headline">¶</a></h2>
+<p>Often we can just use an ordinary string, instead of <a class="reference external" href="api/redirect.html#lepl.matchers.core.Literal">Literal()</a>, and Lepl will still understand
+what we mean:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">add</span> <span class="o">=</span> <span class="n">Real</span><span class="p">()</span> <span class="o">&amp;</span> <span class="s">&#39;+&#39;</span> <span class="o">&amp;</span> <span class="n">Real</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;12+30&#39;</span><span class="p">)</span>
+<span class="go">[&#39;12&#39;, &#39;+&#39;, &#39;30&#39;]</span>
+</pre></div>
+</div>
+<p>Unfortunately this doesn&#8217;t always work, and predicting exactly when it&#8217;s going
+to fail can be difficult (technically, the string must be an argument to a
+matcher&#8217;s overloaded operator or constructor).  So if you get a strange error
+on a line with strings, try adding a <a class="reference external" href="api/redirect.html#lepl.matchers.core.Literal">Literal()</a> around the text &#8212; after a
+while you&#8217;ll get a feeling for when it is needed, and when not.</p>
+<p>Anyway, we still haven&#8217;t added those numbers.  To do that we need to do
+something with the results.</p>
+</div>
+<div class="section" id="ignoring-values">
+<span id="index-5"></span><h2>Ignoring Values<a class="headerlink" href="#ignoring-values" title="Permalink to this headline">¶</a></h2>
+<p>To simplify adding the two values, we need to get rid of the &#8220;+&#8221; (please just
+trust me on this; it will be clear why in a few more sections).</p>
+<p>It is quite common when parsing data that we do not need to see all the values
+we have matched.  That doesn&#8217;t mean that it isn&#8217;t important to do the match
+&#8212; in this case we need to check that there is a &#8220;+&#8221; between the two numbers
+to be sure that we are doing the right thing by adding them &#8212; but once we
+have done that check, we don&#8217;t actually want the &#8220;+&#8221; to be returned as a
+result.</p>
+<p>We can indicate that a match should be ignored by preceding the matcher with
+<tt class="docutils literal"><span class="pre">~</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">add</span> <span class="o">=</span> <span class="n">Real</span><span class="p">()</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">Literal</span><span class="p">(</span><span class="s">&#39;+&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">Real</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;12+30&#39;</span><span class="p">)</span>
+<span class="go">[&#39;12&#39;, &#39;30&#39;]</span>
+</pre></div>
+</div>
+<p>Just like <tt class="docutils literal"><span class="pre">&amp;</span></tt>, this is shorthand for another matcher, in this case
+<a class="reference external" href="api/redirect.html#lepl.matchers.derived.Drop">Drop()</a>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">add</span> <span class="o">=</span> <span class="n">Real</span><span class="p">()</span> <span class="o">&amp;</span> <span class="n">Drop</span><span class="p">(</span><span class="n">Literal</span><span class="p">(</span><span class="s">&#39;+&#39;</span><span class="p">))</span> <span class="o">&amp;</span> <span class="n">Real</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;12+30&#39;</span><span class="p">)</span>
+<span class="go">[&#39;12&#39;, &#39;30&#39;]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="creating-numbers">
+<span id="index-6"></span><h2>Creating Numbers<a class="headerlink" href="#creating-numbers" title="Permalink to this headline">¶</a></h2>
+<p>Our result above, <tt class="docutils literal"><span class="pre">['12',</span> <span class="pre">'30']</span></tt>, is a list of numbers.  But the numbers are
+still strings.  We need to convert them to floats before we can add them.  To
+see what I mean, consider the two examples below:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="mi">12</span> <span class="o">+</span> <span class="mi">30</span>
+<span class="go">42</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="s">&#39;12&#39;</span> <span class="o">+</span> <span class="s">&#39;30&#39;</span>
+<span class="go">&#39;1230&#39;</span>
+</pre></div>
+</div>
+<p>We want the first case, not the second.</p>
+<p>To do this we can define a new matcher, which takes the output from
+<a class="reference external" href="api/redirect.html#lepl.matchers.derived.Real">Real()</a> (a list of strings) and passes each value in the list to the
+Python built&#8211;in function, <tt class="docutils literal"><span class="pre">float()</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">number</span> <span class="o">=</span> <span class="n">Real</span><span class="p">()</span> <span class="o">&gt;&gt;</span> <span class="nb">float</span>
+</pre></div>
+</div>
+<p>We can test this by calling <a class="reference external" href="api/redirect.html#lepl.core.config.ParserMixin.parse">parse()</a>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">number</span> <span class="o">=</span> <span class="n">Real</span><span class="p">()</span> <span class="o">&gt;&gt;</span> <span class="nb">float</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">number</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;12&#39;</span><span class="p">)</span>
+<span class="go">[12.0]</span>
+</pre></div>
+</div>
+<p>So now we can re-define <a class="reference external" href="api/redirect.html#lepl.matchers.derived.add">add</a> to use this matcher instead:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">number</span> <span class="o">=</span> <span class="n">Real</span><span class="p">()</span> <span class="o">&gt;&gt;</span> <span class="nb">float</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add</span> <span class="o">=</span> <span class="n">number</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">Literal</span><span class="p">(</span><span class="s">&#39;+&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">number</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;12+30&#39;</span><span class="p">)</span>
+<span class="go">[12.0, 30.0]</span>
+</pre></div>
+</div>
+<p>(I have repeated the definition of number here and in the previous example so
+that each is complete by itself).</p>
+<p>Note that, because <tt class="docutils literal"><span class="pre">&gt;&gt;</span></tt> works on each result in turn, we could have written
+this in a different, but equivalent way:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">add</span> <span class="o">=</span> <span class="p">(</span><span class="n">Real</span><span class="p">()</span> <span class="o">&amp;</span> <span class="n">Drop</span><span class="p">(</span><span class="n">Literal</span><span class="p">(</span><span class="s">&#39;+&#39;</span><span class="p">))</span> <span class="o">&amp;</span> <span class="n">Real</span><span class="p">())</span> <span class="o">&gt;&gt;</span> <span class="nb">float</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;12+30&#39;</span><span class="p">)</span>
+<span class="go">[12.0, 30.0]</span>
+</pre></div>
+</div>
+<p>But as a general rule it is better to process results as soon as possible.
+This usually keeps the parser simpler.</p>
+<p>For more on <tt class="docutils literal"><span class="pre">&gt;&gt;</span></tt> you may find it useful to read <a class="reference internal" href="faq.html#faq-apply"><em>How do I choose between &gt; and &gt;&gt; ?</em></a></p>
+</div>
+<div class="section" id="adding-values">
+<h2>Adding Values<a class="headerlink" href="#adding-values" title="Permalink to this headline">¶</a></h2>
+<p>Now that we have just the two numbers, we can add them.  How?  Well, we have a
+list of numbers that we need to add, and Python has a function that does
+exactly this, called <tt class="docutils literal"><span class="pre">sum()</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">sum</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="go">6</span>
+</pre></div>
+</div>
+<p>So we can send our results to that function:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">number</span> <span class="o">=</span> <span class="n">Real</span><span class="p">()</span> <span class="o">&gt;&gt;</span> <span class="nb">float</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add</span> <span class="o">=</span> <span class="n">number</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">Literal</span><span class="p">(</span><span class="s">&#39;+&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">number</span> <span class="o">&gt;</span> <span class="nb">sum</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;12+30&#39;</span><span class="p">)</span>
+<span class="go">[42.0]</span>
+</pre></div>
+</div>
+<p>which gives the answer we wanted!</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The difference between <tt class="docutils literal"><span class="pre">&gt;</span></tt> and <tt class="docutils literal"><span class="pre">&gt;&gt;</span></tt> is quite subtle, but important:
+<tt class="docutils literal"><span class="pre">&gt;</span></tt> sends the entire list of results to a function as a single argument
+(so the function must take a list of values), while <tt class="docutils literal"><span class="pre">&gt;&gt;</span></tt> sends each
+result separately (so the function must take a single value).</p>
+</div>
+<p>We have come a long way &#8212; from nothing to a parser that can add two numbers.
+In the next section we will make this more robust, allowing us to have spaces
+in the expression.</p>
+</div>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>What have we learnt so far?</p>
+<ul class="simple">
+<li>Parsing is all about recognising structure (eg. mathematical expressions).</li>
+<li>Once we have recognised structure we can process it (eg. adding numbers
+together).</li>
+<li>To use Lepl we must first use import the lepl module: <tt class="docutils literal"><span class="pre">from</span> <span class="pre">lepl</span> <span class="pre">import</span>
+<span class="pre">*</span></tt>.</li>
+<li>Lepl builds up a parser using functions (which I call &#8220;matchers&#8221;).</li>
+<li>Matchers can return one value (with <a class="reference external" href="api/redirect.html#lepl.core.config.ParserMixin.parse">parse()</a>) or all possible values
+(with <a class="reference external" href="api/redirect.html#lepl.core.config.ParserMixin.parse_all">parse_all()</a>).</li>
+<li>We can join matchers together with <tt class="docutils literal"><span class="pre">&amp;</span></tt> or <a class="reference external" href="api/redirect.html#lepl.matchers.combine.And">And()</a>.</li>
+<li>We can ignore the results of a matcher with <tt class="docutils literal"><span class="pre">~</span></tt> or <a class="reference external" href="api/redirect.html#lepl.matchers.derived.Drop">Drop()</a>.</li>
+<li>We can process each value in a list of results with <tt class="docutils literal"><span class="pre">&gt;&gt;</span></tt>.</li>
+<li>We can process the list of results (as a complete list) with <tt class="docutils literal"><span class="pre">&gt;</span></tt>.</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="contents.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Part 1 - Basic Matching</a><ul>
+<li><a class="reference internal" href="#what-is-parsing">What is Parsing?</a></li>
+<li><a class="reference internal" href="#recognising-a-number">Recognising a Number</a></li>
+<li><a class="reference internal" href="#ambiguity">Ambiguity</a></li>
+<li><a class="reference internal" href="#more-ambiguity-integers-and-floats">More Ambiguity - Integers and Floats</a></li>
+<li><a class="reference internal" href="#matching-a-sum">Matching a Sum</a></li>
+<li><a class="reference internal" href="#implicit-literals">Implicit Literals</a></li>
+<li><a class="reference internal" href="#ignoring-values">Ignoring Values</a></li>
+<li><a class="reference internal" href="#creating-numbers">Creating Numbers</a></li>
+<li><a class="reference internal" href="#adding-values">Adding Values</a></li>
+<li><a class="reference internal" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="intro.html"
+                        title="previous chapter">A Tutorial for Lepl</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="intro-2.html"
+                        title="next chapter">Part 2 - Handling Spaces, Repetition</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/intro-1.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="intro-2.html" title="Part 2 - Handling Spaces, Repetition"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="intro.html" title="A Tutorial for Lepl"
+             >previous</a> |</li>
+        <li><a href="contents.html">LEPL 5.1.2 documentation</a> &raquo;</li>
+          <li><a href="intro.html" >A Tutorial for Lepl</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2009-2011, Andrew Cooke.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

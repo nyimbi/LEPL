@@ -1,0 +1,521 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Part 4 - Evaluation, Efficiency &mdash; LEPL 5.1.2 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '5.1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="LEPL 5.1.2 documentation" href="index.html" />
+    <link rel="up" title="A Tutorial for Lepl" href="intro.html" />
+    <link rel="next" title="Lepl Manual" href="manual.html" />
+    <link rel="prev" title="Part 3 - Recursion, Abstract Syntax Trees" href="intro-3.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="manual.html" title="Lepl Manual"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="intro-3.html" title="Part 3 - Recursion, Abstract Syntax Trees"
+             accesskey="P">previous</a> |</li>
+        <li><a href="contents.html">LEPL 5.1.2 documentation</a> &raquo;</li>
+          <li><a href="intro.html" accesskey="U">A Tutorial for Lepl</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="part-4-evaluation-efficiency">
+<h1>Part 4 - Evaluation, Efficiency<a class="headerlink" href="#part-4-evaluation-efficiency" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="recap">
+<h2>Recap<a class="headerlink" href="#recap" title="Permalink to this headline">¶</a></h2>
+<p>In the previous sections we have developed a parser that could generate a
+simple AST for repeated addition and subtraction:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">lepl</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">value</span> <span class="o">=</span> <span class="n">Token</span><span class="p">(</span><span class="n">UnsignedReal</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">symbol</span> <span class="o">=</span> <span class="n">Token</span><span class="p">(</span><span class="s">&#39;[^0-9a-zA-Z </span><span class="se">\t\r\n</span><span class="s">]&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">number</span> <span class="o">=</span> <span class="n">Optional</span><span class="p">(</span><span class="n">symbol</span><span class="p">(</span><span class="s">&#39;-&#39;</span><span class="p">))</span> <span class="o">+</span> <span class="n">value</span> <span class="o">&gt;&gt;</span> <span class="nb">float</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span> <span class="o">=</span> <span class="n">Delayed</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add</span> <span class="o">=</span> <span class="n">number</span> <span class="o">&amp;</span> <span class="n">symbol</span><span class="p">(</span><span class="s">&#39;+&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">expr</span> <span class="o">&gt;</span> <span class="n">List</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sub</span> <span class="o">=</span> <span class="n">number</span> <span class="o">&amp;</span> <span class="n">symbol</span><span class="p">(</span><span class="s">&#39;-&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">expr</span> <span class="o">&gt;</span> <span class="n">List</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span> <span class="o">+=</span> <span class="n">add</span> <span class="o">|</span> <span class="n">sub</span> <span class="o">|</span> <span class="n">number</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;1+2-3 +4-5&#39;</span><span class="p">)</span>
+<span class="go">[List(...)]</span>
+</pre></div>
+</div>
+<p>(remember that I will not repeat the import statement in the examples below).</p>
+<p>In this part of the tutorial we will extend this further, to handle
+multiplication and parentheses.  Instead of calculating the value of the
+expression as we parse the data we will improve our AST so that it can do the
+calculation.</p>
+<p>In a simple example like this the two approaches &#8212; processing the results
+while generating them, or waiting until afterwards and using the AST &#8212; are
+almost equivalent.  But in more complex cases it can be critical that we
+separate the two phases.  This is because the processing of the results is
+often a much more complicated job that parsing the initial data.</p>
+<p>An example of this is an interpreter.  Parsing a program is only one small
+step in executing it, and it would make the code for an interpreter needlessly
+complicated if all the extra work of executing the program had to be done
+during parsing.  So, instead, the parser constructs an AST that represents the
+contents of the program in a way that is much easier for other parts of the
+interpreter to understand.</p>
+</div>
+<div class="section" id="operator-precedence">
+<span id="index-0"></span><h2>Operator Precedence<a class="headerlink" href="#operator-precedence" title="Permalink to this headline">¶</a></h2>
+<p>It&#8217;s a common problem, especially when parsing things like programming
+languages, that we need to handle groupings of different priorities.  For
+example, in the expression &#8220;1 + 2 * 3&#8221;, &#8220;2*3&#8221; groups more tightly than the
+addition (so we get 7 and not 9 as the correct result).</p>
+<p>With Lepl this priority is implicit in the parser.  Priority is determined by
+structuring the recursive calls necessary for repeated handling of groups as a
+series of layers.  Which is much easier to show than explain in words:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">value</span> <span class="o">=</span> <span class="n">Token</span><span class="p">(</span><span class="n">UnsignedReal</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">symbol</span> <span class="o">=</span> <span class="n">Token</span><span class="p">(</span><span class="s">&#39;[^0-9a-zA-Z </span><span class="se">\t\r\n</span><span class="s">]&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">number</span> <span class="o">=</span> <span class="n">Optional</span><span class="p">(</span><span class="n">symbol</span><span class="p">(</span><span class="s">&#39;-&#39;</span><span class="p">))</span> <span class="o">+</span> <span class="n">value</span> <span class="o">&gt;&gt;</span> <span class="nb">float</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group2</span><span class="p">,</span> <span class="n">group3</span> <span class="o">=</span> <span class="n">Delayed</span><span class="p">(),</span> <span class="n">Delayed</span><span class="p">()</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># first layer, most tightly grouped, is parens and numbers</span>
+<span class="gp">... </span><span class="n">parens</span> <span class="o">=</span> <span class="n">symbol</span><span class="p">(</span><span class="s">&#39;(&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">group3</span> <span class="o">&amp;</span> <span class="n">symbol</span><span class="p">(</span><span class="s">&#39;)&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group1</span> <span class="o">=</span> <span class="n">parens</span> <span class="o">|</span> <span class="n">number</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># second layer, next most tightly grouped, is multiplication</span>
+<span class="gp">... </span><span class="n">mul</span> <span class="o">=</span> <span class="n">group1</span> <span class="o">&amp;</span> <span class="n">symbol</span><span class="p">(</span><span class="s">&#39;*&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">group2</span> <span class="o">&gt;</span> <span class="n">List</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">div</span> <span class="o">=</span> <span class="n">group1</span> <span class="o">&amp;</span> <span class="n">symbol</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">group2</span> <span class="o">&gt;</span> <span class="n">List</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group2</span> <span class="o">+=</span> <span class="n">mul</span> <span class="o">|</span> <span class="n">div</span> <span class="o">|</span> <span class="n">group1</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># third layer, least tightly grouped, is addition</span>
+<span class="gp">... </span><span class="n">add</span> <span class="o">=</span> <span class="n">group2</span> <span class="o">&amp;</span> <span class="n">symbol</span><span class="p">(</span><span class="s">&#39;+&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">group3</span> <span class="o">&gt;</span> <span class="n">List</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sub</span> <span class="o">=</span> <span class="n">group2</span> <span class="o">&amp;</span> <span class="n">symbol</span><span class="p">(</span><span class="s">&#39;-&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">group3</span> <span class="o">&gt;</span> <span class="n">List</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group3</span> <span class="o">+=</span> <span class="n">add</span> <span class="o">|</span> <span class="n">sub</span> <span class="o">|</span> <span class="n">group2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ast</span> <span class="o">=</span> <span class="n">group3</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;1+2*(3-4)+5/6+7&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">ast</span><span class="p">)</span>
+<span class="go">List</span>
+<span class="go"> +- 1.0</span>
+<span class="go"> +- &#39;+&#39;</span>
+<span class="go"> `- List</span>
+<span class="go">     +- List</span>
+<span class="go">     |   +- 2.0</span>
+<span class="go">     |   +- &#39;*&#39;</span>
+<span class="go">     |   +- &#39;(&#39;</span>
+<span class="go">     |   +- List</span>
+<span class="go">     |   |   +- 3.0</span>
+<span class="go">     |   |   +- &#39;-&#39;</span>
+<span class="go">     |   |   `- 4.0</span>
+<span class="go">     |   `- &#39;)&#39;</span>
+<span class="go">     +- &#39;+&#39;</span>
+<span class="go">     `- List</span>
+<span class="go">         +- List</span>
+<span class="go">         |   +- 5.0</span>
+<span class="go">         |   +- &#39;/&#39;</span>
+<span class="go">         |   `- 6.0</span>
+<span class="go">         +- &#39;+&#39;</span>
+<span class="go">         `- 7.0</span>
+</pre></div>
+</div>
+<p>Note how each group can pass to the next, and how parentheses return back to
+the first group, giving the overall recursion we need to handle nested groups.</p>
+</div>
+<div class="section" id="ambiguity-and-left-recursion">
+<span id="index-1"></span><h2>Ambiguity and Left Recursion<a class="headerlink" href="#ambiguity-and-left-recursion" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This and the next section are fairly advanced.  You may want to skip
+them on a first read through.</p>
+</div>
+<p>It&#8217;s easy, when showing a solution, to pretend that it&#8217;s obvious.  But try
+hiding the code above and then writing the parser yourself.  It&#8217;s not as
+simple as it looks.</p>
+<p>In this section I will show two possible mistakes you can make (mistakes that
+I made while testing the code for this tutorial).</p>
+<p>The first mistake is the ordering of the definitions for <tt class="docutils literal"><span class="pre">group2</span></tt> and
+<tt class="docutils literal"><span class="pre">group3</span></tt>.  The following code is almost identical, but gives a very
+different result:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">value</span> <span class="o">=</span> <span class="n">Token</span><span class="p">(</span><span class="n">UnsignedReal</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">symbol</span> <span class="o">=</span> <span class="n">Token</span><span class="p">(</span><span class="s">&#39;[^0-9a-zA-Z </span><span class="se">\t\r\n</span><span class="s">]&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">number</span> <span class="o">=</span> <span class="n">Optional</span><span class="p">(</span><span class="n">symbol</span><span class="p">(</span><span class="s">&#39;-&#39;</span><span class="p">))</span> <span class="o">+</span> <span class="n">value</span> <span class="o">&gt;&gt;</span> <span class="nb">float</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group2</span><span class="p">,</span> <span class="n">group3b</span> <span class="o">=</span> <span class="n">Delayed</span><span class="p">(),</span> <span class="n">Delayed</span><span class="p">()</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># first layer, most tightly grouped, is parens and numbers</span>
+<span class="gp">... </span><span class="n">parens</span> <span class="o">=</span> <span class="n">symbol</span><span class="p">(</span><span class="s">&#39;(&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">group3b</span> <span class="o">&amp;</span> <span class="n">symbol</span><span class="p">(</span><span class="s">&#39;)&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group1</span> <span class="o">=</span> <span class="n">parens</span> <span class="o">|</span> <span class="n">number</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># second layer, next most tightly grouped, is multiplication</span>
+<span class="gp">... </span><span class="n">mul</span> <span class="o">=</span> <span class="n">group1</span> <span class="o">&amp;</span> <span class="n">symbol</span><span class="p">(</span><span class="s">&#39;*&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">group2</span> <span class="o">&gt;</span> <span class="n">List</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">div</span> <span class="o">=</span> <span class="n">group1</span> <span class="o">&amp;</span> <span class="n">symbol</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">group2</span> <span class="o">&gt;</span> <span class="n">List</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group2</span> <span class="o">+=</span> <span class="n">group1</span> <span class="o">|</span> <span class="n">mul</span> <span class="o">|</span> <span class="n">div</span>      <span class="c"># changed!</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># third layer, least tightly grouped, is addition</span>
+<span class="gp">... </span><span class="n">add</span> <span class="o">=</span> <span class="n">group2</span> <span class="o">&amp;</span> <span class="n">symbol</span><span class="p">(</span><span class="s">&#39;+&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">group3b</span> <span class="o">&gt;</span> <span class="n">List</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sub</span> <span class="o">=</span> <span class="n">group2</span> <span class="o">&amp;</span> <span class="n">symbol</span><span class="p">(</span><span class="s">&#39;-&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">group3b</span> <span class="o">&gt;</span> <span class="n">List</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group3b</span> <span class="o">+=</span> <span class="n">group2</span> <span class="o">|</span> <span class="n">add</span> <span class="o">|</span> <span class="n">sub</span>     <span class="c"># changed!</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ast</span> <span class="o">=</span> <span class="n">group3b</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;1+2*(3-4)+5/6+7&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="go">[...]</span>
+<span class="go">lepl.stream.maxdepth.FullFirstMatchException: The match failed in &lt;string&gt; at &#39;+&#39; (line 1, character 2).</span>
+</pre></div>
+</div>
+<p>This isn&#8217;t as bad as it looks.  Lepl does find the result we are expecting,
+it&#8217;s just not the first result found, which is what <a class="reference external" href="api/redirect.html#lepl.core.config.ParserMixin.parse">parse()</a> returns.  We
+can see how many results are found:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">group3b</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">no_full_first_match</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">group3b</span><span class="o">.</span><span class="n">parse_all</span><span class="p">(</span><span class="s">&#39;1+2*(3-4)+5/6+7&#39;</span><span class="p">)))</span>
+<span class="go">6</span>
+</pre></div>
+</div>
+<p>and it turns out the result we expect is the last one.</p>
+<p>You can understand what has happened by tracing out how the text is matched:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">group3b</span></tt> is defined as <tt class="docutils literal"><span class="pre">group2</span> <span class="pre">|</span> <span class="pre">add</span> <span class="pre">|</span> <span class="pre">sub</span></tt>, so <tt class="docutils literal"><span class="pre">group2</span></tt> is tried
+first (<a class="reference external" href="api/redirect.html#lepl.matchers.combine.Or">Or()</a> evaluates from
+left to right)</li>
+<li><tt class="docutils literal"><span class="pre">group2</span></tt> is defined as <tt class="docutils literal"><span class="pre">group1</span> <span class="pre">|</span> <span class="pre">mul</span> <span class="pre">|</span> <span class="pre">div</span></tt>, so <tt class="docutils literal"><span class="pre">group1</span></tt> is tried
+first</li>
+<li><tt class="docutils literal"><span class="pre">group1</span></tt> is defined as <tt class="docutils literal"><span class="pre">parens</span> <span class="pre">|</span> <span class="pre">number</span></tt>, so <tt class="docutils literal"><span class="pre">parens</span></tt> is tried first</li>
+<li><tt class="docutils literal"><span class="pre">parens</span></tt> fails to match, because the input does not start with &#8220;(&#8220;</li>
+<li>so the next alternative in the <a class="reference external" href="api/redirect.html#lepl.matchers.combine.Or">Or()</a> for <tt class="docutils literal"><span class="pre">group1</span></tt> is tried,
+which is <tt class="docutils literal"><span class="pre">number</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">number</span></tt> succeeds and has nothing following it</li>
+<li>returning back up the stack of pending matchers (<tt class="docutils literal"><span class="pre">group1</span></tt>, <tt class="docutils literal"><span class="pre">group2</span></tt>,
+<tt class="docutils literal"><span class="pre">group3b</span></tt>), all have no following matcher, so the match is complete</li>
+<li>so the &#8220;successful&#8221; parse is <tt class="docutils literal"><span class="pre">1.0</span></tt>, but that hasn&#8217;t consumed all the
+input, so we get the error.</li>
+</ul>
+<p>An easy (but see comments on efficiency below) fix for avoiding short results
+is to explicitly say that the parser must match the entire output (<a class="reference external" href="api/redirect.html#lepl.matchers.core.Eos">Eos()</a> matches &#8220;end of string&#8221; or
+&#8220;end of stream&#8221;).  This works because the sequence described above fails (as
+some input remains), so the next alternative is tried (which in this case
+would be the <tt class="docutils literal"><span class="pre">mul</span></tt> in <tt class="docutils literal"><span class="pre">group2</span></tt>, since <tt class="docutils literal"><span class="pre">group1</span></tt> has run out of
+alternatives).  Eventually an arrangement of matchers is found that matches
+the complete input:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span> <span class="o">=</span> <span class="n">group3b</span> <span class="o">&amp;</span> <span class="n">Eos</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;1+2*(3-4)+5/6+7&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+<span class="go">List</span>
+<span class="go"> +- 1.0</span>
+<span class="go"> +- &#39;+&#39;</span>
+<span class="go"> `- List</span>
+<span class="go">     +- List</span>
+<span class="go">     |   +- 2.0</span>
+<span class="go">     |   +- &#39;*&#39;</span>
+<span class="go">     |   +- &#39;(&#39;</span>
+<span class="go">     |   +- List</span>
+<span class="go">     |   |   +- 3.0</span>
+<span class="go">     |   |   +- &#39;-&#39;</span>
+<span class="go">     |   |   `- 4.0</span>
+<span class="go">     |   `- &#39;)&#39;</span>
+<span class="go">     +- &#39;+&#39;</span>
+<span class="go">     `- List</span>
+<span class="go">         +- List</span>
+<span class="go">         |   +- 5.0</span>
+<span class="go">         |   +- &#39;/&#39;</span>
+<span class="go">         |   `- 6.0</span>
+<span class="go">         +- &#39;+&#39;</span>
+<span class="go">         `- 7.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">parse_all</span><span class="p">(</span><span class="s">&#39;1+2*(3-4)+5/6+7&#39;</span><span class="p">)))</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+<p>The second mistake is to duplicate the recursive call on both sides of the
+operator.  So below, for example, we have <tt class="docutils literal"><span class="pre">add</span> <span class="pre">=</span> <span class="pre">group3c...</span></tt> instead of
+<tt class="docutils literal"><span class="pre">add</span> <span class="pre">=</span> <span class="pre">group2...</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">value</span> <span class="o">=</span> <span class="n">Token</span><span class="p">(</span><span class="n">UnsignedReal</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">symbol</span> <span class="o">=</span> <span class="n">Token</span><span class="p">(</span><span class="s">&#39;[^0-9a-zA-Z </span><span class="se">\t\r\n</span><span class="s">]&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">number</span> <span class="o">=</span> <span class="n">Optional</span><span class="p">(</span><span class="n">symbol</span><span class="p">(</span><span class="s">&#39;-&#39;</span><span class="p">))</span> <span class="o">+</span> <span class="n">value</span> <span class="o">&gt;&gt;</span> <span class="nb">float</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group2</span><span class="p">,</span> <span class="n">group3c</span> <span class="o">=</span> <span class="n">Delayed</span><span class="p">(),</span> <span class="n">Delayed</span><span class="p">()</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># first layer, most tightly grouped, is parens and numbers</span>
+<span class="gp">... </span><span class="n">parens</span> <span class="o">=</span> <span class="n">symbol</span><span class="p">(</span><span class="s">&#39;(&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">group3c</span> <span class="o">&amp;</span> <span class="n">symbol</span><span class="p">(</span><span class="s">&#39;)&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group1</span> <span class="o">=</span> <span class="n">parens</span> <span class="o">|</span> <span class="n">number</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># second layer, next most tightly grouped, is multiplication</span>
+<span class="gp">... </span><span class="n">mul</span> <span class="o">=</span> <span class="n">group2</span> <span class="o">&amp;</span> <span class="n">symbol</span><span class="p">(</span><span class="s">&#39;*&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">group2</span> <span class="o">&gt;</span> <span class="n">List</span>     <span class="c"># changed</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">div</span> <span class="o">=</span> <span class="n">group2</span> <span class="o">&amp;</span> <span class="n">symbol</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">group2</span> <span class="o">&gt;</span> <span class="n">List</span>     <span class="c"># changed</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group2</span> <span class="o">+=</span> <span class="n">mul</span> <span class="o">|</span> <span class="n">div</span> <span class="o">|</span> <span class="n">group1</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># third layer, least tightly grouped, is addition</span>
+<span class="gp">... </span><span class="n">add</span> <span class="o">=</span> <span class="n">group3c</span> <span class="o">&amp;</span> <span class="n">symbol</span><span class="p">(</span><span class="s">&#39;+&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">group3c</span> <span class="o">&gt;</span> <span class="n">List</span>   <span class="c"># changed</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sub</span> <span class="o">=</span> <span class="n">group3c</span> <span class="o">&amp;</span> <span class="n">symbol</span><span class="p">(</span><span class="s">&#39;-&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">group3c</span> <span class="o">&gt;</span> <span class="n">List</span>   <span class="c"># changed</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group3c</span> <span class="o">+=</span> <span class="n">add</span> <span class="o">|</span> <span class="n">sub</span> <span class="o">|</span> <span class="n">group2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ast</span> <span class="o">=</span> <span class="n">group3c</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;1+2*(3-4)+5/6+7&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="go">[...]</span>
+<span class="go">lepl.matchers.memo.MemoException: Left recursion was detected.</span>
+<span class="go">You can try .config.auto_memoize() or similar, but it is more efficient to</span>
+<span class="go">re-write the parser to remove left-recursive definitions.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group3c</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">auto_memoize</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ast</span> <span class="o">=</span> <span class="n">group3c</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;1+2*(3-4)+5/6+7&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">ast</span><span class="p">)</span>
+<span class="go">List</span>
+<span class="go"> +- List</span>
+<span class="go"> |   +- List</span>
+<span class="go"> |   |   +- 1.0</span>
+<span class="go"> |   |   +- &#39;+&#39;</span>
+<span class="go"> |   |   `- List</span>
+<span class="go"> |   |       +- 2.0</span>
+<span class="go"> |   |       +- &#39;*&#39;</span>
+<span class="go"> |   |       +- &#39;(&#39;</span>
+<span class="go"> |   |       +- List</span>
+<span class="go"> |   |       |   +- 3.0</span>
+<span class="go"> |   |       |   +- &#39;-&#39;</span>
+<span class="go"> |   |       |   `- 4.0</span>
+<span class="go"> |   |       `- &#39;)&#39;</span>
+<span class="go"> |   +- &#39;+&#39;</span>
+<span class="go"> |   `- List</span>
+<span class="go"> |       +- 5.0</span>
+<span class="go"> |       +- &#39;/&#39;</span>
+<span class="go"> |       `- 6.0</span>
+<span class="go"> +- &#39;+&#39;</span>
+<span class="go"> `- 7.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">group3c</span><span class="o">.</span><span class="n">parse_all</span><span class="p">(</span><span class="s">&#39;1+2*(3-4)+5/6+7&#39;</span><span class="p">)))</span>
+<span class="go">12</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span> <span class="o">=</span> <span class="n">group3c</span> <span class="o">&amp;</span> <span class="n">Eos</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">auto_memoize</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">parse_all</span><span class="p">(</span><span class="s">&#39;1+2*(3-4)+5/6+7&#39;</span><span class="p">)))</span>
+<span class="go">5</span>
+</pre></div>
+</div>
+<p>Here, not only do we need to mess around with the configuration to extract any
+results at all, but we also get 5 different matches even when we force the
+entire input to be matched.  If you look at those matches in detail you&#8217;ll see
+that they are all logically equivalent, corresponding to the different ways
+you can divide up an expression like &#8220;1+2+3&#8221; &#8212; as &#8220;(1+2)+3&#8221; or &#8220;1+(2+3)&#8221;.</p>
+<p>The lesson here is to avoid left-recursion.</p>
+</div>
+<div class="section" id="subclassing-list">
+<span id="index-2"></span><h2>Subclassing List<a class="headerlink" href="#subclassing-list" title="Permalink to this headline">¶</a></h2>
+<p>Back to our arithmetic expression parser.  We can make the AST more useful by
+using subclasses of List to indicate different operations (I&#8217;ve dropped the
+operations because, with this extra information, they are no longer needed;
+the parentheses can go too):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">Add</span><span class="p">(</span><span class="n">List</span><span class="p">):</span> <span class="k">pass</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">Sub</span><span class="p">(</span><span class="n">List</span><span class="p">):</span> <span class="k">pass</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">Mul</span><span class="p">(</span><span class="n">List</span><span class="p">):</span> <span class="k">pass</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">Div</span><span class="p">(</span><span class="n">List</span><span class="p">):</span> <span class="k">pass</span>
+<span class="gp">...</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># tokens</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">value</span> <span class="o">=</span> <span class="n">Token</span><span class="p">(</span><span class="n">UnsignedReal</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">symbol</span> <span class="o">=</span> <span class="n">Token</span><span class="p">(</span><span class="s">&#39;[^0-9a-zA-Z </span><span class="se">\t\r\n</span><span class="s">]&#39;</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">number</span> <span class="o">=</span> <span class="n">Optional</span><span class="p">(</span><span class="n">symbol</span><span class="p">(</span><span class="s">&#39;-&#39;</span><span class="p">))</span> <span class="o">+</span> <span class="n">value</span> <span class="o">&gt;&gt;</span> <span class="nb">float</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group2</span><span class="p">,</span> <span class="n">group3</span> <span class="o">=</span> <span class="n">Delayed</span><span class="p">(),</span> <span class="n">Delayed</span><span class="p">()</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># first layer, most tightly grouped, is parens and numbers</span>
+<span class="gp">... </span><span class="n">parens</span> <span class="o">=</span> <span class="o">~</span><span class="n">symbol</span><span class="p">(</span><span class="s">&#39;(&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">group3</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">symbol</span><span class="p">(</span><span class="s">&#39;)&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group1</span> <span class="o">=</span> <span class="n">parens</span> <span class="o">|</span> <span class="n">number</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># second layer, next most tightly grouped, is multiplication</span>
+<span class="gp">... </span><span class="n">mul</span> <span class="o">=</span> <span class="n">group1</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">symbol</span><span class="p">(</span><span class="s">&#39;*&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">group2</span> <span class="o">&gt;</span> <span class="n">Mul</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">div</span> <span class="o">=</span> <span class="n">group1</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">symbol</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">group2</span> <span class="o">&gt;</span> <span class="n">Div</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group2</span> <span class="o">+=</span> <span class="n">mul</span> <span class="o">|</span> <span class="n">div</span> <span class="o">|</span> <span class="n">group1</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># third layer, least tightly grouped, is addition</span>
+<span class="gp">... </span><span class="n">add</span> <span class="o">=</span> <span class="n">group2</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">symbol</span><span class="p">(</span><span class="s">&#39;+&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">group3</span> <span class="o">&gt;</span> <span class="n">Add</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sub</span> <span class="o">=</span> <span class="n">group2</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">symbol</span><span class="p">(</span><span class="s">&#39;-&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">group3</span> <span class="o">&gt;</span> <span class="n">Sub</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group3</span> <span class="o">+=</span> <span class="n">add</span> <span class="o">|</span> <span class="n">sub</span> <span class="o">|</span> <span class="n">group2</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ast</span> <span class="o">=</span> <span class="n">group3</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;1+2*(3-4)+5/6+7&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">ast</span><span class="p">)</span>
+<span class="go">Add</span>
+<span class="go"> +- 1.0</span>
+<span class="go"> `- Add</span>
+<span class="go">     +- Mul</span>
+<span class="go">     |   +- 2.0</span>
+<span class="go">     |   `- Sub</span>
+<span class="go">     |       +- 3.0</span>
+<span class="go">     |       `- 4.0</span>
+<span class="go">     `- Add</span>
+<span class="go">         +- Div</span>
+<span class="go">         |   +- 5.0</span>
+<span class="go">         |   `- 6.0</span>
+<span class="go">         `- 7.0</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="evaluation">
+<h2>Evaluation<a class="headerlink" href="#evaluation" title="Permalink to this headline">¶</a></h2>
+<p>We can make the AST &#8220;evaluate itself&#8221; by adding an appropriate action to each
+tree node.  If we do this via <tt class="docutils literal"><span class="pre">__float__</span></tt> then <tt class="docutils literal"><span class="pre">float()</span></tt> provides a
+uniform interface to access the value of both float values and nodes.</p>
+<p>I&#8217;ll also make use of the <a class="reference external" href="http://docs.python.org/3.0/library/operator.html">operator package</a> to provide the
+operations:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">add</span><span class="p">,</span> <span class="n">sub</span><span class="p">,</span> <span class="n">mul</span><span class="p">,</span> <span class="n">truediv</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># ast nodes</span>
+<span class="gp">... </span><span class="k">class</span> <span class="nc">Op</span><span class="p">(</span><span class="n">List</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">__float__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_op</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">Add</span><span class="p">(</span><span class="n">Op</span><span class="p">):</span> <span class="n">_op</span> <span class="o">=</span> <span class="n">add</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">Sub</span><span class="p">(</span><span class="n">Op</span><span class="p">):</span> <span class="n">_op</span> <span class="o">=</span> <span class="n">sub</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">Mul</span><span class="p">(</span><span class="n">Op</span><span class="p">):</span> <span class="n">_op</span> <span class="o">=</span> <span class="n">mul</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">Div</span><span class="p">(</span><span class="n">Op</span><span class="p">):</span> <span class="n">_op</span> <span class="o">=</span> <span class="n">truediv</span>
+<span class="gp">...</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># tokens</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">value</span> <span class="o">=</span> <span class="n">Token</span><span class="p">(</span><span class="n">UnsignedReal</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">symbol</span> <span class="o">=</span> <span class="n">Token</span><span class="p">(</span><span class="s">&#39;[^0-9a-zA-Z </span><span class="se">\t\r\n</span><span class="s">]&#39;</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">number</span> <span class="o">=</span> <span class="n">Optional</span><span class="p">(</span><span class="n">symbol</span><span class="p">(</span><span class="s">&#39;-&#39;</span><span class="p">))</span> <span class="o">+</span> <span class="n">value</span> <span class="o">&gt;&gt;</span> <span class="nb">float</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group2</span><span class="p">,</span> <span class="n">group3</span> <span class="o">=</span> <span class="n">Delayed</span><span class="p">(),</span> <span class="n">Delayed</span><span class="p">()</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># first layer, most tightly grouped, is parens and numbers</span>
+<span class="gp">... </span><span class="n">parens</span> <span class="o">=</span> <span class="o">~</span><span class="n">symbol</span><span class="p">(</span><span class="s">&#39;(&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">group3</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">symbol</span><span class="p">(</span><span class="s">&#39;)&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group1</span> <span class="o">=</span> <span class="n">parens</span> <span class="o">|</span> <span class="n">number</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># second layer, next most tightly grouped, is multiplication</span>
+<span class="gp">... </span><span class="n">mul_</span> <span class="o">=</span> <span class="n">group1</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">symbol</span><span class="p">(</span><span class="s">&#39;*&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">group2</span> <span class="o">&gt;</span> <span class="n">Mul</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">div_</span> <span class="o">=</span> <span class="n">group1</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">symbol</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">group2</span> <span class="o">&gt;</span> <span class="n">Div</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group2</span> <span class="o">+=</span> <span class="n">mul_</span> <span class="o">|</span> <span class="n">div_</span> <span class="o">|</span> <span class="n">group1</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># third layer, least tightly grouped, is addition</span>
+<span class="gp">... </span><span class="n">add_</span> <span class="o">=</span> <span class="n">group2</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">symbol</span><span class="p">(</span><span class="s">&#39;+&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">group3</span> <span class="o">&gt;</span> <span class="n">Add</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sub_</span> <span class="o">=</span> <span class="n">group2</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">symbol</span><span class="p">(</span><span class="s">&#39;-&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">group3</span> <span class="o">&gt;</span> <span class="n">Sub</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group3</span> <span class="o">+=</span> <span class="n">add_</span> <span class="o">|</span> <span class="n">sub_</span> <span class="o">|</span> <span class="n">group2</span>
+
+<span class="gp">... </span><span class="n">ast</span> <span class="o">=</span> <span class="n">group3</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;1+2*(3-4)+5/6+7&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">ast</span><span class="p">)</span>
+<span class="go">Add</span>
+<span class="go"> +- 1.0</span>
+<span class="go"> `- Add</span>
+<span class="go">     +- Mul</span>
+<span class="go">     |   +- 2.0</span>
+<span class="go">     |   `- Sub</span>
+<span class="go">     |       +- 3.0</span>
+<span class="go">     |       `- 4.0</span>
+<span class="go">     `- Add</span>
+<span class="go">         +- Div</span>
+<span class="go">         |   +- 5.0</span>
+<span class="go">         |   `- 6.0</span>
+<span class="go">         `- 7.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">float</span><span class="p">(</span><span class="n">ast</span><span class="p">)</span>
+<span class="go">6.833333333333333</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mi">1</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="mi">3</span><span class="o">-</span><span class="mi">4</span><span class="p">)</span><span class="o">+</span><span class="mi">5</span><span class="o">/</span><span class="mi">6</span><span class="o">+</span><span class="mi">7</span>
+<span class="go">6.833333333333333</span>
+</pre></div>
+</div>
+<p>Yowzah!</p>
+<p>Hopefully you can see how powerful this &#8212; it wouldn&#8217;t be too much extra work
+to extend it to include variable bindings (you would need to start passing
+round an &#8220;environment&#8221; that maps names to values, and which can push and pop
+variables).  Soon you could have an interpreter for your own small language...</p>
+</div>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>What have we learnt in this section?</p>
+<ul class="simple">
+<li>Operator precedence can be handled by careful design of the grammar.</li>
+<li>For efficient parsing, we should be aware of (and avoid) ambiguity and
+left&#8211;recursion.</li>
+<li>We can subclass <a class="reference external" href="api/redirect.html#lepl.support.list.List">List()</a> to add
+functionality to AST nodes.</li>
+</ul>
+<p>Thanks for reading!</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="contents.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Part 4 - Evaluation, Efficiency</a><ul>
+<li><a class="reference internal" href="#recap">Recap</a></li>
+<li><a class="reference internal" href="#operator-precedence">Operator Precedence</a></li>
+<li><a class="reference internal" href="#ambiguity-and-left-recursion">Ambiguity and Left Recursion</a></li>
+<li><a class="reference internal" href="#subclassing-list">Subclassing List</a></li>
+<li><a class="reference internal" href="#evaluation">Evaluation</a></li>
+<li><a class="reference internal" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="intro-3.html"
+                        title="previous chapter">Part 3 - Recursion, Abstract Syntax Trees</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="manual.html"
+                        title="next chapter">Lepl Manual</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/intro-4.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="manual.html" title="Lepl Manual"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="intro-3.html" title="Part 3 - Recursion, Abstract Syntax Trees"
+             >previous</a> |</li>
+        <li><a href="contents.html">LEPL 5.1.2 documentation</a> &raquo;</li>
+          <li><a href="intro.html" >A Tutorial for Lepl</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2009-2011, Andrew Cooke.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

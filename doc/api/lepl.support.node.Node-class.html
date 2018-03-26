@@ -1,0 +1,607 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lepl.support.node.Node</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lepl-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lepl-module.html">Package&nbsp;lepl</a> ::
+        <a href="lepl.support-module.html">Package&nbsp;support</a> ::
+        <a href="lepl.support.node-module.html">Module&nbsp;node</a> ::
+        Class&nbsp;Node
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lepl.support.node.Node-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class Node</h1><p class="nomargin-top"><span class="codelink"><a href="lepl.support.node-pysrc.html#Node">source&nbsp;code</a></span></p>
+<center>
+<center>  <map id="uml_class_diagram_for_lepl_sup_43" name="uml_class_diagram_for_lepl_sup_43">
+<area shape="rect" id="node1_9" href="lepl.support.node.Node-class.html#__init__" title="Expects a single list of arguments, as will be received if invoked with the &gt; operator." alt="" coords="67,103,213,121"/>
+<area shape="rect" id="node1_10" href="lepl.support.node.Node-class.html#__dir__" title="The names of all the attributes constructed from the results." alt="" coords="67,121,213,140"/>
+<area shape="rect" id="node1_11" href="lepl.support.node.Node-class.html#__getitem__" title="lepl.support.node.Node.__getitem__" alt="" coords="67,140,213,159"/>
+<area shape="rect" id="node1_12" href="lepl.support.node.Node-class.html#__iter__" title="lepl.support.node.Node.__iter__" alt="" coords="67,159,213,177"/>
+<area shape="rect" id="node1_13" href="lepl.support.node.Node-class.html#__str__" title="str(x)" alt="" coords="67,177,213,196"/>
+<area shape="rect" id="node1_14" href="lepl.support.node.Node-class.html#__repr__" title="repr(x)" alt="" coords="67,196,213,215"/>
+<area shape="rect" id="node1_15" href="lepl.support.node.Node-class.html#__len__" title="lepl.support.node.Node.__len__" alt="" coords="67,215,213,233"/>
+<area shape="rect" id="node1_16" href="lepl.support.node.Node-class.html#__bool__" title="lepl.support.node.Node.__bool__" alt="" coords="67,233,213,252"/>
+<area shape="rect" id="node1_17" href="lepl.support.node.Node-class.html#__nonzero__" title="lepl.support.node.Node.__nonzero__" alt="" coords="67,252,213,271"/>
+<area shape="rect" id="node1" href="lepl.support.node.Node-class.html" title="A base class for AST nodes." alt="" coords="55,70,225,277"/>
+<area shape="rect" id="node2" href="lepl.support.lib.LogMixin-class.html" title="Add standard Python logging to a class." alt="" coords="5,6,99,50"/>
+<area shape="rect" id="node3" href="lepl.support.graph.ConstructorGraphNode-class.html" title="An interface that provides information on constructor arguments." alt="" coords="129,6,325,50"/>
+</map>
+  <img src="uml_class_diagram_for_lepl_sup_43.gif" alt='' usemap="#uml_class_diagram_for_lepl_sup_43" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
+<hr />
+<p>A base class for AST nodes.</p>
+<p>It is designed to be applied to a list of results, via <tt class="rst-docutils literal">&gt;</tt>.</p>
+<p>Nodes support both simple list--like behaviour:</p>
+<pre class="rst-literal-block">
+&gt;&gt;&gt; abc = Node('a', 'b', 'c')
+&gt;&gt;&gt; abc[1]
+'b'
+&gt;&gt;&gt; abc[1:]
+['b', 'c']
+&gt;&gt;&gt; abc[:-1]
+['a', 'b']
+</pre>
+<p>and dict--like behaviour through attributes:</p>
+<pre class="rst-literal-block">
+&gt;&gt;&gt; fb = Node(('foo', 23), ('bar', 'baz'))
+&gt;&gt;&gt; fb.foo
+[23]
+&gt;&gt;&gt; fb.bar
+['baz']
+</pre>
+<p>Both mixed together:</p>
+<pre class="rst-literal-block">
+&gt;&gt;&gt; fb = Node(('foo', 23), ('bar', 'baz'), 43, 'zap', ('foo', 'again'))
+&gt;&gt;&gt; fb[:]
+[23, 'baz', 43, 'zap', 'again']
+&gt;&gt;&gt; fb.foo
+[23, 'again']
+</pre>
+<p>Note how <tt class="rst-docutils literal">('name', value)</tt> pairs have a special meaning in the constructor.
+This is supported by the creation of &quot;named pairs&quot;:</p>
+<pre class="rst-literal-block">
+&gt;&gt;&gt; letter = Letter() &gt; 'letter'
+&gt;&gt;&gt; digit = Digit() &gt; 'digit'
+&gt;&gt;&gt; example = (letter | digit)[:] &gt; Node
+&gt;&gt;&gt; n = example.parse('abc123d45e')[0]
+&gt;&gt;&gt; n.letter
+['a', 'b', 'c', 'd', 'e']
+&gt;&gt;&gt; n.digit
+['1', '2', '3', '4', '5']
+</pre>
+<p>However, a named pair with a Node as a value is coerced into a subclass of
+Node with the given name (this keeps Nodes connected into a single tree and
+so simplifies traversal).</p>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.support.node.Node-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">*args</span>)</span><br />
+      Expects a single list of arguments, as will be received if invoked with
+the <tt class="rst-rst-rst-rst-rst-rst-rst-rst-rst-docutils literal rst-rst-rst-rst-rst-rst-rst-rst-docutils literal rst-rst-rst-rst-rst-rst-rst-docutils literal rst-rst-rst-rst-rst-rst-docutils literal rst-rst-rst-rst-rst-docutils literal rst-rst-rst-rst-docutils literal rst-rst-rst-docutils literal rst-rst-docutils literal rst-docutils literal">&gt;</tt> operator.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.support.node-pysrc.html#Node.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__add_named_child"></a><span class="summary-sig-name">__add_named_child</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">name</span>,
+        <span class="summary-sig-arg">value</span>)</span><br />
+      Add a value associated with a name (either a named pair or the class
+of a Node subclass).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.support.node-pysrc.html#Node.__add_named_child">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__add_anon_child"></a><span class="summary-sig-name">__add_anon_child</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">value</span>)</span><br />
+      Add a nameless value.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.support.node-pysrc.html#Node.__add_anon_child">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__add_attribute"></a><span class="summary-sig-name">__add_attribute</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">name</span>,
+        <span class="summary-sig-arg">value</span>)</span><br />
+      Attributes are associated with lists of (named) values.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.support.node-pysrc.html#Node.__add_attribute">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__dir__"></a><span class="summary-sig-name">__dir__</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      The names of all the attributes constructed from the results.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.support.node-pysrc.html#Node.__dir__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__getitem__"></a><span class="summary-sig-name">__getitem__</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">index</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.support.node-pysrc.html#Node.__getitem__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__iter__"></a><span class="summary-sig-name">__iter__</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.support.node-pysrc.html#Node.__iter__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.support.node.Node-class.html#__str__" class="summary-sig-name">__str__</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      str(x)</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.support.node-pysrc.html#Node.__str__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.support.node.Node-class.html#__repr__" class="summary-sig-name">__repr__</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      repr(x)</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.support.node-pysrc.html#Node.__repr__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__len__"></a><span class="summary-sig-name">__len__</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.support.node-pysrc.html#Node.__len__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__bool__"></a><span class="summary-sig-name">__bool__</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.support.node-pysrc.html#Node.__bool__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__nonzero__"></a><span class="summary-sig-name">__nonzero__</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.support.node-pysrc.html#Node.__nonzero__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.support.node.Node-class.html#_recursively_eq" class="summary-sig-name" onclick="show_private();">_recursively_eq</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">other</span>)</span><br />
+      This compares two nodes by recursively comparing their contents.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.support.node-pysrc.html#Node._recursively_eq">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.support.node.Node-class.html#_constructor_args" class="summary-sig-name" onclick="show_private();">_constructor_args</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Regenerate the constructor arguments (returns (args, kargs)).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.support.node-pysrc.html#Node._constructor_args">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">*args</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.support.node-pysrc.html#Node.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Expects a single list of arguments, as will be received if invoked with
+the <tt class="rst-rst-rst-rst-rst-rst-rst-rst-rst-rst-docutils literal rst-rst-rst-rst-rst-rst-rst-rst-rst-docutils literal rst-rst-rst-rst-rst-rst-rst-rst-docutils literal rst-rst-rst-rst-rst-rst-rst-docutils literal rst-rst-rst-rst-rst-rst-docutils literal rst-rst-rst-rst-rst-docutils literal rst-rst-rst-rst-docutils literal rst-rst-rst-docutils literal rst-rst-docutils literal rst-docutils literal">&gt;</tt> operator.
+  <dl class="fields">
+    <dt>Overrides:
+        object.__init__
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__str__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__str__</span>(<span class="sig-arg">self</span>)</span>
+    <br /><em class="fname">(Informal representation operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.support.node-pysrc.html#Node.__str__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  str(x)
+  <dl class="fields">
+    <dt>Overrides:
+        object.__str__
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__repr__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__repr__</span>(<span class="sig-arg">self</span>)</span>
+    <br /><em class="fname">(Representation operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.support.node-pysrc.html#Node.__repr__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  repr(x)
+  <dl class="fields">
+    <dt>Overrides:
+        object.__repr__
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="_recursively_eq"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_recursively_eq</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">other</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.support.node-pysrc.html#Node._recursively_eq">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  This compares two nodes by recursively comparing their contents.
+It may be useful for testing, for example, but care should be taken
+to avoid its use on cycles of objects.
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="_constructor_args"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_constructor_args</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.support.node-pysrc.html#Node._constructor_args">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Regenerate the constructor arguments (returns (args, kargs)).
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="lepl.support.graph.ConstructorGraphNode-class.html#_constructor_args" onclick="show_private();">graph.ConstructorGraphNode._constructor_args</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lepl-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sun May 13 16:31:08 2012
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

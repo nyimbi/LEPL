@@ -1,0 +1,745 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lepl.stream.core.StreamHelper</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lepl-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lepl-module.html">Package&nbsp;lepl</a> ::
+        <a href="lepl.stream-module.html">Package&nbsp;stream</a> ::
+        <a href="lepl.stream.core-module.html">Module&nbsp;core</a> ::
+        Class&nbsp;StreamHelper
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lepl.stream.core.StreamHelper-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class StreamHelper</h1><p class="nomargin-top"><span class="codelink"><a href="lepl.stream.core-pysrc.html#StreamHelper">source&nbsp;code</a></span></p>
+<center>
+<center>  <map id="uml_class_diagram_for_lepl_str_6" name="uml_class_diagram_for_lepl_str_6">
+<area shape="rect" id="node1_14" href="lepl.stream.core.StreamHelper-class.html#__init__" title="lepl.stream.core.StreamHelper.__init__" alt="" coords="17,39,551,57"/>
+<area shape="rect" id="node1_15" href="lepl.stream.core.StreamHelper-class.html#__repr__" title="Simplify for comparison in tests" alt="" coords="17,57,551,76"/>
+<area shape="rect" id="node1_16" href="lepl.stream.core.StreamHelper-class.html#__eq__" title="lepl.stream.core.StreamHelper.__eq__" alt="" coords="17,76,551,95"/>
+<area shape="rect" id="node1_17" href="lepl.stream.core.StreamHelper-class.html#__hash__" title="lepl.stream.core.StreamHelper.__hash__" alt="" coords="17,95,551,113"/>
+<area shape="rect" id="node1_18" href="lepl.stream.core.StreamHelper-class.html#key" title="Generate an object that can be hashed (implements __hash__ and __eq__)." alt="" coords="17,113,551,132"/>
+<area shape="rect" id="node1_19" href="lepl.stream.core.StreamHelper-class.html#kargs" title="Generate a dictionary of values that describe the stream." alt="" coords="17,132,551,151"/>
+<area shape="rect" id="node1_20" href="lepl.stream.core.StreamHelper-class.html#fmt" title="fmt a message using the expensive kargs function." alt="" coords="17,151,551,169"/>
+<area shape="rect" id="node1_21" href="lepl.stream.core.StreamHelper-class.html#debug" title="Generate an inexpensive debug message." alt="" coords="17,169,551,188"/>
+<area shape="rect" id="node1_22" href="lepl.stream.core.StreamHelper-class.html#next" title="Return (value, stream) where value is the next value (or values if count &gt; 1) from the stream and stream is advanced to the next character." alt="" coords="17,188,551,207"/>
+<area shape="rect" id="node1_23" href="lepl.stream.core.StreamHelper-class.html#join" title="Join sequences of values into a single sequence." alt="" coords="17,207,551,225"/>
+<area shape="rect" id="node1_24" href="lepl.stream.core.StreamHelper-class.html#empty" title="Return true if no more data available." alt="" coords="17,225,551,244"/>
+<area shape="rect" id="node1_25" href="lepl.stream.core.StreamHelper-class.html#line" title="Return (values, stream) where values correspond to something like &quot;the rest of the line&quot; from the current point and stream is advanced to the point after the line ends." alt="" coords="17,244,551,263"/>
+<area shape="rect" id="node1_26" href="lepl.stream.core.StreamHelper-class.html#len" title="Return the remaining length of the stream." alt="" coords="17,263,551,281"/>
+<area shape="rect" id="node1_27" href="lepl.stream.core.StreamHelper-class.html#cacheable" title="Is this stream cacheable?" alt="" coords="17,300,551,319"/>
+<area shape="rect" id="node1" href="lepl.stream.core.StreamHelper-class.html" title="The interface that all helpers should implement." alt="" coords="5,6,563,325"/>
+</map>
+  <img src="uml_class_diagram_for_lepl_str_6.gif" alt='' usemap="#uml_class_diagram_for_lepl_str_6" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
+<hr />
+The interface that all helpers should implement.
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__init__"></a><span class="summary-sig-name">__init__</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">id</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">factory</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">max</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">global_kargs</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">cache_level</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.stream.core-pysrc.html#StreamHelper.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__repr__"></a><span class="summary-sig-name">__repr__</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Simplify for comparison in tests</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.stream.core-pysrc.html#StreamHelper.__repr__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__eq__"></a><span class="summary-sig-name">__eq__</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">other</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.stream.core-pysrc.html#StreamHelper.__eq__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__hash__"></a><span class="summary-sig-name">__hash__</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.stream.core-pysrc.html#StreamHelper.__hash__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.stream.core.StreamHelper-class.html#key" class="summary-sig-name">key</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">state</span>,
+        <span class="summary-sig-arg">other</span>)</span><br />
+      Generate an object that can be hashed (implements __hash__ and __eq__).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.stream.core-pysrc.html#StreamHelper.key">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.stream.core.StreamHelper-class.html#kargs" class="summary-sig-name">kargs</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">state</span>,
+        <span class="summary-sig-arg">prefix</span>=<span class="summary-sig-default">''</span>,
+        <span class="summary-sig-arg">kargs</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Generate a dictionary of values that describe the stream.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.stream.core-pysrc.html#StreamHelper.kargs">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="fmt"></a><span class="summary-sig-name">fmt</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">state</span>,
+        <span class="summary-sig-arg">template</span>,
+        <span class="summary-sig-arg">prefix</span>=<span class="summary-sig-default">''</span>,
+        <span class="summary-sig-arg">kargs</span>=<span class="summary-sig-default">None</span>)</span><br />
+      fmt a message using the expensive kargs function.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.stream.core-pysrc.html#StreamHelper.fmt">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="debug"></a><span class="summary-sig-name">debug</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">state</span>)</span><br />
+      Generate an inexpensive debug message.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.stream.core-pysrc.html#StreamHelper.debug">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.stream.core.StreamHelper-class.html#next" class="summary-sig-name">next</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">state</span>,
+        <span class="summary-sig-arg">count</span>=<span class="summary-sig-default">1</span>)</span><br />
+      Return (value, stream) where <code class="link">value</code> is the next value (or
+values if count &gt; 1) from the stream and <a href="lepl.stream.core.StreamHelper-class.html#stream" class="link">stream</a> is advanced to the
+next character.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.stream.core-pysrc.html#StreamHelper.next">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="join"></a><span class="summary-sig-name">join</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">state</span>,
+        <span class="summary-sig-arg">*values</span>)</span><br />
+      Join sequences of values into a single sequence.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.stream.core-pysrc.html#StreamHelper.join">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="empty"></a><span class="summary-sig-name">empty</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">state</span>)</span><br />
+      Return true if no more data available.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.stream.core-pysrc.html#StreamHelper.empty">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.stream.core.StreamHelper-class.html#line" class="summary-sig-name">line</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">state</span>,
+        <span class="summary-sig-arg">empty_ok</span>)</span><br />
+      Return (values, stream) where <code class="link">values</code> correspond to something
+like &quot;the rest of the line&quot; from the current point and <a href="lepl.stream.core.StreamHelper-class.html#stream" class="link">stream</a>
+is advanced to the point after the line ends.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.stream.core-pysrc.html#StreamHelper.line">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.stream.core.StreamHelper-class.html#len" class="summary-sig-name">len</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">state</span>)</span><br />
+      Return the remaining length of the stream.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.stream.core-pysrc.html#StreamHelper.len">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.stream.core.StreamHelper-class.html#stream" class="summary-sig-name">stream</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">state</span>,
+        <span class="summary-sig-arg">value</span>,
+        <span class="summary-sig-arg">id_</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">max</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Return a new stream that encapsulates the value given, starting at
+<code class="link">state</code>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.stream.core-pysrc.html#StreamHelper.stream">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.stream.core.StreamHelper-class.html#deepest" class="summary-sig-name">deepest</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Return a stream that represents the deepest match.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.stream.core-pysrc.html#StreamHelper.deepest">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="delta"></a><span class="summary-sig-name">delta</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">state</span>)</span><br />
+      Return the offset, lineno and char of the current point, relative to
+the entire stream, as a tuple.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.stream.core-pysrc.html#StreamHelper.delta">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="eq"></a><span class="summary-sig-name">eq</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">state1</span>,
+        <span class="summary-sig-arg">state2</span>)</span><br />
+      Are the two states equal?</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.stream.core-pysrc.html#StreamHelper.eq">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.stream.core.StreamHelper-class.html#new_max" class="summary-sig-name">new_max</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">state</span>)</span><br />
+      Return (old max, new stream), where new stream uses a new max.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.stream.core-pysrc.html#StreamHelper.new_max">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="cacheable"></a><span class="summary-sig-name">cacheable</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Is this stream cacheable?</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.stream.core-pysrc.html#StreamHelper.cacheable">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="key"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">key</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">state</span>,
+        <span class="sig-arg">other</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.stream.core-pysrc.html#StreamHelper.key">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Generate an object that can be hashed (implements __hash__ and __eq__).
+See <a href="lepl.stream.core.HashKey-class.html" class="link">HashKey</a>.
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="kargs"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">kargs</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">state</span>,
+        <span class="sig-arg">prefix</span>=<span class="sig-default">''</span>,
+        <span class="sig-arg">kargs</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.stream.core-pysrc.html#StreamHelper.kargs">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Generate a dictionary of values that describe the stream.  These
+may be extended by subclasses.  They are provided to
+<code class="link">syntax_error_kargs</code>, for example.</p>
+<p><code class="link">prefix</code> modifies the property names</p>
+<p><a href="lepl.stream.core.StreamHelper-class.html#kargs" class="link">kargs</a> allows values to be provided.  These are <em>not</em> overwritten,
+so if there is a name clash the provided value remains.</p>
+<p>Note: Calculating this can be expensive; use only for error messages,
+not debug messages (that may be discarded).</p>
+<p>The following names will be defined (at a minimum).</p>
+<p>For these value the &quot;global&quot; prefix indicates the underlying stream
+when, for example, tokens are used (other values will be relative to
+the token).  If tokens etc are not in use then global and non-global
+values will agree.
+- data: a line representing the data, highlighting the current offset
+- global_data: as data, but for the entire sequence
+- text: as data, but without a &quot;[...]&quot; at the end
+- global_text: as text, but for the entire sequence
+- type: the type of the sequence
+- global_type: the type of the entire sequence
+- global_offset: a 0-based index into the underlying sequence</p>
+<p>These values are always local:
+- offset: a 0-based index into the sequence
+- rest: the data following the current point
+- repr: the current value, or &lt;EOS&gt;
+- str: the current value, or an empty string</p>
+<p>These values are always global:
+- filename: a filename, if available, or the type
+- lineno: a 1-based line number for the current offset
+- char: a 1-based character count within the line for the current offset
+- location: a summary of the current location</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="next"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">next</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">state</span>,
+        <span class="sig-arg">count</span>=<span class="sig-default">1</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.stream.core-pysrc.html#StreamHelper.next">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Return (value, stream) where <code class="link">value</code> is the next value (or
+values if count &gt; 1) from the stream and <a href="lepl.stream.core.StreamHelper-class.html#stream" class="link">stream</a> is advanced to the
+next character.  Note that <code class="link">value</code> is always a sequence (so if the
+stream is a list of integers, and <a href="#id1"><span class="rst-rst-problematic rst-problematic" id="rst-rst-id2">`</span></a>count`=1, then it will be a
+unitary list, for example).</p>
+<p>Should raise StopIteration when no more data are available.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="line"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">line</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">state</span>,
+        <span class="sig-arg">empty_ok</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.stream.core-pysrc.html#StreamHelper.line">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Return (values, stream) where <code class="link">values</code> correspond to something
+like &quot;the rest of the line&quot; from the current point and <a href="lepl.stream.core.StreamHelper-class.html#stream" class="link">stream</a>
+is advanced to the point after the line ends.</p>
+<p>If <code class="link">empty_ok</code> is true and we are at the end of a line, return an
+empty line, otherwise advance (and maybe raise a StopIteration).</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="len"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">len</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">state</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.stream.core-pysrc.html#StreamHelper.len">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Return the remaining length of the stream.  Streams of unknown
+length (iterables) should raise a TypeError.
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="stream"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">stream</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">state</span>,
+        <span class="sig-arg">value</span>,
+        <span class="sig-arg">id_</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">max</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.stream.core-pysrc.html#StreamHelper.stream">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Return a new stream that encapsulates the value given, starting at
+<code class="link">state</code>.  IMPORTANT: the stream used is the one that corresponds to
+the start of the value.</p>
+<dl class="rst-docutils">
+<dt>For example:</dt>
+<dd>(line, next_stream) = s_line(stream, False)
+token_stream = s_stream(stream, line) # uses stream, not next_stream</dd>
+</dl>
+<p>This is used when processing Tokens, for example, or columns (where
+fragments in the correct column area are parsed separately).</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="deepest"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">deepest</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.stream.core-pysrc.html#StreamHelper.deepest">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Return a stream that represents the deepest match.  The stream may be
+incomplete in some sense (it may not be possible to use it for
+parsing more data), but it will have usable fmt and kargs methods.
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="new_max"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">new_max</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">state</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.stream.core-pysrc.html#StreamHelper.new_max">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Return (old max, new stream), where new stream uses a new max.
+This is used when we want to read from the stream without
+affecting the max (eg when looking ahead to generate tokens).
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lepl-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sun May 13 16:31:07 2012
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

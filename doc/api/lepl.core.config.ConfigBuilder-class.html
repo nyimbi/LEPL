@@ -1,0 +1,1745 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lepl.core.config.ConfigBuilder</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lepl-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lepl-module.html">Package&nbsp;lepl</a> ::
+        <a href="lepl.core-module.html">Package&nbsp;core</a> ::
+        <a href="lepl.core.config-module.html">Module&nbsp;config</a> ::
+        Class&nbsp;ConfigBuilder
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lepl.core.config.ConfigBuilder-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class ConfigBuilder</h1><p class="nomargin-top"><span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder">source&nbsp;code</a></span></p>
+<center>
+<center>  <map id="uml_class_diagram_for_lepl_cor_18" name="uml_class_diagram_for_lepl_cor_18">
+<area shape="rect" id="node1_14" href="lepl.core.config.ConfigBuilder-class.html#__init__" title="x.__init__(...) initializes x; see help(type(x)) for signature" alt="" coords="16,39,437,57"/>
+<area shape="rect" id="node1_15" href="lepl.core.config.ConfigBuilder-class.html#add_rewriter" title="Add a rewriter that will be applied to the matcher graph when the parser is generated." alt="" coords="16,57,437,76"/>
+<area shape="rect" id="node1_16" href="lepl.core.config.ConfigBuilder-class.html#remove_rewriter" title="Remove a rewriter from the current configuration." alt="" coords="16,76,437,95"/>
+<area shape="rect" id="node1_17" href="lepl.core.config.ConfigBuilder-class.html#remove_all_rewriters" title="Remove all rewriters of a given type from the current configuration." alt="" coords="16,95,437,113"/>
+<area shape="rect" id="node1_18" href="lepl.core.config.ConfigBuilder-class.html#add_monitor" title="Add a monitor to the current configuration." alt="" coords="16,113,437,132"/>
+<area shape="rect" id="node1_19" href="lepl.core.config.ConfigBuilder-class.html#remove_all_monitors" title="Remove all monitors from the current configuration." alt="" coords="16,132,437,151"/>
+<area shape="rect" id="node1_20" href="lepl.core.config.ConfigBuilder-class.html#stream_factory" title="Specify the stream factory." alt="" coords="16,151,437,169"/>
+<area shape="rect" id="node1_21" href="lepl.core.config.ConfigBuilder-class.html#add_stream_kargs" title="Add a value for passing to the stream factory." alt="" coords="16,169,437,188"/>
+<area shape="rect" id="node1_22" href="lepl.core.config.ConfigBuilder-class.html#remove_all_stream_kargs" title="Remove all values passed to the stream factory." alt="" coords="16,188,437,207"/>
+<area shape="rect" id="node1_23" href="lepl.core.config.ConfigBuilder-class.html#configuration" title="The current configuration (rewriters, monitors, stream_factory)." alt="" coords="16,207,437,225"/>
+<area shape="rect" id="node1_24" href="lepl.core.config.ConfigBuilder-class.html#alphabet" title="Set the alphabet used." alt="" coords="16,225,437,244"/>
+<area shape="rect" id="node1_25" href="lepl.core.config.ConfigBuilder-class.html#changed" title="Has the config been changed by the user since it was last returned via configuration? &#160;if not, any previously generated parser can be reused." alt="" coords="16,244,437,263"/>
+<area shape="rect" id="node1_26" href="lepl.core.config.ConfigBuilder-class.html#clear_cache" title="Force calculation of a new parser." alt="" coords="16,263,437,281"/>
+<area shape="rect" id="node1_27" href="lepl.core.config.ConfigBuilder-class.html#default" title="Provide the default configuration (deleting what may have been configured previously)." alt="" coords="16,300,437,319"/>
+<area shape="rect" id="node1" href="lepl.core.config.ConfigBuilder-class.html" title="Accumulate configuration through chained methods." alt="" coords="4,6,449,325"/>
+</map>
+  <img src="uml_class_diagram_for_lepl_cor_18.gif" alt='' usemap="#uml_class_diagram_for_lepl_cor_18" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
+<hr />
+Accumulate configuration through chained methods.
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.config.ConfigBuilder-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">matcher</span>)</span><br />
+      x.__init__(...) initializes x; see help(type(x)) for signature</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__start"></a><span class="summary-sig-name">__start</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Set default values on demand to avoid dependency loop.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.__start">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="add_rewriter"></a><span class="summary-sig-name">add_rewriter</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">rewriter</span>)</span><br />
+      Add a rewriter that will be applied to the matcher graph when the
+parser is generated.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.add_rewriter">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="remove_rewriter"></a><span class="summary-sig-name">remove_rewriter</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">rewriter</span>)</span><br />
+      Remove a rewriter from the current configuration.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.remove_rewriter">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="remove_all_rewriters"></a><span class="summary-sig-name">remove_all_rewriters</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">type_</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Remove all rewriters of a given type from the current configuration.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.remove_all_rewriters">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.config.ConfigBuilder-class.html#add_monitor" class="summary-sig-name">add_monitor</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">monitor</span>)</span><br />
+      Add a monitor to the current configuration.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.add_monitor">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="remove_all_monitors"></a><span class="summary-sig-name">remove_all_monitors</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Remove all monitors from the current configuration.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.remove_all_monitors">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.config.ConfigBuilder-class.html#stream_factory" class="summary-sig-name">stream_factory</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">stream_factory</span>=<span class="summary-sig-default">DEFAULT_STREAM_FACTORY</span>)</span><br />
+      Specify the stream factory.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.stream_factory">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="add_stream_kargs"></a><span class="summary-sig-name">add_stream_kargs</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">**kargs</span>)</span><br />
+      Add a value for passing to the stream factory.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.add_stream_kargs">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="remove_all_stream_kargs"></a><span class="summary-sig-name">remove_all_stream_kargs</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Remove all values passed to the stream factory.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.remove_all_stream_kargs">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.config.ConfigBuilder-class.html#configuration" class="summary-sig-name">configuration</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      The current configuration (rewriters, monitors, stream_factory).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.configuration">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.config.ConfigBuilder-class.html#__get_alphabet" class="summary-sig-name" onclick="show_private();">__get_alphabet</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Get the alphabet used.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.__get_alphabet">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.config.ConfigBuilder-class.html#alphabet" class="summary-sig-name">alphabet</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">alphabet</span>)</span><br />
+      Set the alphabet used.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.alphabet">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.config.ConfigBuilder-class.html#changed" class="summary-sig-name">changed</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Has the config been changed by the user since it was last returned
+via <a href="lepl.core.config.ConfigBuilder-class.html#configuration" class="link">configuration</a>?  if not, any previously generated parser can be
+reused.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.changed">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="clear_cache"></a><span class="summary-sig-name">clear_cache</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Force calculation of a new parser.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.clear_cache">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="set_arguments"></a><span class="summary-sig-name">set_arguments</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">type_</span>,
+        <span class="summary-sig-arg">**kargs</span>)</span><br />
+      Set the given keyword arguments on all matchers of the given <code class="link">type_</code>
+(ie class) in the grammar.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.set_arguments">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="no_set_arguments"></a><span class="summary-sig-name">no_set_arguments</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Remove all rewriters that set arguments.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.no_set_arguments">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.config.ConfigBuilder-class.html#set_alphabet_arg" class="summary-sig-name">set_alphabet_arg</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">alphabet</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Set <a href="lepl.core.config.ConfigBuilder-class.html#alphabet" class="link">alphabet</a> on various matchers.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.set_alphabet_arg">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.config.ConfigBuilder-class.html#full_first_match" class="summary-sig-name">full_first_match</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">eos</span>=<span class="summary-sig-default">True</span>)</span><br />
+      Raise an error if the first match fails.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.full_first_match">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="no_full_first_match"></a><span class="summary-sig-name">no_full_first_match</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Disable the automatic generation of an error if the first match fails.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.no_full_first_match">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.config.ConfigBuilder-class.html#flatten" class="summary-sig-name">flatten</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Combined nested <a href="lepl-module.html#And" class="link">And()</a> and <a href="lepl-module.html#Or" class="link">Or()</a> matchers.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.flatten">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="no_flatten"></a><span class="summary-sig-name">no_flatten</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Disable the combination of nested <a href="lepl-module.html#And" class="link">And()</a> and <a href="lepl-module.html#Or" class="link">Or()</a> matchers.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.no_flatten">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.config.ConfigBuilder-class.html#compile_to_dfa" class="summary-sig-name">compile_to_dfa</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">force</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">alphabet</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Compile simple matchers to DFA regular expressions.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.compile_to_dfa">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.config.ConfigBuilder-class.html#compile_to_nfa" class="summary-sig-name">compile_to_nfa</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">force</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">alphabet</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Compile simple matchers to NFA regular expressions.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.compile_to_nfa">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.config.ConfigBuilder-class.html#compile_to_re" class="summary-sig-name">compile_to_re</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">force</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">alphabet</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Compile simple matchers to re (C library) regular expressions.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.compile_to_re">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="no_compile_to_regexp"></a><span class="summary-sig-name">no_compile_to_regexp</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Disable compilation of simple matchers to regular expressions.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.no_compile_to_regexp">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.config.ConfigBuilder-class.html#optimize_or" class="summary-sig-name">optimize_or</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">conservative</span>=<span class="summary-sig-default">False</span>)</span><br />
+      Rearrange arguments to <a href="lepl-module.html#Or" class="link">Or()</a> so that left-recursive matchers are
+tested last.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.optimize_or">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="no_optimize_or"></a><span class="summary-sig-name">no_optimize_or</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Disable the re-ordering of some <a href="lepl-module.html#Or" class="link">Or()</a> arguments.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.no_optimize_or">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.config.ConfigBuilder-class.html#lexer" class="summary-sig-name">lexer</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">alphabet</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">discard</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">lexer</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Detect the use of <a href="lepl-module.html#Token" class="link">Token()</a> and modify the parser to use the lexer.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.lexer">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="no_lexer"></a><span class="summary-sig-name">no_lexer</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Disable support for the lexer.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.no_lexer">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.config.ConfigBuilder-class.html#direct_eval" class="summary-sig-name">direct_eval</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">spec</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Combine simple matchers so that they are evaluated without
+trampolining.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.direct_eval">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="no_direct_eval"></a><span class="summary-sig-name">no_direct_eval</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Disable direct evaluation.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.no_direct_eval">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.config.ConfigBuilder-class.html#compose_transforms" class="summary-sig-name">compose_transforms</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Combine transforms (functions applied to results) with matchers.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.compose_transforms">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="no_compose_transforms"></a><span class="summary-sig-name">no_compose_transforms</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Disable the composition of transforms.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.no_compose_transforms">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.config.ConfigBuilder-class.html#auto_memoize" class="summary-sig-name">auto_memoize</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">conservative</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">full</span>=<span class="summary-sig-default">True</span>,
+        <span class="summary-sig-arg">d</span>=<span class="summary-sig-default">0</span>)</span><br />
+      This configuration attempts to detect which memoizer is most effective
+for each matcher.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.auto_memoize">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.config.ConfigBuilder-class.html#left_memoize" class="summary-sig-name">left_memoize</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">d</span>=<span class="summary-sig-default">0</span>)</span><br />
+      Add memoization that may detect and stabilise left-recursion.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.left_memoize">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.config.ConfigBuilder-class.html#right_memoize" class="summary-sig-name">right_memoize</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Add memoization that can make some complex parsers (with a lot of
+backtracking) more efficient.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.right_memoize">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.config.ConfigBuilder-class.html#no_memoize" class="summary-sig-name">no_memoize</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Remove memoization.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.no_memoize">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.config.ConfigBuilder-class.html#lines" class="summary-sig-name">lines</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">discard</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">tabsize</span>=<span class="summary-sig-default">8</span>,
+        <span class="summary-sig-arg">block_policy</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">block_start</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Configure &quot;offside parsing&quot;.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.lines">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.config.ConfigBuilder-class.html#trace_stack" class="summary-sig-name">trace_stack</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">enabled</span>=<span class="summary-sig-default">False</span>)</span><br />
+      Add a monitor to trace results using <a href="lepl-module.html#TraceStack" class="link">TraceStack()</a>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.trace_stack">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.config.ConfigBuilder-class.html#trace_variables" class="summary-sig-name">trace_variables</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Add a monitor to correctly insert the transforms needed when using
+the <a href="lepl-module.html#TraceVariables" class="link">TraceVariables()</a> context:</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.trace_variables">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.config.ConfigBuilder-class.html#low_memory" class="summary-sig-name">low_memory</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">queue_len</span>=<span class="summary-sig-default">100</span>)</span><br />
+      Reduce memory use (at the expense of backtracking).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.low_memory">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.config.ConfigBuilder-class.html#cache_level" class="summary-sig-name">cache_level</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">level</span>=<span class="summary-sig-default">1</span>)</span><br />
+      Control when the stream can be cached internally (this is used for
+debugging and error messages) - streams are cached for debugging when
+the value is greater than zero.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.cache_level">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.config.ConfigBuilder-class.html#record_deepest" class="summary-sig-name">record_deepest</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">n_before</span>=<span class="summary-sig-default">6</span>,
+        <span class="summary-sig-arg">n_results_after</span>=<span class="summary-sig-default">2</span>,
+        <span class="summary-sig-arg">n_done_after</span>=<span class="summary-sig-default">2</span>)</span><br />
+      Add a monitor to record deepest match.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.record_deepest">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="clear"></a><span class="summary-sig-name">clear</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Delete any earlier configuration and disable the default (so no
+rewriters or monitors are used).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.clear">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.config.ConfigBuilder-class.html#default" class="summary-sig-name">default</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Provide the default configuration (deleting what may have been
+configured previously).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.default">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__str__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">matcher</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  x.__init__(...) initializes x; see help(type(x)) for signature
+  <dl class="fields">
+    <dt>Overrides:
+        object.__init__
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="add_monitor"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">add_monitor</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">monitor</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.add_monitor">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Add a monitor to the current configuration.  Monitors are called
+from within the trampolining process and can be used to track
+evaluation, control resource use, etc.
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="stream_factory"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">stream_factory</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">stream_factory</span>=<span class="sig-default">DEFAULT_STREAM_FACTORY</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.stream_factory">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Specify the stream factory.  This is used to generate the input stream
+for the parser.
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="configuration"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">configuration</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.configuration">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  The current configuration (rewriters, monitors, stream_factory).
+  <dl class="fields">
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@property</code></li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__get_alphabet"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__get_alphabet</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.__get_alphabet">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get the alphabet used.</p>
+<p>Typically this is Unicode, which is the default.  It is needed for
+the generation of regular expressions.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="alphabet"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">alphabet</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">alphabet</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.alphabet">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Set the alphabet used.  It is needed for the generation of regular
+expressions, for example (but the default, for Unicode, is usually
+sufficient).
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="changed"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">changed</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.changed">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Has the config been changed by the user since it was last returned
+via <a href="lepl.core.config.ConfigBuilder-class.html#configuration" class="link">configuration</a>?  if not, any previously generated parser can be
+reused.
+  <dl class="fields">
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@property</code></li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="set_alphabet_arg"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">set_alphabet_arg</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">alphabet</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.set_alphabet_arg">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Set <a href="lepl.core.config.ConfigBuilder-class.html#alphabet" class="link">alphabet</a> on various matchers.  This is useful when using an
+unusual alphabet (most often when using line-aware parsing), as
+it saves having to specify it on each matcher when creating the
+grammar.
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="full_first_match"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">full_first_match</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">eos</span>=<span class="sig-default">True</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.full_first_match">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Raise an error if the first match fails.  If <code class="link">eos</code> is True then this
+requires that the entire input is matched, otherwise it only requires
+that the matcher succeed.  The exception includes information about
+the deepest read to the stream (which is a good indication of where
+any error occurs).</p>
+<p>This is part of the default configuration.  It can be removed with
+<a href="lepl.core.config.ConfigBuilder-class.html#no_full_first_match" class="link">no_full_first_match()</a>.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="flatten"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">flatten</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.flatten">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Combined nested <a href="lepl-module.html#And" class="link">And()</a> and <a href="lepl-module.html#Or" class="link">Or()</a> matchers.  This does not change
+the parser semantics, but improves efficiency.</p>
+<p>This is part of the default configuration.  It can be removed with
+<a href="lepl.core.config.ConfigBuilder-class.html#no_flatten" class="link">no_flatten</a>.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="compile_to_dfa"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">compile_to_dfa</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">force</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">alphabet</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.compile_to_dfa">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Compile simple matchers to DFA regular expressions.  This improves
+efficiency but may change the parser semantics slightly (DFA regular
+expressions do not provide backtracking / alternative matches).
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="compile_to_nfa"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">compile_to_nfa</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">force</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">alphabet</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.compile_to_nfa">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Compile simple matchers to NFA regular expressions.  This improves
+efficiency and should not change the parser semantics.</p>
+<p>This is part of the default configuration.  It can be removed with
+<code class="link">no_compile_regexp</code>.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="compile_to_re"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">compile_to_re</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">force</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">alphabet</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.compile_to_re">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Compile simple matchers to re (C library) regular expressions.
+This improves efficiency but may change the parser semantics slightly
+(DFA regular expressions do not provide backtracking / alternative
+matches).
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="optimize_or"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">optimize_or</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">conservative</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.optimize_or">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Rearrange arguments to <a href="lepl-module.html#Or" class="link">Or()</a> so that left-recursive matchers are
+tested last.  This improves efficiency, but may alter the parser
+semantics (the ordering of multiple results with ambiguous grammars
+may change).</p>
+<p><code class="link">conservative</code> refers to the algorithm used to detect loops; False
+may classify some left--recursive loops as right--recursive.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="lexer"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">lexer</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">alphabet</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">discard</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">lexer</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.lexer">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Detect the use of <a href="lepl-module.html#Token" class="link">Token()</a> and modify the parser to use the lexer.
+If tokens are not used, this has no effect on parsing.</p>
+<p>This is part of the default configuration.  It can be disabled with
+<a href="lepl.core.config.ConfigBuilder-class.html#no_lexer" class="link">no_lexer</a>.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="direct_eval"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">direct_eval</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">spec</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.direct_eval">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Combine simple matchers so that they are evaluated without
+trampolining.  This improves efficiency (particularly because it
+reduces the number of matchers that can be memoized).</p>
+<p>This is part of the default configuration.  It can be removed with
+<a href="lepl.core.config.ConfigBuilder-class.html#no_direct_eval" class="link">no_direct_eval</a>.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="compose_transforms"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">compose_transforms</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.compose_transforms">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Combine transforms (functions applied to results) with matchers.
+This may improve efficiency.</p>
+<p>This is part of the default configuration.  It can be removed with
+<a href="lepl.core.config.ConfigBuilder-class.html#no_compose_transforms" class="link">no_compose_transforms</a>.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="auto_memoize"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">auto_memoize</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">conservative</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">full</span>=<span class="sig-default">True</span>,
+        <span class="sig-arg">d</span>=<span class="sig-default">0</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.auto_memoize">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>This configuration attempts to detect which memoizer is most effective
+for each matcher.  As such it is a general &quot;fix&quot; for left-recursive
+grammars and is suggested in the warning shown when the right-only
+memoizer detects left recursion.</p>
+<p>Lepl does not guarantee that all left-recursive grammars are handled
+correctly.  The corrections applied may be incomplete and can be
+inefficient.  It is always better to re-write a grammar to avoid
+left-recursion.  One way to improve efficiency, at the cost of less
+accurate matching, is to specify a non-zero <tt class="rst-docutils literal">d</tt> parameter - this
+is the maximum iteration depth that will be used (by default, when
+<tt class="rst-docutils literal">d</tt> is zero, it is the length of the remaining input, which can
+be very large).</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="left_memoize"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">left_memoize</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">d</span>=<span class="sig-default">0</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.left_memoize">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Add memoization that may detect and stabilise left-recursion.  This
+makes the parser more robust (so it can handle more grammars) but
+also more complex (and probably slower).</p>
+<p><tt class="rst-docutils literal">config.auto_memoize()</tt> will also add memoization, but will select
+left/right memoization depending on the path through the parser.</p>
+<p>Lepl does not guarantee that all left-recursive grammars are handled
+correctly.  The corrections applied may be incomplete and can be
+inefficient.  It is always better to re-write a grammar to avoid
+left-recursion.  One way to improve efficiency, at the cost of less
+accurate matching, is to specify a non-zero <tt class="rst-docutils literal">d</tt> parameter - this
+is the maximum iteration depth that will be used (by default, when
+<tt class="rst-docutils literal">d</tt> is zero, it is the length of the remaining input, which can
+be very large).</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="right_memoize"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">right_memoize</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.right_memoize">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Add memoization that can make some complex parsers (with a lot of
+backtracking) more efficient.  This also detects left-recursive
+grammars and displays a suitable warning.</p>
+<p>This is included in the default configuration.  For simple grammars
+it may make things slower; it can be disabled by
+<tt class="rst-docutils literal">config.no_memoize()</tt>.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="no_memoize"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">no_memoize</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.no_memoize">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Remove memoization.  To use the default configuration without
+memoization (which may be faster in some cases), specify
+<code class="link">config.no_memoize()</code>.
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="lines"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">lines</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">discard</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">tabsize</span>=<span class="sig-default">8</span>,
+        <span class="sig-arg">block_policy</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">block_start</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.lines">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Configure &quot;offside parsing&quot;.  This enables lexing and adds extra
+tokens to mark the start and end of lines.  If block_policy is
+specified then the line start token will also include spaces
+which can be used by the <tt class="rst-docutils literal">Block()</tt> and <tt class="rst-docutils literal">BLine()</tt> matchers
+to do offside (whitespace-aware) parsing.</p>
+<p><code class="link">discard</code> is the regular expression to use to identify spaces
+between tokens (by default, spaces and tabs).</p>
+<p>The remaining parameters are used only if at least one of
+<code class="link">block_policy</code> and <code class="link">block_start</code> is given.</p>
+<p><code class="link">block_policy</code> decides how indentation if calculated.
+See <a href="lepl-module.html#explicit" class="link">explicit</a> etc in lepl.lexer.blocks.matchers.</p>
+<p><code class="link">block_start</code> is the initial indentation (by default, zero).  If set
+to lepl.lexer.lines.matchers.NO_BLOCKS indentation will not
+be checked (useful for tests).</p>
+<p><code class="link">tabsize</code> is used only if <code class="link">block_policy</code> is given.  It is the number
+of spaces used to replace a leading tab (no replacement if None).</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="trace_stack"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">trace_stack</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">enabled</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.trace_stack">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Add a monitor to trace results using <a href="lepl-module.html#TraceStack" class="link">TraceStack()</a>.</p>
+<p>This is not used by default as it has a cost at runtime.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="trace_variables"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">trace_variables</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.trace_variables">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Add a monitor to correctly insert the transforms needed when using
+the <a href="lepl-module.html#TraceVariables" class="link">TraceVariables()</a> context:</p>
+<blockquote>
+<dl class="rst-docutils">
+<dt>with TraceVariables():</dt>
+<dd>...</dd>
+</dl>
+</blockquote>
+<p>This is used by default as it has no runtime cost (once the parser
+is created).</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="low_memory"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">low_memory</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">queue_len</span>=<span class="sig-default">100</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.low_memory">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+Reduce memory use (at the expense of backtracking).
+
+This will:
+- Add a monitor to manage resources.  See `GeneratorManager()`.
+- Disable direct evaluation (more trampolining gives more scope
+  for removing generators)
+- Disable the full first match error (which requires a copy of the
+  input for the error message)
+- Disable memoisation (which would keep input in memory)
+
+This reduces memory usage, but makes the parser less reliable.
+Usually a value like 100 (the default) for the queue length will make 
+memory use insignificant and still give a useful first parse.
+
+Note that, although the parser will use less memory, it may run
+more slowly (as extra work needs to be done to &quot;clean out&quot; the 
+stored values).
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="cache_level"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">cache_level</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">level</span>=<span class="sig-default">1</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.cache_level">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Control when the stream can be cached internally (this is used for
+debugging and error messages) - streams are cached for debugging when
+the value is greater than zero.  The value is incremented each time
+a new stream is constructed (eg when constructing tokens).</p>
+<p>A value of 1 implies that a stream would be always cached.  A value of
+0 might be used when iterating over a file with the lexer - the
+iteration is not cached, but individual tokens will be.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="record_deepest"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">record_deepest</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">n_before</span>=<span class="sig-default">6</span>,
+        <span class="sig-arg">n_results_after</span>=<span class="sig-default">2</span>,
+        <span class="sig-arg">n_done_after</span>=<span class="sig-default">2</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.record_deepest">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Add a monitor to record deepest match.  See <a href="lepl-module.html#RecordDeepest" class="link">RecordDeepest()</a>.
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="default"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">default</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.config-pysrc.html#ConfigBuilder.default">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Provide the default configuration (deleting what may have been
+configured previously).  This is equivalent to the initial
+configuration.  It provides a moderately efficient, stable parser.
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lepl-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sun May 13 16:31:01 2012
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

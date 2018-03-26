@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lepl.matchers</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lepl-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lepl-module.html">Package&nbsp;lepl</a> ::
+        Package&nbsp;matchers
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lepl.matchers-module.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PACKAGE DESCRIPTION ==================== -->
+<h1 class="epydoc">Package matchers</h1><p class="nomargin-top"><span class="codelink"><a href="lepl.matchers-pysrc.html">source&nbsp;code</a></span></p>
+<p>Matchers form the basis of the library; they are used to define the grammar
+and do the work of parsing the input.</p>
+<p>A matcher is like a parser combinator - it takes a stream, matches content in
+the stream, and returns a list of tokens and a new stream.  However, matchers
+are also coroutines that can be &quot;recalled&quot; to return alternative matches.
+This gives backtracking.</p>
+<p>Matchers are defined and implemented as both classes and functions.  I have
+used the same syntax (capitalized names) for both to keep the API uniform.</p>
+<p>For more background, please see the <a class="rst-reference external" href="../index.html" target="_top">manual</a>.</p>
+
+<!-- ==================== SUBMODULES ==================== -->
+<a name="section-Submodules"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Submodules</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Submodules"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr><td class="summary">
+  <ul class="nomargin">
+    <li class="private"> <strong class="uidlink"><a href="lepl.matchers._test-module.html">lepl.matchers._test</a></strong>: <em class="summary">Tests for the lepl.matchers package.</em>
+    <ul class="private">
+    <li> <strong class="uidlink"><a href="lepl.matchers._test.combine-module.html">lepl.matchers._test.combine</a></strong>: <em class="summary">Tests for the combining matchers.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.matchers._test.core-module.html">lepl.matchers._test.core</a></strong>: <em class="summary">Tests for the lepl.matchers.core module.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.matchers._test.derived-module.html">lepl.matchers._test.derived</a></strong>    </li>
+    <li> <strong class="uidlink"><a href="lepl.matchers._test.error-module.html">lepl.matchers._test.error</a></strong>: <em class="summary">Tests for the lepl.matchers.error module.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.matchers._test.float_bug-module.html">lepl.matchers._test.float_bug</a></strong>: <em class="summary">Tests for a weird bug when writing the float (rational at the time) matcher.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.matchers._test.memo-module.html">lepl.matchers._test.memo</a></strong>    </li>
+    <li> <strong class="uidlink"><a href="lepl.matchers._test.operators-module.html">lepl.matchers._test.operators</a></strong>: <em class="summary">Tests for the lepl.matchers.operators module.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.matchers._test.separators-module.html">lepl.matchers._test.separators</a></strong>: <em class="summary">Tests for the lepl.matchers.separators module.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.matchers._test.support-module.html">lepl.matchers._test.support</a></strong>    </li>
+    <li> <strong class="uidlink"><a href="lepl.matchers._test.transform-module.html">lepl.matchers._test.transform</a></strong>: <em class="summary">Tests for the lepl.matchers.transform module</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.matchers._test.variables-module.html">lepl.matchers._test.variables</a></strong>: <em class="summary">Tests for the lepl.matchers.variables module.</em>    </li>
+    </ul>
+    </li>
+    <li class="private"> <strong class="uidlink"><a href="lepl.matchers._test3-module.html">lepl.matchers._test3</a></strong>: <em class="summary">Tests for the lepl.matchers package
+(Python 3 only - not include in final release)</em>
+    <ul class="private">
+    <li> <strong class="uidlink"><a href="lepl.matchers._test3.support-module.html">lepl.matchers._test3.support</a></strong>: <em class="summary">Tests for the lepl.matchers.support module (duplicate, including Python 3
+only syntax)</em>    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="lepl.matchers.combine-module.html">lepl.matchers.combine</a></strong>: <em class="summary">Matchers that combine sub-matchers (And, Or etc).</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.matchers.complex-module.html">lepl.matchers.complex</a></strong>: <em class="summary">Complex matchers that are rearely used.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.matchers.core-module.html">lepl.matchers.core</a></strong>: <em class="summary">Matchers that embody fundamental, common actions.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.matchers.derived-module.html">lepl.matchers.derived</a></strong>: <em class="summary">Matchers that are defined in terms of other matchers (ie the majority).</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.matchers.error-module.html">lepl.matchers.error</a></strong>: <em class="summary">Error handling (generating an error while parsing).</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.matchers.matcher-module.html">lepl.matchers.matcher</a></strong>: <em class="summary">Base class for matchers.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.matchers.memo-module.html">lepl.matchers.memo</a></strong>: <em class="summary">Memoisation (both as described by Norvig 1991, giving Packrat
+parsers for non-left recursive grammars, and the equivalent described by
+Frost and Hafiz 2006 which allows left-recursive grammars to be used).</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.matchers.monitor-module.html">lepl.matchers.monitor</a></strong>: <em class="summary">Matchers that interact with monitors.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.matchers.operators-module.html">lepl.matchers.operators</a></strong>: <em class="summary">Support for operator syntactic sugar (and operator redefinition).</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.matchers.support-module.html">lepl.matchers.support</a></strong>: <em class="summary">Support classes for matchers.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.matchers.transform-module.html">lepl.matchers.transform</a></strong>: <em class="summary">A transformation is a function that modifies the result of calling a matcher
+once.</em>    </li>
+    <li> <strong class="uidlink"><a href="lepl.matchers.variables-module.html">lepl.matchers.variables</a></strong>: <em class="summary">Display information when matchers that are bound to variables are called.</em>    </li>
+  </ul></td></tr>
+</table>
+
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lepl-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sun May 13 16:30:59 2012
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

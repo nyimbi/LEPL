@@ -1,0 +1,71 @@
+
+.. index:: RFC 3696
+.. _rfc3696:
+
+RFC 3696 - Email and URL Validation
+===================================
+
+`RFC 3696 <http://www.faqs.org/rfcs/rfc3696.html>`_ contains advice on how
+best to validate email addresses, HTTP URLs, and "mailto" URLs.  I strongly
+recommend that you read that document before using this library --- it will
+help you better understand the motivation for these functions.  In particular,
+they do not test whether arguments are *exactly compliant* with the
+appropriate specificatons; nor do they guarantee any particular properties.
+
+My interpretation of that document is that these are reasonable heuristics
+that should help validate user input without causing too many false negatives.
+That is all.
+
+As such, the public interface exposes only three simple functions.  These are
+factories that return a ``validator`` for each of the three types.
+
+.. _validator:
+.. function:: validator(value : string) -> bool
+   :noindex:
+
+   A function which, given a string, returns either ``True`` (in which case
+   the value is consistent wth RFC 3696) or ``False`` (inconsistent).
+
+The package *implementation* also contains various matchers for IP addresses,
+etc.  The names of these functions are prefixed by an underscore, and there is
+no gaurantee that they will remain stable between any revision of this
+library.  Despite that, they may be useful as a reference, or to understand
+better how Lepl can be used for validation.
+
+.. module:: lepl.apps.rfc3696
+   :synopsis: Validate email, HTTP and mailto URLs.
+.. moduleauthor:: Andrew Cooke <andrew@acooke.org>
+
+All (public) functions can be imported with::
+
+  from lepl.apps.rfc3696 import *
+
+They are *not* available directly in the `lepl <api/redirect.html#lepl>`_ package.
+
+.. function:: Email() -> validator
+
+   `Email() <api/redirect.html#lepl.apps.rfc3696.Email>`_: Generate a
+   `validator` for email addresses.
+
+.. function:: HttpUrl() -> validator
+
+   `HttpUrl() <api/redirect.html#lepl.apps.rfc3696.HttpUrl>`_: Generate a
+   `validator` for HTTP URLs.
+
+.. function:: MailToUrl() -> validator
+
+   `MailToUrl() <api/redirect.html#lepl.apps.rfc3696.MailToUrl>`_: Generate a
+   `validator` for "mailto" URLs.
+
+.. note::
+
+   A warning like::
+
+     No handlers could be found for logger "lepl.parser.trampoline"
+
+  means that you do not have Python's logging configured.  If you are not
+  using the logging package elsewhere then you can do the following to
+  suppress the error::
+
+     from logging import basicConfig, ERROR
+     basicConfig(level=ERROR)

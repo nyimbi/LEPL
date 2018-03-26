@@ -1,0 +1,601 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lepl.support.lib</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lepl-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lepl-module.html">Package&nbsp;lepl</a> ::
+        <a href="lepl.support-module.html">Package&nbsp;support</a> ::
+        Module&nbsp;lib
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lepl.support.lib-module.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module lib</h1><p class="nomargin-top"><span class="codelink"><a href="lepl.support.lib-pysrc.html">source&nbsp;code</a></span></p>
+Library routines / utilities (some unused).
+
+<!-- ==================== CLASSES ==================== -->
+<a name="section-Classes"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Classes</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Classes"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="unicode-class.html" class="summary-name">str</a><br />
+      unicode(string [, encoding[, errors]]) -&gt; object
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="unicode-class.html" class="summary-name">basestring</a><br />
+      unicode(string [, encoding[, errors]]) -&gt; object
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lepl.support.lib.CircularFifo-class.html" class="summary-name">CircularFifo</a><br />
+      A FIFO queue with a fixed maximum size that silently discards data on
+overflow.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lepl.support.lib.LogMixin-class.html" class="summary-name">LogMixin</a><br />
+      Add standard Python logging to a class.
+    </td>
+  </tr>
+</table>
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Functions</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Functions"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">Unicode character</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="chr"></a><span class="summary-sig-name">chr</span>(<span class="summary-sig-arg">i</span>)</span><br />
+      Return a Unicode string of one character with ordinal i; 0 &lt;= i &lt;= 0x10ffff.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="assert_type"></a><span class="summary-sig-name">assert_type</span>(<span class="summary-sig-arg">name</span>,
+        <span class="summary-sig-arg">value</span>,
+        <span class="summary-sig-arg">type_</span>,
+        <span class="summary-sig-arg">none_ok</span>=<span class="summary-sig-default">False</span>)</span><br />
+      If the value is not of the given type, raise a syntax error.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.support.lib-pysrc.html#assert_type">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.support.lib-module.html#open_stop" class="summary-sig-name">open_stop</a>(<span class="summary-sig-arg">spec</span>)</span><br />
+      In Python 2.6 open [] appears to use maxint or similar, which is not
+available in Python 3.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.support.lib-pysrc.html#open_stop">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="lmap"></a><span class="summary-sig-name">lmap</span>(<span class="summary-sig-arg">function</span>,
+        <span class="summary-sig-arg">values</span>)</span><br />
+      A map that returns a list rather than an iterator.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.support.lib-pysrc.html#lmap">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="compose"></a><span class="summary-sig-name">compose</span>(<span class="summary-sig-arg">fun_a</span>,
+        <span class="summary-sig-arg">fun_b</span>)</span><br />
+      Functional composition (assumes fun_a takes a single argument).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.support.lib-pysrc.html#compose">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="compose_tuple"></a><span class="summary-sig-name">compose_tuple</span>(<span class="summary-sig-arg">fun_a</span>,
+        <span class="summary-sig-arg">fun_b</span>)</span><br />
+      Functional composition (assumes fun_b returns a sequence which is supplied
+to fun_a via <a href="#id1"><span class="rst-problematic" id="rst-id2">*</span></a>args).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.support.lib-pysrc.html#compose_tuple">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="empty"></a><span class="summary-sig-name">empty</span>()</span><br />
+      An empty generator.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.support.lib-pysrc.html#empty">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="count"></a><span class="summary-sig-name">count</span>(<span class="summary-sig-arg">value</span>=<span class="summary-sig-default">0</span>,
+        <span class="summary-sig-arg">step</span>=<span class="summary-sig-default">1</span>)</span><br />
+      Identical to itertools.count for recent Python, but 2.6 lacks the step.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.support.lib-pysrc.html#count">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="safe_in"></a><span class="summary-sig-name">safe_in</span>(<span class="summary-sig-arg">value</span>,
+        <span class="summary-sig-arg">container</span>,
+        <span class="summary-sig-arg">default</span>=<span class="summary-sig-default">False</span>)</span><br />
+      Test for membership without an error for unhashable items.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.support.lib-pysrc.html#safe_in">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="safe_add"></a><span class="summary-sig-name">safe_add</span>(<span class="summary-sig-arg">container</span>,
+        <span class="summary-sig-arg">value</span>)</span><br />
+      Add items to a container, if they are hashable.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.support.lib-pysrc.html#safe_add">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.support.lib-module.html#fallback_add" class="summary-sig-name">fallback_add</a>(<span class="summary-sig-arg">container</span>,
+        <span class="summary-sig-arg">value</span>)</span><br />
+      Add items to a container.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.support.lib-pysrc.html#fallback_add">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="fold"></a><span class="summary-sig-name">fold</span>(<span class="summary-sig-arg">fun</span>,
+        <span class="summary-sig-arg">start</span>,
+        <span class="summary-sig-arg">sequence</span>)</span><br />
+      Fold over a sequence.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.support.lib-pysrc.html#fold">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="sample"></a><span class="summary-sig-name">sample</span>(<span class="summary-sig-arg">prefix</span>,
+        <span class="summary-sig-arg">rest</span>,
+        <span class="summary-sig-arg">size</span>=<span class="summary-sig-default">40</span>)</span><br />
+      Provide a small sample of a string.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.support.lib-pysrc.html#sample">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="singleton"></a><span class="summary-sig-name">singleton</span>(<span class="summary-sig-arg">key</span>,
+        <span class="summary-sig-arg">factory</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Manage singletons for various types.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.support.lib-pysrc.html#singleton">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="fmt"></a><span class="summary-sig-name">fmt</span>(<span class="summary-sig-arg">template</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kargs</span>)</span><br />
+      Guarantee that template is always unicode, as embedding unicode in ascii
+can cause errors.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.support.lib-pysrc.html#fmt">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="identity"></a><span class="summary-sig-name">identity</span>(<span class="summary-sig-arg">x</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.support.lib-pysrc.html#identity">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="document"></a><span class="summary-sig-name">document</span>(<span class="summary-sig-arg">destn</span>,
+        <span class="summary-sig-arg">source</span>,
+        <span class="summary-sig-arg">text</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Copy function name and docs.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.support.lib-pysrc.html#document">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="add_defaults"></a><span class="summary-sig-name">add_defaults</span>(<span class="summary-sig-arg">original</span>,
+        <span class="summary-sig-arg">defaults</span>,
+        <span class="summary-sig-arg">prefix</span>=<span class="summary-sig-default">''</span>)</span><br />
+      Add defaults to original dict if not already present.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.support.lib-pysrc.html#add_defaults">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== VARIABLES ==================== -->
+<a name="section-Variables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Variables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="file"></a><span class="summary-name">file</span> = <code title="IOBase">IOBase</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="__SINGLETONS"></a><span class="summary-name">__SINGLETONS</span> = <code title="{}">{}</code><br />
+      Map from factory (constructor/class) to singleton.
+    </td>
+  </tr>
+</table>
+<!-- ==================== FUNCTION DETAILS ==================== -->
+<a name="section-FunctionDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Function Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-FunctionDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="open_stop"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">open_stop</span>(<span class="sig-arg">spec</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.support.lib-pysrc.html#open_stop">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  In Python 2.6 open [] appears to use maxint or similar, which is not
+available in Python 3.  This uses a minimum value for maxint I found
+somewhere; hopefully no-one ever wants finite repeats larger than this.
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="fallback_add"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">fallback_add</span>(<span class="sig-arg">container</span>,
+        <span class="sig-arg">value</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.support.lib-pysrc.html#fallback_add">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Add items to a container.  Call initially with a set, but accept the
+returned collection, which will fallback to a list of necessary (if the
+contents are unhashable).
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lepl-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sun May 13 16:30:59 2012
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

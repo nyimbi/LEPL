@@ -1,0 +1,309 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Implementation &mdash; LEPL 5.1.2 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '5.1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="LEPL 5.1.2 documentation" href="index.html" />
+    <link rel="up" title="Lepl Manual" href="manual.html" />
+    <link rel="next" title="Resource Management" href="resources.html" />
+    <link rel="prev" title="Patterns" href="style.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="resources.html" title="Resource Management"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="style.html" title="Patterns"
+             accesskey="P">previous</a> |</li>
+        <li><a href="contents.html">LEPL 5.1.2 documentation</a> &raquo;</li>
+          <li><a href="manual.html" accesskey="U">Lepl Manual</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="implementation">
+<span id="index-0"></span><span id="id1"></span><h1>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h1>
+<p>Lepl is, in many ways, a very traditional recursive descent parser.  This
+chapter does not describe the basic ideas behind recursive descent parsing
+<a class="footnote-reference" href="#id3" id="id2">[*]</a>.  Instead I will focus on the details that are unique to this particular
+implementation.</p>
+<table class="docutils footnote" frame="void" id="id3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[*]</a></td><td>There is a broad&#8211;bush description of how matchers work in
+<a class="reference internal" href="matchers.html#implementation-details"><em>Implementation Details</em></a>.</td></tr>
+</tbody>
+</table>
+<div class="section" id="trampolining">
+<span id="index-1"></span><span id="id4"></span><h2>Trampolining<a class="headerlink" href="#trampolining" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="overview">
+<h3>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h3>
+<p>A typical recursive descent parser uses at least one stack frame for each
+recursive call to a matcher.  Unfortunately, the default Python stack is
+rather small and there is no optimisation of tail&#8211;recursive calls.  So the
+degree of recursion is limited.  This problem is exacerbated by a &#8220;clean&#8221;,
+orthogonal design that constructs matchers in a hierarchical manner
+(eg. <a class="reference external" href="api/redirect.html#lepl.matchers.derived.Word">Word()</a> calls <a class="reference external" href="api/redirect.html#lepl.matchers.core.Any">Any()</a> to handle character matching;
+memoisation uses nested matchers to manage caches).</p>
+<p>Trampolining removes this limitation by moving evaluation to a separate
+function, which manages the evaluation sequence separately from the program
+stack.</p>
+<p>A trampolining implementation would typically use a continuation passing
+style, but Python supports co&#8211;routines (via extended generators) which
+automate the encapsulation of a local environment.  Trampolining then becomes
+a simple loop that repeatedly evaluates co-routines stored in a stack
+allocated on the heap.</p>
+<p>The conversion from nested functions to trampolining with generators involves
+little more than replacing calls to sub-matchers with <tt class="docutils literal"><span class="pre">yield</span></tt> (which
+presents the target to the trampoline function for evaluation) and then again
+using <tt class="docutils literal"><span class="pre">yield</span></tt> to return the match (rather than <tt class="docutils literal"><span class="pre">return</span></tt>).</p>
+</div>
+<div class="section" id="optimisations">
+<span id="index-2"></span><h3>Optimisations<a class="headerlink" href="#optimisations" title="Permalink to this headline">¶</a></h3>
+<p>The overhead of the trampolining is quite small (expensive operations in
+Python appear to involve accessing attributes and calling functions; the time
+spent in the logic of the trampoline loop is relatively unimportant).</p>
+<p>However, in an attempt to improve performance wherever possible, I have
+experimented with various approaches to reducing the number of &#8220;bounces&#8221; made.
+These include calling function&#8211;based (those that do not need to evaluate
+other matcher) directly; flattening nested <a class="reference external" href="api/redirect.html#lepl.matchers.combine.And">And()</a> and <a class="reference external" href="api/redirect.html#lepl.matchers.combine.Or">Or()</a> matchers; compiling simple leaf
+matchers to regular expressions; combining nested transformations.</p>
+<p>These are all relatively easy to implement using introspection of the matcher
+DAG (see below).</p>
+</div>
+<div class="section" id="simple-functional-matchers">
+<span id="new-matchers"></span><span id="index-3"></span><h3>Simple Functional Matchers<a class="headerlink" href="#simple-functional-matchers" title="Permalink to this headline">¶</a></h3>
+<p>The simplest matchers can be defined trivially.  For example, to match a
+single character:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nd">@function_matcher</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">char</span><span class="p">(</span><span class="n">support</span><span class="p">,</span> <span class="n">stream</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="p">(</span><span class="n">char</span><span class="p">,</span> <span class="n">next_stream</span><span class="p">)</span> <span class="o">=</span> <span class="n">s_next</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="k">return</span> <span class="p">([</span><span class="n">char</span><span class="p">],</span> <span class="n">next_stream</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">char</span><span class="p">()[:]</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;ab&#39;</span><span class="p">)</span>
+<span class="go">[&#39;a&#39;, &#39;b&#39;]</span>
+</pre></div>
+</div>
+<p>The <a class="reference external" href="api/redirect.html#lepl.matchers.support.function_matcher">&#64;function_matcher</a> decorator does
+the necessary work to place the given logic within an <a class="reference external" href="api/redirect.html#lepl.matchers.support.OperatorMatcher">OperatorMatcher()</a> instance, so the
+resulting matcher includes all the usual Lepl functionality (configuration,
+operators, etc).</p>
+<p><a class="reference external" href="api/redirect.html#lepl.stream.core.s_next">s_next()</a> is part of the stream API (see below) &#8212; it returns the next
+character and the associated stream.  It automatically handles the
+end&#8211;of&#8211;stream case by raising <tt class="docutils literal"><span class="pre">StopIteration()</span></tt>.</p>
+<p>This can extended to include configuration:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nd">@function_matcher_factory</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">char_in</span><span class="p">(</span><span class="n">chars</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="k">def</span> <span class="nf">match</span><span class="p">(</span><span class="n">support</span><span class="p">,</span> <span class="n">stream</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>        <span class="k">if</span> <span class="n">stream</span> <span class="ow">and</span> <span class="n">stream</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">chars</span><span class="p">:</span>
+<span class="gp">&gt;&gt;&gt; </span>            <span class="k">return</span> <span class="p">([</span><span class="n">stream</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">stream</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="k">return</span> <span class="n">match</span>
+</pre></div>
+</div>
+<p>where the <a class="reference external" href="api/redirect.html#lepl.matchers.support.function_matcher_factory">&#64;function_matcher_factory</a> decorator
+uses introspection to ensure that the final matcher takes the correct
+arguments, and is associated with any given documentation.</p>
+<p>Matchers of this kind may avoid trampolining when used with
+<a class="reference external" href="api/redirect.html#lepl.core.config.ConfigBuilder.direct_eval">.config.direct_eval()</a>.</p>
+</div>
+<div class="section" id="sequence-matchers">
+<span id="index-4"></span><h3>Sequence Matchers<a class="headerlink" href="#sequence-matchers" title="Permalink to this headline">¶</a></h3>
+<p>The next most complex kind of matchers can return multiple values (ie they
+support backtracking):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nd">@sequence_matcher</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">any_char</span><span class="p">(</span><span class="n">support</span><span class="p">,</span> <span class="n">stream</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="k">while</span> <span class="n">stream</span><span class="p">:</span>
+<span class="gp">&gt;&gt;&gt; </span>        <span class="k">yield</span> <span class="p">([</span><span class="n">stream</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">stream</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+<span class="gp">&gt;&gt;&gt; </span>        <span class="n">stream</span> <span class="o">=</span> <span class="n">stream</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="nd">@sequence_matcher_factory</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">any_char_in</span><span class="p">(</span><span class="n">chars</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="k">def</span> <span class="nf">match</span><span class="p">(</span><span class="n">support</span><span class="p">,</span> <span class="n">stream</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>        <span class="k">while</span> <span class="n">stream</span><span class="p">:</span>
+<span class="gp">&gt;&gt;&gt; </span>            <span class="k">if</span> <span class="n">stream</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">chars</span><span class="p">:</span>
+<span class="gp">&gt;&gt;&gt; </span>                <span class="k">yield</span> <span class="p">([</span><span class="n">stream</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">stream</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+<span class="gp">&gt;&gt;&gt; </span>            <span class="n">stream</span> <span class="o">=</span> <span class="n">stream</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="k">return</span> <span class="n">match</span>
+</pre></div>
+</div>
+<p>(these will discard any characters that do match, and return those that do as
+successive possibilities).</p>
+<p>Again, matchers of this kind may avoid trampolining when used with
+<a class="reference external" href="api/redirect.html#lepl.core.config.ConfigBuilder.direct_eval">.config.direct_eval()</a>.</p>
+</div>
+<div class="section" id="trampoline-matchers">
+<span id="index-5"></span><h3>Trampoline Matchers<a class="headerlink" href="#trampoline-matchers" title="Permalink to this headline">¶</a></h3>
+<p>The most general matchers evaluate other matchers.  It is difficult to think
+of a simple example to add here, but the curious can check the implementation
+of <a class="reference external" href="api/redirect.html#lepl.matchers.combine.And">And()</a> and <a class="reference external" href="api/redirect.html#lepl.matchers.combine.Or">Or()</a> (the API documentation includes
+source).</p>
+<p>These matchers are defined using <a class="reference external" href="api/redirect.html#lepl.matchers.support.trampoline_matcher">&#64;trampoline_matcher</a> and
+<a class="reference external" href="api/redirect.html#lepl.matchers.support.trampoline_matcher_factory">&#64;trampoline_matcher_factory</a> and
+cannot avoid trampolining.</p>
+</div>
+</div>
+<div class="section" id="memoisation">
+<span id="memoisation-impl"></span><span id="index-6"></span><h2>Memoisation<a class="headerlink" href="#memoisation" title="Permalink to this headline">¶</a></h2>
+<p>The simple memoizer, <a class="reference external" href="api/redirect.html#lepl.matchers.memo.RMemo">RMemo()</a>,
+is equivalent to the approach described by <a class="reference external" href="http://acl.ldc.upenn.edu/J/J91/J91-1004.pdf">Norvig 1991</a>.</p>
+<p>During the application of left&#8211;recursive grammars a matcher may be called with
+the same stream, but within different contexts (eg. consider <tt class="docutils literal"><span class="pre">a</span> <span class="pre">=</span> <span class="pre">Optional(a)</span>
+<span class="pre">&amp;</span> <span class="pre">b</span></tt>, where each repeated call to <tt class="docutils literal"><span class="pre">a</span></tt> is from an additional &#8220;step down&#8221;).</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Without memoisation left recursion will cause an infinite loop and crash the
+program.</p>
+</div>
+<p><a class="reference external" href="http://www.cs.uwindsor.ca/~hafiz/p46-frost.pdf">Frost and Hafiz 2006</a>
+observed that there is a natural limit to the number of times left recursion
+can be meaningful, which is the length of the remaining input (since you have
+to consumer <em>something</em> each time round).  They therefore recommended
+extending the simple cache with a counter that blocks recursion past that
+depth.</p>
+<p>This approach is implemented in <a class="reference external" href="api/redirect.html#lepl.matchers.memo.LMemo">LMemo()</a> which makes Lepl robust to
+left&#8211;recursive grammars.</p>
+<p>However, the implementation is non-trivial.  In particular, each occurrence of
+a matcher in the DAG needs to be curtailed separately.  Since matchers are
+pure they are often references in multiple places; this conflicts with the
+need to treat each location as a distinct entity and so some care is needed to
+duplicate appropriate nodes when rewriting (the end&#8211;user does not need to
+worry about this, but it makes implementation and testing more difficult).</p>
+</div>
+<div class="section" id="parser-rewriting">
+<span id="index-7"></span><h2>Parser Rewriting<a class="headerlink" href="#parser-rewriting" title="Permalink to this headline">¶</a></h2>
+<p>A parser is constructed from a set matchers that form a directed (possibly
+cyclic) graph.  By storing the constructor arguments for the matcher objects
+(and knowing their types, which are constructors in Python) we can reconstruct
+(and, more generally, rewrite) the graph.</p>
+<p>The base classes for the graph are in the <tt class="docutils literal"><span class="pre">graph</span></tt> package (the <tt class="docutils literal"><span class="pre">node</span></tt> package, used for ASTs, builds on these
+classes so many of the tools used internally within Lepl may also be useful to
+process ASTs).  Matcher graph rewriting occurs during parser construction
+(see the <tt class="docutils literal"><span class="pre">parser</span></tt> package).</p>
+<p>Parser rewriting allows memoisation to be transparently added to all nodes,
+for example.</p>
+<p>Tree traversal (without rewriting) is also useful; it is used to generate
+various textual representations of the matchers (and the pretty ASCII trees
+for <a class="reference external" href="api/redirect.html#lepl.support.node.Node">Node()</a>&#8211;based ASTs).</p>
+</div>
+<div class="section" id="streams">
+<span id="index-8"></span><span id="id8"></span><h2>Streams<a class="headerlink" href="#streams" title="Permalink to this headline">¶</a></h2>
+<p>Since Lepl 5 all input is wrapped within a &#8220;stream&#8221; abstraction.  This is a
+tuple containing state and a helper: the state changes at each position, but
+the helper remains the same.  So for strings the state is an index, while the
+helper wraps the original input.</p>
+<p>Helpers provide additional functionality, like recording the deepest match,
+formatting, and calculating hash keys.  Access to these functions is provided
+through the generic <tt class="docutils literal"><span class="pre">s_xxx</span></tt> functions defined in <a class="reference external" href="api/redirect.html#lepl.stream.core">lepl.stream.core</a>.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="contents.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Implementation</a><ul>
+<li><a class="reference internal" href="#trampolining">Trampolining</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#optimisations">Optimisations</a></li>
+<li><a class="reference internal" href="#simple-functional-matchers">Simple Functional Matchers</a></li>
+<li><a class="reference internal" href="#sequence-matchers">Sequence Matchers</a></li>
+<li><a class="reference internal" href="#trampoline-matchers">Trampoline Matchers</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#memoisation">Memoisation</a></li>
+<li><a class="reference internal" href="#parser-rewriting">Parser Rewriting</a></li>
+<li><a class="reference internal" href="#streams">Streams</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="style.html"
+                        title="previous chapter">Patterns</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="resources.html"
+                        title="next chapter">Resource Management</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/implementation.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="resources.html" title="Resource Management"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="style.html" title="Patterns"
+             >previous</a> |</li>
+        <li><a href="contents.html">LEPL 5.1.2 documentation</a> &raquo;</li>
+          <li><a href="manual.html" >Lepl Manual</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2009-2011, Andrew Cooke.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

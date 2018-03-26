@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lepl.regexp.binary.BinaryAlphabet</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lepl-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lepl-module.html">Package&nbsp;lepl</a> ::
+        <a href="lepl.regexp-module.html">Package&nbsp;regexp</a> ::
+        <a href="lepl.regexp.binary-module.html">Module&nbsp;binary</a> ::
+        Class&nbsp;BinaryAlphabet
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lepl.regexp.binary.BinaryAlphabet-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class BinaryAlphabet</h1><p class="nomargin-top"><span class="codelink"><a href="lepl.regexp.binary-pysrc.html#BinaryAlphabet">source&nbsp;code</a></span></p>
+<center>
+<center>  <map id="uml_class_diagram_for_lepl_reg_17" name="uml_class_diagram_for_lepl_reg_17">
+<area shape="rect" id="node1_20" href="lepl.regexp.binary.BinaryAlphabet-class.html#__init__" title="x.__init__(...) initializes x; see help(type(x)) for signature" alt="" coords="40,519,168,537"/>
+<area shape="rect" id="node1_21" href="lepl.regexp.binary.BinaryAlphabet-class.html#before" title="Must return the character before c in the alphabet." alt="" coords="40,537,168,556"/>
+<area shape="rect" id="node1_22" href="lepl.regexp.binary.BinaryAlphabet-class.html#after" title="Must return the character after c in the alphabet." alt="" coords="40,556,168,575"/>
+<area shape="rect" id="node1_23" href="lepl.regexp.binary.BinaryAlphabet-class.html#from_char" title="Convert to 0 or 1." alt="" coords="40,575,168,593"/>
+<area shape="rect" id="node1" href="lepl.regexp.binary.BinaryAlphabet-class.html" title="An alphabet for binary strings." alt="" coords="28,486,180,599"/>
+<area shape="rect" id="node2_24" href="lepl.regexp.str.StrAlphabet-class.html#escape" title="lepl.regexp.str.StrAlphabet.escape" alt="" coords="17,236,189,255"/>
+<area shape="rect" id="node2_25" href="lepl.regexp.str.StrAlphabet-class.html#escaped" title="lepl.regexp.str.StrAlphabet.escaped" alt="" coords="17,255,189,273"/>
+<area shape="rect" id="node2_26" href="lepl.regexp.str.StrAlphabet-class.html#illegal" title="lepl.regexp.str.StrAlphabet.illegal" alt="" coords="17,273,189,292"/>
+<area shape="rect" id="node2_27" href="lepl.regexp.str.StrAlphabet-class.html#range" title="lepl.regexp.str.StrAlphabet.range" alt="" coords="17,292,189,311"/>
+<area shape="rect" id="node2_28" href="lepl.regexp.str.StrAlphabet-class.html#fmt_intervals" title="Hide unicode chars because of some strange error that occurs with Python2.6 on the command line." alt="" coords="17,311,189,329"/>
+<area shape="rect" id="node2_29" href="lepl.regexp.str.StrAlphabet-class.html#fmt_sequence" title="Generate a string representation of a sequence." alt="" coords="17,329,189,348"/>
+<area shape="rect" id="node2_30" href="lepl.regexp.str.StrAlphabet-class.html#fmt_repeat" title="Generate a string representation of a repetition." alt="" coords="17,348,189,367"/>
+<area shape="rect" id="node2_31" href="lepl.regexp.str.StrAlphabet-class.html#fmt_choice" title="Generate a string representation of a choice." alt="" coords="17,367,189,385"/>
+<area shape="rect" id="node2_32" href="lepl.regexp.str.StrAlphabet-class.html#fmt_option" title="Generate a string representation of an option." alt="" coords="17,385,189,404"/>
+<area shape="rect" id="node2_33" href="lepl.regexp.str.StrAlphabet-class.html#fmt_label" title="Generate a string representation of labelled options." alt="" coords="17,404,189,423"/>
+<area shape="rect" id="node2_34" href="lepl.regexp.str.StrAlphabet-class.html#join" title="Join characters together." alt="" coords="17,423,189,441"/>
+<area shape="rect" id="node2_35" href="lepl.regexp.str.StrAlphabet-class.html#parse" title="Generate a Sequence from the given text." alt="" coords="17,441,189,460"/>
+<area shape="rect" id="node2" href="lepl.regexp.str.StrAlphabet-class.html" title="Support for alphabets." alt="" coords="5,203,201,466"/>
+<area shape="rect" id="node3" href="lepl.support.lib.LogMixin-class.html" title="Add standard Python logging to a class." alt="" coords="31,6,174,50"/>
+<area shape="rect" id="node4_36" href="lepl.regexp.core.Alphabet-class.html#min" title="The &quot;smallest&quot; character." alt="" coords="41,103,167,121"/>
+<area shape="rect" id="node4_37" href="lepl.regexp.core.Alphabet-class.html#max" title="The &quot;largest&quot; character." alt="" coords="41,121,167,140"/>
+<area shape="rect" id="node4_38" href="lepl.regexp.core.Alphabet-class.html#invert" title="Return a list of intervals that describes the complement of the given interval." alt="" coords="41,140,167,159"/>
+<area shape="rect" id="node4_39" href="lepl.regexp.core.Alphabet-class.html#extension" title="This is called for extensions for the form (NAME) where NAME is any sequence of capitals. &#160;It should return a character range. &#160;Further uses of (...) are still to be decided." alt="" coords="41,159,167,177"/>
+<area shape="rect" id="node4" href="lepl.regexp.core.Alphabet-class.html" title="Regular expressions are generalised over alphabets, which describe the set of acceptable characters." alt="" coords="29,70,179,183"/>
+</map>
+  <img src="uml_class_diagram_for_lepl_reg_17.gif" alt='' usemap="#uml_class_diagram_for_lepl_reg_17" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
+<hr />
+An alphabet for binary strings.
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.regexp.binary.BinaryAlphabet-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      x.__init__(...) initializes x; see help(type(x)) for signature</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.regexp.binary-pysrc.html#BinaryAlphabet.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.regexp.binary.BinaryAlphabet-class.html#before" class="summary-sig-name">before</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">char</span>)</span><br />
+      Must return the character before c in the alphabet.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.regexp.binary-pysrc.html#BinaryAlphabet.before">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.regexp.binary.BinaryAlphabet-class.html#after" class="summary-sig-name">after</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">char</span>)</span><br />
+      Must return the character after c in the alphabet.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.regexp.binary-pysrc.html#BinaryAlphabet.after">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.regexp.binary.BinaryAlphabet-class.html#from_char" class="summary-sig-name">from_char</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">char</span>)</span><br />
+      Convert to 0 or 1.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.regexp.binary-pysrc.html#BinaryAlphabet.from_char">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lepl.regexp.str.StrAlphabet-class.html">str.StrAlphabet</a></code></b>:
+      <code><a href="lepl.regexp.str.StrAlphabet-class.html#escape">escape</a></code>,
+      <code><a href="lepl.regexp.str.StrAlphabet-class.html#escaped">escaped</a></code>,
+      <code><a href="lepl.regexp.str.StrAlphabet-class.html#fmt_choice">fmt_choice</a></code>,
+      <code><a href="lepl.regexp.str.StrAlphabet-class.html#fmt_intervals">fmt_intervals</a></code>,
+      <code><a href="lepl.regexp.str.StrAlphabet-class.html#fmt_label">fmt_label</a></code>,
+      <code><a href="lepl.regexp.str.StrAlphabet-class.html#fmt_option">fmt_option</a></code>,
+      <code><a href="lepl.regexp.str.StrAlphabet-class.html#fmt_repeat">fmt_repeat</a></code>,
+      <code><a href="lepl.regexp.str.StrAlphabet-class.html#fmt_sequence">fmt_sequence</a></code>,
+      <code><a href="lepl.regexp.str.StrAlphabet-class.html#illegal">illegal</a></code>,
+      <code><a href="lepl.regexp.str.StrAlphabet-class.html#join">join</a></code>,
+      <code><a href="lepl.regexp.str.StrAlphabet-class.html#parse">parse</a></code>,
+      <code><a href="lepl.regexp.str.StrAlphabet-class.html#range">range</a></code>
+      </p>
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lepl.regexp.str.StrAlphabet-class.html">str.StrAlphabet</a></code></b> (private):
+      <code><a href="lepl.regexp.str.StrAlphabet-class.html#_escape_char" onclick="show_private();">_escape_char</a></code>,
+      <code><a href="lepl.regexp.str.StrAlphabet-class.html#_no_parens" onclick="show_private();">_no_parens</a></code>
+      </p></div>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lepl.regexp.core.Alphabet-class.html">core.Alphabet</a></code></b>:
+      <code><a href="lepl.regexp.core.Alphabet-class.html#extension">extension</a></code>,
+      <code><a href="lepl.regexp.core.Alphabet-class.html#invert">invert</a></code>,
+      <code><a href="lepl.regexp.core.Alphabet-class.html#max">max</a></code>,
+      <code><a href="lepl.regexp.core.Alphabet-class.html#min">min</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__str__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.regexp.binary-pysrc.html#BinaryAlphabet.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  x.__init__(...) initializes x; see help(type(x)) for signature
+  <dl class="fields">
+    <dt>Overrides:
+        object.__init__
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="before"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">before</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">char</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.regexp.binary-pysrc.html#BinaryAlphabet.before">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Must return the character before c in the alphabet.  Never called with
+min (assuming input data are in range).
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="lepl.regexp.core.Alphabet-class.html#before">core.Alphabet.before</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="after"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">after</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">char</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.regexp.binary-pysrc.html#BinaryAlphabet.after">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Must return the character after c in the alphabet.  Never called with
+max (assuming input data are in range).
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="lepl.regexp.core.Alphabet-class.html#after">core.Alphabet.after</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="from_char"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">from_char</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">char</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.regexp.binary-pysrc.html#BinaryAlphabet.from_char">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Convert to 0 or 1.
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="lepl.regexp.str.StrAlphabet-class.html#from_char">str.StrAlphabet.from_char</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lepl-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sun May 13 16:31:06 2012
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

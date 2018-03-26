@@ -1,0 +1,383 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Getting Started &mdash; LEPL 5.1.2 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '5.1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="LEPL 5.1.2 documentation" href="index.html" />
+    <link rel="up" title="Lepl Manual" href="manual.html" />
+    <link rel="next" title="Matchers" href="matchers.html" />
+    <link rel="prev" title="Lepl Manual" href="manual.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="matchers.html" title="Matchers"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="manual.html" title="Lepl Manual"
+             accesskey="P">previous</a> |</li>
+        <li><a href="contents.html">LEPL 5.1.2 documentation</a> &raquo;</li>
+          <li><a href="manual.html" accesskey="U">Lepl Manual</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="getting-started">
+<span id="id1"></span><h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
+<p>This chapter works through a simple example using Lepl.  For a longer, more
+detailed example, see the <a class="reference internal" href="intro.html#tutorial"><em>Tutorial</em></a>.  There are also some
+additional <a class="reference internal" href="examples.html#examples"><em>Examples</em></a> at the end of this manual.</p>
+<p>After reading this chapter you should have a better understanding of what
+matchers and parsers do, and how they can be constructed.</p>
+<div class="section" id="first-example">
+<span id="index-0"></span><h2>First Example<a class="headerlink" href="#first-example" title="Permalink to this headline">¶</a></h2>
+<p>The structure of a piece of text is described in Lepl using <em>matchers</em>.  A
+simple matcher might recognise a letter, digit or space.  More complex
+matchers are built from these to recognise words, equations, etc.</p>
+<p>One a matcher has been built up in this way it can be used to create a
+<em>parser</em> to process text.</p>
+<p>Internally, when the parser is used to analyse some text, it passes the string
+to the matchers that were used as &#8220;building blocks&#8221;.  These break the text
+into pieces that are then assembled into the final result.</p>
+<p>The assembly of the matched text can include extra processing that modifies
+the data however you like.</p>
+<p>So we describe a structure (called a <em>grammar</em>) using matchers then use those
+matchers to break text into pieces that match that structure.  Finally, we
+process and assemble those pieces to give a final result.</p>
+<p>An example will make this clearer.  Imagine that we are given a username and a
+phone number, separated by a comma, and we want to split that into the two
+values:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">lepl</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">name</span>    <span class="o">=</span> <span class="n">Word</span><span class="p">()</span>              <span class="o">&gt;</span> <span class="s">&#39;name&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">phone</span>   <span class="o">=</span> <span class="n">Integer</span><span class="p">()</span>           <span class="o">&gt;</span> <span class="s">&#39;phone&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span> <span class="o">=</span> <span class="n">name</span> <span class="o">/</span> <span class="s">&#39;,&#39;</span> <span class="o">/</span> <span class="n">phone</span>  <span class="o">&gt;</span> <span class="n">make_dict</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">matcher</span><span class="o">.</span><span class="n">get_parse</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span><span class="p">(</span><span class="s">&#39;andrew, 3333253&#39;</span><span class="p">)</span>
+<span class="go">[{&#39;phone&#39;: &#39;3333253&#39;, &#39;name&#39;: &#39;andrew&#39;}]</span>
+</pre></div>
+</div>
+<p>The main body of this program (after the import statements) defines the
+matcher.  Then the parser is constructed, and, finally, the string <tt class="docutils literal"><span class="pre">'andrew,</span>
+<span class="pre">3333253'</span></tt> parsed to create a <tt class="docutils literal"><span class="pre">dict</span></tt>.</p>
+<p>We can shorten the last two lines to:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;andrew, 3333253&#39;</span><span class="p">)</span>
+<span class="go">[{&#39;phone&#39;: &#39;3333253&#39;, &#39;name&#39;: &#39;andrew&#39;}]</span>
+</pre></div>
+</div>
+<p>(a parser is still created, inside the matcher).</p>
+<p>There&#8217;s a lot going on here, some of which I will explain in later sections,
+but the most important thing to notice is that <tt class="docutils literal"><span class="pre">matcher</span></tt> was constructed
+from two simpler matchers <a class="footnote-reference" href="#id4" id="id2">[1]</a> &#8212; <a class="reference external" href="api/redirect.html#lepl.matchers.derived.Word">Word()</a> and <a class="reference external" href="api/redirect.html#lepl.matchers.derived.Integer">Integer()</a> <a class="footnote-reference" href="#id5" id="id3">[2]</a>.  It is those two
+matchers that identify the values &#8216;andrew&#8217; (a word) and &#8216;3333253&#8217; (an
+integer).</p>
+<table class="docutils footnote" frame="void" id="id4" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[1]</a></td><td>In fact there are probably a dozen or so matchers involved here: the
+<tt class="docutils literal"><span class="pre">,</span></tt> is converted into a matcher that matches commas; the <tt class="docutils literal"><span class="pre">/</span></tt>
+construct new matchers from the matchers on either side with matchers
+for spaces between them; most of the matchers I&#8217;ve just mentioned are
+actually implemented using other matchers for single characters, or to
+repeat values, or to join characters found together into a string...
+Fortunately you don&#8217;t need to know all this just to <em>use</em> a matcher.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id5" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[2]</a></td><td>Matcher names are linked to the API documentation which contains more
+detail.</td></tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="matchers">
+<span id="index-1"></span><h2>Matchers<a class="headerlink" href="#matchers" title="Permalink to this headline">¶</a></h2>
+<p>Internally, all matchers work in the same way: they take a <em>stream</em> of input
+and produce some results and a new stream as output.  But, because a matcher
+may find more than one match, it does not return the results and stream
+directly.  Instead, it returns a <em>generator</em>.</p>
+<p>Generators are a fairly new part of Python, rather like lists.  All you need
+to know to use them is that, to read the value, you use the function
+<tt class="docutils literal"><span class="pre">next()</span></tt>.</p>
+<p>We can see how this works with the simple generators <a class="reference external" href="api/redirect.html#lepl.matchers.derived.Word">Word()</a> by calling the
+<a class="reference external" href="api/redirect.html#lepl.core.config.ParserMixin.match">matcher.match()</a> method:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span> <span class="o">=</span> <span class="n">Word</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">no_full_first_match</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">next</span><span class="p">(</span><span class="n">matcher</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s">&#39;hello world&#39;</span><span class="p">))</span>
+<span class="go">([&#39;hello&#39;], (5, &lt;helper&gt;))</span>
+</pre></div>
+</div>
+<p>You can see the result and the remaining stream (for strings this is an
+offset, here <tt class="docutils literal"><span class="pre">5</span></tt>, and a &#8220;helper&#8221; object that contains the original input and
+additional useful information like the deepest match).</p>
+<p>We needed to call <a class="reference external" href="api/redirect.html#lepl.core.config.ConfigBuilder.no_full_first_match">.config.no_full_first_match()</a>
+otherwise we would have triggered an error due to incomplete matching (in case
+you are wondering, that error is from the parser that was automatically
+created when we called <a class="reference external" href="api/redirect.html#lepl.core.config.ParserMixin.match">match()</a>; individual matchers don&#8217;t check for a
+complete parse).</p>
+<p>Matchers can be joined together with <a class="reference external" href="api/redirect.html#lepl.matchers.combine.And">And()</a>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">next</span><span class="p">(</span> <span class="n">And</span><span class="p">(</span><span class="n">Word</span><span class="p">(),</span> <span class="n">Space</span><span class="p">(),</span> <span class="n">Integer</span><span class="p">())</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s">&#39;hello 123&#39;</span><span class="p">)</span> <span class="p">)</span>
+<span class="go">([&#39;hello&#39;, &#39; &#39;, &#39;123&#39;], (9, &lt;helper&gt;))</span>
+</pre></div>
+</div>
+<p>which can also be written as:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">next</span><span class="p">(</span> <span class="p">(</span><span class="n">Word</span><span class="p">()</span> <span class="o">&amp;</span> <span class="n">Space</span><span class="p">()</span> <span class="o">&amp;</span> <span class="n">Integer</span><span class="p">())</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s">&#39;hello 123&#39;</span><span class="p">)</span> <span class="p">)</span>
+<span class="go">([&#39;hello&#39;, &#39; &#39;, &#39;123&#39;], (9, &lt;helper&gt;))</span>
+</pre></div>
+</div>
+<p>or even:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">next</span><span class="p">(</span> <span class="p">(</span><span class="n">Word</span><span class="p">()</span> <span class="o">/</span> <span class="n">Integer</span><span class="p">())</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s">&#39;hello 123&#39;</span><span class="p">)</span> <span class="p">)</span>
+<span class="go">([&#39;hello&#39;, &#39; &#39;, &#39;123&#39;], (9, &lt;helper&gt;))</span>
+</pre></div>
+</div>
+<p>because <tt class="docutils literal"><span class="pre">&amp;</span></tt> is shorthand for <a class="reference external" href="api/redirect.html#lepl.matchers.combine.And">And()</a>, while <tt class="docutils literal"><span class="pre">/</span></tt> is similar, but
+allows optional spaces.</p>
+<p>We can get an idea of how Lepl works internally by looking at the output
+above.  In particular, note that results are contained in a list and the
+returned stream starts after the results.  Putting the results in a list
+allows a matcher to return more than one result (or none at all) and the new
+stream can be used by another matcher to continue the work on the rest of the
+input data.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>There are three groups of commands used to evaluate parsers.  These are:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">parser.parse(...)</span></tt> - Returns a single result.  Useful for simple
+parsing.</li>
+<li><tt class="docutils literal"><span class="pre">parser.parse_all(...)</span></tt> - Returns a generator of results.  Useful for
+parsing ambiguous data.</li>
+<li><tt class="docutils literal"><span class="pre">parser.match(...)</span></tt> - Returns a generator of (result, stream) pairs.
+Useful for seeing &#8220;how Lepl works&#8221; in a little more detail.</li>
+</ul>
+<p>In addition there are modifications of these methods for particular input
+types, like <tt class="docutils literal"><span class="pre">parser.match_string(...)</span></tt>.  The generic calls above will use
+the type of the argument to figure out which more specific method should be
+used.</p>
+<p class="last">Finally, there are also <tt class="docutils literal"><span class="pre">get_...</span></tt> versions of these methods, which return
+the parser as a standalone function.  This is useful if you want to generate
+multiple versions of a parser with different configurations.</p>
+</div>
+</div>
+<div class="section" id="more-detail">
+<span id="index-2"></span><h2>More Detail<a class="headerlink" href="#more-detail" title="Permalink to this headline">¶</a></h2>
+<p>Let&#8217;s look at the initial example in more detail:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">name</span>    <span class="o">=</span> <span class="n">Word</span><span class="p">()</span>              <span class="o">&gt;</span> <span class="s">&#39;name&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">phone</span>   <span class="o">=</span> <span class="n">Integer</span><span class="p">()</span>           <span class="o">&gt;</span> <span class="s">&#39;phone&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span> <span class="o">=</span> <span class="n">name</span> <span class="o">/</span> <span class="s">&#39;,&#39;</span> <span class="o">/</span> <span class="n">phone</span>  <span class="o">&gt;</span> <span class="n">make_dict</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;andrew, 3333253&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="go">{&#39;phone&#39;: &#39;3333253&#39;, &#39;name&#39;: &#39;andrew&#39;}</span>
+</pre></div>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">','</span></tt> is converted into a matcher that recognises a comma.  And the
+<tt class="docutils literal"><span class="pre">/</span></tt> joins the other matchers together with optional spaces.  But what does
+the <tt class="docutils literal"><span class="pre">&gt;</span></tt> do?</p>
+<p>In general, <tt class="docutils literal"><span class="pre">&gt;</span></tt> passes the results to a function.  But when the target is a
+string a <em>named pair</em> is generated.</p>
+<p>Since the <tt class="docutils literal"><span class="pre">&gt;</span></tt> produces a matcher, we can test this at the command line:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">next</span><span class="p">(</span> <span class="p">(</span><span class="n">Word</span><span class="p">()</span> <span class="o">&gt;</span> <span class="s">&#39;name&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s">&#39;andrew&#39;</span><span class="p">)</span> <span class="p">)</span>
+<span class="go">([(&#39;name&#39;, &#39;andrew&#39;)], (6, &lt;helper&gt;))</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">next</span><span class="p">(</span> <span class="p">(</span><span class="n">Integer</span><span class="p">()</span> <span class="o">&gt;</span> <span class="s">&#39;phone&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s">&#39;3333253&#39;</span><span class="p">)</span> <span class="p">)</span>
+<span class="go">([(&#39;phone&#39;, &#39;3333253&#39;)], (7, &lt;helper&gt;))</span>
+</pre></div>
+</div>
+<p>This makes <a class="reference external" href="api/redirect.html#lepl.support.node.make_dict">make_dict</a> easier
+to understand.  Python&#8217;s standard <tt class="docutils literal"><span class="pre">dict()</span></tt> will construct a dictionary from
+named pairs:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">dict</span><span class="p">([(</span><span class="s">&#39;name&#39;</span><span class="p">,</span> <span class="s">&#39;andrew&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;phone&#39;</span><span class="p">,</span> <span class="s">&#39;3333253&#39;</span><span class="p">)])</span>
+<span class="go">{&#39;phone&#39;: &#39;3333253&#39;, &#39;name&#39;: &#39;andrew&#39;}</span>
+</pre></div>
+</div>
+<p>And the results from <tt class="docutils literal"><span class="pre">name</span> <span class="pre">/</span> <span class="pre">','</span> <span class="pre">/</span> <span class="pre">phone</span></tt> include named pairs:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">next</span><span class="p">(</span> <span class="p">(</span><span class="n">name</span> <span class="o">/</span> <span class="s">&#39;,&#39;</span> <span class="o">/</span> <span class="n">phone</span><span class="p">)</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s">&#39;andrew, 3333253&#39;</span><span class="p">)</span> <span class="p">)</span>
+<span class="go">([(&#39;name&#39;, &#39;andrew&#39;), &#39;,&#39;, &#39; &#39;, (&#39;phone&#39;, &#39;3333253&#39;)], (15, &lt;helper&gt;))</span>
+</pre></div>
+</div>
+<p>Now we know that <tt class="docutils literal"><span class="pre">&gt;</span></tt> passes results to a function, so it looks like
+<a class="reference external" href="api/redirect.html#lepl.support.node.make_dict">make_dict</a> is almost identical to the
+Python builtin <tt class="docutils literal"><span class="pre">dict</span></tt>.  In fact, the only difference is that it strips out
+results that are not named pairs (in this case, the comma and space).</p>
+</div>
+<div class="section" id="repetition">
+<span id="index-3"></span><span id="id9"></span><h2>Repetition<a class="headerlink" href="#repetition" title="Permalink to this headline">¶</a></h2>
+<p>Next we will extend the matcher so that we can process a list of several
+usernames and phone numbers:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">spaces</span>  <span class="o">=</span> <span class="n">Space</span><span class="p">()[</span><span class="mi">0</span><span class="p">:]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">name</span>    <span class="o">=</span> <span class="n">Word</span><span class="p">()</span>              <span class="o">&gt;</span> <span class="s">&#39;name&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">phone</span>   <span class="o">=</span> <span class="n">Integer</span><span class="p">()</span>           <span class="o">&gt;</span> <span class="s">&#39;phone&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">line</span>    <span class="o">=</span> <span class="n">name</span> <span class="o">/</span> <span class="s">&#39;,&#39;</span> <span class="o">/</span> <span class="n">phone</span>  <span class="o">&gt;</span> <span class="n">make_dict</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">newline</span> <span class="o">=</span> <span class="n">spaces</span> <span class="o">&amp;</span> <span class="n">Newline</span><span class="p">()</span> <span class="o">&amp;</span> <span class="n">spaces</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">:,</span><span class="o">~</span><span class="n">newline</span><span class="p">]</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;andrew, 3333253</span><span class="se">\n</span><span class="s"> bob, 12345&#39;</span><span class="p">)</span>
+<span class="go">[{&#39;phone&#39;: &#39;3333253&#39;, &#39;name&#39;: &#39;andrew&#39;}, {&#39;phone&#39;: &#39;12345&#39;, &#39;name&#39;: &#39;bob&#39;}]</span>
+</pre></div>
+</div>
+<p>This uses repetition in two places.  First, and simplest, is <tt class="docutils literal"><span class="pre">Space()[0:]</span></tt>.
+This matches 0 or more spaces.  In general, adding <tt class="docutils literal"><span class="pre">[start:stop]</span></tt> to a
+matcher will repeat it for between <em>start</em> and <em>stop</em> times (the defaults for
+missing values is 0 and &#8220;as many as possible&#8221;).</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><em>stop</em> is <em>inclusive</em>, so <tt class="docutils literal"><span class="pre">Space()[2:3]</span></tt> would match 2 or 3 spaces.  This
+is subtly different from Python&#8217;s normal array behaviour.</p>
+</div>
+<p>The second use of repetition is <tt class="docutils literal"><span class="pre">line[0:,~newline]</span></tt>.  This repeats the
+matcher <tt class="docutils literal"><span class="pre">line</span></tt> 0 or more times, but also includes another matcher,
+<tt class="docutils literal"><span class="pre">~newline</span></tt>, which is used a <em>separator</em>.  The separator is placed between
+each repeated item, like commas in a list.</p>
+<p>So <tt class="docutils literal"><span class="pre">line[0:,~newline]</span></tt> will recognise repeated names and phone numbers,
+separated by spaces and newlines.  The <tt class="docutils literal"><span class="pre">~</span></tt> used to modify <tt class="docutils literal"><span class="pre">newline</span></tt>
+discards any results so that they do not clutter the final list.  It could
+also have been written as <a class="reference external" href="api/redirect.html#lepl.matchers.derived.Drop">Drop(newline)</a> &#8212; another example of making a
+more complex matcher from simpler pieces.</p>
+</div>
+<div class="section" id="single-dictionary">
+<h2>Single Dictionary<a class="headerlink" href="#single-dictionary" title="Permalink to this headline">¶</a></h2>
+<p>The repeated matcher above returns a list of dicts.  But what we really want
+is a single dict that associates each username with a telephone number.</p>
+<p>We can write our own function to do this, then call it with <tt class="docutils literal"><span class="pre">&gt;</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">combine</span><span class="p">(</span><span class="n">results</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="nb">all</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="gp">... </span>    <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="nb">all</span><span class="p">[</span><span class="n">result</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s">&#39;phone&#39;</span><span class="p">]</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="nb">all</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">spaces</span>  <span class="o">=</span> <span class="n">Space</span><span class="p">()[</span><span class="mi">0</span><span class="p">:]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">name</span>    <span class="o">=</span> <span class="n">Word</span><span class="p">()</span>              <span class="o">&gt;</span> <span class="s">&#39;name&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">phone</span>   <span class="o">=</span> <span class="n">Integer</span><span class="p">()</span>           <span class="o">&gt;</span> <span class="s">&#39;phone&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">line</span>    <span class="o">=</span> <span class="n">name</span> <span class="o">/</span> <span class="s">&#39;,&#39;</span> <span class="o">/</span> <span class="n">phone</span>  <span class="o">&gt;</span> <span class="n">make_dict</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">newline</span> <span class="o">=</span> <span class="n">spaces</span> <span class="o">&amp;</span> <span class="n">Newline</span><span class="p">()</span> <span class="o">&amp;</span> <span class="n">spaces</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">:,</span><span class="o">~</span><span class="n">newline</span><span class="p">]</span>   <span class="o">&gt;</span> <span class="n">combine</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;andrew, 3333253</span><span class="se">\n</span><span class="s"> bob, 12345&#39;</span><span class="p">)</span>
+<span class="go">[{&#39;bob&#39;: &#39;12345&#39;, &#39;andrew&#39;: &#39;3333253&#39;}]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="summary-and-going-further">
+<h2>Summary and Going Further<a class="headerlink" href="#summary-and-going-further" title="Permalink to this headline">¶</a></h2>
+<p>Lepl can be extended in several ways:</p>
+<ul class="simple">
+<li>You can contruct new matchers by combining existing ones.  You will do this
+all the time using Lepl &#8212; almost every line in the examples above defines
+a new matcher.</li>
+<li>You can define and call functions to process results (using <tt class="docutils literal"><span class="pre">&gt;</span></tt>).  This is
+quite common, too, and there&#8217;s an example just above.</li>
+<li>You can write your own matchers.  See <a class="reference internal" href="implementation.html#new-matchers"><em>Simple Functional Matchers</em></a> and following
+sections.</li>
+<li>You can also change the definition of operators (<tt class="docutils literal"><span class="pre">&amp;</span></tt>, <tt class="docutils literal"><span class="pre">/</span></tt> etc; see
+<a class="reference internal" href="operators.html#replacement"><em>Replacement</em></a>).  Again, this is unusual to do directly, but forms the
+basis for <a class="reference internal" href="intro-2.html#separators"><em>Separators</em></a>.</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="contents.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Getting Started</a><ul>
+<li><a class="reference internal" href="#first-example">First Example</a></li>
+<li><a class="reference internal" href="#matchers">Matchers</a></li>
+<li><a class="reference internal" href="#more-detail">More Detail</a></li>
+<li><a class="reference internal" href="#repetition">Repetition</a></li>
+<li><a class="reference internal" href="#single-dictionary">Single Dictionary</a></li>
+<li><a class="reference internal" href="#summary-and-going-further">Summary and Going Further</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="manual.html"
+                        title="previous chapter">Lepl Manual</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="matchers.html"
+                        title="next chapter">Matchers</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/started.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="matchers.html" title="Matchers"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="manual.html" title="Lepl Manual"
+             >previous</a> |</li>
+        <li><a href="contents.html">LEPL 5.1.2 documentation</a> &raquo;</li>
+          <li><a href="manual.html" >Lepl Manual</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2009-2011, Andrew Cooke.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,586 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lepl.support._test.graph</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lepl-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lepl-module.html">Package&nbsp;lepl</a> ::
+        <a href="lepl.support-module.html">Package&nbsp;support</a> ::
+        <a href="lepl.support._test-module.html">Package&nbsp;_test</a> ::
+        Module&nbsp;graph
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lepl.support._test.graph-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="lepl.support._test.graph-module.html">Module lepl.support._test.graph</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment"># The contents of this file are subject to the Mozilla Public License</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-comment"># (MPL) Version 1.1 (the "License"); you may not use this file except</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-comment"># in compliance with the License. You may obtain a copy of the License</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-comment"># at http://www.mozilla.org/MPL/</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-comment"># Software distributed under the License is distributed on an "AS IS"</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-comment"># basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-comment"># the License for the specific language governing rights and</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-comment"># limitations under the License.</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-comment"># The Original Code is LEPL (http://www.acooke.org/lepl)</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-comment"># The Initial Developer of the Original Code is Andrew Cooke.</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-comment"># Portions created by the Initial Developer are Copyright (C) 2009-2010</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-comment"># Andrew Cooke (andrew@acooke.org). All Rights Reserved.</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-comment"># Alternatively, the contents of this file may be used under the terms</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt class="py-comment"># of the LGPL license (the GNU Lesser General Public License,</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-comment"># http://www.gnu.org/licenses/lgpl.html), in which case the provisions</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-comment"># of the LGPL License are applicable instead of those above.</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt class="py-comment"># If you wish to allow use of your version of this file only under the</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt class="py-comment"># terms of the LGPL License and not to allow others to use your version</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"><tt class="py-comment"># of this file under the MPL, indicate your decision by deleting the</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt class="py-comment"># provisions above and replace them with the notice and other provisions</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt class="py-comment"># required by the LGPL License.  If you do not delete the provisions</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"><tt class="py-comment"># above, a recipient may use your version of this file under either the</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"><tt class="py-comment"># MPL or the LGPL License.</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"><tt class="py-docstring">'''</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line"><tt class="py-docstring">Tests for the lepl.support.graph module.</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line"><tt class="py-docstring">'''</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">unittest</tt> <tt class="py-keyword">import</tt> <tt class="py-name">TestCase</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line"> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line"> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package lepl=lepl-module.html"><a title="lepl" class="py-name" href="#" onclick="return doclink('link-0', 'lepl', 'link-0');">lepl</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Module lepl.lexer.support=lepl.lexer.support-module.html,Module lepl.matchers._test.support=lepl.matchers._test.support-module.html,Module lepl.matchers._test3.support=lepl.matchers._test3.support-module.html,Module lepl.matchers.support=lepl.matchers.support-module.html,Package lepl.support=lepl.support-module.html"><a title="lepl.lexer.support
+lepl.matchers._test.support
+lepl.matchers._test3.support
+lepl.matchers.support
+lepl.support" class="py-name" href="#" onclick="return doclink('link-1', 'support', 'link-1');">support</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Module lepl.support._test.graph=lepl.support._test.graph-module.html,Function lepl.support._test.graph.graph()=lepl.support._test.graph-module.html#graph,Module lepl.support.graph=lepl.support.graph-module.html"><a title="lepl.support._test.graph
+lepl.support._test.graph.graph
+lepl.support.graph" class="py-name" href="#" onclick="return doclink('link-2', 'graph', 'link-2');">graph</a></tt> <tt class="py-keyword">import</tt> <tt id="link-3" class="py-name" targets="Class lepl.support.graph.ArgAsAttributeMixin=lepl.support.graph.ArgAsAttributeMixin-class.html"><a title="lepl.support.graph.ArgAsAttributeMixin" class="py-name" href="#" onclick="return doclink('link-3', 'ArgAsAttributeMixin', 'link-3');">ArgAsAttributeMixin</a></tt><tt class="py-op">,</tt> <tt id="link-4" class="py-name" targets="Function lepl.support.graph.preorder()=lepl.support.graph-module.html#preorder"><a title="lepl.support.graph.preorder" class="py-name" href="#" onclick="return doclink('link-4', 'preorder', 'link-4');">preorder</a></tt><tt class="py-op">,</tt> <tt id="link-5" class="py-name" targets="Method lepl.support.graph.PostorderWalkerMixin.postorder()=lepl.support.graph.PostorderWalkerMixin-class.html#postorder,Function lepl.support.graph.postorder()=lepl.support.graph-module.html#postorder"><a title="lepl.support.graph.PostorderWalkerMixin.postorder
+lepl.support.graph.postorder" class="py-name" href="#" onclick="return doclink('link-5', 'postorder', 'link-5');">postorder</a></tt><tt class="py-op">,</tt> <tt id="link-6" class="py-name" targets="Function lepl.support.graph.reset()=lepl.support.graph-module.html#reset"><a title="lepl.support.graph.reset" class="py-name" href="#" onclick="return doclink('link-6', 'reset', 'link-6');">reset</a></tt><tt class="py-op">,</tt> \ </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">    <tt id="link-7" class="py-name" targets="Class lepl.support.graph.ConstructorWalker=lepl.support.graph.ConstructorWalker-class.html"><a title="lepl.support.graph.ConstructorWalker" class="py-name" href="#" onclick="return doclink('link-7', 'ConstructorWalker', 'link-7');">ConstructorWalker</a></tt><tt class="py-op">,</tt> <tt id="link-8" class="py-name" targets="Class lepl.support.graph.Clone=lepl.support.graph.Clone-class.html"><a title="lepl.support.graph.Clone" class="py-name" href="#" onclick="return doclink('link-8', 'Clone', 'link-8');">Clone</a></tt><tt class="py-op">,</tt> <tt id="link-9" class="py-name" targets="Function lepl.support.graph.make_proxy()=lepl.support.graph-module.html#make_proxy"><a title="lepl.support.graph.make_proxy" class="py-name" href="#" onclick="return doclink('link-9', 'make_proxy', 'link-9');">make_proxy</a></tt><tt class="py-op">,</tt> <tt id="link-10" class="py-name" targets="Variable lepl.support.graph.LEAF=lepl.support.graph-module.html#LEAF"><a title="lepl.support.graph.LEAF" class="py-name" href="#" onclick="return doclink('link-10', 'LEAF', 'link-10');">LEAF</a></tt><tt class="py-op">,</tt> <tt id="link-11" class="py-name" targets="Function lepl.support.graph.leaves()=lepl.support.graph-module.html#leaves"><a title="lepl.support.graph.leaves" class="py-name" href="#" onclick="return doclink('link-11', 'leaves', 'link-11');">leaves</a></tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-12" class="py-name"><a title="lepl" class="py-name" href="#" onclick="return doclink('link-12', 'lepl', 'link-0');">lepl</a></tt><tt class="py-op">.</tt><tt id="link-13" class="py-name"><a title="lepl.lexer.support
+lepl.matchers._test.support
+lepl.matchers._test3.support
+lepl.matchers.support
+lepl.support" class="py-name" href="#" onclick="return doclink('link-13', 'support', 'link-1');">support</a></tt><tt class="py-op">.</tt><tt id="link-14" class="py-name" targets="Method lepl.matchers.support.TreeStr.node()=lepl.matchers.support.TreeStr-class.html#node,Method lepl.regexp.core.DfaGraph.node()=lepl.regexp.core.DfaGraph-class.html#node,Module lepl.support._test.node=lepl.support._test.node-module.html,Method lepl.support.graph.Clone.node()=lepl.support.graph.Clone-class.html#node,Method lepl.support.graph.ConstructorStr.node()=lepl.support.graph.ConstructorStr-class.html#node,Method lepl.support.graph.GraphStr.node()=lepl.support.graph.GraphStr-class.html#node,Method lepl.support.graph.Visitor.node()=lepl.support.graph.Visitor-class.html#node,Module lepl.support.node=lepl.support.node-module.html"><a title="lepl.matchers.support.TreeStr.node
+lepl.regexp.core.DfaGraph.node
+lepl.support._test.node
+lepl.support.graph.Clone.node
+lepl.support.graph.ConstructorStr.node
+lepl.support.graph.GraphStr.node
+lepl.support.graph.Visitor.node
+lepl.support.node" class="py-name" href="#" onclick="return doclink('link-14', 'node', 'link-14');">node</a></tt> <tt class="py-keyword">import</tt> <tt id="link-15" class="py-name" targets="Class lepl.support.node.Node=lepl.support.node.Node-class.html"><a title="lepl.support.node.Node" class="py-name" href="#" onclick="return doclink('link-15', 'Node', 'link-15');">Node</a></tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line"> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line"> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line"><tt class="py-comment"># pylint: disable-msg=C0103, C0111, C0301, W0702, C0324, C0102, C0321, W0141</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line"><tt class="py-comment"># (dude this is just a test)</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line"> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">     </tt>
+<a name="SimpleNode"></a><div id="SimpleNode-def"><a name="L46"></a><tt class="py-lineno"> 46</tt> <a class="py-toggle" href="#" id="SimpleNode-toggle" onclick="return toggle('SimpleNode');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lepl.support._test.graph.SimpleNode-class.html">SimpleNode</a><tt class="py-op">(</tt><tt class="py-base-class">ArgAsAttributeMixin</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SimpleNode-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="SimpleNode-expanded"><a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">     </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">    <tt class="py-comment"># pylint: disable-msg=E1101</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">     </tt>
+<a name="SimpleNode.__init__"></a><div id="SimpleNode.__init__-def"><a name="L50"></a><tt class="py-lineno"> 50</tt> <a class="py-toggle" href="#" id="SimpleNode.__init__-toggle" onclick="return toggle('SimpleNode.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.support._test.graph.SimpleNode-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">label</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-param">nodes</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SimpleNode.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="SimpleNode.__init__-expanded"><a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">        <tt class="py-name">super</tt><tt class="py-op">(</tt><tt id="link-16" class="py-name" targets="Class lepl.support._test.graph.SimpleNode=lepl.support._test.graph.SimpleNode-class.html"><a title="lepl.support._test.graph.SimpleNode" class="py-name" href="#" onclick="return doclink('link-16', 'SimpleNode', 'link-16');">SimpleNode</a></tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-17" class="py-name" targets="Method lepl.bin.bits.BitIterator.__init__()=lepl.bin.bits.BitIterator-class.html#__init__,Method lepl.bin.bits.BitString.__init__()=lepl.bin.bits.BitString-class.html#__init__,Method lepl.bin.bits.ByteIterator.__init__()=lepl.bin.bits.ByteIterator-class.html#__init__,Method lepl.bin.bits.Int.__init__()=lepl.bin.bits.Int-class.html#__init__,Method lepl.bin.matchers.BEnd.__init__()=lepl.bin.matchers.BEnd-class.html#__init__,Method lepl.bin.matchers.Const.__init__()=lepl.bin.matchers.Const-class.html#__init__,Method lepl.bin.matchers._ByteArray.__init__()=lepl.bin.matchers._ByteArray-class.html#__init__,Method lepl.bin.matchers._Constant.__init__()=lepl.bin.matchers._Constant-class.html#__init__,Method lepl.bin.matchers._String.__init__()=lepl.bin.matchers._String-class.html#__init__,Method lepl.bin.matchers._Variable.__init__()=lepl.bin.matchers._Variable-class.html#__init__,Method lepl.cairo.context.cset.__init__()=lepl.cairo.context.cset-class.html#__init__,Method lepl.core._test.parser.InstanceMethodTest.Foo.__init__()=lepl.core._test.parser.InstanceMethodTest.Foo-class.html#__init__,Method lepl.core.config.ConfigBuilder.__init__()=lepl.core.config.ConfigBuilder-class.html#__init__,Method lepl.core.config.ParserMixin.__init__()=lepl.core.config.ParserMixin-class.html#__init__,Method lepl.core.dynamic.BaseVar.__init__()=lepl.core.dynamic.BaseVar-class.html#__init__,Method lepl.core.manager.GeneratorRef.__init__()=lepl.core.manager.GeneratorRef-class.html#__init__,Method lepl.core.manager._GeneratorManager.__init__()=lepl.core.manager._GeneratorManager-class.html#__init__,Method lepl.core.monitor.MultipleStackMonitors.__init__()=lepl.core.monitor.MultipleStackMonitors-class.html#__init__,Method lepl.core.monitor.MultipleValueMonitors.__init__()=lepl.core.monitor.MultipleValueMonitors-class.html#__init__,Method lepl.core.parser.GeneratorWrapper.__init__()=lepl.core.parser.GeneratorWrapper-class.html#__init__,Method lepl.core.rewriters.AutoMemoize.__init__()=lepl.core.rewriters.AutoMemoize-class.html#__init__,Method lepl.core.rewriters.ComposeTransforms.__init__()=lepl.core.rewriters.ComposeTransforms-class.html#__init__,Method lepl.core.rewriters.DirectEvaluation.__init__()=lepl.core.rewriters.DirectEvaluation-class.html#__init__,Method lepl.core.rewriters.Flatten.__init__()=lepl.core.rewriters.Flatten-class.html#__init__,Method lepl.core.rewriters.FullFirstMatch.__init__()=lepl.core.rewriters.FullFirstMatch-class.html#__init__,Method lepl.core.rewriters.LeftMemoize.__init__()=lepl.core.rewriters.LeftMemoize-class.html#__init__,Method lepl.core.rewriters.NodeStats.__init__()=lepl.core.rewriters.NodeStats-class.html#__init__,Method lepl.core.rewriters.NodeStats2.__init__()=lepl.core.rewriters.NodeStats2-class.html#__init__,Method lepl.core.rewriters.OptimizeOr.__init__()=lepl.core.rewriters.OptimizeOr-class.html#__init__,Method lepl.core.rewriters.Rewriter.__init__()=lepl.core.rewriters.Rewriter-class.html#__init__,Method lepl.core.rewriters.RightMemoize.__init__()=lepl.core.rewriters.RightMemoize-class.html#__init__,Method lepl.core.rewriters.SetArguments.__init__()=lepl.core.rewriters.SetArguments-class.html#__init__,Method lepl.core.rewriters.TraceVariables.__init__()=lepl.core.rewriters.TraceVariables-class.html#__init__,Method lepl.core.trace._RecordDeepest.__init__()=lepl.core.trace._RecordDeepest-class.html#__init__,Method lepl.core.trace._TraceStack.__init__()=lepl.core.trace._TraceStack-class.html#__init__,Method lepl.lexer.lexer.Lexer.__init__()=lepl.lexer.lexer.Lexer-class.html#__init__,Method lepl.lexer.lines.lexer._OffsideLexer.__init__()=lepl.lexer.lines.lexer._OffsideLexer-class.html#__init__,Method lepl.lexer.lines.matchers.Block.__init__()=lepl.lexer.lines.matchers.Block-class.html#__init__,Method lepl.lexer.lines.matchers.LineEnd.__init__()=lepl.lexer.lines.matchers.LineEnd-class.html#__init__,Method lepl.lexer.lines.matchers.LineStart.__init__()=lepl.lexer.lines.matchers.LineStart-class.html#__init__,Method lepl.lexer.lines.monitor.BlockMonitor.__init__()=lepl.lexer.lines.monitor.BlockMonitor-class.html#__init__,Method lepl.lexer.matchers.BaseToken.__init__()=lepl.lexer.matchers.BaseToken-class.html#__init__,Method lepl.lexer.matchers.Token.__init__()=lepl.lexer.matchers.Token-class.html#__init__,Method lepl.lexer.operators.TokenNamespace.__init__()=lepl.lexer.operators.TokenNamespace-class.html#__init__,Method lepl.lexer.rewriters.AddLexer.__init__()=lepl.lexer.rewriters.AddLexer-class.html#__init__,Method lepl.lexer.stream.FilteredTokenHelper.__init__()=lepl.lexer.stream.FilteredTokenHelper-class.html#__init__,Method lepl.lexer.stream.TokenHelper.__init__()=lepl.lexer.stream.TokenHelper-class.html#__init__,Method lepl.matchers._test.derived.RangeMatch.__init__()=lepl.matchers._test.derived.RangeMatch-class.html#__init__,Method lepl.matchers.combine._BaseCombiner.__init__()=lepl.matchers.combine._BaseCombiner-class.html#__init__,Method lepl.matchers.core.Delayed.__init__()=lepl.matchers.core.Delayed-class.html#__init__,Method lepl.matchers.core.Lookahead.__init__()=lepl.matchers.core.Lookahead-class.html#__init__,Method lepl.matchers.error.Error.__init__()=lepl.matchers.error.Error-class.html#__init__,Method lepl.matchers.matcher.Matcher.__init__()=lepl.matchers.matcher.Matcher-class.html#__init__,Method lepl.matchers.matcher.Relations.__init__()=lepl.matchers.matcher.Relations-class.html#__init__,Method lepl.matchers.memo._LMemo.__init__()=lepl.matchers.memo._LMemo-class.html#__init__,Method lepl.matchers.memo._RMemo.__init__()=lepl.matchers.memo._RMemo-class.html#__init__,Method lepl.matchers.monitor.Trace.__init__()=lepl.matchers.monitor.Trace-class.html#__init__,Method lepl.matchers.operators.DroppedSpace.__init__()=lepl.matchers.operators.DroppedSpace-class.html#__init__,Method lepl.matchers.operators.OperatorMixin.__init__()=lepl.matchers.operators.OperatorMixin-class.html#__init__,Method lepl.matchers.operators.OperatorNamespace.__init__()=lepl.matchers.operators.OperatorNamespace-class.html#__init__,Method lepl.matchers.operators.Override.__init__()=lepl.matchers.operators.Override-class.html#__init__,Method lepl.matchers.operators._BaseSeparator.__init__()=lepl.matchers.operators._BaseSeparator-class.html#__init__,Method lepl.matchers.support.BaseFactoryMatcher.__init__()=lepl.matchers.support.BaseFactoryMatcher-class.html#__init__,Method lepl.matchers.support.OperatorMatcher.__init__()=lepl.matchers.support.OperatorMatcher-class.html#__init__,Method lepl.matchers.support.Transformable.__init__()=lepl.matchers.support.Transformable-class.html#__init__,Method lepl.matchers.transform.Transform.__init__()=lepl.matchers.transform.Transform-class.html#__init__,Method lepl.matchers.transform.TransformationWrapper.__init__()=lepl.matchers.transform.TransformationWrapper-class.html#__init__,Method lepl.regexp.binary.BinaryAlphabet.__init__()=lepl.regexp.binary.BinaryAlphabet-class.html#__init__,Method lepl.regexp.core.Alphabet.__init__()=lepl.regexp.core.Alphabet-class.html#__init__,Method lepl.regexp.core.BaseGraph.__init__()=lepl.regexp.core.BaseGraph-class.html#__init__,Method lepl.regexp.core.Compiler.__init__()=lepl.regexp.core.Compiler-class.html#__init__,Method lepl.regexp.core.DfaGraph.__init__()=lepl.regexp.core.DfaGraph-class.html#__init__,Method lepl.regexp.core.DfaPattern.__init__()=lepl.regexp.core.DfaPattern-class.html#__init__,Method lepl.regexp.core.Labelled.__init__()=lepl.regexp.core.Labelled-class.html#__init__,Method lepl.regexp.core.NfaGraph.__init__()=lepl.regexp.core.NfaGraph-class.html#__init__,Method lepl.regexp.core.NfaPattern.__init__()=lepl.regexp.core.NfaPattern-class.html#__init__,Method lepl.regexp.core.NfaToDfa.__init__()=lepl.regexp.core.NfaToDfa-class.html#__init__,Method lepl.regexp.core.Sequence.__init__()=lepl.regexp.core.Sequence-class.html#__init__,Method lepl.regexp.interval.IntervalMap.__init__()=lepl.regexp.interval.IntervalMap-class.html#__init__,Method lepl.regexp.interval.Intervals.__init__()=lepl.regexp.interval.Intervals-class.html#__init__,Method lepl.regexp.interval.TaggedFragments.__init__()=lepl.regexp.interval.TaggedFragments-class.html#__init__,Method lepl.regexp.interval._Character.__init__()=lepl.regexp.interval._Character-class.html#__init__,Method lepl.regexp.matchers.BaseRegexp.__init__()=lepl.regexp.matchers.BaseRegexp-class.html#__init__,Method lepl.regexp.matchers.DfaRegexp.__init__()=lepl.regexp.matchers.DfaRegexp-class.html#__init__,Method lepl.regexp.matchers.NfaRegexp.__init__()=lepl.regexp.matchers.NfaRegexp-class.html#__init__,Method lepl.regexp.rewriters.CompileRegexp.__init__()=lepl.regexp.rewriters.CompileRegexp-class.html#__init__,Method lepl.regexp.rewriters.RegexpContainer.__init__()=lepl.regexp.rewriters.RegexpContainer-class.html#__init__,Method lepl.regexp.str.StrAlphabet.__init__()=lepl.regexp.str.StrAlphabet-class.html#__init__,Method lepl.regexp.str.StrParser.__init__()=lepl.regexp.str.StrParser-class.html#__init__,Method lepl.regexp.unicode.UnicodeAlphabet.__init__()=lepl.regexp.unicode.UnicodeAlphabet-class.html#__init__,Method lepl.stream.core.HashKey.__init__()=lepl.stream.core.HashKey-class.html#__init__,Method lepl.stream.core.MutableMaxDepth.__init__()=lepl.stream.core.MutableMaxDepth-class.html#__init__,Method lepl.stream.core.StreamHelper.__init__()=lepl.stream.core.StreamHelper-class.html#__init__,Method lepl.stream.facade.HelperFacade.__init__()=lepl.stream.facade.HelperFacade-class.html#__init__,Method lepl.stream.iter.Cons.__init__()=lepl.stream.iter.Cons-class.html#__init__,Method lepl.stream.maxdepth.FullFirstMatchException.__init__()=lepl.stream.maxdepth.FullFirstMatchException-class.html#__init__,Method lepl.stream.simple.BaseHelper.__init__()=lepl.stream.simple.BaseHelper-class.html#__init__,Method lepl.stream.simple.SequenceHelper.__init__()=lepl.stream.simple.SequenceHelper-class.html#__init__,Method lepl.stream.simple.StringHelper.__init__()=lepl.stream.simple.StringHelper-class.html#__init__,Method lepl.support._test.graph.SimpleNode.__init__()=lepl.support._test.graph.SimpleNode-class.html#__init__,Method lepl.support.context.Namespace.__init__()=lepl.support.context.Namespace-class.html#__init__,Method lepl.support.context.NamespaceMap.__init__()=lepl.support.context.NamespaceMap-class.html#__init__,Method lepl.support.context.NamespaceMixin.__init__()=lepl.support.context.NamespaceMixin-class.html#__init__,Method lepl.support.context.OnceOnlyNamespace.__init__()=lepl.support.context.OnceOnlyNamespace-class.html#__init__,Method lepl.support.context.Scope.__init__()=lepl.support.context.Scope-class.html#__init__,Method lepl.support.graph.ArgAsAttributeMixin.__init__()=lepl.support.graph.ArgAsAttributeMixin-class.html#__init__,Method lepl.support.graph.Clone.__init__()=lepl.support.graph.Clone-class.html#__init__,Method lepl.support.graph.ConstructorStr.__init__()=lepl.support.graph.ConstructorStr-class.html#__init__,Method lepl.support.graph.ConstructorWalker.__init__()=lepl.support.graph.ConstructorWalker-class.html#__init__,Method lepl.support.graph.GraphStr.__init__()=lepl.support.graph.GraphStr-class.html#__init__,Method lepl.support.graph.PostorderWalkerMixin.__init__()=lepl.support.graph.PostorderWalkerMixin-class.html#__init__,Method lepl.support.graph.Proxy.__init__()=lepl.support.graph.Proxy-class.html#__init__,Method lepl.support.graph.SimpleWalker.__init__()=lepl.support.graph.SimpleWalker-class.html#__init__,Method lepl.support.lib.CircularFifo.__init__()=lepl.support.lib.CircularFifo-class.html#__init__,Method lepl.support.lib.LogMixin.__init__()=lepl.support.lib.LogMixin-class.html#__init__,Method lepl.support.node.Node.__init__()=lepl.support.node.Node-class.html#__init__,Method lepl.support.state.State.__init__()=lepl.support.state.State-class.html#__init__,Method lepl.support.warn.Warning.__init__()=lepl.support.warn.Warning-class.html#__init__"><a title="lepl.bin.bits.BitIterator.__init__
+lepl.bin.bits.BitString.__init__
+lepl.bin.bits.ByteIterator.__init__
+lepl.bin.bits.Int.__init__
+lepl.bin.matchers.BEnd.__init__
+lepl.bin.matchers.Const.__init__
+lepl.bin.matchers._ByteArray.__init__
+lepl.bin.matchers._Constant.__init__
+lepl.bin.matchers._String.__init__
+lepl.bin.matchers._Variable.__init__
+lepl.cairo.context.cset.__init__
+lepl.core._test.parser.InstanceMethodTest.Foo.__init__
+lepl.core.config.ConfigBuilder.__init__
+lepl.core.config.ParserMixin.__init__
+lepl.core.dynamic.BaseVar.__init__
+lepl.core.manager.GeneratorRef.__init__
+lepl.core.manager._GeneratorManager.__init__
+lepl.core.monitor.MultipleStackMonitors.__init__
+lepl.core.monitor.MultipleValueMonitors.__init__
+lepl.core.parser.GeneratorWrapper.__init__
+lepl.core.rewriters.AutoMemoize.__init__
+lepl.core.rewriters.ComposeTransforms.__init__
+lepl.core.rewriters.DirectEvaluation.__init__
+lepl.core.rewriters.Flatten.__init__
+lepl.core.rewriters.FullFirstMatch.__init__
+lepl.core.rewriters.LeftMemoize.__init__
+lepl.core.rewriters.NodeStats.__init__
+lepl.core.rewriters.NodeStats2.__init__
+lepl.core.rewriters.OptimizeOr.__init__
+lepl.core.rewriters.Rewriter.__init__
+lepl.core.rewriters.RightMemoize.__init__
+lepl.core.rewriters.SetArguments.__init__
+lepl.core.rewriters.TraceVariables.__init__
+lepl.core.trace._RecordDeepest.__init__
+lepl.core.trace._TraceStack.__init__
+lepl.lexer.lexer.Lexer.__init__
+lepl.lexer.lines.lexer._OffsideLexer.__init__
+lepl.lexer.lines.matchers.Block.__init__
+lepl.lexer.lines.matchers.LineEnd.__init__
+lepl.lexer.lines.matchers.LineStart.__init__
+lepl.lexer.lines.monitor.BlockMonitor.__init__
+lepl.lexer.matchers.BaseToken.__init__
+lepl.lexer.matchers.Token.__init__
+lepl.lexer.operators.TokenNamespace.__init__
+lepl.lexer.rewriters.AddLexer.__init__
+lepl.lexer.stream.FilteredTokenHelper.__init__
+lepl.lexer.stream.TokenHelper.__init__
+lepl.matchers._test.derived.RangeMatch.__init__
+lepl.matchers.combine._BaseCombiner.__init__
+lepl.matchers.core.Delayed.__init__
+lepl.matchers.core.Lookahead.__init__
+lepl.matchers.error.Error.__init__
+lepl.matchers.matcher.Matcher.__init__
+lepl.matchers.matcher.Relations.__init__
+lepl.matchers.memo._LMemo.__init__
+lepl.matchers.memo._RMemo.__init__
+lepl.matchers.monitor.Trace.__init__
+lepl.matchers.operators.DroppedSpace.__init__
+lepl.matchers.operators.OperatorMixin.__init__
+lepl.matchers.operators.OperatorNamespace.__init__
+lepl.matchers.operators.Override.__init__
+lepl.matchers.operators._BaseSeparator.__init__
+lepl.matchers.support.BaseFactoryMatcher.__init__
+lepl.matchers.support.OperatorMatcher.__init__
+lepl.matchers.support.Transformable.__init__
+lepl.matchers.transform.Transform.__init__
+lepl.matchers.transform.TransformationWrapper.__init__
+lepl.regexp.binary.BinaryAlphabet.__init__
+lepl.regexp.core.Alphabet.__init__
+lepl.regexp.core.BaseGraph.__init__
+lepl.regexp.core.Compiler.__init__
+lepl.regexp.core.DfaGraph.__init__
+lepl.regexp.core.DfaPattern.__init__
+lepl.regexp.core.Labelled.__init__
+lepl.regexp.core.NfaGraph.__init__
+lepl.regexp.core.NfaPattern.__init__
+lepl.regexp.core.NfaToDfa.__init__
+lepl.regexp.core.Sequence.__init__
+lepl.regexp.interval.IntervalMap.__init__
+lepl.regexp.interval.Intervals.__init__
+lepl.regexp.interval.TaggedFragments.__init__
+lepl.regexp.interval._Character.__init__
+lepl.regexp.matchers.BaseRegexp.__init__
+lepl.regexp.matchers.DfaRegexp.__init__
+lepl.regexp.matchers.NfaRegexp.__init__
+lepl.regexp.rewriters.CompileRegexp.__init__
+lepl.regexp.rewriters.RegexpContainer.__init__
+lepl.regexp.str.StrAlphabet.__init__
+lepl.regexp.str.StrParser.__init__
+lepl.regexp.unicode.UnicodeAlphabet.__init__
+lepl.stream.core.HashKey.__init__
+lepl.stream.core.MutableMaxDepth.__init__
+lepl.stream.core.StreamHelper.__init__
+lepl.stream.facade.HelperFacade.__init__
+lepl.stream.iter.Cons.__init__
+lepl.stream.maxdepth.FullFirstMatchException.__init__
+lepl.stream.simple.BaseHelper.__init__
+lepl.stream.simple.SequenceHelper.__init__
+lepl.stream.simple.StringHelper.__init__
+lepl.support._test.graph.SimpleNode.__init__
+lepl.support.context.Namespace.__init__
+lepl.support.context.NamespaceMap.__init__
+lepl.support.context.NamespaceMixin.__init__
+lepl.support.context.OnceOnlyNamespace.__init__
+lepl.support.context.Scope.__init__
+lepl.support.graph.ArgAsAttributeMixin.__init__
+lepl.support.graph.Clone.__init__
+lepl.support.graph.ConstructorStr.__init__
+lepl.support.graph.ConstructorWalker.__init__
+lepl.support.graph.GraphStr.__init__
+lepl.support.graph.PostorderWalkerMixin.__init__
+lepl.support.graph.Proxy.__init__
+lepl.support.graph.SimpleWalker.__init__
+lepl.support.lib.CircularFifo.__init__
+lepl.support.lib.LogMixin.__init__
+lepl.support.node.Node.__init__
+lepl.support.state.State.__init__
+lepl.support.warn.Warning.__init__" class="py-name" href="#" onclick="return doclink('link-17', '__init__', 'link-17');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-18" class="py-name" targets="Method lepl.support.graph.ArgAsAttributeMixin._arg()=lepl.support.graph.ArgAsAttributeMixin-class.html#_arg"><a title="lepl.support.graph.ArgAsAttributeMixin._arg" class="py-name" href="#" onclick="return doclink('link-18', '_arg', 'link-18');">_arg</a></tt><tt class="py-op">(</tt><tt id="link-19" class="py-name" targets="Function lepl.regexp._test.binary.label()=lepl.regexp._test.binary-module.html#label,Function lepl.regexp._test.unicode.label()=lepl.regexp._test.unicode-module.html#label"><a title="lepl.regexp._test.binary.label
+lepl.regexp._test.unicode.label" class="py-name" href="#" onclick="return doclink('link-19', 'label', 'link-19');">label</a></tt><tt class="py-op">=</tt><tt id="link-20" class="py-name"><a title="lepl.regexp._test.binary.label
+lepl.regexp._test.unicode.label" class="py-name" href="#" onclick="return doclink('link-20', 'label', 'link-19');">label</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-21" class="py-name" targets="Method lepl.support.graph.ArgAsAttributeMixin._args()=lepl.support.graph.ArgAsAttributeMixin-class.html#_args"><a title="lepl.support.graph.ArgAsAttributeMixin._args" class="py-name" href="#" onclick="return doclink('link-21', '_args', 'link-21');">_args</a></tt><tt class="py-op">(</tt><tt class="py-name">nodes</tt><tt class="py-op">=</tt><tt class="py-name">nodes</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">         </tt>
+<a name="SimpleNode.__str__"></a><div id="SimpleNode.__str__-def"><a name="L55"></a><tt class="py-lineno"> 55</tt> <a class="py-toggle" href="#" id="SimpleNode.__str__-toggle" onclick="return toggle('SimpleNode.__str__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.support._test.graph.SimpleNode-class.html#__str__">__str__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SimpleNode.__str__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="SimpleNode.__str__-expanded"><a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-22" class="py-name" targets="Module lepl.regexp.str=lepl.regexp.str-module.html"><a title="lepl.regexp.str" class="py-name" href="#" onclick="return doclink('link-22', 'str', 'link-22');">str</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-23" class="py-name"><a title="lepl.regexp._test.binary.label
+lepl.regexp._test.unicode.label" class="py-name" href="#" onclick="return doclink('link-23', 'label', 'link-19');">label</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">     </tt>
+<a name="SimpleNode.__repr__"></a><div id="SimpleNode.__repr__-def"><a name="L58"></a><tt class="py-lineno"> 58</tt> <a class="py-toggle" href="#" id="SimpleNode.__repr__-toggle" onclick="return toggle('SimpleNode.__repr__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.support._test.graph.SimpleNode-class.html#__repr__">__repr__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SimpleNode.__repr__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="SimpleNode.__repr__-expanded"><a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">        <tt id="link-24" class="py-name" targets="Function lepl.matchers.derived.args()=lepl.matchers.derived-module.html#args"><a title="lepl.matchers.derived.args" class="py-name" href="#" onclick="return doclink('link-24', 'args', 'link-24');">args</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt id="link-25" class="py-name"><a title="lepl.regexp.str" class="py-name" href="#" onclick="return doclink('link-25', 'str', 'link-22');">str</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-26" class="py-name"><a title="lepl.regexp._test.binary.label
+lepl.regexp._test.unicode.label" class="py-name" href="#" onclick="return doclink('link-26', 'label', 'link-19');">label</a></tt><tt class="py-op">)</tt><tt class="py-op">]</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">        <tt id="link-27" class="py-name"><a title="lepl.matchers.derived.args" class="py-name" href="#" onclick="return doclink('link-27', 'args', 'link-24');">args</a></tt><tt class="py-op">.</tt><tt id="link-28" class="py-name" targets="Method lepl.matchers.transform.TransformationWrapper.extend()=lepl.matchers.transform.TransformationWrapper-class.html#extend,Method lepl.regexp.str.StrParser.extend()=lepl.regexp.str.StrParser-class.html#extend"><a title="lepl.matchers.transform.TransformationWrapper.extend
+lepl.regexp.str.StrParser.extend" class="py-name" href="#" onclick="return doclink('link-28', 'extend', 'link-28');">extend</a></tt><tt class="py-op">(</tt><tt class="py-name">map</tt><tt class="py-op">(</tt><tt class="py-name">repr</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">nodes</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-string">'SimpleNode(%s)'</tt> <tt class="py-op">%</tt> <tt class="py-string">','</tt><tt class="py-op">.</tt><tt id="link-29" class="py-name" targets="Method lepl.regexp.core.Alphabet.join()=lepl.regexp.core.Alphabet-class.html#join,Method lepl.regexp.str.StrAlphabet.join()=lepl.regexp.str.StrAlphabet-class.html#join,Method lepl.stream.core.StreamHelper.join()=lepl.stream.core.StreamHelper-class.html#join,Method lepl.stream.facade.HelperFacade.join()=lepl.stream.facade.HelperFacade-class.html#join,Method lepl.stream.simple.ListHelper.join()=lepl.stream.simple.ListHelper-class.html#join,Method lepl.stream.simple.SequenceHelper.join()=lepl.stream.simple.SequenceHelper-class.html#join,Method lepl.stream.simple.StringHelper.join()=lepl.stream.simple.StringHelper-class.html#join,Variable lepl.support.list.join=lepl.support.list-module.html#join"><a title="lepl.regexp.core.Alphabet.join
+lepl.regexp.str.StrAlphabet.join
+lepl.stream.core.StreamHelper.join
+lepl.stream.facade.HelperFacade.join
+lepl.stream.simple.ListHelper.join
+lepl.stream.simple.SequenceHelper.join
+lepl.stream.simple.StringHelper.join
+lepl.support.list.join" class="py-name" href="#" onclick="return doclink('link-29', 'join', 'link-29');">join</a></tt><tt class="py-op">(</tt><tt id="link-30" class="py-name"><a title="lepl.matchers.derived.args" class="py-name" href="#" onclick="return doclink('link-30', 'args', 'link-24');">args</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">     </tt>
+<a name="SimpleNode.__getitem__"></a><div id="SimpleNode.__getitem__-def"><a name="L63"></a><tt class="py-lineno"> 63</tt> <a class="py-toggle" href="#" id="SimpleNode.__getitem__-toggle" onclick="return toggle('SimpleNode.__getitem__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.support._test.graph.SimpleNode-class.html#__getitem__">__getitem__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">index</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SimpleNode.__getitem__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="SimpleNode.__getitem__-expanded"><a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">nodes</tt><tt class="py-op">[</tt><tt id="link-31" class="py-name" targets="Method lepl.regexp.interval.IntervalMap.index()=lepl.regexp.interval.IntervalMap-class.html#index"><a title="lepl.regexp.interval.IntervalMap.index" class="py-name" href="#" onclick="return doclink('link-31', 'index', 'link-31');">index</a></tt><tt class="py-op">]</tt> </tt>
+</div><a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">     </tt>
+<a name="SimpleNode.__len__"></a><div id="SimpleNode.__len__-def"><a name="L66"></a><tt class="py-lineno"> 66</tt> <a class="py-toggle" href="#" id="SimpleNode.__len__-toggle" onclick="return toggle('SimpleNode.__len__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.support._test.graph.SimpleNode-class.html#__len__">__len__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SimpleNode.__len__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="SimpleNode.__len__-expanded"><a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-32" class="py-name" targets="Method lepl.lexer.stream.TokenHelper.len()=lepl.lexer.stream.TokenHelper-class.html#len,Method lepl.regexp.interval.Intervals.len()=lepl.regexp.interval.Intervals-class.html#len,Method lepl.regexp.interval.TaggedFragments.len()=lepl.regexp.interval.TaggedFragments-class.html#len,Method lepl.regexp.interval._Character.len()=lepl.regexp.interval._Character-class.html#len,Method lepl.stream.core.StreamHelper.len()=lepl.stream.core.StreamHelper-class.html#len,Method lepl.stream.facade.HelperFacade.len()=lepl.stream.facade.HelperFacade-class.html#len,Method lepl.stream.iter.IterableHelper.len()=lepl.stream.iter.IterableHelper-class.html#len,Method lepl.stream.simple.SequenceHelper.len()=lepl.stream.simple.SequenceHelper-class.html#len"><a title="lepl.lexer.stream.TokenHelper.len
+lepl.regexp.interval.Intervals.len
+lepl.regexp.interval.TaggedFragments.len
+lepl.regexp.interval._Character.len
+lepl.stream.core.StreamHelper.len
+lepl.stream.facade.HelperFacade.len
+lepl.stream.iter.IterableHelper.len
+lepl.stream.simple.SequenceHelper.len" class="py-name" href="#" onclick="return doclink('link-32', 'len', 'link-32');">len</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">nodes</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">     </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line"> </tt>
+<a name="graph"></a><div id="graph-def"><a name="L70"></a><tt class="py-lineno"> 70</tt> <a class="py-toggle" href="#" id="graph-toggle" onclick="return toggle('graph');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.support._test.graph-module.html#graph">graph</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="graph-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="graph-expanded"><a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-33" class="py-name"><a title="lepl.support._test.graph.SimpleNode" class="py-name" href="#" onclick="return doclink('link-33', 'SimpleNode', 'link-16');">SimpleNode</a></tt><tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">                <tt id="link-34" class="py-name"><a title="lepl.support._test.graph.SimpleNode" class="py-name" href="#" onclick="return doclink('link-34', 'SimpleNode', 'link-16');">SimpleNode</a></tt><tt class="py-op">(</tt><tt class="py-number">11</tt><tt class="py-op">,</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">                     <tt id="link-35" class="py-name"><a title="lepl.support._test.graph.SimpleNode" class="py-name" href="#" onclick="return doclink('link-35', 'SimpleNode', 'link-16');">SimpleNode</a></tt><tt class="py-op">(</tt><tt class="py-number">111</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">                     <tt id="link-36" class="py-name"><a title="lepl.support._test.graph.SimpleNode" class="py-name" href="#" onclick="return doclink('link-36', 'SimpleNode', 'link-16');">SimpleNode</a></tt><tt class="py-op">(</tt><tt class="py-number">112</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">                <tt id="link-37" class="py-name"><a title="lepl.support._test.graph.SimpleNode" class="py-name" href="#" onclick="return doclink('link-37', 'SimpleNode', 'link-16');">SimpleNode</a></tt><tt class="py-op">(</tt><tt class="py-number">12</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">         </tt>
+<a name="OrderTest"></a><div id="OrderTest-def"><a name="L77"></a><tt class="py-lineno"> 77</tt> <a class="py-toggle" href="#" id="OrderTest-toggle" onclick="return toggle('OrderTest');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lepl.support._test.graph.OrderTest-class.html">OrderTest</a><tt class="py-op">(</tt><tt class="py-base-class">TestCase</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="OrderTest-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="OrderTest-expanded"><a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">     </tt>
+<a name="OrderTest.test_preorder"></a><div id="OrderTest.test_preorder-def"><a name="L79"></a><tt class="py-lineno"> 79</tt> <a class="py-toggle" href="#" id="OrderTest.test_preorder-toggle" onclick="return toggle('OrderTest.test_preorder');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.support._test.graph.OrderTest-class.html#test_preorder">test_preorder</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="OrderTest.test_preorder-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="OrderTest.test_preorder-expanded"><a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">        <tt class="py-name">result</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt id="link-38" class="py-name"><a title="lepl.matchers.support.TreeStr.node
+lepl.regexp.core.DfaGraph.node
+lepl.support._test.node
+lepl.support.graph.Clone.node
+lepl.support.graph.ConstructorStr.node
+lepl.support.graph.GraphStr.node
+lepl.support.graph.Visitor.node
+lepl.support.node" class="py-name" href="#" onclick="return doclink('link-38', 'node', 'link-14');">node</a></tt><tt class="py-op">.</tt><tt id="link-39" class="py-name"><a title="lepl.regexp._test.binary.label
+lepl.regexp._test.unicode.label" class="py-name" href="#" onclick="return doclink('link-39', 'label', 'link-19');">label</a></tt> <tt class="py-keyword">for</tt> <tt id="link-40" class="py-name"><a title="lepl.matchers.support.TreeStr.node
+lepl.regexp.core.DfaGraph.node
+lepl.support._test.node
+lepl.support.graph.Clone.node
+lepl.support.graph.ConstructorStr.node
+lepl.support.graph.GraphStr.node
+lepl.support.graph.Visitor.node
+lepl.support.node" class="py-name" href="#" onclick="return doclink('link-40', 'node', 'link-14');">node</a></tt> <tt class="py-keyword">in</tt> <tt id="link-41" class="py-name"><a title="lepl.support.graph.preorder" class="py-name" href="#" onclick="return doclink('link-41', 'preorder', 'link-4');">preorder</a></tt><tt class="py-op">(</tt><tt id="link-42" class="py-name"><a title="lepl.support._test.graph
+lepl.support._test.graph.graph
+lepl.support.graph" class="py-name" href="#" onclick="return doclink('link-42', 'graph', 'link-2');">graph</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt id="link-43" class="py-name"><a title="lepl.support._test.graph.SimpleNode" class="py-name" href="#" onclick="return doclink('link-43', 'SimpleNode', 'link-16');">SimpleNode</a></tt><tt class="py-op">,</tt> <tt class="py-name">exclude</tt><tt class="py-op">=</tt><tt id="link-44" class="py-name"><a title="lepl.support.graph.LEAF" class="py-name" href="#" onclick="return doclink('link-44', 'LEAF', 'link-10');">LEAF</a></tt><tt class="py-op">)</tt><tt class="py-op">]</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt class="py-name">result</tt> <tt class="py-op">==</tt> <tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-number">11</tt><tt class="py-op">,</tt> <tt class="py-number">111</tt><tt class="py-op">,</tt> <tt class="py-number">112</tt><tt class="py-op">,</tt> <tt class="py-number">12</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">result</tt> </tt>
+</div><a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">         </tt>
+<a name="OrderTest.test_postorder"></a><div id="OrderTest.test_postorder-def"><a name="L83"></a><tt class="py-lineno"> 83</tt> <a class="py-toggle" href="#" id="OrderTest.test_postorder-toggle" onclick="return toggle('OrderTest.test_postorder');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.support._test.graph.OrderTest-class.html#test_postorder">test_postorder</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="OrderTest.test_postorder-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="OrderTest.test_postorder-expanded"><a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">        <tt class="py-name">result</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt id="link-45" class="py-name"><a title="lepl.matchers.support.TreeStr.node
+lepl.regexp.core.DfaGraph.node
+lepl.support._test.node
+lepl.support.graph.Clone.node
+lepl.support.graph.ConstructorStr.node
+lepl.support.graph.GraphStr.node
+lepl.support.graph.Visitor.node
+lepl.support.node" class="py-name" href="#" onclick="return doclink('link-45', 'node', 'link-14');">node</a></tt><tt class="py-op">.</tt><tt id="link-46" class="py-name"><a title="lepl.regexp._test.binary.label
+lepl.regexp._test.unicode.label" class="py-name" href="#" onclick="return doclink('link-46', 'label', 'link-19');">label</a></tt> <tt class="py-keyword">for</tt> <tt id="link-47" class="py-name"><a title="lepl.matchers.support.TreeStr.node
+lepl.regexp.core.DfaGraph.node
+lepl.support._test.node
+lepl.support.graph.Clone.node
+lepl.support.graph.ConstructorStr.node
+lepl.support.graph.GraphStr.node
+lepl.support.graph.Visitor.node
+lepl.support.node" class="py-name" href="#" onclick="return doclink('link-47', 'node', 'link-14');">node</a></tt> <tt class="py-keyword">in</tt> <tt id="link-48" class="py-name"><a title="lepl.support.graph.PostorderWalkerMixin.postorder
+lepl.support.graph.postorder" class="py-name" href="#" onclick="return doclink('link-48', 'postorder', 'link-5');">postorder</a></tt><tt class="py-op">(</tt><tt id="link-49" class="py-name"><a title="lepl.support._test.graph
+lepl.support._test.graph.graph
+lepl.support.graph" class="py-name" href="#" onclick="return doclink('link-49', 'graph', 'link-2');">graph</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt id="link-50" class="py-name"><a title="lepl.support._test.graph.SimpleNode" class="py-name" href="#" onclick="return doclink('link-50', 'SimpleNode', 'link-16');">SimpleNode</a></tt><tt class="py-op">,</tt> <tt class="py-name">exclude</tt><tt class="py-op">=</tt><tt id="link-51" class="py-name"><a title="lepl.support.graph.LEAF" class="py-name" href="#" onclick="return doclink('link-51', 'LEAF', 'link-10');">LEAF</a></tt><tt class="py-op">)</tt><tt class="py-op">]</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt class="py-name">result</tt> <tt class="py-op">==</tt> <tt class="py-op">[</tt><tt class="py-number">111</tt><tt class="py-op">,</tt> <tt class="py-number">112</tt><tt class="py-op">,</tt> <tt class="py-number">11</tt><tt class="py-op">,</tt> <tt class="py-number">12</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">result</tt> </tt>
+</div></div><a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">         </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">         </tt>
+<a name="ResetTest"></a><div id="ResetTest-def"><a name="L88"></a><tt class="py-lineno"> 88</tt> <a class="py-toggle" href="#" id="ResetTest-toggle" onclick="return toggle('ResetTest');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lepl.support._test.graph.ResetTest-class.html">ResetTest</a><tt class="py-op">(</tt><tt class="py-base-class">TestCase</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ResetTest-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="ResetTest-expanded"><a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">     </tt>
+<a name="ResetTest.test_reset"></a><div id="ResetTest.test_reset-def"><a name="L90"></a><tt class="py-lineno"> 90</tt> <a class="py-toggle" href="#" id="ResetTest.test_reset-toggle" onclick="return toggle('ResetTest.test_reset');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.support._test.graph.ResetTest-class.html#test_reset">test_reset</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ResetTest.test_reset-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="ResetTest.test_reset-expanded"><a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">        <tt class="py-name">nodes</tt> <tt class="py-op">=</tt> <tt id="link-52" class="py-name"><a title="lepl.support.graph.preorder" class="py-name" href="#" onclick="return doclink('link-52', 'preorder', 'link-4');">preorder</a></tt><tt class="py-op">(</tt><tt id="link-53" class="py-name"><a title="lepl.support._test.graph
+lepl.support._test.graph.graph
+lepl.support.graph" class="py-name" href="#" onclick="return doclink('link-53', 'graph', 'link-2');">graph</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt id="link-54" class="py-name"><a title="lepl.support._test.graph.SimpleNode" class="py-name" href="#" onclick="return doclink('link-54', 'SimpleNode', 'link-16');">SimpleNode</a></tt><tt class="py-op">,</tt> <tt class="py-name">exclude</tt><tt class="py-op">=</tt><tt id="link-55" class="py-name"><a title="lepl.support.graph.LEAF" class="py-name" href="#" onclick="return doclink('link-55', 'LEAF', 'link-10');">LEAF</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt id="link-56" class="py-name" targets="Method lepl.lexer.stream.FilteredTokenHelper.next()=lepl.lexer.stream.FilteredTokenHelper-class.html#next,Method lepl.lexer.stream.TokenHelper.next()=lepl.lexer.stream.TokenHelper-class.html#next,Method lepl.stream.core.StreamHelper.next()=lepl.stream.core.StreamHelper-class.html#next,Method lepl.stream.facade.HelperFacade.next()=lepl.stream.facade.HelperFacade-class.html#next,Method lepl.stream.iter.IterableHelper.next()=lepl.stream.iter.IterableHelper-class.html#next,Method lepl.stream.simple.SequenceHelper.next()=lepl.stream.simple.SequenceHelper-class.html#next"><a title="lepl.lexer.stream.FilteredTokenHelper.next
+lepl.lexer.stream.TokenHelper.next
+lepl.stream.core.StreamHelper.next
+lepl.stream.facade.HelperFacade.next
+lepl.stream.iter.IterableHelper.next
+lepl.stream.simple.SequenceHelper.next" class="py-name" href="#" onclick="return doclink('link-56', 'next', 'link-56');">next</a></tt><tt class="py-op">(</tt><tt class="py-name">nodes</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-57" class="py-name"><a title="lepl.regexp._test.binary.label
+lepl.regexp._test.unicode.label" class="py-name" href="#" onclick="return doclink('link-57', 'label', 'link-19');">label</a></tt> <tt class="py-op">==</tt> <tt class="py-number">1</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt id="link-58" class="py-name"><a title="lepl.lexer.stream.FilteredTokenHelper.next
+lepl.lexer.stream.TokenHelper.next
+lepl.stream.core.StreamHelper.next
+lepl.stream.facade.HelperFacade.next
+lepl.stream.iter.IterableHelper.next
+lepl.stream.simple.SequenceHelper.next" class="py-name" href="#" onclick="return doclink('link-58', 'next', 'link-56');">next</a></tt><tt class="py-op">(</tt><tt class="py-name">nodes</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-59" class="py-name"><a title="lepl.regexp._test.binary.label
+lepl.regexp._test.unicode.label" class="py-name" href="#" onclick="return doclink('link-59', 'label', 'link-19');">label</a></tt> <tt class="py-op">==</tt> <tt class="py-number">11</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">        <tt id="link-60" class="py-name"><a title="lepl.support.graph.reset" class="py-name" href="#" onclick="return doclink('link-60', 'reset', 'link-6');">reset</a></tt><tt class="py-op">(</tt><tt class="py-name">nodes</tt><tt class="py-op">)</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt id="link-61" class="py-name"><a title="lepl.lexer.stream.FilteredTokenHelper.next
+lepl.lexer.stream.TokenHelper.next
+lepl.stream.core.StreamHelper.next
+lepl.stream.facade.HelperFacade.next
+lepl.stream.iter.IterableHelper.next
+lepl.stream.simple.SequenceHelper.next" class="py-name" href="#" onclick="return doclink('link-61', 'next', 'link-56');">next</a></tt><tt class="py-op">(</tt><tt class="py-name">nodes</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-62" class="py-name"><a title="lepl.regexp._test.binary.label
+lepl.regexp._test.unicode.label" class="py-name" href="#" onclick="return doclink('link-62', 'label', 'link-19');">label</a></tt> <tt class="py-op">==</tt> <tt class="py-number">1</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt id="link-63" class="py-name"><a title="lepl.lexer.stream.FilteredTokenHelper.next
+lepl.lexer.stream.TokenHelper.next
+lepl.stream.core.StreamHelper.next
+lepl.stream.facade.HelperFacade.next
+lepl.stream.iter.IterableHelper.next
+lepl.stream.simple.SequenceHelper.next" class="py-name" href="#" onclick="return doclink('link-63', 'next', 'link-56');">next</a></tt><tt class="py-op">(</tt><tt class="py-name">nodes</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-64" class="py-name"><a title="lepl.regexp._test.binary.label
+lepl.regexp._test.unicode.label" class="py-name" href="#" onclick="return doclink('link-64', 'label', 'link-19');">label</a></tt> <tt class="py-op">==</tt> <tt class="py-number">11</tt> </tt>
+</div></div><a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line"> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line"> </tt>
+<a name="CloneTest"></a><div id="CloneTest-def"><a name="L99"></a><tt class="py-lineno"> 99</tt> <a class="py-toggle" href="#" id="CloneTest-toggle" onclick="return toggle('CloneTest');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lepl.support._test.graph.CloneTest-class.html">CloneTest</a><tt class="py-op">(</tt><tt class="py-base-class">TestCase</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="CloneTest-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="CloneTest-expanded"><a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">     </tt>
+<a name="CloneTest.test_simple"></a><div id="CloneTest.test_simple-def"><a name="L101"></a><tt class="py-lineno">101</tt> <a class="py-toggle" href="#" id="CloneTest.test_simple-toggle" onclick="return toggle('CloneTest.test_simple');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.support._test.graph.CloneTest-class.html#test_simple">test_simple</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="CloneTest.test_simple-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="CloneTest.test_simple-expanded"><a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">        <tt class="py-name">g1</tt> <tt class="py-op">=</tt> <tt id="link-65" class="py-name"><a title="lepl.support._test.graph
+lepl.support._test.graph.graph
+lepl.support.graph" class="py-name" href="#" onclick="return doclink('link-65', 'graph', 'link-2');">graph</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">        <tt class="py-name">g2</tt> <tt class="py-op">=</tt> <tt id="link-66" class="py-name"><a title="lepl.support.graph.ConstructorWalker" class="py-name" href="#" onclick="return doclink('link-66', 'ConstructorWalker', 'link-7');">ConstructorWalker</a></tt><tt class="py-op">(</tt><tt class="py-name">g1</tt><tt class="py-op">,</tt> <tt id="link-67" class="py-name"><a title="lepl.support._test.graph.SimpleNode" class="py-name" href="#" onclick="return doclink('link-67', 'SimpleNode', 'link-16');">SimpleNode</a></tt><tt class="py-op">)</tt><tt class="py-op">(</tt><tt id="link-68" class="py-name"><a title="lepl.support.graph.Clone" class="py-name" href="#" onclick="return doclink('link-68', 'Clone', 'link-8');">Clone</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt class="py-name">repr</tt><tt class="py-op">(</tt><tt class="py-name">g1</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-name">repr</tt><tt class="py-op">(</tt><tt class="py-name">g2</tt><tt class="py-op">)</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt class="py-name">g1</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">g2</tt> </tt>
+</div><a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">     </tt>
+<a name="CloneTest.assert_same"></a><div id="CloneTest.assert_same-def"><a name="L107"></a><tt class="py-lineno">107</tt> <a class="py-toggle" href="#" id="CloneTest.assert_same-toggle" onclick="return toggle('CloneTest.assert_same');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.support._test.graph.CloneTest-class.html#assert_same">assert_same</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">text1</tt><tt class="py-op">,</tt> <tt class="py-param">text2</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="CloneTest.assert_same-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="CloneTest.assert_same-expanded"><a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-69" class="py-name" targets="Method lepl.matchers._test.core.StrTest.__clean()=lepl.matchers._test.core.StrTest-class.html#__clean,Method lepl.support._test.graph.CloneTest.__clean()=lepl.support._test.graph.CloneTest-class.html#__clean"><a title="lepl.matchers._test.core.StrTest.__clean
+lepl.support._test.graph.CloneTest.__clean" class="py-name" href="#" onclick="return doclink('link-69', '__clean', 'link-69');">__clean</a></tt><tt class="py-op">(</tt><tt class="py-name">text1</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-70" class="py-name"><a title="lepl.matchers._test.core.StrTest.__clean
+lepl.support._test.graph.CloneTest.__clean" class="py-name" href="#" onclick="return doclink('link-70', '__clean', 'link-69');">__clean</a></tt><tt class="py-op">(</tt><tt class="py-name">text2</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-71" class="py-name"><a title="lepl.matchers._test.core.StrTest.__clean
+lepl.support._test.graph.CloneTest.__clean" class="py-name" href="#" onclick="return doclink('link-71', '__clean', 'link-69');">__clean</a></tt><tt class="py-op">(</tt><tt class="py-name">text1</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">     </tt>
+<a name="CloneTest.__clean"></a><div id="CloneTest.__clean-def"><a name="L110"></a><tt class="py-lineno">110</tt> <a class="py-toggle" href="#" id="CloneTest.__clean-toggle" onclick="return toggle('CloneTest.__clean');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.support._test.graph.CloneTest-class.html#__clean">__clean</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">text</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="CloneTest.__clean-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="CloneTest.__clean-expanded"><a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line">        <tt class="py-name">depth</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">        <tt class="py-name">result</tt> <tt class="py-op">=</tt> <tt class="py-string">''</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">c</tt> <tt class="py-keyword">in</tt> <tt id="link-72" class="py-name" targets="Module lepl.lexer.lines._test.text=lepl.lexer.lines._test.text-module.html"><a title="lepl.lexer.lines._test.text" class="py-name" href="#" onclick="return doclink('link-72', 'text', 'link-72');">text</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">c</tt> <tt class="py-op">==</tt> <tt class="py-string">'&lt;'</tt><tt class="py-op">:</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line">                <tt class="py-name">depth</tt> <tt class="py-op">+=</tt> <tt class="py-number">1</tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line">            <tt class="py-keyword">elif</tt> <tt class="py-name">c</tt> <tt class="py-op">==</tt> <tt class="py-string">'&gt;'</tt><tt class="py-op">:</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line">                <tt class="py-name">depth</tt> <tt class="py-op">-=</tt> <tt class="py-number">1</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line">            <tt class="py-keyword">elif</tt> <tt class="py-name">depth</tt> <tt class="py-op">==</tt> <tt class="py-number">0</tt><tt class="py-op">:</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line">                <tt class="py-name">result</tt> <tt class="py-op">+=</tt> <tt class="py-name">c</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">result</tt> </tt>
+</div><a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line"> </tt>
+<a name="CloneTest.test_loop"></a><div id="CloneTest.test_loop-def"><a name="L122"></a><tt class="py-lineno">122</tt> <a class="py-toggle" href="#" id="CloneTest.test_loop-toggle" onclick="return toggle('CloneTest.test_loop');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.support._test.graph.CloneTest-class.html#test_loop">test_loop</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="CloneTest.test_loop-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="CloneTest.test_loop-expanded"><a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-name">s</tt><tt class="py-op">,</tt> <tt class="py-name">n</tt><tt class="py-op">)</tt> <tt class="py-op">=</tt> <tt id="link-73" class="py-name"><a title="lepl.support.graph.make_proxy" class="py-name" href="#" onclick="return doclink('link-73', 'make_proxy', 'link-9');">make_proxy</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">        <tt class="py-name">g1</tt> <tt class="py-op">=</tt> <tt id="link-74" class="py-name"><a title="lepl.support._test.graph.SimpleNode" class="py-name" href="#" onclick="return doclink('link-74', 'SimpleNode', 'link-16');">SimpleNode</a></tt><tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line">                <tt id="link-75" class="py-name"><a title="lepl.support._test.graph.SimpleNode" class="py-name" href="#" onclick="return doclink('link-75', 'SimpleNode', 'link-16');">SimpleNode</a></tt><tt class="py-op">(</tt><tt class="py-number">11</tt><tt class="py-op">,</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">                     <tt id="link-76" class="py-name"><a title="lepl.support._test.graph.SimpleNode" class="py-name" href="#" onclick="return doclink('link-76', 'SimpleNode', 'link-16');">SimpleNode</a></tt><tt class="py-op">(</tt><tt class="py-number">111</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line">                     <tt id="link-77" class="py-name"><a title="lepl.support._test.graph.SimpleNode" class="py-name" href="#" onclick="return doclink('link-77', 'SimpleNode', 'link-16');">SimpleNode</a></tt><tt class="py-op">(</tt><tt class="py-number">112</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line">                     <tt class="py-name">n</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line">                <tt id="link-78" class="py-name"><a title="lepl.support._test.graph.SimpleNode" class="py-name" href="#" onclick="return doclink('link-78', 'SimpleNode', 'link-16');">SimpleNode</a></tt><tt class="py-op">(</tt><tt class="py-number">12</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line">        <tt class="py-name">s</tt><tt class="py-op">(</tt><tt class="py-name">g1</tt><tt class="py-op">)</tt> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line">        <tt class="py-name">g2</tt> <tt class="py-op">=</tt> <tt id="link-79" class="py-name"><a title="lepl.support.graph.ConstructorWalker" class="py-name" href="#" onclick="return doclink('link-79', 'ConstructorWalker', 'link-7');">ConstructorWalker</a></tt><tt class="py-op">(</tt><tt class="py-name">g1</tt><tt class="py-op">,</tt> <tt id="link-80" class="py-name"><a title="lepl.support._test.graph.SimpleNode" class="py-name" href="#" onclick="return doclink('link-80', 'SimpleNode', 'link-16');">SimpleNode</a></tt><tt class="py-op">)</tt><tt class="py-op">(</tt><tt id="link-81" class="py-name"><a title="lepl.support.graph.Clone" class="py-name" href="#" onclick="return doclink('link-81', 'Clone', 'link-8');">Clone</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-82" class="py-name" targets="Method lepl.matchers._test.core.StrTest.assert_same()=lepl.matchers._test.core.StrTest-class.html#assert_same,Method lepl.support._test.graph.CloneTest.assert_same()=lepl.support._test.graph.CloneTest-class.html#assert_same"><a title="lepl.matchers._test.core.StrTest.assert_same
+lepl.support._test.graph.CloneTest.assert_same" class="py-name" href="#" onclick="return doclink('link-82', 'assert_same', 'link-82');">assert_same</a></tt><tt class="py-op">(</tt><tt class="py-name">repr</tt><tt class="py-op">(</tt><tt class="py-name">g1</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">repr</tt><tt class="py-op">(</tt><tt class="py-name">g2</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line"> </tt>
+<a name="CloneTest.test_loops"></a><div id="CloneTest.test_loops-def"><a name="L134"></a><tt class="py-lineno">134</tt> <a class="py-toggle" href="#" id="CloneTest.test_loops-toggle" onclick="return toggle('CloneTest.test_loops');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.support._test.graph.CloneTest-class.html#test_loops">test_loops</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="CloneTest.test_loops-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="CloneTest.test_loops-expanded"><a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-name">s1</tt><tt class="py-op">,</tt> <tt class="py-name">n1</tt><tt class="py-op">)</tt> <tt class="py-op">=</tt> <tt id="link-83" class="py-name"><a title="lepl.support.graph.make_proxy" class="py-name" href="#" onclick="return doclink('link-83', 'make_proxy', 'link-9');">make_proxy</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-name">s2</tt><tt class="py-op">,</tt> <tt class="py-name">n2</tt><tt class="py-op">)</tt> <tt class="py-op">=</tt> <tt id="link-84" class="py-name"><a title="lepl.support.graph.make_proxy" class="py-name" href="#" onclick="return doclink('link-84', 'make_proxy', 'link-9');">make_proxy</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line">        <tt class="py-name">g1</tt> <tt class="py-op">=</tt> <tt id="link-85" class="py-name"><a title="lepl.support._test.graph.SimpleNode" class="py-name" href="#" onclick="return doclink('link-85', 'SimpleNode', 'link-16');">SimpleNode</a></tt><tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line">                <tt id="link-86" class="py-name"><a title="lepl.support._test.graph.SimpleNode" class="py-name" href="#" onclick="return doclink('link-86', 'SimpleNode', 'link-16');">SimpleNode</a></tt><tt class="py-op">(</tt><tt class="py-number">11</tt><tt class="py-op">,</tt> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line">                     <tt id="link-87" class="py-name"><a title="lepl.support._test.graph.SimpleNode" class="py-name" href="#" onclick="return doclink('link-87', 'SimpleNode', 'link-16');">SimpleNode</a></tt><tt class="py-op">(</tt><tt class="py-number">111</tt><tt class="py-op">,</tt> <tt class="py-name">n2</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line">                     <tt id="link-88" class="py-name"><a title="lepl.support._test.graph.SimpleNode" class="py-name" href="#" onclick="return doclink('link-88', 'SimpleNode', 'link-16');">SimpleNode</a></tt><tt class="py-op">(</tt><tt class="py-number">112</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line">                     <tt class="py-name">n1</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line">                <tt id="link-89" class="py-name"><a title="lepl.support._test.graph.SimpleNode" class="py-name" href="#" onclick="return doclink('link-89', 'SimpleNode', 'link-16');">SimpleNode</a></tt><tt class="py-op">(</tt><tt class="py-number">12</tt><tt class="py-op">,</tt> <tt class="py-name">n1</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line">        <tt class="py-name">s1</tt><tt class="py-op">(</tt><tt class="py-name">g1</tt><tt class="py-op">)</tt> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line">        <tt class="py-name">s2</tt><tt class="py-op">(</tt><tt id="link-90" class="py-name"><a title="lepl.lexer.stream.FilteredTokenHelper.next
+lepl.lexer.stream.TokenHelper.next
+lepl.stream.core.StreamHelper.next
+lepl.stream.facade.HelperFacade.next
+lepl.stream.iter.IterableHelper.next
+lepl.stream.simple.SequenceHelper.next" class="py-name" href="#" onclick="return doclink('link-90', 'next', 'link-56');">next</a></tt><tt class="py-op">(</tt><tt id="link-91" class="py-name" targets="Module lepl.stream._test.iter=lepl.stream._test.iter-module.html,Module lepl.stream.iter=lepl.stream.iter-module.html"><a title="lepl.stream._test.iter
+lepl.stream.iter" class="py-name" href="#" onclick="return doclink('link-91', 'iter', 'link-91');">iter</a></tt><tt class="py-op">(</tt><tt class="py-name">g1</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line">        <tt class="py-name">g2</tt> <tt class="py-op">=</tt> <tt id="link-92" class="py-name"><a title="lepl.support.graph.ConstructorWalker" class="py-name" href="#" onclick="return doclink('link-92', 'ConstructorWalker', 'link-7');">ConstructorWalker</a></tt><tt class="py-op">(</tt><tt class="py-name">g1</tt><tt class="py-op">,</tt> <tt id="link-93" class="py-name"><a title="lepl.support._test.graph.SimpleNode" class="py-name" href="#" onclick="return doclink('link-93', 'SimpleNode', 'link-16');">SimpleNode</a></tt><tt class="py-op">)</tt><tt class="py-op">(</tt><tt id="link-94" class="py-name"><a title="lepl.support.graph.Clone" class="py-name" href="#" onclick="return doclink('link-94', 'Clone', 'link-8');">Clone</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-95" class="py-name"><a title="lepl.matchers._test.core.StrTest.assert_same
+lepl.support._test.graph.CloneTest.assert_same" class="py-name" href="#" onclick="return doclink('link-95', 'assert_same', 'link-82');">assert_same</a></tt><tt class="py-op">(</tt><tt class="py-name">repr</tt><tt class="py-op">(</tt><tt class="py-name">g1</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">repr</tt><tt class="py-op">(</tt><tt class="py-name">g2</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line">         </tt>
+<a name="CloneTest.test_loops_with_proxy"></a><div id="CloneTest.test_loops_with_proxy-def"><a name="L148"></a><tt class="py-lineno">148</tt> <a class="py-toggle" href="#" id="CloneTest.test_loops_with_proxy-toggle" onclick="return toggle('CloneTest.test_loops_with_proxy');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.support._test.graph.CloneTest-class.html#test_loops_with_proxy">test_loops_with_proxy</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="CloneTest.test_loops_with_proxy-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="CloneTest.test_loops_with_proxy-expanded"><a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-name">s1</tt><tt class="py-op">,</tt> <tt class="py-name">n1</tt><tt class="py-op">)</tt> <tt class="py-op">=</tt> <tt id="link-96" class="py-name"><a title="lepl.support.graph.make_proxy" class="py-name" href="#" onclick="return doclink('link-96', 'make_proxy', 'link-9');">make_proxy</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-name">s2</tt><tt class="py-op">,</tt> <tt class="py-name">n2</tt><tt class="py-op">)</tt> <tt class="py-op">=</tt> <tt id="link-97" class="py-name"><a title="lepl.support.graph.make_proxy" class="py-name" href="#" onclick="return doclink('link-97', 'make_proxy', 'link-9');">make_proxy</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line">        <tt class="py-name">g1</tt> <tt class="py-op">=</tt> <tt id="link-98" class="py-name"><a title="lepl.support._test.graph.SimpleNode" class="py-name" href="#" onclick="return doclink('link-98', 'SimpleNode', 'link-16');">SimpleNode</a></tt><tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> </tt>
+<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line">                <tt id="link-99" class="py-name"><a title="lepl.support._test.graph.SimpleNode" class="py-name" href="#" onclick="return doclink('link-99', 'SimpleNode', 'link-16');">SimpleNode</a></tt><tt class="py-op">(</tt><tt class="py-number">11</tt><tt class="py-op">,</tt> </tt>
+<a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line">                     <tt id="link-100" class="py-name"><a title="lepl.support._test.graph.SimpleNode" class="py-name" href="#" onclick="return doclink('link-100', 'SimpleNode', 'link-16');">SimpleNode</a></tt><tt class="py-op">(</tt><tt class="py-number">111</tt><tt class="py-op">,</tt> <tt class="py-name">n2</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line">                     <tt id="link-101" class="py-name"><a title="lepl.support._test.graph.SimpleNode" class="py-name" href="#" onclick="return doclink('link-101', 'SimpleNode', 'link-16');">SimpleNode</a></tt><tt class="py-op">(</tt><tt class="py-number">112</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line">                     <tt class="py-name">n1</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line">                <tt id="link-102" class="py-name"><a title="lepl.support._test.graph.SimpleNode" class="py-name" href="#" onclick="return doclink('link-102', 'SimpleNode', 'link-16');">SimpleNode</a></tt><tt class="py-op">(</tt><tt class="py-number">12</tt><tt class="py-op">,</tt> <tt class="py-name">n1</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line">        <tt class="py-name">s1</tt><tt class="py-op">(</tt><tt class="py-name">g1</tt><tt class="py-op">)</tt> </tt>
+<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line">        <tt class="py-name">s2</tt><tt class="py-op">(</tt><tt id="link-103" class="py-name"><a title="lepl.lexer.stream.FilteredTokenHelper.next
+lepl.lexer.stream.TokenHelper.next
+lepl.stream.core.StreamHelper.next
+lepl.stream.facade.HelperFacade.next
+lepl.stream.iter.IterableHelper.next
+lepl.stream.simple.SequenceHelper.next" class="py-name" href="#" onclick="return doclink('link-103', 'next', 'link-56');">next</a></tt><tt class="py-op">(</tt><tt id="link-104" class="py-name"><a title="lepl.stream._test.iter
+lepl.stream.iter" class="py-name" href="#" onclick="return doclink('link-104', 'iter', 'link-91');">iter</a></tt><tt class="py-op">(</tt><tt class="py-name">g1</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line">        <tt class="py-name">g2</tt> <tt class="py-op">=</tt> <tt id="link-105" class="py-name"><a title="lepl.support.graph.ConstructorWalker" class="py-name" href="#" onclick="return doclink('link-105', 'ConstructorWalker', 'link-7');">ConstructorWalker</a></tt><tt class="py-op">(</tt><tt class="py-name">g1</tt><tt class="py-op">,</tt> <tt id="link-106" class="py-name"><a title="lepl.support._test.graph.SimpleNode" class="py-name" href="#" onclick="return doclink('link-106', 'SimpleNode', 'link-16');">SimpleNode</a></tt><tt class="py-op">)</tt><tt class="py-op">(</tt><tt id="link-107" class="py-name"><a title="lepl.support.graph.Clone" class="py-name" href="#" onclick="return doclink('link-107', 'Clone', 'link-8');">Clone</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line">        <tt class="py-name">g3</tt> <tt class="py-op">=</tt> <tt id="link-108" class="py-name"><a title="lepl.support.graph.ConstructorWalker" class="py-name" href="#" onclick="return doclink('link-108', 'ConstructorWalker', 'link-7');">ConstructorWalker</a></tt><tt class="py-op">(</tt><tt class="py-name">g2</tt><tt class="py-op">,</tt> <tt id="link-109" class="py-name"><a title="lepl.support._test.graph.SimpleNode" class="py-name" href="#" onclick="return doclink('link-109', 'SimpleNode', 'link-16');">SimpleNode</a></tt><tt class="py-op">)</tt><tt class="py-op">(</tt><tt id="link-110" class="py-name"><a title="lepl.support.graph.Clone" class="py-name" href="#" onclick="return doclink('link-110', 'Clone', 'link-8');">Clone</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-111" class="py-name"><a title="lepl.matchers._test.core.StrTest.assert_same
+lepl.support._test.graph.CloneTest.assert_same" class="py-name" href="#" onclick="return doclink('link-111', 'assert_same', 'link-82');">assert_same</a></tt><tt class="py-op">(</tt><tt class="py-name">repr</tt><tt class="py-op">(</tt><tt class="py-name">g1</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">repr</tt><tt class="py-op">(</tt><tt class="py-name">g3</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line"><tt class="py-comment">#        print(repr(g3))</tt> </tt>
+<a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line"> </tt>
+<a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line"> </tt>
+<a name="GenericOrderTest"></a><div id="GenericOrderTest-def"><a name="L165"></a><tt class="py-lineno">165</tt> <a class="py-toggle" href="#" id="GenericOrderTest-toggle" onclick="return toggle('GenericOrderTest');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lepl.support._test.graph.GenericOrderTest-class.html">GenericOrderTest</a><tt class="py-op">(</tt><tt class="py-base-class">TestCase</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="GenericOrderTest-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="GenericOrderTest-expanded"><a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line">     </tt>
+<a name="GenericOrderTest.test_preorder"></a><div id="GenericOrderTest.test_preorder-def"><a name="L167"></a><tt class="py-lineno">167</tt> <a class="py-toggle" href="#" id="GenericOrderTest.test_preorder-toggle" onclick="return toggle('GenericOrderTest.test_preorder');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.support._test.graph.GenericOrderTest-class.html#test_preorder">test_preorder</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="GenericOrderTest.test_preorder-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="GenericOrderTest.test_preorder-expanded"><a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line">        <tt id="link-112" class="py-name" targets="Variable lepl.cairo.colour.Colour.g=lepl.cairo.colour.Colour-class.html#g"><a title="lepl.cairo.colour.Colour.g" class="py-name" href="#" onclick="return doclink('link-112', 'g', 'link-112');">g</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-op">[</tt><tt class="py-number">11</tt><tt class="py-op">,</tt> <tt class="py-op">[</tt><tt class="py-number">111</tt><tt class="py-op">,</tt> <tt class="py-number">112</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-number">12</tt><tt class="py-op">]</tt><tt class="py-op">]</tt> </tt>
+<a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line">        <tt class="py-name">result</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt id="link-113" class="py-name"><a title="lepl.matchers.support.TreeStr.node
+lepl.regexp.core.DfaGraph.node
+lepl.support._test.node
+lepl.support.graph.Clone.node
+lepl.support.graph.ConstructorStr.node
+lepl.support.graph.GraphStr.node
+lepl.support.graph.Visitor.node
+lepl.support.node" class="py-name" href="#" onclick="return doclink('link-113', 'node', 'link-14');">node</a></tt> <tt class="py-keyword">for</tt> <tt id="link-114" class="py-name"><a title="lepl.matchers.support.TreeStr.node
+lepl.regexp.core.DfaGraph.node
+lepl.support._test.node
+lepl.support.graph.Clone.node
+lepl.support.graph.ConstructorStr.node
+lepl.support.graph.GraphStr.node
+lepl.support.graph.Visitor.node
+lepl.support.node" class="py-name" href="#" onclick="return doclink('link-114', 'node', 'link-14');">node</a></tt> <tt class="py-keyword">in</tt> <tt id="link-115" class="py-name"><a title="lepl.support.graph.preorder" class="py-name" href="#" onclick="return doclink('link-115', 'preorder', 'link-4');">preorder</a></tt><tt class="py-op">(</tt><tt id="link-116" class="py-name"><a title="lepl.cairo.colour.Colour.g" class="py-name" href="#" onclick="return doclink('link-116', 'g', 'link-112');">g</a></tt><tt class="py-op">,</tt> <tt id="link-117" class="py-name" targets="Module lepl.support._test.list=lepl.support._test.list-module.html,Module lepl.support.list=lepl.support.list-module.html"><a title="lepl.support._test.list
+lepl.support.list" class="py-name" href="#" onclick="return doclink('link-117', 'list', 'link-117');">list</a></tt><tt class="py-op">)</tt> <tt class="py-keyword">if</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt id="link-118" class="py-name"><a title="lepl.matchers.support.TreeStr.node
+lepl.regexp.core.DfaGraph.node
+lepl.support._test.node
+lepl.support.graph.Clone.node
+lepl.support.graph.ConstructorStr.node
+lepl.support.graph.GraphStr.node
+lepl.support.graph.Visitor.node
+lepl.support.node" class="py-name" href="#" onclick="return doclink('link-118', 'node', 'link-14');">node</a></tt><tt class="py-op">,</tt> <tt class="py-name">int</tt><tt class="py-op">)</tt><tt class="py-op">]</tt> </tt>
+<a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt class="py-name">result</tt> <tt class="py-op">==</tt> <tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-number">11</tt><tt class="py-op">,</tt> <tt class="py-number">111</tt><tt class="py-op">,</tt> <tt class="py-number">112</tt><tt class="py-op">,</tt> <tt class="py-number">12</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">result</tt> </tt>
+</div><a name="L171"></a><tt class="py-lineno">171</tt>  <tt class="py-line">         </tt>
+<a name="GenericOrderTest.test_postorder"></a><div id="GenericOrderTest.test_postorder-def"><a name="L172"></a><tt class="py-lineno">172</tt> <a class="py-toggle" href="#" id="GenericOrderTest.test_postorder-toggle" onclick="return toggle('GenericOrderTest.test_postorder');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.support._test.graph.GenericOrderTest-class.html#test_postorder">test_postorder</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="GenericOrderTest.test_postorder-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="GenericOrderTest.test_postorder-expanded"><a name="L173"></a><tt class="py-lineno">173</tt>  <tt class="py-line">        <tt class="py-docstring">'''</tt> </tt>
+<a name="L174"></a><tt class="py-lineno">174</tt>  <tt class="py-line"><tt class="py-docstring">        At first I was surprised about this (compare with SimpleNode results above),</tt> </tt>
+<a name="L175"></a><tt class="py-lineno">175</tt>  <tt class="py-line"><tt class="py-docstring">        but these are leaf nodes, so postorder doesn't change anything (there's</tt> </tt>
+<a name="L176"></a><tt class="py-lineno">176</tt>  <tt class="py-line"><tt class="py-docstring">        no difference between "before visiting" and "after visiting" a leaf). </tt> </tt>
+<a name="L177"></a><tt class="py-lineno">177</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L178"></a><tt class="py-lineno">178</tt>  <tt class="py-line">        <tt id="link-119" class="py-name"><a title="lepl.cairo.colour.Colour.g" class="py-name" href="#" onclick="return doclink('link-119', 'g', 'link-112');">g</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-op">[</tt><tt class="py-number">11</tt><tt class="py-op">,</tt> <tt class="py-op">[</tt><tt class="py-number">111</tt><tt class="py-op">,</tt> <tt class="py-number">112</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-number">12</tt><tt class="py-op">]</tt><tt class="py-op">]</tt> </tt>
+<a name="L179"></a><tt class="py-lineno">179</tt>  <tt class="py-line">        <tt class="py-name">result</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt id="link-120" class="py-name"><a title="lepl.matchers.support.TreeStr.node
+lepl.regexp.core.DfaGraph.node
+lepl.support._test.node
+lepl.support.graph.Clone.node
+lepl.support.graph.ConstructorStr.node
+lepl.support.graph.GraphStr.node
+lepl.support.graph.Visitor.node
+lepl.support.node" class="py-name" href="#" onclick="return doclink('link-120', 'node', 'link-14');">node</a></tt> <tt class="py-keyword">for</tt> <tt id="link-121" class="py-name"><a title="lepl.matchers.support.TreeStr.node
+lepl.regexp.core.DfaGraph.node
+lepl.support._test.node
+lepl.support.graph.Clone.node
+lepl.support.graph.ConstructorStr.node
+lepl.support.graph.GraphStr.node
+lepl.support.graph.Visitor.node
+lepl.support.node" class="py-name" href="#" onclick="return doclink('link-121', 'node', 'link-14');">node</a></tt> <tt class="py-keyword">in</tt> <tt id="link-122" class="py-name"><a title="lepl.support.graph.PostorderWalkerMixin.postorder
+lepl.support.graph.postorder" class="py-name" href="#" onclick="return doclink('link-122', 'postorder', 'link-5');">postorder</a></tt><tt class="py-op">(</tt><tt id="link-123" class="py-name"><a title="lepl.cairo.colour.Colour.g" class="py-name" href="#" onclick="return doclink('link-123', 'g', 'link-112');">g</a></tt><tt class="py-op">,</tt> <tt id="link-124" class="py-name"><a title="lepl.support._test.list
+lepl.support.list" class="py-name" href="#" onclick="return doclink('link-124', 'list', 'link-117');">list</a></tt><tt class="py-op">)</tt> <tt class="py-keyword">if</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt id="link-125" class="py-name"><a title="lepl.matchers.support.TreeStr.node
+lepl.regexp.core.DfaGraph.node
+lepl.support._test.node
+lepl.support.graph.Clone.node
+lepl.support.graph.ConstructorStr.node
+lepl.support.graph.GraphStr.node
+lepl.support.graph.Visitor.node
+lepl.support.node" class="py-name" href="#" onclick="return doclink('link-125', 'node', 'link-14');">node</a></tt><tt class="py-op">,</tt> <tt class="py-name">int</tt><tt class="py-op">)</tt><tt class="py-op">]</tt> </tt>
+<a name="L180"></a><tt class="py-lineno">180</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt class="py-name">result</tt> <tt class="py-op">==</tt> <tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-number">11</tt><tt class="py-op">,</tt> <tt class="py-number">111</tt><tt class="py-op">,</tt> <tt class="py-number">112</tt><tt class="py-op">,</tt> <tt class="py-number">12</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">result</tt> </tt>
+</div></div><a name="L181"></a><tt class="py-lineno">181</tt>  <tt class="py-line">         </tt>
+<a name="L182"></a><tt class="py-lineno">182</tt>  <tt class="py-line">         </tt>
+<a name="LeafTest"></a><div id="LeafTest-def"><a name="L183"></a><tt class="py-lineno">183</tt> <a class="py-toggle" href="#" id="LeafTest-toggle" onclick="return toggle('LeafTest');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lepl.support._test.graph.LeafTest-class.html">LeafTest</a><tt class="py-op">(</tt><tt class="py-base-class">TestCase</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LeafTest-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="LeafTest-expanded"><a name="L184"></a><tt class="py-lineno">184</tt>  <tt class="py-line">     </tt>
+<a name="LeafTest.test_order"></a><div id="LeafTest.test_order-def"><a name="L185"></a><tt class="py-lineno">185</tt> <a class="py-toggle" href="#" id="LeafTest.test_order-toggle" onclick="return toggle('LeafTest.test_order');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.support._test.graph.LeafTest-class.html#test_order">test_order</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LeafTest.test_order-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="LeafTest.test_order-expanded"><a name="L186"></a><tt class="py-lineno">186</tt>  <tt class="py-line">        <tt id="link-126" class="py-name" targets="Method lepl.matchers.support.BaseMatcher.tree()=lepl.matchers.support.BaseMatcher-class.html#tree,Method lepl.support._test.node.NestedNamedTest.tree()=lepl.support._test.node.NestedNamedTest-class.html#tree,Method lepl.support._test.node.OrderTest.tree()=lepl.support._test.node.OrderTest-class.html#tree"><a title="lepl.matchers.support.BaseMatcher.tree
+lepl.support._test.node.NestedNamedTest.tree
+lepl.support._test.node.OrderTest.tree" class="py-name" href="#" onclick="return doclink('link-126', 'tree', 'link-126');">tree</a></tt> <tt class="py-op">=</tt> <tt id="link-127" class="py-name"><a title="lepl.support.node.Node" class="py-name" href="#" onclick="return doclink('link-127', 'Node', 'link-15');">Node</a></tt><tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-number">2</tt><tt class="py-op">,</tt> <tt id="link-128" class="py-name"><a title="lepl.support.node.Node" class="py-name" href="#" onclick="return doclink('link-128', 'Node', 'link-15');">Node</a></tt><tt class="py-op">(</tt><tt class="py-number">3</tt><tt class="py-op">,</tt> <tt id="link-129" class="py-name"><a title="lepl.support.node.Node" class="py-name" href="#" onclick="return doclink('link-129', 'Node', 'link-15');">Node</a></tt><tt class="py-op">(</tt><tt class="py-number">4</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt id="link-130" class="py-name"><a title="lepl.support.node.Node" class="py-name" href="#" onclick="return doclink('link-130', 'Node', 'link-15');">Node</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-number">5</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L187"></a><tt class="py-lineno">187</tt>  <tt class="py-line">        <tt class="py-name">result</tt> <tt class="py-op">=</tt> <tt id="link-131" class="py-name"><a title="lepl.support._test.list
+lepl.support.list" class="py-name" href="#" onclick="return doclink('link-131', 'list', 'link-117');">list</a></tt><tt class="py-op">(</tt><tt id="link-132" class="py-name"><a title="lepl.support.graph.leaves" class="py-name" href="#" onclick="return doclink('link-132', 'leaves', 'link-11');">leaves</a></tt><tt class="py-op">(</tt><tt id="link-133" class="py-name"><a title="lepl.matchers.support.BaseMatcher.tree
+lepl.support._test.node.NestedNamedTest.tree
+lepl.support._test.node.OrderTest.tree" class="py-name" href="#" onclick="return doclink('link-133', 'tree', 'link-126');">tree</a></tt><tt class="py-op">,</tt> <tt id="link-134" class="py-name"><a title="lepl.support.node.Node" class="py-name" href="#" onclick="return doclink('link-134', 'Node', 'link-15');">Node</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L188"></a><tt class="py-lineno">188</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt class="py-name">result</tt> <tt class="py-op">==</tt> <tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">,</tt><tt class="py-number">2</tt><tt class="py-op">,</tt><tt class="py-number">3</tt><tt class="py-op">,</tt><tt class="py-number">4</tt><tt class="py-op">,</tt><tt class="py-number">5</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">result</tt> </tt>
+</div></div><a name="L189"></a><tt class="py-lineno">189</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lepl-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sun May 13 16:31:12 2012
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

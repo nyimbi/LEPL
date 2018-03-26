@@ -1,0 +1,1262 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lepl.matchers.operators.OperatorMixin</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lepl-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lepl-module.html">Package&nbsp;lepl</a> ::
+        <a href="lepl.matchers-module.html">Package&nbsp;matchers</a> ::
+        <a href="lepl.matchers.operators-module.html">Module&nbsp;operators</a> ::
+        Class&nbsp;OperatorMixin
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lepl.matchers.operators.OperatorMixin-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class OperatorMixin</h1><p class="nomargin-top"><span class="codelink"><a href="lepl.matchers.operators-pysrc.html#OperatorMixin">source&nbsp;code</a></span></p>
+<center>
+<center>  <map id="uml_class_diagram_for_lepl_mat_62" name="uml_class_diagram_for_lepl_mat_62">
+<area shape="rect" id="node1_14" href="lepl.matchers.operators.OperatorMixin-class.html#__init__" title="x.__init__(...) initializes x; see help(type(x)) for signature" alt="" coords="17,103,213,121"/>
+<area shape="rect" id="node1_15" href="lepl.matchers.operators.OperatorMixin-class.html#__add__" title="self + other &#45; Join strings, merge lists." alt="" coords="17,121,213,140"/>
+<area shape="rect" id="node1_16" href="lepl.matchers.operators.OperatorMixin-class.html#__radd__" title="other + self &#45; Join strings, merge lists." alt="" coords="17,140,213,159"/>
+<area shape="rect" id="node1_17" href="lepl.matchers.operators.OperatorMixin-class.html#__and__" title="self &amp; other &#45; Append results." alt="" coords="17,159,213,177"/>
+<area shape="rect" id="node1_18" href="lepl.matchers.operators.OperatorMixin-class.html#__rand__" title="other &amp; self &#45; Append results." alt="" coords="17,177,213,196"/>
+<area shape="rect" id="node1_19" href="lepl.matchers.operators.OperatorMixin-class.html#__div__" title="For 2.6" alt="" coords="17,196,213,215"/>
+<area shape="rect" id="node1_20" href="lepl.matchers.operators.OperatorMixin-class.html#__rdiv__" title="For 2.6" alt="" coords="17,215,213,233"/>
+<area shape="rect" id="node1_21" href="lepl.matchers.operators.OperatorMixin-class.html#__truediv__" title="self / other &#45; Append results, with optional separating space." alt="" coords="17,233,213,252"/>
+<area shape="rect" id="node1_22" href="lepl.matchers.operators.OperatorMixin-class.html#__rtruediv__" title="other / self &#45; Append results, with optional separating space." alt="" coords="17,252,213,271"/>
+<area shape="rect" id="node1_23" href="lepl.matchers.operators.OperatorMixin-class.html#__floordiv__" title="self // other &#45; Append results, with required separating space." alt="" coords="17,271,213,289"/>
+<area shape="rect" id="node1_24" href="lepl.matchers.operators.OperatorMixin-class.html#__rfloordiv__" title="other // self &#45; Append results, with required separating space." alt="" coords="17,289,213,308"/>
+<area shape="rect" id="node1_25" href="lepl.matchers.operators.OperatorMixin-class.html#__or__" title="self | other &#45; Try alternative matchers." alt="" coords="17,308,213,327"/>
+<area shape="rect" id="node1_26" href="lepl.matchers.operators.OperatorMixin-class.html#__ror__" title="other | self &#45; Try alternative matchers." alt="" coords="17,327,213,345"/>
+<area shape="rect" id="node1_27" href="lepl.matchers.operators.OperatorMixin-class.html#__xor__" title="self ^ message" alt="" coords="17,364,213,383"/>
+<area shape="rect" id="node1" href="lepl.matchers.operators.OperatorMixin-class.html" title="Define the operators used to combine elements in a grammar specification." alt="" coords="5,70,225,389"/>
+<area shape="rect" id="node2" href="lepl.support.context.NamespaceMixin-class.html" title="Allow access to global (per&#45;thread) values." alt="" coords="5,6,227,50"/>
+</map>
+  <img src="uml_class_diagram_for_lepl_mat_62.gif" alt='' usemap="#uml_class_diagram_for_lepl_mat_62" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
+<hr />
+Define the operators used to combine elements in a grammar specification.
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.matchers.operators.OperatorMixin-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">name</span>,
+        <span class="summary-sig-arg">namespace</span>)</span><br />
+      x.__init__(...) initializes x; see help(type(x)) for signature</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.matchers.operators-pysrc.html#OperatorMixin.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.matchers.operators.OperatorMixin-class.html#__add__" class="summary-sig-name">__add__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">other</span>)</span><br />
+      <strong>self + other</strong> - Join strings, merge lists.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.matchers.operators-pysrc.html#OperatorMixin.__add__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.matchers.operators.OperatorMixin-class.html#__radd__" class="summary-sig-name">__radd__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">other</span>)</span><br />
+      <strong>other + self</strong> - Join strings, merge lists.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.matchers.operators-pysrc.html#OperatorMixin.__radd__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.matchers.operators.OperatorMixin-class.html#__and__" class="summary-sig-name">__and__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">other</span>)</span><br />
+      <strong>self &amp; other</strong> - Append results.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.matchers.operators-pysrc.html#OperatorMixin.__and__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.matchers.operators.OperatorMixin-class.html#__rand__" class="summary-sig-name">__rand__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">other</span>)</span><br />
+      <strong>other &amp; self</strong> - Append results.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.matchers.operators-pysrc.html#OperatorMixin.__rand__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__div__"></a><span class="summary-sig-name">__div__</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">other</span>)</span><br />
+      For 2.6</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.matchers.operators-pysrc.html#OperatorMixin.__div__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__rdiv__"></a><span class="summary-sig-name">__rdiv__</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">other</span>)</span><br />
+      For 2.6</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.matchers.operators-pysrc.html#OperatorMixin.__rdiv__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.matchers.operators.OperatorMixin-class.html#__truediv__" class="summary-sig-name">__truediv__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">other</span>)</span><br />
+      <strong>self / other</strong> - Append results, with optional separating space.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.matchers.operators-pysrc.html#OperatorMixin.__truediv__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.matchers.operators.OperatorMixin-class.html#__rtruediv__" class="summary-sig-name">__rtruediv__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">other</span>)</span><br />
+      <strong>other / self</strong> - Append results, with optional separating space.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.matchers.operators-pysrc.html#OperatorMixin.__rtruediv__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.matchers.operators.OperatorMixin-class.html#__floordiv__" class="summary-sig-name">__floordiv__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">other</span>)</span><br />
+      <strong>self // other</strong> - Append results, with required separating space.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.matchers.operators-pysrc.html#OperatorMixin.__floordiv__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.matchers.operators.OperatorMixin-class.html#__rfloordiv__" class="summary-sig-name">__rfloordiv__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">other</span>)</span><br />
+      <strong>other // self</strong> - Append results, with required separating space.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.matchers.operators-pysrc.html#OperatorMixin.__rfloordiv__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.matchers.operators.OperatorMixin-class.html#__or__" class="summary-sig-name">__or__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">other</span>)</span><br />
+      <strong>self | other</strong> - Try alternative matchers.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.matchers.operators-pysrc.html#OperatorMixin.__or__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.matchers.operators.OperatorMixin-class.html#__ror__" class="summary-sig-name">__ror__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">other</span>)</span><br />
+      <strong>other | self</strong> - Try alternative matchers.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.matchers.operators-pysrc.html#OperatorMixin.__ror__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.matchers.operators.OperatorMixin-class.html#__mod__" class="summary-sig-name">__mod__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">other</span>)</span><br />
+      <strong>self % other</strong> - Take first match (committed choice).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.matchers.operators-pysrc.html#OperatorMixin.__mod__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.matchers.operators.OperatorMixin-class.html#__rmod__" class="summary-sig-name">__rmod__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">other</span>)</span><br />
+      <strong>other % self</strong> - Take first match (committed choice).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.matchers.operators-pysrc.html#OperatorMixin.__rmod__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.matchers.operators.OperatorMixin-class.html#__invert__" class="summary-sig-name">__invert__</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      <strong>~self</strong> - Discard the result.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.matchers.operators-pysrc.html#OperatorMixin.__invert__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.matchers.operators.OperatorMixin-class.html#__getitem__" class="summary-sig-name">__getitem__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">indices</span>)</span><br />
+      <strong>self[start:stop:algorithm, separator, ...]</strong> - Repetition and lists.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.matchers.operators-pysrc.html#OperatorMixin.__getitem__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.matchers.operators.OperatorMixin-class.html#__gt__" class="summary-sig-name">__gt__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">function</span>)</span><br />
+      <strong>self &gt; function</strong> - Process or label the results.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.matchers.operators-pysrc.html#OperatorMixin.__gt__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.matchers.operators.OperatorMixin-class.html#__ge__" class="summary-sig-name">__ge__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">function</span>)</span><br />
+      <strong>self &gt;= function</strong> - Process or label the results.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.matchers.operators-pysrc.html#OperatorMixin.__ge__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.matchers.operators.OperatorMixin-class.html#__rshift__" class="summary-sig-name">__rshift__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">function</span>)</span><br />
+      <strong>self &gt;&gt; function</strong> - Process or label the results (map).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.matchers.operators-pysrc.html#OperatorMixin.__rshift__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.matchers.operators.OperatorMixin-class.html#__pow__" class="summary-sig-name">__pow__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">function</span>)</span><br />
+      <strong>self ** function</strong> - Process the results (**kargs).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.matchers.operators-pysrc.html#OperatorMixin.__pow__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.matchers.operators.OperatorMixin-class.html#__xor__" class="summary-sig-name">__xor__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">message</span>)</span><br />
+      <strong>self ^ message</strong></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.matchers.operators-pysrc.html#OperatorMixin.__xor__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__check"></a><span class="summary-sig-name">__check</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">name</span>,
+        <span class="summary-sig-arg">other</span>,
+        <span class="summary-sig-arg">is_match</span>)</span><br />
+      Provide some diagnostics if the syntax is completely mixed up.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.matchers.operators-pysrc.html#OperatorMixin.__check">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lepl.support.context.NamespaceMixin-class.html">support.context.NamespaceMixin</a></code></b> (private):
+      <code><a href="lepl.support.context.NamespaceMixin-class.html#_lookup" onclick="show_private();">_lookup</a></code>
+      </p></div>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__str__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">name</span>,
+        <span class="sig-arg">namespace</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.matchers.operators-pysrc.html#OperatorMixin.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  x.__init__(...) initializes x; see help(type(x)) for signature
+  <dl class="fields">
+    <dt>Overrides:
+        object.__init__
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__add__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__add__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">other</span>)</span>
+    <br /><em class="fname">(Addition operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.matchers.operators-pysrc.html#OperatorMixin.__add__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p><strong>self + other</strong> - Join strings, merge lists.</p>
+<p>Combine adjacent matchers in sequence, merging the result with &quot;+&quot;
+(so strings are joined, lists merged).</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>other</code></strong> - Another matcher or a string that will be converted to a literal
+match.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__radd__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__radd__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">other</span>)</span>
+    <br /><em class="fname">(Right-side addition operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.matchers.operators-pysrc.html#OperatorMixin.__radd__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p><strong>other + self</strong> - Join strings, merge lists.</p>
+<p>Combine adjacent matchers in sequence, merging the result with &quot;+&quot;
+(so strings are joined, lists merged).</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>other</code></strong> - Another matcher or a string that will be converted to a literal
+match.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__and__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__and__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">other</span>)</span>
+    <br /><em class="fname">(And operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.matchers.operators-pysrc.html#OperatorMixin.__and__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p><strong>self &amp; other</strong> - Append results.</p>
+<p>Combine adjacent matchers in sequence.  This is equivalent to
+<a href="lepl-module.html#And" class="link">And()</a>.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>other</code></strong> - Another matcher or a string that will be converted to a literal
+match.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__rand__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__rand__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">other</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.matchers.operators-pysrc.html#OperatorMixin.__rand__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p><strong>other &amp; self</strong> - Append results.</p>
+<p>Combine adjacent matchers in sequence.  This is equivalent to
+<a href="lepl-module.html#And" class="link">And()</a>.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>other</code></strong> - Another matcher or a string that will be converted to a literal
+match.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__truediv__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__truediv__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">other</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.matchers.operators-pysrc.html#OperatorMixin.__truediv__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p><strong>self / other</strong> - Append results, with optional separating space.</p>
+<p>Combine adjacent matchers in sequence, with an optional space between
+them.  The space is included in the results.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>other</code></strong> - Another matcher or a string that will be converted to a literal
+match.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__rtruediv__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__rtruediv__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">other</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.matchers.operators-pysrc.html#OperatorMixin.__rtruediv__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p><strong>other / self</strong> - Append results, with optional separating space.</p>
+<p>Combine adjacent matchers in sequence, with an optional space between
+them.  The space is included in the results.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>other</code></strong> - Another matcher or a string that will be converted to a literal
+match.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__floordiv__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__floordiv__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">other</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.matchers.operators-pysrc.html#OperatorMixin.__floordiv__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p><strong>self // other</strong> - Append results, with required separating space.</p>
+<p>Combine adjacent matchers in sequence, with a space between them.
+The space is included in the results.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>other</code></strong> - Another matcher or a string that will be converted to a literal
+match.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__rfloordiv__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__rfloordiv__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">other</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.matchers.operators-pysrc.html#OperatorMixin.__rfloordiv__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p><strong>other // self</strong> - Append results, with required separating space.</p>
+<p>Combine adjacent matchers in sequence, with a space between them.
+The space is included in the results.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>other</code></strong> - Another matcher or a string that will be converted to a literal
+match.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__or__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__or__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">other</span>)</span>
+    <br /><em class="fname">(Or operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.matchers.operators-pysrc.html#OperatorMixin.__or__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p><strong>self | other</strong> - Try alternative matchers.</p>
+<p>This introduces backtracking.  Matches are tried from left to right
+and successful results returned (one on each &quot;recall&quot;).  This is
+equivalent to <a href="lepl-module.html#Or" class="link">Or()</a>.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>other</code></strong> - Another matcher or a string that will be converted to a literal
+match.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__ror__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__ror__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">other</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.matchers.operators-pysrc.html#OperatorMixin.__ror__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p><strong>other | self</strong> - Try alternative matchers.</p>
+<p>This introduces backtracking.  Matches are tried from left to right
+and successful results returned (one on each &quot;recall&quot;).  This is
+equivalent to <a href="lepl-module.html#Or" class="link">Or()</a>.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>other</code></strong> - Another matcher or a string that will be converted to a literal
+match.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__mod__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__mod__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">other</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.matchers.operators-pysrc.html#OperatorMixin.__mod__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p><strong>self % other</strong> - Take first match (committed choice).</p>
+<p>Matches are tried from left to right and the first successful result
+is returned.  This is equivalent to <a href="lepl-module.html#First" class="link">First()</a>.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>other</code></strong> - Another matcher or a string that will be converted to a literal
+match.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__rmod__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__rmod__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">other</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.matchers.operators-pysrc.html#OperatorMixin.__rmod__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p><strong>other % self</strong> - Take first match (committed choice).</p>
+<p>Matches are tried from left to right and the first successful result
+is returned.  This is equivalent to <a href="lepl-module.html#First" class="link">First()</a>.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>other</code></strong> - Another matcher or a string that will be converted to a literal
+match.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__invert__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__invert__</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.matchers.operators-pysrc.html#OperatorMixin.__invert__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p><strong>~self</strong> - Discard the result.</p>
+<p>This generates a matcher that behaves as the original, but returns
+an empty list. This is equivalent to <a href="lepl-module.html#Drop" class="link">Drop()</a>.</p>
+<p>Note that <a href="lepl-module.html#Lookahead" class="link">Lookahead()</a> overrides this method to have
+different semantics (negative lookahead).</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="__getitem__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__getitem__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">indices</span>)</span>
+    <br /><em class="fname">(Indexing operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.matchers.operators-pysrc.html#OperatorMixin.__getitem__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p><strong>self[start:stop:algorithm, separator, ...]</strong> - Repetition and lists.</p>
+<p>This is a complex statement that modifies the current matcher so
+that it matches several times.  A separator may be specified
+(eg for comma-separated lists) and the results may be combined with
+&quot;+&quot; (so repeated matching of characters would give a word).</p>
+<dl class="rst-docutils">
+<dt>start:stop:algorithm</dt>
+<dd><p class="rst-first">This controls the number of matches made and the order in which
+different numbers of matches are returned.</p>
+<dl class="rst-docutils">
+<dt>[start]</dt>
+<dd>Repeat exactly <em>start</em> times</dd>
+<dt>[start:stop]</dt>
+<dd>Repeat <em>start</em> to <em>stop</em> times (starting with as many matches
+as possible, and then decreasing as necessary).</dd>
+<dt>[start:stop:algorithm]</dt>
+<dd><p class="rst-first">Direction selects the algorithm for searching.</p>
+<dl class="rst-last rst-docutils">
+<dt>'b' (BREADTH_FIRST)</dt>
+<dd>A breadth first search is used, which tends to give shorter
+matches before longer ones.  This tries all possible matches for
+the sub-matcher first (before repeating calls to consume more
+of the stream).  If the sub-matcher does not backtrack then this
+guarantees that the number of matches returned will not decrease
+(ie will monotonically increase) on backtracking.</dd>
+<dt>'d' (DEPTH_FIRST)</dt>
+<dd>A depth first search is used, which tends to give longer
+matches before shorter ones.  This tries to repeats matches
+with the sub-matcher, consuming as much of the stream as
+possible, before backtracking to find alternative matchers.
+If the sub-matcher does not backtrack then this guarantees
+that the number of matches returned will not increase (ie will
+monotonically decrease) on backtracking.</dd>
+<dt>'g' (GREEDY)</dt>
+<dd>An exhaustive search is used, which finds all results (by
+breadth first search) and orders them by length before returning
+them ordered from longest to shortest.  This guarantees that
+the number of matches returned will not increase (ie will
+monotonically decrease) on backtracking, but can consume a lot
+of resources.</dd>
+<dt>'n' (NON_GREEDY)</dt>
+<dd>As for 'g' (GREEDY), but results are ordered shortest to
+longest.  This guarantees that the number of matches returned
+will not decrease (ie will monotonically increase) on
+backtracking, but can consume a lot of resources,</dd>
+</dl>
+</dd>
+</dl>
+<p class="rst-last">Values may be omitted; the defaults are: <em>start</em> = 0, <em>stop</em> =
+infinity, <em>algorithm</em> = 'd' (DEPTH_FIRST).</p>
+</dd>
+<dt>separator</dt>
+<dd>If given, this must appear between repeated values.  Matched
+separators are returned as part of the result (unless, of course,
+they are implemented with a matcher that returns nothing).  If
+<em>separator</em> is a string it is converted to a literal match.</dd>
+</dl>
+<dl class="rst-docutils">
+<dt>...</dt>
+<dd>If ... (an ellipsis) is given then the results are joined together
+with &quot;+&quot;.</dd>
+</dl>
+<div class="rst-section" id="rst-examples">
+<h1 class="heading">Examples</h1>
+<p>Any()[0:3,...] will match 3 or less characters, joining them
+together so that the result is a single string.</p>
+<p>Word()[:,','] will match a comma-separated list of words.</p>
+<p>value[:] or value[0:] or value[0::'d'] is a &quot;greedy&quot; match that,
+if value does not backtrack, is equivalent to the &quot;*&quot; in a regular
+expression.
+value[::'n'] is the &quot;non-greedy&quot; equivalent (preferring as short a
+match as possible) and value[::'g'] is greedy even when value does
+provide alternative matches on backtracking.</p>
+</div>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="__gt__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__gt__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">function</span>)</span>
+    <br /><em class="fname">(Greater-than operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.matchers.operators-pysrc.html#OperatorMixin.__gt__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p><strong>self &gt; function</strong> - Process or label the results.</p>
+<p>Create a named pair or apply a function to the results.  This is
+equivalent to <a href="lepl-module.html#Apply" class="link">Apply()</a>.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><p><strong class="pname"><code>function</code></strong> - This can be a string or a function.</p>
+<p>If a string is given each result is replaced by a
+(name, value) pair, where name is the string and value is the
+result.</p>
+<p>If a function is given it is called with the results as an
+argument.  The return value is used <em>within a list</em> as the new
+result.  This is equivalent to <a href="lepl-module.html#Apply" class="link">Apply()</a> with raw=False.</p></li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__ge__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__ge__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">function</span>)</span>
+    <br /><em class="fname">(Greater-than-or-equals operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.matchers.operators-pysrc.html#OperatorMixin.__ge__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p><strong>self &gt;= function</strong> - Process or label the results.</p>
+<p>Apply a function to the results.
+This is equivalent to <a href="lepl-module.html#Apply" class="link">Apply(raw=True)</a>.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>function</code></strong> - This is called with the results as an argument.  The return value
+is used as the new result.  This is equivalent to <a href="lepl-module.html#Apply" class="link">Apply()</a> with
+raw=True.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__rshift__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__rshift__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">function</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.matchers.operators-pysrc.html#OperatorMixin.__rshift__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p><strong>self &gt;&gt; function</strong> - Process or label the results (map).</p>
+<p>Create a named pair or apply a function to each result in turn.
+This is equivalent to <a href="lepl-module.html#Map" class="link">Map()</a>.  It is similar to
+<em>self &gt;= function</em>, except that the function is applied to each
+result in turn.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><p><strong class="pname"><code>function</code></strong> - This can be a string or a function.</p>
+<p>If a string is given each result is replaced by a
+(name, value) pair, where name is the string and value is the
+result.</p>
+<p>If a function is given it is called with each result in turn.
+The return values are used as the new result.</p></li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__pow__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__pow__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">function</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.matchers.operators-pysrc.html#OperatorMixin.__pow__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p><strong>self ** function</strong> - Process the results (**kargs).</p>
+<p>Apply a function to keyword arguments
+This is equivalent to <a href="lepl-module.html#KApply" class="link">KApply()</a>.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><p><strong class="pname"><code>function</code></strong> - A function that is called with the keyword arguments described below.
+The return value is used as the new result.</p>
+<p>Keyword arguments:</p>
+<blockquote>
+<dl class="rst-docutils">
+<dt>stream_in</dt>
+<dd>The stream passed to the matcher.</dd>
+<dt>stream_out</dt>
+<dd>The stream returned from the matcher.</dd>
+<dt>results</dt>
+<dd>A list of the results returned.</dd>
+</dl>
+</blockquote></li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__xor__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__xor__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">message</span>)</span>
+    <br /><em class="fname">(Exclusive-Or operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.matchers.operators-pysrc.html#OperatorMixin.__xor__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p><strong>self ^ message</strong></p>
+<p>Raise a SytaxError.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>message</code></strong> - The message for the SyntaxError.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lepl-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sun May 13 16:31:04 2012
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

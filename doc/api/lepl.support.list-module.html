@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lepl.support.list</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lepl-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lepl-module.html">Package&nbsp;lepl</a> ::
+        <a href="lepl.support-module.html">Package&nbsp;support</a> ::
+        Module&nbsp;list
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lepl.support.list-module.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module list</h1><p class="nomargin-top"><span class="codelink"><a href="lepl.support.list-pysrc.html">source&nbsp;code</a></span></p>
+<p>Support for S-expression ASTs using subclasses of Python's list class.</p>
+<p>The general support works with any nested iterables (except strings).</p>
+
+<!-- ==================== CLASSES ==================== -->
+<a name="section-Classes"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Classes</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Classes"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lepl.support.list.List-class.html" class="summary-name">List</a><br />
+      Extend a list for use in ASTs.
+    </td>
+  </tr>
+</table>
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Functions</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Functions"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="clone_iterable"></a><span class="summary-sig-name">clone_iterable</span>(<span class="summary-sig-arg">type_</span>,
+        <span class="summary-sig-arg">items</span>)</span><br />
+      Clone a class that wraps data in an AST.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.support.list-pysrc.html#clone_iterable">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.support.list-module.html#sexpr_fold" class="summary-sig-name">sexpr_fold</a>(<span class="summary-sig-arg">per_list</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">per_item</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">exclude</span>=<span class="summary-sig-default">lambda x: isinstance(x,basestring)</span>)</span><br />
+      We need some kind of fold-like procedure for generalising operations on
+arbitrarily nested iterables.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.support.list-pysrc.html#sexpr_fold">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.support.list-module.html#sexpr_to_tree" class="summary-sig-name">sexpr_to_tree</a>(<span class="summary-sig-arg">list_</span>)</span><br />
+      Generate a tree using the same &quot;trick&quot; as <a href="lepl.support.graph.GraphStr-class.html" class="link">GraphStr</a>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.support.list-pysrc.html#sexpr_to_tree">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.support.list-module.html#sexpr_throw" class="summary-sig-name">sexpr_throw</a>(<span class="summary-sig-arg">node</span>)</span><br />
+      Raise an error, if one exists in the results (AST trees are traversed).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.support.list-pysrc.html#sexpr_throw">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== VARIABLES ==================== -->
+<a name="section-Variables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Variables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="clone_sexpr"></a><span class="summary-name">clone_sexpr</span> = <code title="sexpr_fold()">sexpr_fold()</code><br />
+      Clone a set of listed iterables.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lepl.support.list-module.html#count_sexpr" class="summary-name">count_sexpr</a> = <code title="sexpr_fold(per_list= lambda type_, items: sum(items), per_item= lambda\
+ item: 1)">sexpr_fold(per_list= lambda type_, items: sum(it<code class="variable-ellipsis">...</code></code><br />
+      Count the number of value nodes in an AST.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lepl.support.list-module.html#join" class="summary-name">join</a> = <code title="lambda items:">lambda items:</code><br />
+      Flatten a list of lists by one level, so [[1],[2, [3]]] becomes [1,2,[3]].
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lepl.support.list-module.html#sexpr_flatten" class="summary-name">sexpr_flatten</a> = <code title="sexpr_fold(per_list= lambda type_, items: join(items), per_item= lambd\
+a item: [item])">sexpr_fold(per_list= lambda type_, items: join<code class="variable-ellipsis">...</code></code><br />
+      Flatten a list completely, so [[1],[2, [3]]] becomes [1,2,3]
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_fmt"></a><span class="summary-name">_fmt</span> = <code title="{}">{}</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lepl.support.list-module.html#sexpr_to_str" class="summary-name">sexpr_to_str</a> = <code title="sexpr_fold(per_list= lambda type_, items: fmt(_fmt.get(type_, '{0}([{1\
+}])'), type_.__name__, ','.join(items)), per_item= lambda item: repr(i\
+tem))">sexpr_fold(per_list= lambda type_, items: fmt(_<code class="variable-ellipsis">...</code></code><br />
+      A flat representation of nested lists (a set of constructors).
+    </td>
+  </tr>
+</table>
+<!-- ==================== FUNCTION DETAILS ==================== -->
+<a name="section-FunctionDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Function Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-FunctionDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="sexpr_fold"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">sexpr_fold</span>(<span class="sig-arg">per_list</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">per_item</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">exclude</span>=<span class="sig-default">lambda x: isinstance(x,basestring)</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.support.list-pysrc.html#sexpr_fold">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>We need some kind of fold-like procedure for generalising operations on
+arbitrarily nested iterables.  We can't use a normal fold because Python
+doesn't have the equivalent of cons, etc; this tries to be more Pythonic
+(see comments later).</p>
+<p>We divide everything into iterables (&quot;lists&quot;) and atomic values (&quot;items&quot;).
+per_list is called with a generator over the (transformed) top-most list,
+in order.  Items (ie atomic values) in that list, when requested from the
+generator, will be processed by per_item; iterables will be processed by a
+separate call to per_list (ie recursively).</p>
+<p>So this is more like a recursive map than a fold, but with Python's
+mutable state and lack of typing it appears to be equally powerful.
+Note that per_list is passed the previous type, which can be used for
+dispatching operations.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="sexpr_to_tree"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">sexpr_to_tree</span>(<span class="sig-arg">list_</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.support.list-pysrc.html#sexpr_to_tree">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Generate a tree using the same &quot;trick&quot; as <a href="lepl.support.graph.GraphStr-class.html" class="link">GraphStr</a>.</p>
+<p>The initial fold returns a function (str, str) -&gt; list(str) at each
+level.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="sexpr_throw"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">sexpr_throw</span>(<span class="sig-arg">node</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.support.list-pysrc.html#sexpr_throw">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Raise an error, if one exists in the results (AST trees are traversed).
+Otherwise, the results are returned (invoke with <tt class="rst-docutils literal">&gt;&gt;</tt>).
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== VARIABLES DETAILS ==================== -->
+<a name="section-VariablesDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-VariablesDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="count_sexpr"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">count_sexpr</h3>
+  <p>Count the number of value nodes in an AST.</p>
+<p>(Note that size(List) gives the number of entries in that list, counting each
+sublist as &quot;1&quot;, while this descends embedded lists, counting their non-iterable
+contents.</p>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+sexpr_fold(per_list= lambda type_, items: sum(items), per_item= lambda<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+ item: 1)
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="join"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">join</h3>
+  <p>Flatten a list of lists by one level, so [[1],[2, [3]]] becomes [1,2,[3]].</p>
+<p>Note: this will <em>only</em> work correctly if all entries are lists.</p>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+lambda items:
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="sexpr_flatten"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">sexpr_flatten</h3>
+  Flatten a list completely, so [[1],[2, [3]]] becomes [1,2,3]
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+sexpr_fold(per_list= lambda type_, items: join(items), per_item= lambd<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+a item: [item])
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="sexpr_to_str"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">sexpr_to_str</h3>
+  A flat representation of nested lists (a set of constructors).
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+sexpr_fold(per_list= lambda type_, items: fmt(_fmt.get(type_, '{0}([{1<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+}])'), type_.__name__, ','.join(items)), per_item= lambda item: repr(i<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+tem))
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lepl-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sun May 13 16:30:59 2012
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

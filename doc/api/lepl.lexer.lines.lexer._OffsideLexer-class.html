@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lepl.lexer.lines.lexer._OffsideLexer</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lepl-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lepl-module.html">Package&nbsp;lepl</a> ::
+        <a href="lepl.lexer-module.html">Package&nbsp;lexer</a> ::
+        <a href="lepl.lexer.lines-module.html">Package&nbsp;lines</a> ::
+        <a href="lepl.lexer.lines.lexer-module.html">Module&nbsp;lexer</a> ::
+        Class&nbsp;_OffsideLexer
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lepl.lexer.lines.lexer._OffsideLexer-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class _OffsideLexer</h1><p class="nomargin-top"><span class="codelink"><a href="lepl.lexer.lines.lexer-pysrc.html#_OffsideLexer">source&nbsp;code</a></span></p>
+<center>
+<center>  <map id="uml_class_diagram_for_lepl_lex_15" name="uml_class_diagram_for_lepl_lex_15">
+<area shape="rect" id="node1_11" href="lepl.lexer.lexer.Lexer-class.html#token_for_id" title="A utility that checks the known tokens for a given ID." alt="" coords="316,351,448,369"/>
+<area shape="rect" id="node1" href="lepl.lexer.lexer.Lexer-class.html" title="This takes a set of regular expressions and provides a matcher that converts a stream into a stream of tokens, passing the new stream to the embedded matcher." alt="" coords="303,318,459,375"/>
+<area shape="rect" id="node7_12" href="lepl.lexer.lines.lexer._OffsideLexer-class.html#__init__" title="matcher is the head of the original matcher graph, which will be called with a tokenised stream." alt="" coords="63,428,701,447"/>
+<area shape="rect" id="node7" href="lepl.lexer.lines.lexer._OffsideLexer-class.html" title="An alternative lexer that adds LineStart and LineEnd tokens." alt="" coords="50,395,713,453"/>
+<area shape="rect" id="node2_13" href="lepl.support.graph.ArgAsAttributeMixin-class.html#__iter__" title="Return all children, in order." alt="" coords="25,103,227,121"/>
+<area shape="rect" id="node2" href="lepl.support.graph.ArgAsAttributeMixin-class.html" title="Constructor arguments are stored as attributes; their names are also stored in order so that the arguments can be constructed." alt="" coords="13,70,238,127"/>
+<area shape="rect" id="node8_14" href="lepl.matchers.support.BaseMatcher-class.html#__repr__" title="repr(x)" alt="" coords="413,180,597,199"/>
+<area shape="rect" id="node8_15" href="lepl.matchers.support.BaseMatcher-class.html#__str__" title="str(x)" alt="" coords="413,199,597,217"/>
+<area shape="rect" id="node8_16" href="lepl.matchers.support.BaseMatcher-class.html#kargs" title="lepl.matchers.support.BaseMatcher.kargs" alt="" coords="413,217,597,236"/>
+<area shape="rect" id="node8_17" href="lepl.matchers.support.BaseMatcher-class.html#tree" title="An ASCII tree for display." alt="" coords="413,236,597,255"/>
+<area shape="rect" id="node8_18" href="lepl.matchers.support.BaseMatcher-class.html#tree_repr" title="The text to display via tree()" alt="" coords="413,255,597,273"/>
+<area shape="rect" id="node8_19" href="lepl.matchers.support.BaseMatcher-class.html#clone" title="Clone this matcher (and associated graph)." alt="" coords="413,273,597,292"/>
+<area shape="rect" id="node8" href="lepl.matchers.support.BaseMatcher-class.html" title="A base class that provides support to all matchers." alt="" coords="401,147,609,298"/>
+<area shape="rect" id="node3_20" href="lepl.matchers.matcher.Matcher-class.html#indented_repr" title="Called by repr; should recursively call contents." alt="" coords="280,103,505,121"/>
+<area shape="rect" id="node3" href="lepl.matchers.matcher.Matcher-class.html" title="lepl.matchers.matcher.Matcher" alt="" coords="267,70,517,127"/>
+<area shape="rect" id="node4" href="lepl.support.lib.LogMixin-class.html" title="Add standard Python logging to a class." alt="" coords="546,77,689,121"/>
+<area shape="rect" id="node5_21" href="lepl.support.graph.PostorderWalkerMixin-class.html#postorder" title="A shortcut that allows a visitor to be applied postorder." alt="" coords="729,103,943,121"/>
+<area shape="rect" id="node5" href="lepl.support.graph.PostorderWalkerMixin-class.html" title="Add a &#39;postorder&#39; method." alt="" coords="717,70,955,127"/>
+<area shape="rect" id="node6" href="lepl.support.context.NamespaceMixin-class.html" title="Allow access to global (per&#45;thread) values." alt="" coords="151,201,372,245"/>
+<area shape="rect" id="node9" href="lepl.support.graph.ConstructorGraphNode-class.html" title="An interface that provides information on constructor arguments." alt="" coords="5,6,248,50"/>
+</map>
+  <img src="uml_class_diagram_for_lepl_lex_15.gif" alt='' usemap="#uml_class_diagram_for_lepl_lex_15" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
+<hr />
+<p>An alternative lexer that adds <a href="lepl-module.html#LineStart" class="link">LineStart</a> and <a href="lepl-module.html#LineEnd" class="link">LineEnd</a> tokens.</p>
+<p>Note that because of the extend argument list this must be used in
+the config via <a href="lepl.lexer.lines.lexer-module.html#make_offside_lexer" class="link">make_offside_lexer()</a> (although in normal use it is
+supplied by simply calling <code class="link">config.lines()</code> so you don't need to refer
+to this class at all)</p>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.lexer.lines.lexer._OffsideLexer-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">matcher</span>,
+        <span class="summary-sig-arg">tokens</span>,
+        <span class="summary-sig-arg">alphabet</span>,
+        <span class="summary-sig-arg">discard</span>,
+        <span class="summary-sig-arg">t_regexp</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">s_regexp</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">tabsize</span>=<span class="summary-sig-default">8</span>,
+        <span class="summary-sig-arg">blocks</span>=<span class="summary-sig-default">False</span>)</span><br />
+      matcher is the head of the original matcher graph, which will be called
+with a tokenised stream.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.lexer.lines.lexer-pysrc.html#_OffsideLexer.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.lexer.lines.lexer._OffsideLexer-class.html#_tokens" class="summary-sig-name" onclick="show_private();">_tokens</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">stream</span>,
+        <span class="summary-sig-arg">max</span>)</span><br />
+      Generate tokens, on demand.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.lexer.lines.lexer-pysrc.html#_OffsideLexer._tokens">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lepl.lexer.lexer.Lexer-class.html">lexer.Lexer</a></code></b>:
+      <code><a href="lepl.lexer.lexer.Lexer-class.html#token_for_id">token_for_id</a></code>
+      </p>
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lepl.lexer.lexer.Lexer-class.html">lexer.Lexer</a></code></b> (private):
+      <code><a href="lepl.lexer.lexer.Lexer-class.html#_match" onclick="show_private();">_match</a></code>
+      </p></div>
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lepl.support.context.NamespaceMixin-class.html">support.context.NamespaceMixin</a></code></b> (private):
+      <code><a href="lepl.support.context.NamespaceMixin-class.html#_lookup" onclick="show_private();">_lookup</a></code>
+      </p></div>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lepl.matchers.support.BaseMatcher-class.html">matchers.support.BaseMatcher</a></code></b>:
+      <code><a href="lepl.matchers.support.BaseMatcher-class.html#__repr__">__repr__</a></code>,
+      <code><a href="lepl.matchers.support.BaseMatcher-class.html#__str__">__str__</a></code>,
+      <code><a href="lepl.matchers.support.BaseMatcher-class.html#clone">clone</a></code>,
+      <code><a href="lepl.matchers.support.BaseMatcher-class.html#kargs">kargs</a></code>,
+      <code><a href="lepl.matchers.support.BaseMatcher-class.html#tree">tree</a></code>,
+      <code><a href="lepl.matchers.support.BaseMatcher-class.html#tree_repr">tree_repr</a></code>
+      </p>
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lepl.matchers.support.BaseMatcher-class.html">matchers.support.BaseMatcher</a></code></b> (private):
+      <code><a href="lepl.matchers.support.BaseMatcher-class.html#_fmt_compact" onclick="show_private();">_fmt_compact</a></code>,
+      <code><a href="lepl.matchers.support.BaseMatcher-class.html#_fmt_repr" onclick="show_private();">_fmt_repr</a></code>,
+      <code><a href="lepl.matchers.support.BaseMatcher-class.html#_fmt_str" onclick="show_private();">_fmt_str</a></code>,
+      <code><a href="lepl.matchers.support.BaseMatcher-class.html#_format_repr" onclick="show_private();">_format_repr</a></code>,
+      <code><a href="lepl.matchers.support.BaseMatcher-class.html#_indented_repr" onclick="show_private();">_indented_repr</a></code>
+      </p></div>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lepl.support.graph.ArgAsAttributeMixin-class.html">support.graph.ArgAsAttributeMixin</a></code></b>:
+      <code><a href="lepl.support.graph.ArgAsAttributeMixin-class.html#__iter__">__iter__</a></code>
+      </p>
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lepl.support.graph.ArgAsAttributeMixin-class.html">support.graph.ArgAsAttributeMixin</a></code></b> (private):
+      <code><a href="lepl.support.graph.ArgAsAttributeMixin-class.html#_arg" onclick="show_private();">_arg</a></code>,
+      <code><a href="lepl.support.graph.ArgAsAttributeMixin-class.html#_args" onclick="show_private();">_args</a></code>,
+      <code><a href="lepl.support.graph.ArgAsAttributeMixin-class.html#_constructor_args" onclick="show_private();">_constructor_args</a></code>,
+      <code><a href="lepl.support.graph.ArgAsAttributeMixin-class.html#_karg" onclick="show_private();">_karg</a></code>,
+      <code><a href="lepl.support.graph.ArgAsAttributeMixin-class.html#_kargs" onclick="show_private();">_kargs</a></code>
+      </p></div>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lepl.support.graph.PostorderWalkerMixin-class.html">support.graph.PostorderWalkerMixin</a></code></b>:
+      <code><a href="lepl.support.graph.PostorderWalkerMixin-class.html#postorder">postorder</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lepl.matchers.matcher.Matcher-class.html">matchers.matcher.Matcher</a></code></b>:
+      <code><a href="lepl.matchers.matcher.Matcher-class.html#indented_repr">indented_repr</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">matcher</span>,
+        <span class="sig-arg">tokens</span>,
+        <span class="sig-arg">alphabet</span>,
+        <span class="sig-arg">discard</span>,
+        <span class="sig-arg">t_regexp</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">s_regexp</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">tabsize</span>=<span class="sig-default">8</span>,
+        <span class="sig-arg">blocks</span>=<span class="sig-default">False</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.lexer.lines.lexer-pysrc.html#_OffsideLexer.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>matcher is the head of the original matcher graph, which will be called
+with a tokenised stream.</p>
+<p>tokens is the set of <a href="lepl-module.html#Token" class="link">Token</a> instances that define the lexer.</p>
+<p>alphabet is the alphabet for which the regexps are defined.</p>
+<p>discard is the regular expression for spaces (which are silently
+dropped if not token can be matcher).</p>
+<p>t_regexp and s_regexp are internally compiled state, use in cloning,
+and should not be provided by non-cloning callers.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="lepl.matchers.matcher.Matcher-class.html#__init__">matchers.matcher.Matcher.__init__</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="_tokens"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_tokens</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">stream</span>,
+        <span class="sig-arg">max</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.lexer.lines.lexer-pysrc.html#_OffsideLexer._tokens">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Generate tokens, on demand.
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="lepl.lexer.lexer.Lexer-class.html#_tokens" onclick="show_private();">lexer.Lexer._tokens</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lepl-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sun May 13 16:31:02 2012
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

@@ -1,0 +1,1362 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lepl.core.config.ParserMixin</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lepl-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lepl-module.html">Package&nbsp;lepl</a> ::
+        <a href="lepl.core-module.html">Package&nbsp;core</a> ::
+        <a href="lepl.core.config-module.html">Module&nbsp;config</a> ::
+        Class&nbsp;ParserMixin
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lepl.core.config.ParserMixin-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class ParserMixin</h1><p class="nomargin-top"><span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin">source&nbsp;code</a></span></p>
+<center>
+<center>  <map id="uml_class_diagram_for_lepl_cor_20" name="uml_class_diagram_for_lepl_cor_20">
+<area shape="rect" id="node1_14" href="lepl.core.config.ParserMixin-class.html#__init__" title="x.__init__(...) initializes x; see help(type(x)) for signature" alt="" coords="17,39,267,57"/>
+<area shape="rect" id="node1_15" href="lepl.core.config.ParserMixin-class.html#get_match_file" title="Get a function that will parse the contents of a file, returning a sequence of (results, stream) pairs." alt="" coords="17,57,267,76"/>
+<area shape="rect" id="node1_16" href="lepl.core.config.ParserMixin-class.html#get_match_iterable" title="Get a function that will parse the contents of an iterable (eg." alt="" coords="17,76,267,95"/>
+<area shape="rect" id="node1_17" href="lepl.core.config.ParserMixin-class.html#get_match_list" title="Get a function that will parse the contents of a list returning a sequence of (results, stream) pairs." alt="" coords="17,95,267,113"/>
+<area shape="rect" id="node1_18" href="lepl.core.config.ParserMixin-class.html#get_match_string" title="Get a function that will parse the contents of a string returning a sequence of (results, stream) pairs." alt="" coords="17,113,267,132"/>
+<area shape="rect" id="node1_19" href="lepl.core.config.ParserMixin-class.html#get_match_sequence" title="Get a function that will parse the contents of a generic sequence (with [] and len()) returning a sequence of (results, stream) pairs." alt="" coords="17,132,267,151"/>
+<area shape="rect" id="node1_20" href="lepl.core.config.ParserMixin-class.html#get_match" title="Get a function that will parse input, returning a sequence of (results, stream) pairs." alt="" coords="17,151,267,169"/>
+<area shape="rect" id="node1_21" href="lepl.core.config.ParserMixin-class.html#match_file" title="Parse the contents of a file, returning a sequence of (results, stream) pairs." alt="" coords="17,169,267,188"/>
+<area shape="rect" id="node1_22" href="lepl.core.config.ParserMixin-class.html#match_iterable" title="Parse the contents of an iterable (eg." alt="" coords="17,188,267,207"/>
+<area shape="rect" id="node1_23" href="lepl.core.config.ParserMixin-class.html#match_list" title="Parse the contents of a list returning a sequence of (results, stream) pairs." alt="" coords="17,207,267,225"/>
+<area shape="rect" id="node1_24" href="lepl.core.config.ParserMixin-class.html#match_string" title="Parse the contents of a string, returning a sequence of (results, stream) pairs." alt="" coords="17,225,267,244"/>
+<area shape="rect" id="node1_25" href="lepl.core.config.ParserMixin-class.html#match_sequence" title="Parse the contents of a generic sequence (with [] and len()) returning a sequence of (results, stream) pairs." alt="" coords="17,244,267,263"/>
+<area shape="rect" id="node1_26" href="lepl.core.config.ParserMixin-class.html#match" title="Parse input, returning a sequence of (results, stream) pairs." alt="" coords="17,263,267,281"/>
+<area shape="rect" id="node1_27" href="lepl.core.config.ParserMixin-class.html#parse_all" title="Parse input, returning a sequence of matches." alt="" coords="17,300,267,319"/>
+<area shape="rect" id="node1" href="lepl.core.config.ParserMixin-class.html" title="Methods to configure and generate a parser or matcher." alt="" coords="5,6,278,325"/>
+</map>
+  <img src="uml_class_diagram_for_lepl_cor_20.gif" alt='' usemap="#uml_class_diagram_for_lepl_cor_20" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
+<hr />
+Methods to configure and generate a parser or matcher.
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.config.ParserMixin-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kargs</span>)</span><br />
+      x.__init__(...) initializes x; see help(type(x)) for signature</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.config.ParserMixin-class.html#_raw_parser" class="summary-sig-name" onclick="show_private();">_raw_parser</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">from_</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Provide the parser.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin._raw_parser">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.config.ParserMixin-class.html#get_match_file" class="summary-sig-name">get_match_file</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Get a function that will parse the contents of a file, returning a
+sequence of (results, stream) pairs.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin.get_match_file">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.config.ParserMixin-class.html#get_match_iterable" class="summary-sig-name">get_match_iterable</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Get a function that will parse the contents of an iterable
+(eg.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin.get_match_iterable">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_match_list"></a><span class="summary-sig-name">get_match_list</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Get a function that will parse the contents of a list returning a
+sequence of (results, stream) pairs.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin.get_match_list">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_match_string"></a><span class="summary-sig-name">get_match_string</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Get a function that will parse the contents of a string returning a
+sequence of (results, stream) pairs.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin.get_match_string">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_match_sequence"></a><span class="summary-sig-name">get_match_sequence</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Get a function that will parse the contents of a generic sequence
+(with [] and len()) returning a sequence of (results, stream) pairs.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin.get_match_sequence">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.config.ParserMixin-class.html#get_match" class="summary-sig-name">get_match</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Get a function that will parse input, returning a sequence of
+(results, stream) pairs.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin.get_match">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.config.ParserMixin-class.html#match_file" class="summary-sig-name">match_file</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">file_</span>,
+        <span class="summary-sig-arg">**kargs</span>)</span><br />
+      Parse the contents of a file, returning a sequence of
+(results, stream) pairs.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin.match_file">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.config.ParserMixin-class.html#match_iterable" class="summary-sig-name">match_iterable</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">iterable</span>,
+        <span class="summary-sig-arg">**kargs</span>)</span><br />
+      Parse the contents of an iterable (eg.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin.match_iterable">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="match_list"></a><span class="summary-sig-name">match_list</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">list_</span>,
+        <span class="summary-sig-arg">**kargs</span>)</span><br />
+      Parse the contents of a list returning a sequence of (results, stream)
+pairs.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin.match_list">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="match_string"></a><span class="summary-sig-name">match_string</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">string</span>,
+        <span class="summary-sig-arg">**kargs</span>)</span><br />
+      Parse the contents of a string, returning a sequence of
+(results, stream) pairs.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin.match_string">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="match_sequence"></a><span class="summary-sig-name">match_sequence</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">sequence</span>,
+        <span class="summary-sig-arg">**kargs</span>)</span><br />
+      Parse the contents of a generic sequence (with [] and len())
+returning a sequence of (results, stream) pairs.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin.match_sequence">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.config.ParserMixin-class.html#match" class="summary-sig-name">match</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">input_</span>,
+        <span class="summary-sig-arg">**kargs</span>)</span><br />
+      Parse input, returning a sequence of (results, stream) pairs.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin.match">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.config.ParserMixin-class.html#get_parse_file" class="summary-sig-name">get_parse_file</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Get a function that will parse the contents of a file, returning a
+single match.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin.get_parse_file">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.config.ParserMixin-class.html#get_parse_iterable" class="summary-sig-name">get_parse_iterable</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Get a function that will parse the contents of an iterable
+(eg.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin.get_parse_iterable">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_parse_list"></a><span class="summary-sig-name">get_parse_list</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Get a function that will parse the contents of a list returning a
+single match.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin.get_parse_list">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_parse_string"></a><span class="summary-sig-name">get_parse_string</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Get a function that will parse the contents of a string returning a
+single match.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin.get_parse_string">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_parse_sequence"></a><span class="summary-sig-name">get_parse_sequence</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Get a function that will parse the contents of a generic sequence
+(with [] and len()) returning a single match.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin.get_parse_sequence">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.config.ParserMixin-class.html#get_parse" class="summary-sig-name">get_parse</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Get a function that will parse input, returning a single match.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin.get_parse">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.config.ParserMixin-class.html#parse_file" class="summary-sig-name">parse_file</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">file_</span>,
+        <span class="summary-sig-arg">**kargs</span>)</span><br />
+      Parse the contents of a file, returning a single match.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin.parse_file">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.config.ParserMixin-class.html#parse_iterable" class="summary-sig-name">parse_iterable</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">iterable</span>,
+        <span class="summary-sig-arg">**kargs</span>)</span><br />
+      Parse the contents of an iterable (eg.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin.parse_iterable">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="parse_list"></a><span class="summary-sig-name">parse_list</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">list_</span>,
+        <span class="summary-sig-arg">**kargs</span>)</span><br />
+      Parse the contents of a list returning a single match.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin.parse_list">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="parse_string"></a><span class="summary-sig-name">parse_string</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">string</span>,
+        <span class="summary-sig-arg">**kargs</span>)</span><br />
+      Parse the contents of a string, returning a single match.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin.parse_string">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="parse_sequence"></a><span class="summary-sig-name">parse_sequence</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">sequence</span>,
+        <span class="summary-sig-arg">**kargs</span>)</span><br />
+      Pparse the contents of a generic sequence (with [] and len())
+returning a single match.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin.parse_sequence">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.config.ParserMixin-class.html#parse" class="summary-sig-name">parse</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">input_</span>,
+        <span class="summary-sig-arg">**kargs</span>)</span><br />
+      Parse the input, returning a single match.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin.parse">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.config.ParserMixin-class.html#get_parse_file_all" class="summary-sig-name">get_parse_file_all</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Get a function that will parse the contents of a file, returning a
+sequence of matches.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin.get_parse_file_all">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.config.ParserMixin-class.html#get_parse_iterable_all" class="summary-sig-name">get_parse_iterable_all</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Get a function that will parse the contents of an iterable
+(eg.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin.get_parse_iterable_all">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_parse_list_all"></a><span class="summary-sig-name">get_parse_list_all</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Get a function that will parse the contents of a list returning a
+sequence of matches.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin.get_parse_list_all">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_parse_string_all"></a><span class="summary-sig-name">get_parse_string_all</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Get a function that will parse a string, returning a sequence of
+matches.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin.get_parse_string_all">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_parse_sequence_all"></a><span class="summary-sig-name">get_parse_sequence_all</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Get a function that will parse the contents of a generic sequence
+(with [] and len()) returning a sequence of matches.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin.get_parse_sequence_all">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.config.ParserMixin-class.html#get_parse_all" class="summary-sig-name">get_parse_all</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Get a function that will parse input, returning a sequence of
+matches.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin.get_parse_all">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.config.ParserMixin-class.html#parse_file_all" class="summary-sig-name">parse_file_all</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">file_</span>,
+        <span class="summary-sig-arg">**kargs</span>)</span><br />
+      Parse the contents of a file, returning a sequence of matches.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin.parse_file_all">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.config.ParserMixin-class.html#parse_iterable_all" class="summary-sig-name">parse_iterable_all</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">iterable</span>,
+        <span class="summary-sig-arg">**kargs</span>)</span><br />
+      Parse the contents of an iterable (eg.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin.parse_iterable_all">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="parse_list_all"></a><span class="summary-sig-name">parse_list_all</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">list_</span>,
+        <span class="summary-sig-arg">**kargs</span>)</span><br />
+      Parse the contents of a list returning a sequence of matches.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin.parse_list_all">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="parse_string_all"></a><span class="summary-sig-name">parse_string_all</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">string</span>,
+        <span class="summary-sig-arg">**kargs</span>)</span><br />
+      Parse the contents of a string, returning a sequence of matches.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin.parse_string_all">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="parse_sequence_all"></a><span class="summary-sig-name">parse_sequence_all</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">sequence</span>,
+        <span class="summary-sig-arg">**kargs</span>)</span><br />
+      Parse the contents of a generic sequence (with [] and len())
+returning a sequence of matches.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin.parse_sequence_all">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.config.ParserMixin-class.html#parse_all" class="summary-sig-name">parse_all</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">input_</span>,
+        <span class="summary-sig-arg">**kargs</span>)</span><br />
+      Parse input, returning a sequence of
+matches.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin.parse_all">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__str__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">*args</span>,
+        <span class="sig-arg">**kargs</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  x.__init__(...) initializes x; see help(type(x)) for signature
+  <dl class="fields">
+    <dt>Overrides:
+        object.__init__
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="_raw_parser"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_raw_parser</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">from_</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin._raw_parser">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Provide the parser.  This underlies the &quot;fancy&quot; methods below.
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="get_match_file"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_match_file</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin.get_match_file">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Get a function that will parse the contents of a file, returning a
+sequence of (results, stream) pairs.  The data will be read as
+required (using an iterator), so the file must remain open during
+parsing.  To avoid this, read all data into a string and parse that.
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="get_match_iterable"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_match_iterable</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin.get_match_iterable">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Get a function that will parse the contents of an iterable
+(eg. a generator), returning a sequence of (results, stream) pairs.
+The data will be read as required.
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="get_match"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_match</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin.get_match">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Get a function that will parse input, returning a sequence of
+(results, stream) pairs.
+The type of stream is inferred from the input to the parser.
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="match_file"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">match_file</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">file_</span>,
+        <span class="sig-arg">**kargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin.match_file">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Parse the contents of a file, returning a sequence of
+(results, stream) pairs.  The data will be read as required
+(using an iterator), so the file must remain open during parsing.
+To avoid this, read all data into a string and parse that.
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="match_iterable"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">match_iterable</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">iterable</span>,
+        <span class="sig-arg">**kargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin.match_iterable">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Parse the contents of an iterable (eg. a generator), returning
+a sequence of (results, stream) pairs.  The data will be read as
+required.
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="match"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">match</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">input_</span>,
+        <span class="sig-arg">**kargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin.match">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Parse input, returning a sequence of (results, stream) pairs.
+The type of stream is inferred from the input.
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="get_parse_file"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_parse_file</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin.get_parse_file">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Get a function that will parse the contents of a file, returning a
+single match.  The data will be read as required (using an iterator),
+so the file must remain open during parsing.  To avoid this, read
+all data into a string and parse that.
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="get_parse_iterable"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_parse_iterable</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin.get_parse_iterable">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Get a function that will parse the contents of an iterable
+(eg. a generator), returning a single match.  The data will be read
+as required.
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="get_parse"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_parse</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin.get_parse">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Get a function that will parse input, returning a single match.
+The type of stream is inferred from the input to the parser.
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="parse_file"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">parse_file</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">file_</span>,
+        <span class="sig-arg">**kargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin.parse_file">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Parse the contents of a file, returning a single match.  The data
+will be read as required (using an iterator), so the file must
+remain open during parsing.  To avoid this, read all data into a
+string and parse that.
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="parse_iterable"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">parse_iterable</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">iterable</span>,
+        <span class="sig-arg">**kargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin.parse_iterable">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Parse the contents of an iterable (eg. a generator), returning
+a single match.  The data will be read as required.
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="parse"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">parse</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">input_</span>,
+        <span class="sig-arg">**kargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin.parse">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Parse the input, returning a single match.  The type of stream is
+inferred from the input.
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="get_parse_file_all"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_parse_file_all</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin.get_parse_file_all">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Get a function that will parse the contents of a file, returning a
+sequence of matches.  The data will be read as required (using an
+iterator), so the file must remain open during parsing.  To avoid
+this, read all data into a string and parse that.
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="get_parse_iterable_all"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_parse_iterable_all</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin.get_parse_iterable_all">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Get a function that will parse the contents of an iterable
+(eg. a generator), returning a sequence of matches.  The data will
+be read as required.
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="get_parse_all"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_parse_all</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin.get_parse_all">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Get a function that will parse input, returning a sequence of
+matches.  The type of stream is inferred from the input to the
+parser.
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="parse_file_all"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">parse_file_all</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">file_</span>,
+        <span class="sig-arg">**kargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin.parse_file_all">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Parse the contents of a file, returning a sequence of matches.
+The data will be read as required (using an iterator), so the file
+must remain open during parsing.  To avoid this, read all data
+into a string and parse that.
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="parse_iterable_all"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">parse_iterable_all</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">iterable</span>,
+        <span class="sig-arg">**kargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin.parse_iterable_all">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Parse the contents of an iterable (eg. a generator), returning
+a sequence of matches.  The data will be read as required.
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="parse_all"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">parse_all</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">input_</span>,
+        <span class="sig-arg">**kargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.config-pysrc.html#ParserMixin.parse_all">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Parse input, returning a sequence of
+matches.  The type of stream is inferred from the input to the
+parser.
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lepl-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sun May 13 16:31:01 2012
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

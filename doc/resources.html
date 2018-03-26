@@ -1,0 +1,221 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Resource Management &mdash; LEPL 5.1.2 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '5.1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="LEPL 5.1.2 documentation" href="index.html" />
+    <link rel="up" title="Lepl Manual" href="manual.html" />
+    <link rel="next" title="Binary Data" href="binary.html" />
+    <link rel="prev" title="Implementation" href="implementation.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="binary.html" title="Binary Data"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="implementation.html" title="Implementation"
+             accesskey="P">previous</a> |</li>
+        <li><a href="contents.html">LEPL 5.1.2 documentation</a> &raquo;</li>
+          <li><a href="manual.html" accesskey="U">Lepl Manual</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="resource-management">
+<span id="resources"></span><span id="index-0"></span><h1>Resource Management<a class="headerlink" href="#resource-management" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="the-input-problem">
+<span id="index-1"></span><h2>The Input Problem<a class="headerlink" href="#the-input-problem" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="advanced.html#backtracking"><em>Search and Backtracking</em></a> within Lepl is implemented using generators.  These are
+blocks of code that can be paused and restarted.  Each matcher has, at its
+core, one of these generators.  Backtracking is achieved by calling the
+generator to continue searching the input for alternative matches.</p>
+<p>This can be a problem, particularly when parsing input from files.  The
+<a class="reference external" href="api/redirect.html#lepl.core.config.ParserMixin.parse_file">parse_file()</a>
+method calls <a class="reference external" href="api/redirect.html#lepl.core.config.ParserMixin.parse_iterable">parse_iterable()</a> which
+iterates over the lines in the file.  The streams created by <a class="reference external" href="api/redirect.html#lepl.core.config.ParserMixin.parse_iterable">parse_iterable()</a> are lazy
+linked lists that only reference later parts of the input.  That means that
+Python can reclaim (garbage&#8211;collect) the memory used by earlier input while
+the parser is still matching later input.  However, this cannot happen (memory
+cannot be freed) if a generator keeps a reference to earlier input (which it
+needs in case it is called to backtrack and provide a new match).</p>
+<p>So the generators used in Lepl to provide backtracking frustrate Python&#8217;s
+garbage collection and lead to parsers consuming much more memory than would
+otherwise be necessary.</p>
+</div>
+<div class="section" id="the-output-problem">
+<h2>The Output Problem<a class="headerlink" href="#the-output-problem" title="Permalink to this headline">¶</a></h2>
+<p>As a parser consumes input it also constructs the output.  In Lepl the output
+is a list of data held in memory.  This output list is built by the parser
+until all the input has been consumed, and then returned as a result.</p>
+<p>A large input often implies a large output.  So even if we solve the &#8220;input
+problem&#8221; above, a parser will still use a lot of memory to store the output.</p>
+</div>
+<div class="section" id="the-input-solution">
+<h2>The Input Solution<a class="headerlink" href="#the-input-solution" title="Permalink to this headline">¶</a></h2>
+<p>To solve the &#8220;input problem&#8221; we need to discard generators, but we need
+generators while parsing because the parser needs to backtrack when it fails
+to match something.  The solution to this apparent contradiction is to discard
+only the generators that we will not need.</p>
+<p>In general we cannot find an exact solution (I believe; finding which
+generators we do not need is probably related to the halting problem), but we
+can implement a simple heuristic that works well in practice: we discard
+generators that have not been used &#8220;for a long time&#8221;.</p>
+<p>To do this, Lepl maintains a list of generators, sorted by last access time.
+When the list exceeds some size the least-used generator is deleted.  This
+reduces memory use while allowing a reasonable amount of backtracking.</p>
+<p>The list of generators is maintained by a <a class="reference external" href="api/redirect.html#lepl.core.manager.GeneratorManager">GeneratorManager()</a>, but you do not need
+to use this class directly.  Instead, call <a class="reference external" href="api/redirect.html#lepl.core.config.ConfigBuilder.low_memory">.config.low_memory()</a>.  That
+configuration method takes a parameter <tt class="docutils literal"><span class="pre">queue_len</span></tt> which controls the size
+of the list of &#8220;valid&#8221; generators.</p>
+</div>
+<div class="section" id="the-output-solution">
+<h2>The Output Solution<a class="headerlink" href="#the-output-solution" title="Permalink to this headline">¶</a></h2>
+<p>We could reduce the amount of memory needed to hold the output if there were
+some way of returning the output incrementally.  In normal use this is not
+possible with Lepl, but there is a &#8220;neat hack&#8221; that works quite well.</p>
+<p>Remember that a Lepl parser can produce a series of matches.  These are
+alternative ways of parsing the input, given the parser.  But in most cases we
+are only interested in the first match &#8212; this is particularly true when
+using <a class="reference external" href="api/redirect.html#lepl.core.config.ConfigBuilder.low_memory">.config.low_memory()</a> as described
+above, because the alternatives will be unavailable.</p>
+<p>The hack is to return fragments of the output as alternative matches.  This
+means:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Adding the matcher <a class="reference external" href="api/redirect.html#lepl.matchers.complex.Iterate">Iterate()</a> at the &#8220;top level&#8221; of the parser.  This
+will return each fragment in turn.</li>
+<li>Calling <a class="reference external" href="api/redirect.html#lepl.core.config.ParserMixin.parse_all">parse_all()</a> and then
+treating the generator as a sequence of fragments, rather than a sequence
+of complete matches.</li>
+</ul>
+</div></blockquote>
+<p>An example will make this clear.  Here is a matcher that simply matches every
+line:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">all_lines</span> <span class="o">=</span> <span class="n">Line</span><span class="p">(</span><span class="n">Token</span><span class="p">(</span><span class="n">Any</span><span class="p">()[:,</span><span class="o">...</span><span class="p">]))[:]</span>
+</pre></div>
+</div>
+<p>and here is the equivalent matcher than returns each line as a separate
+fragment.  Note how the final <tt class="docutils literal"><span class="pre">[:]</span></tt> is replaced by <a class="reference external" href="api/redirect.html#lepl.matchers.complex.Iterate">Iterate()</a>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">each_line</span> <span class="o">=</span> <span class="n">Iterate</span><span class="p">(</span><span class="n">Line</span><span class="p">(</span><span class="n">Token</span><span class="p">(</span><span class="n">Any</span><span class="p">()[:,</span><span class="o">...</span><span class="p">])))</span>
+</pre></div>
+</div>
+<p>We can use <tt class="docutils literal"><span class="pre">each_line</span></tt> as follows:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="s">&#39;&#39;&#39;line one</span>
+<span class="gp">... </span><span class="s">line two</span>
+<span class="gp">... </span><span class="s">line three&#39;&#39;&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">each_line</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">no_full_first_match</span><span class="p">()</span><span class="o">.</span><span class="n">lines</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">each_line</span><span class="o">.</span><span class="n">get_parse_all</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">parser</span><span class="p">(</span><span class="nb">input</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="k">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+<span class="go">[&#39;line one\n&#39;]</span>
+<span class="go">[&#39;line two\n&#39;]</span>
+<span class="go">[&#39;line three&#39;]</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="contents.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Resource Management</a><ul>
+<li><a class="reference internal" href="#the-input-problem">The Input Problem</a></li>
+<li><a class="reference internal" href="#the-output-problem">The Output Problem</a></li>
+<li><a class="reference internal" href="#the-input-solution">The Input Solution</a></li>
+<li><a class="reference internal" href="#the-output-solution">The Output Solution</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="implementation.html"
+                        title="previous chapter">Implementation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="binary.html"
+                        title="next chapter">Binary Data</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/resources.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="binary.html" title="Binary Data"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="implementation.html" title="Implementation"
+             >previous</a> |</li>
+        <li><a href="contents.html">LEPL 5.1.2 documentation</a> &raquo;</li>
+          <li><a href="manual.html" >Lepl Manual</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2009-2011, Andrew Cooke.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

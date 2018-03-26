@@ -1,0 +1,927 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lepl.bin.bits.BitString</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lepl-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lepl-module.html">Package&nbsp;lepl</a> ::
+        <a href="lepl.bin-module.html">Package&nbsp;bin</a> ::
+        <a href="lepl.bin.bits-module.html">Module&nbsp;bits</a> ::
+        Class&nbsp;BitString
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lepl.bin.bits.BitString-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class BitString</h1><p class="nomargin-top"><span class="codelink"><a href="lepl.bin.bits-pysrc.html#BitString">source&nbsp;code</a></span></p>
+<center>
+<center>  <map id="uml_class_diagram_for_lepl_bin_8" name="uml_class_diagram_for_lepl_bin_8">
+<area shape="rect" id="node1_14" href="lepl.bin.bits.BitString-class.html#__init__" title="value is a bytes() instance that contains the data." alt="" coords="17,39,309,57"/>
+<area shape="rect" id="node1_15" href="lepl.bin.bits.BitString-class.html#bytes" title="Return a series of bytes values, which encode the data for len(self) bits when offset=0 (with final padding in the last byte if necessary)." alt="" coords="17,57,309,76"/>
+<area shape="rect" id="node1_16" href="lepl.bin.bits.BitString-class.html#bits" title="Return a series of bits (encoded as booleans) that contain the contents." alt="" coords="17,76,309,95"/>
+<area shape="rect" id="node1_17" href="lepl.bin.bits.BitString-class.html#__str__" title="For 64 bits or less, show bits grouped by byte (octet), with bytes and bits running from left to right." alt="" coords="17,95,309,113"/>
+<area shape="rect" id="node1_18" href="lepl.bin.bits.BitString-class.html#__repr__" title="An explicit display of internal state, including padding and offset." alt="" coords="17,113,309,132"/>
+<area shape="rect" id="node1_19" href="lepl.bin.bits.BitString-class.html#__len__" title="lepl.bin.bits.BitString.__len__" alt="" coords="17,132,309,151"/>
+<area shape="rect" id="node1_20" href="lepl.bin.bits.BitString-class.html#zero" title="Are all bits zero?" alt="" coords="17,151,309,169"/>
+<area shape="rect" id="node1_21" href="lepl.bin.bits.BitString-class.html#offset" title="The internal offset." alt="" coords="17,169,309,188"/>
+<area shape="rect" id="node1_22" href="lepl.bin.bits.BitString-class.html#__iter__" title="lepl.bin.bits.BitString.__iter__" alt="" coords="17,188,309,207"/>
+<area shape="rect" id="node1_23" href="lepl.bin.bits.BitString-class.html#__add__" title="Combine two sequences, appending then together." alt="" coords="17,207,309,225"/>
+<area shape="rect" id="node1_24" href="lepl.bin.bits.BitString-class.html#to_bytes" title="Return a bytes() object, right&#45;padded with zero bits of necessary." alt="" coords="17,225,309,244"/>
+<area shape="rect" id="node1_25" href="lepl.bin.bits.BitString-class.html#to_int" title="Convert the entire bit sequence (of any size) to an integer." alt="" coords="17,244,309,263"/>
+<area shape="rect" id="node1_26" href="lepl.bin.bits.BitString-class.html#to_str" title="Convert to string." alt="" coords="17,263,309,281"/>
+<area shape="rect" id="node1_27" href="lepl.bin.bits.BitString-class.html#from_str" title="Create a BitString from a string." alt="" coords="17,300,309,319"/>
+<area shape="rect" id="node1" href="lepl.bin.bits.BitString-class.html" title="A sequence of bits, of arbitrary length." alt="" coords="5,6,321,325"/>
+</map>
+  <img src="uml_class_diagram_for_lepl_bin_8.gif" alt='' usemap="#uml_class_diagram_for_lepl_bin_8" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
+<hr />
+<p>A sequence of bits, of arbitrary length.  Has similar semantics to
+strings, in that a single index is itself a BitString (of unit length).</p>
+<p>This is intended as a standard fmt for arbitrary binary data, to help
+with conversion between other types.  In other words, convert to and from
+this, and then chain conversions.</p>
+<p>BitStr are stored as a contiguous sequence in an array of bytes.  Both bits
+and bytes are &quot;little endian&quot; - this allows arbitrary lengths of bits,
+at arbitrary offsets, to be given values without worrying about
+alignment.</p>
+<p>The bit sequence starts at bit 'offset' in the first byte and there are
+a total of 'length' bits.  The number of bytes stored is the minimum
+implied by those two values, with zero padding.</p>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.bin.bits.BitString-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">value</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">length</span>=<span class="summary-sig-default">0</span>,
+        <span class="summary-sig-arg">offset</span>=<span class="summary-sig-default">0</span>)</span><br />
+      value is a bytes() instance that contains the data.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.bin.bits-pysrc.html#BitString.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.bin.bits.BitString-class.html#bytes" class="summary-sig-name">bytes</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">offset</span>=<span class="summary-sig-default">0</span>)</span><br />
+      Return a series of bytes values, which encode the data for len(self)
+bits when offset=0 (with final padding in the last byte if necessary).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.bin.bits-pysrc.html#BitString.bytes">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="bits"></a><span class="summary-sig-name">bits</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Return a series of bits (encoded as booleans) that contain the contents.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.bin.bits-pysrc.html#BitString.bits">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.bin.bits.BitString-class.html#__str__" class="summary-sig-name">__str__</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      For 64 bits or less, show bits grouped by byte (octet), with bytes
+and bits running from left to right.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.bin.bits-pysrc.html#BitString.__str__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.bin.bits.BitString-class.html#__repr__" class="summary-sig-name">__repr__</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      An explicit display of internal state, including padding and offset.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.bin.bits-pysrc.html#BitString.__repr__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__len__"></a><span class="summary-sig-name">__len__</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.bin.bits-pysrc.html#BitString.__len__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="zero"></a><span class="summary-sig-name">zero</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Are all bits zero?</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.bin.bits-pysrc.html#BitString.zero">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.bin.bits.BitString-class.html#offset" class="summary-sig-name">offset</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      The internal offset.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.bin.bits-pysrc.html#BitString.offset">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__iter__"></a><span class="summary-sig-name">__iter__</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.bin.bits-pysrc.html#BitString.__iter__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__add__"></a><span class="summary-sig-name">__add__</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">other</span>)</span><br />
+      Combine two sequences, appending then together.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.bin.bits-pysrc.html#BitString.__add__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="to_bytes"></a><span class="summary-sig-name">to_bytes</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">offset</span>=<span class="summary-sig-default">0</span>)</span><br />
+      Return a bytes() object, right-padded with zero bits of necessary.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.bin.bits-pysrc.html#BitString.to_bytes">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.bin.bits.BitString-class.html#to_int" class="summary-sig-name">to_int</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">big_endian</span>=<span class="summary-sig-default">False</span>)</span><br />
+      Convert the entire bit sequence (of any size) to an integer.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.bin.bits-pysrc.html#BitString.to_int">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="to_str"></a><span class="summary-sig-name">to_str</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">encoding</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">errors</span>=<span class="summary-sig-default">'strict'</span>)</span><br />
+      Convert to string.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.bin.bits-pysrc.html#BitString.to_str">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__int__"></a><span class="summary-sig-name">__int__</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.bin.bits-pysrc.html#BitString.__int__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__index__"></a><span class="summary-sig-name">__index__</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.bin.bits-pysrc.html#BitString.__index__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__invert__"></a><span class="summary-sig-name">__invert__</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.bin.bits-pysrc.html#BitString.__invert__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__getitem__"></a><span class="summary-sig-name">__getitem__</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">index</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.bin.bits-pysrc.html#BitString.__getitem__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__eq__"></a><span class="summary-sig-name">__eq__</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">other</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.bin.bits-pysrc.html#BitString.__eq__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.bin.bits.BitString-class.html#__hash__" class="summary-sig-name">__hash__</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      hash(x)</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.bin.bits-pysrc.html#BitString.__hash__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== STATIC METHODS ==================== -->
+<a name="section-StaticMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Static Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-StaticMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="from_byte"></a><span class="summary-sig-name">from_byte</span>(<span class="summary-sig-arg">value</span>)</span><br />
+      Create a BitString from a byte.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.bin.bits-pysrc.html#BitString.from_byte">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="from_int32"></a><span class="summary-sig-name">from_int32</span>(<span class="summary-sig-arg">value</span>,
+        <span class="summary-sig-arg">big_endian</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Create a BitString from a 32 bit integer.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.bin.bits-pysrc.html#BitString.from_int32">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="from_int64"></a><span class="summary-sig-name">from_int64</span>(<span class="summary-sig-arg">value</span>,
+        <span class="summary-sig-arg">big_endian</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Create a BitString from a 64 bit integer.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.bin.bits-pysrc.html#BitString.from_int64">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.bin.bits.BitString-class.html#from_int" class="summary-sig-name">from_int</a>(<span class="summary-sig-arg">value</span>,
+        <span class="summary-sig-arg">length</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">big_endian</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Value can be an int, or a string with a leading or trailing tag.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.bin.bits-pysrc.html#BitString.from_int">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="from_sequence"></a><span class="summary-sig-name">from_sequence</span>(<span class="summary-sig-arg">value</span>,
+        <span class="summary-sig-arg">unpack</span>=<span class="summary-sig-default">lambda x: x</span>)</span><br />
+      Unpack is called for each item in turn (so should be, say, from_byte).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.bin.bits-pysrc.html#BitString.from_sequence">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="from_bytearray"></a><span class="summary-sig-name">from_bytearray</span>(<span class="summary-sig-arg">value</span>)</span><br />
+      Create a BitString from a bytearray.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.bin.bits-pysrc.html#BitString.from_bytearray">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="from_str"></a><span class="summary-sig-name">from_str</span>(<span class="summary-sig-arg">value</span>,
+        <span class="summary-sig-arg">encoding</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">errors</span>=<span class="summary-sig-default">STRICT</span>)</span><br />
+      Create a BitString from a string.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.bin.bits-pysrc.html#BitString.from_str">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="__swap"></a><span class="summary-name">__swap</span> = <code title="swap_table()">swap_table()</code>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">value</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">length</span>=<span class="sig-default">0</span>,
+        <span class="sig-arg">offset</span>=<span class="sig-default">0</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.bin.bits-pysrc.html#BitString.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>value is a bytes() instance that contains the data.</p>
+<p>length is the number of valid bits.  If given as a float it is the
+number of bytes (bits = int(float) * 8 + decimal(float) * 10)</p>
+<p>offset is the index of the first valid bit in the value.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        object.__init__
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="bytes"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">bytes</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">offset</span>=<span class="sig-default">0</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.bin.bits-pysrc.html#BitString.bytes">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Return a series of bytes values, which encode the data for len(self)
+bits when offset=0 (with final padding in the last byte if necessary).
+It is the caller's responsibility to discard any trailing bits.</p>
+<p>When 0 &lt; offset &lt; 8 then the data are zero-padded by offset bits first.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="__str__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__str__</span>(<span class="sig-arg">self</span>)</span>
+    <br /><em class="fname">(Informal representation operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.bin.bits-pysrc.html#BitString.__str__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>For 64 bits or less, show bits grouped by byte (octet), with bytes
+and bits running from left to right.  This is a &quot;picture&quot; of the bits.</p>
+<p>For more than 64 bits, give a hex encoding of bytes (right padded
+with zeros), shown in big-endian fmt.</p>
+<p>In both cases, the length in bits is given after a trailing slash.</p>
+<p>Whatever the internal offset, values are displayed with no initial
+padding.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        object.__str__
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__repr__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__repr__</span>(<span class="sig-arg">self</span>)</span>
+    <br /><em class="fname">(Representation operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.bin.bits-pysrc.html#BitString.__repr__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  An explicit display of internal state, including padding and offset.
+  <dl class="fields">
+    <dt>Overrides:
+        object.__repr__
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="offset"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">offset</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.bin.bits-pysrc.html#BitString.offset">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  The internal offset.  This is not useful as an external API, but
+helps with debugging.
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="to_int"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">to_int</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">big_endian</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.bin.bits-pysrc.html#BitString.to_int">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Convert the entire bit sequence (of any size) to an integer.</p>
+<p>Big endian conversion is only possible if the bits form a whole number
+of bytes.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="__hash__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__hash__</span>(<span class="sig-arg">self</span>)</span>
+    <br /><em class="fname">(Hashing function)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.bin.bits-pysrc.html#BitString.__hash__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  hash(x)
+  <dl class="fields">
+    <dt>Overrides:
+        object.__hash__
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="from_int"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">from_int</span>(<span class="sig-arg">value</span>,
+        <span class="sig-arg">length</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">big_endian</span>=<span class="sig-default">None</span>)</span>
+    <br /><em class="fname">Static Method</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.bin.bits-pysrc.html#BitString.from_int">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Value can be an int, or a string with a leading or trailing tag.
+A plain int, or no tag, or leading tag, is byte little-endian by
+default.</p>
+<p>Length and big-endianness are inferred from the fmt for values
+given as strings, but explicit parameters override these.
+If no length is given, and none can be inferred, 32 bits is assumed
+(bit length cannot be inferred for decimal values, even as strings).</p>
+<p>The interpretation of big-endian values depends on the base and is
+either very intuitive and useful, or completely stupid.  Use at your
+own risk.</p>
+<p>Big-endian hex values must specify an exact number of bytes (even
+number of hex digits).  Each separate byte is assigned a value
+according to big-endian semantics, but with a byte small-endian
+order is used.  This is consistent with the standard conventions for
+network data.  So, for example, 1234x0 gives two bytes.  The first
+contains the value 0x12, the second the value 0x34.</p>
+<p>Big-endian binary values are taken to be a &quot;picture&quot; of the bits,
+with the array reading from left to right.  So 0011b0 specifies
+four bits, starting with two zeroes.</p>
+<p>Big-endian decimal and octal values are treated as hex values.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lepl-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sun May 13 16:31:00 2012
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

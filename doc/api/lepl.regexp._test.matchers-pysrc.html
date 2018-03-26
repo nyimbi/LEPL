@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lepl.regexp._test.matchers</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lepl-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lepl-module.html">Package&nbsp;lepl</a> ::
+        <a href="lepl.regexp-module.html">Package&nbsp;regexp</a> ::
+        <a href="lepl.regexp._test-module.html">Package&nbsp;_test</a> ::
+        Module&nbsp;matchers
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lepl.regexp._test.matchers-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="lepl.regexp._test.matchers-module.html">Module lepl.regexp._test.matchers</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-comment"># The contents of this file are subject to the Mozilla Public License</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-comment"># (MPL) Version 1.1 (the "License"); you may not use this file except</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-comment"># in compliance with the License. You may obtain a copy of the License</tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-comment"># at http://www.mozilla.org/MPL/</tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-comment"># Software distributed under the License is distributed on an "AS IS"</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-comment"># basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See</tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-comment"># the License for the specific language governing rights and</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt class="py-comment"># limitations under the License.</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"><tt class="py-comment"># The Original Code is LEPL (http://www.acooke.org/lepl)</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"><tt class="py-comment"># The Initial Developer of the Original Code is Andrew Cooke.</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"><tt class="py-comment"># Portions created by the Initial Developer are Copyright (C) 2009-2010</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"><tt class="py-comment"># Andrew Cooke (andrew@acooke.org). All Rights Reserved.</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"><tt class="py-comment"># Alternatively, the contents of this file may be used under the terms</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"><tt class="py-comment"># of the LGPL license (the GNU Lesser General Public License,</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"><tt class="py-comment"># http://www.gnu.org/licenses/lgpl.html), in which case the provisions</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"><tt class="py-comment"># of the LGPL License are applicable instead of those above.</tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line"><tt class="py-comment"># If you wish to allow use of your version of this file only under the</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line"><tt class="py-comment"># terms of the LGPL License and not to allow others to use your version</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"><tt class="py-comment"># of this file under the MPL, indicate your decision by deleting the</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line"><tt class="py-comment"># provisions above and replace them with the notice and other provisions</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line"><tt class="py-comment"># required by the LGPL License.  If you do not delete the provisions</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line"><tt class="py-comment"># above, a recipient may use your version of this file under either the</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line"><tt class="py-comment"># MPL or the LGPL License.</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line"> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line"><tt class="py-docstring">'''</tt> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line"><tt class="py-docstring">Tests for the lepl.regexp.matchers module.</tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line"><tt class="py-docstring">'''</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line"> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line"><tt class="py-comment">#from logging import basicConfig, DEBUG</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">unittest</tt> <tt class="py-keyword">import</tt> <tt class="py-name">TestCase</tt> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line"> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package lepl=lepl-module.html"><a title="lepl" class="py-name" href="#" onclick="return doclink('link-0', 'lepl', 'link-0');">lepl</a></tt> <tt class="py-keyword">import</tt> <tt id="link-1" class="py-name" targets="Class lepl.matchers.operators.Separator=lepl.matchers.operators.Separator-class.html"><a title="lepl.matchers.operators.Separator" class="py-name" href="#" onclick="return doclink('link-1', 'Separator', 'link-1');">Separator</a></tt><tt class="py-op">,</tt> <tt id="link-2" class="py-name" targets="Function lepl.matchers.core.Regexp()=lepl.matchers.core-module.html#Regexp"><a title="lepl.matchers.core.Regexp" class="py-name" href="#" onclick="return doclink('link-2', 'Regexp', 'link-2');">Regexp</a></tt><tt class="py-op">,</tt> <tt id="link-3" class="py-name" targets="Class lepl.regexp.matchers.NfaRegexp=lepl.regexp.matchers.NfaRegexp-class.html"><a title="lepl.regexp.matchers.NfaRegexp" class="py-name" href="#" onclick="return doclink('link-3', 'NfaRegexp', 'link-3');">NfaRegexp</a></tt><tt class="py-op">,</tt> <tt id="link-4" class="py-name" targets="Class lepl.regexp.matchers.DfaRegexp=lepl.regexp.matchers.DfaRegexp-class.html"><a title="lepl.regexp.matchers.DfaRegexp" class="py-name" href="#" onclick="return doclink('link-4', 'DfaRegexp', 'link-4');">DfaRegexp</a></tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line"> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line"> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line"><tt class="py-comment"># pylint: disable-msg=C0103, C0111, C0301</tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line"><tt class="py-comment"># (dude this is just a test)</tt> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line"> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line"> </tt>
+<a name="MatchersTest"></a><div id="MatchersTest-def"><a name="L44"></a><tt class="py-lineno">44</tt> <a class="py-toggle" href="#" id="MatchersTest-toggle" onclick="return toggle('MatchersTest');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lepl.regexp._test.matchers.MatchersTest-class.html">MatchersTest</a><tt class="py-op">(</tt><tt class="py-base-class">TestCase</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="MatchersTest-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="MatchersTest-expanded"><a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line">     </tt>
+<a name="MatchersTest.test_nfa"></a><div id="MatchersTest.test_nfa-def"><a name="L46"></a><tt class="py-lineno">46</tt> <a class="py-toggle" href="#" id="MatchersTest.test_nfa-toggle" onclick="return toggle('MatchersTest.test_nfa');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.regexp._test.matchers.MatchersTest-class.html#test_nfa">test_nfa</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="MatchersTest.test_nfa-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="MatchersTest.test_nfa-expanded"><a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line">        <tt class="py-comment">#basicConfig(level=DEBUG)</tt> </tt>
+<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line">         </tt>
+<a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line">        <tt class="py-keyword">with</tt> <tt id="link-5" class="py-name"><a title="lepl.matchers.operators.Separator" class="py-name" href="#" onclick="return doclink('link-5', 'Separator', 'link-1');">Separator</a></tt><tt class="py-op">(</tt><tt class="py-op">~</tt><tt id="link-6" class="py-name"><a title="lepl.matchers.core.Regexp" class="py-name" href="#" onclick="return doclink('link-6', 'Regexp', 'link-2');">Regexp</a></tt><tt class="py-op">(</tt><tt class="py-string">r'\s*'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line">            <tt id="link-7" class="py-name" targets="Method lepl.matchers._test.operators.SpaceTest.word()=lepl.matchers._test.operators.SpaceTest-class.html#word"><a title="lepl.matchers._test.operators.SpaceTest.word" class="py-name" href="#" onclick="return doclink('link-7', 'word', 'link-7');">word</a></tt> <tt class="py-op">=</tt> <tt id="link-8" class="py-name"><a title="lepl.regexp.matchers.NfaRegexp" class="py-name" href="#" onclick="return doclink('link-8', 'NfaRegexp', 'link-3');">NfaRegexp</a></tt><tt class="py-op">(</tt><tt class="py-string">'[A-Z][a-z]*'</tt><tt class="py-op">)</tt> </tt>
+<a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line">            <tt class="py-name">phrase</tt> <tt class="py-op">=</tt> <tt id="link-9" class="py-name"><a title="lepl.matchers._test.operators.SpaceTest.word" class="py-name" href="#" onclick="return doclink('link-9', 'word', 'link-7');">word</a></tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">:</tt><tt class="py-op">]</tt> </tt>
+<a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line">        <tt class="py-name">phrase</tt><tt class="py-op">.</tt><tt id="link-10" class="py-name" targets="Module lepl.core._test.config=lepl.core._test.config-module.html,Module lepl.core.config=lepl.core.config-module.html"><a title="lepl.core._test.config
+lepl.core.config" class="py-name" href="#" onclick="return doclink('link-10', 'config', 'link-10');">config</a></tt><tt class="py-op">.</tt><tt id="link-11" class="py-name" targets="Method lepl.core.config.ConfigBuilder.no_full_first_match()=lepl.core.config.ConfigBuilder-class.html#no_full_first_match"><a title="lepl.core.config.ConfigBuilder.no_full_first_match" class="py-name" href="#" onclick="return doclink('link-11', 'no_full_first_match', 'link-11');">no_full_first_match</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line">             </tt>
+<a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line">        <tt class="py-name">results</tt> <tt class="py-op">=</tt> <tt id="link-12" class="py-name" targets="Module lepl.support._test.list=lepl.support._test.list-module.html,Module lepl.support.list=lepl.support.list-module.html"><a title="lepl.support._test.list
+lepl.support.list" class="py-name" href="#" onclick="return doclink('link-12', 'list', 'link-12');">list</a></tt><tt class="py-op">(</tt><tt class="py-name">phrase</tt><tt class="py-op">.</tt><tt id="link-13" class="py-name" targets="Method lepl.core.config.ParserMixin.match()=lepl.core.config.ParserMixin-class.html#match,Method lepl.regexp.core.DfaPattern.match()=lepl.regexp.core.DfaPattern-class.html#match,Method lepl.regexp.core.NfaPattern.match()=lepl.regexp.core.NfaPattern-class.html#match"><a title="lepl.core.config.ParserMixin.match
+lepl.regexp.core.DfaPattern.match
+lepl.regexp.core.NfaPattern.match" class="py-name" href="#" onclick="return doclink('link-13', 'match', 'link-13');">match</a></tt><tt class="py-op">(</tt><tt class="py-string">'Abc'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt id="link-14" class="py-name" targets="Method lepl.lexer.stream.TokenHelper.len()=lepl.lexer.stream.TokenHelper-class.html#len,Method lepl.regexp.interval.Intervals.len()=lepl.regexp.interval.Intervals-class.html#len,Method lepl.regexp.interval.TaggedFragments.len()=lepl.regexp.interval.TaggedFragments-class.html#len,Method lepl.regexp.interval._Character.len()=lepl.regexp.interval._Character-class.html#len,Method lepl.stream.core.StreamHelper.len()=lepl.stream.core.StreamHelper-class.html#len,Method lepl.stream.facade.HelperFacade.len()=lepl.stream.facade.HelperFacade-class.html#len,Method lepl.stream.iter.IterableHelper.len()=lepl.stream.iter.IterableHelper-class.html#len,Method lepl.stream.simple.SequenceHelper.len()=lepl.stream.simple.SequenceHelper-class.html#len"><a title="lepl.lexer.stream.TokenHelper.len
+lepl.regexp.interval.Intervals.len
+lepl.regexp.interval.TaggedFragments.len
+lepl.regexp.interval._Character.len
+lepl.stream.core.StreamHelper.len
+lepl.stream.facade.HelperFacade.len
+lepl.stream.iter.IterableHelper.len
+lepl.stream.simple.SequenceHelper.len" class="py-name" href="#" onclick="return doclink('link-14', 'len', 'link-14');">len</a></tt><tt class="py-op">(</tt><tt class="py-name">results</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-number">3</tt><tt class="py-op">,</tt> <tt class="py-name">results</tt> </tt>
+<a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt class="py-name">results</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">==</tt> <tt class="py-op">[</tt><tt class="py-string">'Abc'</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">results</tt> </tt>
+<a name="L57"></a><tt class="py-lineno">57</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt class="py-name">results</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">==</tt> <tt class="py-op">[</tt><tt class="py-string">'Ab'</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">results</tt> </tt>
+<a name="L58"></a><tt class="py-lineno">58</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt class="py-name">results</tt><tt class="py-op">[</tt><tt class="py-number">2</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">==</tt> <tt class="py-op">[</tt><tt class="py-string">'A'</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">results</tt> </tt>
+<a name="L59"></a><tt class="py-lineno">59</tt>  <tt class="py-line">         </tt>
+<a name="L60"></a><tt class="py-lineno">60</tt>  <tt class="py-line">        <tt class="py-name">results</tt> <tt class="py-op">=</tt> <tt id="link-15" class="py-name"><a title="lepl.support._test.list
+lepl.support.list" class="py-name" href="#" onclick="return doclink('link-15', 'list', 'link-12');">list</a></tt><tt class="py-op">(</tt><tt class="py-name">phrase</tt><tt class="py-op">.</tt><tt id="link-16" class="py-name"><a title="lepl.core.config.ParserMixin.match
+lepl.regexp.core.DfaPattern.match
+lepl.regexp.core.NfaPattern.match" class="py-name" href="#" onclick="return doclink('link-16', 'match', 'link-13');">match</a></tt><tt class="py-op">(</tt><tt class="py-string">'AbcDef'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L61"></a><tt class="py-lineno">61</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt id="link-17" class="py-name"><a title="lepl.lexer.stream.TokenHelper.len
+lepl.regexp.interval.Intervals.len
+lepl.regexp.interval.TaggedFragments.len
+lepl.regexp.interval._Character.len
+lepl.stream.core.StreamHelper.len
+lepl.stream.facade.HelperFacade.len
+lepl.stream.iter.IterableHelper.len
+lepl.stream.simple.SequenceHelper.len" class="py-name" href="#" onclick="return doclink('link-17', 'len', 'link-14');">len</a></tt><tt class="py-op">(</tt><tt class="py-name">results</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-number">6</tt><tt class="py-op">,</tt> <tt class="py-name">results</tt> </tt>
+<a name="L62"></a><tt class="py-lineno">62</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt class="py-name">results</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">==</tt> <tt class="py-op">[</tt><tt class="py-string">'Abc'</tt><tt class="py-op">,</tt> <tt class="py-string">'Def'</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">results</tt> </tt>
+<a name="L63"></a><tt class="py-lineno">63</tt>  <tt class="py-line">         </tt>
+<a name="L64"></a><tt class="py-lineno">64</tt>  <tt class="py-line">        <tt class="py-name">results</tt> <tt class="py-op">=</tt> <tt id="link-18" class="py-name"><a title="lepl.support._test.list
+lepl.support.list" class="py-name" href="#" onclick="return doclink('link-18', 'list', 'link-12');">list</a></tt><tt class="py-op">(</tt><tt class="py-name">phrase</tt><tt class="py-op">.</tt><tt id="link-19" class="py-name"><a title="lepl.core.config.ParserMixin.match
+lepl.regexp.core.DfaPattern.match
+lepl.regexp.core.NfaPattern.match" class="py-name" href="#" onclick="return doclink('link-19', 'match', 'link-13');">match</a></tt><tt class="py-op">(</tt><tt class="py-string">'Abc Def'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L65"></a><tt class="py-lineno">65</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt id="link-20" class="py-name"><a title="lepl.lexer.stream.TokenHelper.len
+lepl.regexp.interval.Intervals.len
+lepl.regexp.interval.TaggedFragments.len
+lepl.regexp.interval._Character.len
+lepl.stream.core.StreamHelper.len
+lepl.stream.facade.HelperFacade.len
+lepl.stream.iter.IterableHelper.len
+lepl.stream.simple.SequenceHelper.len" class="py-name" href="#" onclick="return doclink('link-20', 'len', 'link-14');">len</a></tt><tt class="py-op">(</tt><tt class="py-name">results</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-number">6</tt><tt class="py-op">,</tt> <tt class="py-name">results</tt> </tt>
+</div><a name="L66"></a><tt class="py-lineno">66</tt>  <tt class="py-line">         </tt>
+<a name="MatchersTest.test_dfa"></a><div id="MatchersTest.test_dfa-def"><a name="L67"></a><tt class="py-lineno">67</tt> <a class="py-toggle" href="#" id="MatchersTest.test_dfa-toggle" onclick="return toggle('MatchersTest.test_dfa');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.regexp._test.matchers.MatchersTest-class.html#test_dfa">test_dfa</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="MatchersTest.test_dfa-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="MatchersTest.test_dfa-expanded"><a name="L68"></a><tt class="py-lineno">68</tt>  <tt class="py-line">        <tt class="py-comment">#basicConfig(level=DEBUG)</tt> </tt>
+<a name="L69"></a><tt class="py-lineno">69</tt>  <tt class="py-line">         </tt>
+<a name="L70"></a><tt class="py-lineno">70</tt>  <tt class="py-line">        <tt class="py-keyword">with</tt> <tt id="link-21" class="py-name"><a title="lepl.matchers.operators.Separator" class="py-name" href="#" onclick="return doclink('link-21', 'Separator', 'link-1');">Separator</a></tt><tt class="py-op">(</tt><tt class="py-op">~</tt><tt id="link-22" class="py-name"><a title="lepl.matchers.core.Regexp" class="py-name" href="#" onclick="return doclink('link-22', 'Regexp', 'link-2');">Regexp</a></tt><tt class="py-op">(</tt><tt class="py-string">r'\s*'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L71"></a><tt class="py-lineno">71</tt>  <tt class="py-line">            <tt id="link-23" class="py-name"><a title="lepl.matchers._test.operators.SpaceTest.word" class="py-name" href="#" onclick="return doclink('link-23', 'word', 'link-7');">word</a></tt> <tt class="py-op">=</tt> <tt id="link-24" class="py-name"><a title="lepl.regexp.matchers.DfaRegexp" class="py-name" href="#" onclick="return doclink('link-24', 'DfaRegexp', 'link-4');">DfaRegexp</a></tt><tt class="py-op">(</tt><tt class="py-string">'[A-Z][a-z]*'</tt><tt class="py-op">)</tt> </tt>
+<a name="L72"></a><tt class="py-lineno">72</tt>  <tt class="py-line">            <tt class="py-name">phrase</tt> <tt class="py-op">=</tt> <tt id="link-25" class="py-name"><a title="lepl.matchers._test.operators.SpaceTest.word" class="py-name" href="#" onclick="return doclink('link-25', 'word', 'link-7');">word</a></tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">:</tt><tt class="py-op">]</tt> </tt>
+<a name="L73"></a><tt class="py-lineno">73</tt>  <tt class="py-line">        <tt class="py-name">phrase</tt><tt class="py-op">.</tt><tt id="link-26" class="py-name"><a title="lepl.core._test.config
+lepl.core.config" class="py-name" href="#" onclick="return doclink('link-26', 'config', 'link-10');">config</a></tt><tt class="py-op">.</tt><tt id="link-27" class="py-name"><a title="lepl.core.config.ConfigBuilder.no_full_first_match" class="py-name" href="#" onclick="return doclink('link-27', 'no_full_first_match', 'link-11');">no_full_first_match</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L74"></a><tt class="py-lineno">74</tt>  <tt class="py-line">         </tt>
+<a name="L75"></a><tt class="py-lineno">75</tt>  <tt class="py-line">        <tt class="py-name">results</tt> <tt class="py-op">=</tt> <tt id="link-28" class="py-name"><a title="lepl.support._test.list
+lepl.support.list" class="py-name" href="#" onclick="return doclink('link-28', 'list', 'link-12');">list</a></tt><tt class="py-op">(</tt><tt class="py-name">phrase</tt><tt class="py-op">.</tt><tt id="link-29" class="py-name"><a title="lepl.core.config.ParserMixin.match
+lepl.regexp.core.DfaPattern.match
+lepl.regexp.core.NfaPattern.match" class="py-name" href="#" onclick="return doclink('link-29', 'match', 'link-13');">match</a></tt><tt class="py-op">(</tt><tt class="py-string">'Abc'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L76"></a><tt class="py-lineno">76</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt id="link-30" class="py-name"><a title="lepl.lexer.stream.TokenHelper.len
+lepl.regexp.interval.Intervals.len
+lepl.regexp.interval.TaggedFragments.len
+lepl.regexp.interval._Character.len
+lepl.stream.core.StreamHelper.len
+lepl.stream.facade.HelperFacade.len
+lepl.stream.iter.IterableHelper.len
+lepl.stream.simple.SequenceHelper.len" class="py-name" href="#" onclick="return doclink('link-30', 'len', 'link-14');">len</a></tt><tt class="py-op">(</tt><tt class="py-name">results</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-name">results</tt> </tt>
+<a name="L77"></a><tt class="py-lineno">77</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt class="py-name">results</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">==</tt> <tt class="py-op">[</tt><tt class="py-string">'Abc'</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">results</tt> </tt>
+<a name="L78"></a><tt class="py-lineno">78</tt>  <tt class="py-line">         </tt>
+<a name="L79"></a><tt class="py-lineno">79</tt>  <tt class="py-line">        <tt class="py-name">results</tt> <tt class="py-op">=</tt> <tt id="link-31" class="py-name"><a title="lepl.support._test.list
+lepl.support.list" class="py-name" href="#" onclick="return doclink('link-31', 'list', 'link-12');">list</a></tt><tt class="py-op">(</tt><tt class="py-name">phrase</tt><tt class="py-op">.</tt><tt id="link-32" class="py-name"><a title="lepl.core.config.ParserMixin.match
+lepl.regexp.core.DfaPattern.match
+lepl.regexp.core.NfaPattern.match" class="py-name" href="#" onclick="return doclink('link-32', 'match', 'link-13');">match</a></tt><tt class="py-op">(</tt><tt class="py-string">'AbcDef'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L80"></a><tt class="py-lineno">80</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt id="link-33" class="py-name"><a title="lepl.lexer.stream.TokenHelper.len
+lepl.regexp.interval.Intervals.len
+lepl.regexp.interval.TaggedFragments.len
+lepl.regexp.interval._Character.len
+lepl.stream.core.StreamHelper.len
+lepl.stream.facade.HelperFacade.len
+lepl.stream.iter.IterableHelper.len
+lepl.stream.simple.SequenceHelper.len" class="py-name" href="#" onclick="return doclink('link-33', 'len', 'link-14');">len</a></tt><tt class="py-op">(</tt><tt class="py-name">results</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-number">2</tt><tt class="py-op">,</tt> <tt class="py-name">results</tt> </tt>
+<a name="L81"></a><tt class="py-lineno">81</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt class="py-name">results</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">==</tt> <tt class="py-op">[</tt><tt class="py-string">'Abc'</tt><tt class="py-op">,</tt> <tt class="py-string">'Def'</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">results</tt> </tt>
+<a name="L82"></a><tt class="py-lineno">82</tt>  <tt class="py-line">         </tt>
+<a name="L83"></a><tt class="py-lineno">83</tt>  <tt class="py-line">        <tt class="py-name">results</tt> <tt class="py-op">=</tt> <tt id="link-34" class="py-name"><a title="lepl.support._test.list
+lepl.support.list" class="py-name" href="#" onclick="return doclink('link-34', 'list', 'link-12');">list</a></tt><tt class="py-op">(</tt><tt class="py-name">phrase</tt><tt class="py-op">.</tt><tt id="link-35" class="py-name"><a title="lepl.core.config.ParserMixin.match
+lepl.regexp.core.DfaPattern.match
+lepl.regexp.core.NfaPattern.match" class="py-name" href="#" onclick="return doclink('link-35', 'match', 'link-13');">match</a></tt><tt class="py-op">(</tt><tt class="py-string">'Abc Def'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L84"></a><tt class="py-lineno">84</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt id="link-36" class="py-name"><a title="lepl.lexer.stream.TokenHelper.len
+lepl.regexp.interval.Intervals.len
+lepl.regexp.interval.TaggedFragments.len
+lepl.regexp.interval._Character.len
+lepl.stream.core.StreamHelper.len
+lepl.stream.facade.HelperFacade.len
+lepl.stream.iter.IterableHelper.len
+lepl.stream.simple.SequenceHelper.len" class="py-name" href="#" onclick="return doclink('link-36', 'len', 'link-14');">len</a></tt><tt class="py-op">(</tt><tt class="py-name">results</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-number">2</tt><tt class="py-op">,</tt> <tt class="py-name">results</tt> </tt>
+</div><a name="L85"></a><tt class="py-lineno">85</tt>  <tt class="py-line">         </tt>
+<a name="MatchersTest.test_full_first_match"></a><div id="MatchersTest.test_full_first_match-def"><a name="L86"></a><tt class="py-lineno">86</tt> <a class="py-toggle" href="#" id="MatchersTest.test_full_first_match-toggle" onclick="return toggle('MatchersTest.test_full_first_match');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.regexp._test.matchers.MatchersTest-class.html#test_full_first_match">test_full_first_match</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="MatchersTest.test_full_first_match-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="MatchersTest.test_full_first_match-expanded"><a name="L87"></a><tt class="py-lineno">87</tt>  <tt class="py-line">        <tt class="py-comment">#basicConfig(level=DEBUG)</tt> </tt>
+<a name="L88"></a><tt class="py-lineno">88</tt>  <tt class="py-line">        <tt id="link-37" class="py-name" targets="Method lepl.matchers._test.combine.DirectionTest1.matcher()=lepl.matchers._test.combine.DirectionTest1-class.html#matcher,Method lepl.matchers._test.combine.DirectionTest2.matcher()=lepl.matchers._test.combine.DirectionTest2-class.html#matcher,Module lepl.matchers.matcher=lepl.matchers.matcher-module.html"><a title="lepl.matchers._test.combine.DirectionTest1.matcher
+lepl.matchers._test.combine.DirectionTest2.matcher
+lepl.matchers.matcher" class="py-name" href="#" onclick="return doclink('link-37', 'matcher', 'link-37');">matcher</a></tt> <tt class="py-op">=</tt> <tt id="link-38" class="py-name"><a title="lepl.matchers.core.Regexp" class="py-name" href="#" onclick="return doclink('link-38', 'Regexp', 'link-2');">Regexp</a></tt><tt class="py-op">(</tt><tt class="py-string">'a'</tt><tt class="py-op">)</tt> </tt>
+<a name="L89"></a><tt class="py-lineno">89</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt id="link-39" class="py-name"><a title="lepl.matchers._test.combine.DirectionTest1.matcher
+lepl.matchers._test.combine.DirectionTest2.matcher
+lepl.matchers.matcher" class="py-name" href="#" onclick="return doclink('link-39', 'matcher', 'link-37');">matcher</a></tt><tt class="py-op">.</tt><tt id="link-40" class="py-name" targets="Function lepl.bin.literal.parse()=lepl.bin.literal-module.html#parse,Method lepl.core.config.ParserMixin.parse()=lepl.core.config.ParserMixin-class.html#parse,Method lepl.regexp.core.Alphabet.parse()=lepl.regexp.core.Alphabet-class.html#parse,Method lepl.regexp.str.StrAlphabet.parse()=lepl.regexp.str.StrAlphabet-class.html#parse"><a title="lepl.bin.literal.parse
+lepl.core.config.ParserMixin.parse
+lepl.regexp.core.Alphabet.parse
+lepl.regexp.str.StrAlphabet.parse" class="py-name" href="#" onclick="return doclink('link-40', 'parse', 'link-40');">parse</a></tt><tt class="py-op">(</tt><tt class="py-string">'a'</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L90"></a><tt class="py-lineno">90</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lepl-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sun May 13 16:31:11 2012
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

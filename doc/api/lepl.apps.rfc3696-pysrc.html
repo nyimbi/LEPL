@@ -1,0 +1,669 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lepl.apps.rfc3696</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lepl-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lepl-module.html">Package&nbsp;lepl</a> ::
+        <a href="lepl.apps-module.html">Package&nbsp;apps</a> ::
+        Module&nbsp;rfc3696
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lepl.apps.rfc3696-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="lepl.apps.rfc3696-module.html">Module lepl.apps.rfc3696</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment"># The contents of this file are subject to the Mozilla Public License</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-comment"># (MPL) Version 1.1 (the "License"); you may not use this file except</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-comment"># in compliance with the License. You may obtain a copy of the License</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-comment"># at http://www.mozilla.org/MPL/</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-comment"># Software distributed under the License is distributed on an "AS IS"</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-comment"># basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-comment"># the License for the specific language governing rights and</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-comment"># limitations under the License.</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-comment"># The Original Code is LEPL (http://www.acooke.org/lepl)</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-comment"># The Initial Developer of the Original Code is Andrew Cooke.</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-comment"># Portions created by the Initial Developer are Copyright (C) 2009-2010</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-comment"># Andrew Cooke (andrew@acooke.org). All Rights Reserved.</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-comment"># Alternatively, the contents of this file may be used under the terms</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt class="py-comment"># of the LGPL license (the GNU Lesser General Public License,</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-comment"># http://www.gnu.org/licenses/lgpl.html), in which case the provisions</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-comment"># of the LGPL License are applicable instead of those above.</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt class="py-comment"># If you wish to allow use of your version of this file only under the</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt class="py-comment"># terms of the LGPL License and not to allow others to use your version</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"><tt class="py-comment"># of this file under the MPL, indicate your decision by deleting the</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt class="py-comment"># provisions above and replace them with the notice and other provisions</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt class="py-comment"># required by the LGPL License.  If you do not delete the provisions</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"><tt class="py-comment"># above, a recipient may use your version of this file under either the</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"><tt class="py-comment"># MPL or the LGPL License.</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"><tt class="py-docstring">'''</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line"><tt class="py-docstring">Matchers for validating URIs and related objects, taken from RFC3696.</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"><tt class="py-docstring">IMPORTANT - the emphasis here is on validation of user input.</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line"><tt class="py-docstring">These matchers are not exact matches for the underlying specs - they are</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line"><tt class="py-docstring">just useful practical approximations.  Read RFC3696 to see what I mean</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line"><tt class="py-docstring">(or the quotes from that doc in the source below).</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"><tt class="py-docstring">'''</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line"> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Method lepl.regexp.core.Compiler.re()=lepl.regexp.core.Compiler-class.html#re"><a title="lepl.regexp.core.Compiler.re" class="py-name" href="#" onclick="return doclink('link-0', 're', 'link-0');">re</a></tt> <tt class="py-keyword">import</tt> <tt id="link-1" class="py-name" targets="Method lepl.lexer.matchers.BaseToken.compile()=lepl.lexer.matchers.BaseToken-class.html#compile"><a title="lepl.lexer.matchers.BaseToken.compile" class="py-name" href="#" onclick="return doclink('link-1', 'compile', 'link-1');">compile</a></tt> <tt class="py-keyword">as</tt> <tt class="py-name">compile_</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">string</tt> <tt class="py-keyword">import</tt> <tt class="py-name">ascii_letters</tt><tt class="py-op">,</tt> <tt class="py-name">digits</tt><tt class="py-op">,</tt> <tt class="py-name">printable</tt><tt class="py-op">,</tt> <tt class="py-name">whitespace</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line"> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-2" class="py-name" targets="Package lepl=lepl-module.html"><a title="lepl" class="py-name" href="#" onclick="return doclink('link-2', 'lepl', 'link-2');">lepl</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line"> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">     </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line"><tt id="link-3" class="py-name" targets="Variable lepl.apps.rfc3696._HEX=lepl.apps.rfc3696-module.html#_HEX"><a title="lepl.apps.rfc3696._HEX" class="py-name" href="#" onclick="return doclink('link-3', '_HEX', 'link-3');">_HEX</a></tt> <tt class="py-op">=</tt> <tt class="py-name">digits</tt> <tt class="py-op">+</tt> <tt class="py-string">'abcdef'</tt> <tt class="py-op">+</tt> <tt class="py-string">'ABCDEF'</tt> </tt>
+<a name="_guarantee_bool"></a><div id="_guarantee_bool-def"><a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line"> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line"> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt> <a class="py-toggle" href="#" id="_guarantee_bool-toggle" onclick="return toggle('_guarantee_bool');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.apps.rfc3696-module.html#_guarantee_bool">_guarantee_bool</a><tt class="py-op">(</tt><tt class="py-param">function</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_guarantee_bool-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="_guarantee_bool-expanded"><a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">    <tt class="py-docstring">'''</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line"><tt class="py-docstring">    A decorator that guarantees a true/false response.</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line"><tt class="py-docstring">    '''</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">    <tt class="py-keyword">def</tt> <tt class="py-def-name">wrapper</tt><tt class="py-op">(</tt><tt class="py-op">*</tt><tt class="py-param">args</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kargs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">        <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">bool</tt><tt class="py-op">(</tt><tt class="py-name">function</tt><tt class="py-op">(</tt><tt class="py-op">*</tt><tt id="link-4" class="py-name" targets="Function lepl.matchers.derived.args()=lepl.matchers.derived-module.html#args"><a title="lepl.matchers.derived.args" class="py-name" href="#" onclick="return doclink('link-4', 'args', 'link-4');">args</a></tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt id="link-5" class="py-name" targets="Method lepl.matchers.support.BaseMatcher.kargs()=lepl.matchers.support.BaseMatcher-class.html#kargs,Method lepl.stream.core.StreamHelper.kargs()=lepl.stream.core.StreamHelper-class.html#kargs,Method lepl.stream.facade.HelperFacade.kargs()=lepl.stream.facade.HelperFacade-class.html#kargs,Method lepl.stream.simple.SequenceHelper.kargs()=lepl.stream.simple.SequenceHelper-class.html#kargs,Method lepl.stream.simple.StringHelper.kargs()=lepl.stream.simple.StringHelper-class.html#kargs"><a title="lepl.matchers.support.BaseMatcher.kargs
+lepl.stream.core.StreamHelper.kargs
+lepl.stream.facade.HelperFacade.kargs
+lepl.stream.simple.SequenceHelper.kargs
+lepl.stream.simple.StringHelper.kargs" class="py-name" href="#" onclick="return doclink('link-5', 'kargs', 'link-5');">kargs</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt><tt class="py-op">:</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">False</tt> </tt>
+</div><a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">wrapper</tt> </tt>
+</div><a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line"> </tt>
+<a name="_matcher_to_validator"></a><div id="_matcher_to_validator-def"><a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line"> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt> <a class="py-toggle" href="#" id="_matcher_to_validator-toggle" onclick="return toggle('_matcher_to_validator');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.apps.rfc3696-module.html#_matcher_to_validator">_matcher_to_validator</a><tt class="py-op">(</tt><tt class="py-param">factory</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_matcher_to_validator-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="_matcher_to_validator-expanded"><a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">    <tt class="py-docstring">'''</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line"><tt class="py-docstring">    Generate a validator based on the given matcher factory.</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line"><tt class="py-docstring">    '''</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">    <tt id="link-6" class="py-name" targets="Method lepl.matchers._test.combine.DirectionTest1.matcher()=lepl.matchers._test.combine.DirectionTest1-class.html#matcher,Method lepl.matchers._test.combine.DirectionTest2.matcher()=lepl.matchers._test.combine.DirectionTest2-class.html#matcher,Module lepl.matchers.matcher=lepl.matchers.matcher-module.html"><a title="lepl.matchers._test.combine.DirectionTest1.matcher
+lepl.matchers._test.combine.DirectionTest2.matcher
+lepl.matchers.matcher" class="py-name" href="#" onclick="return doclink('link-6', 'matcher', 'link-6');">matcher</a></tt> <tt class="py-op">=</tt> <tt id="link-7" class="py-name" targets="Method lepl.matchers.support.BaseFactoryMatcher.factory()=lepl.matchers.support.BaseFactoryMatcher-class.html#factory,Module lepl.stream.factory=lepl.stream.factory-module.html"><a title="lepl.matchers.support.BaseFactoryMatcher.factory
+lepl.stream.factory" class="py-name" href="#" onclick="return doclink('link-7', 'factory', 'link-7');">factory</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">    <tt id="link-8" class="py-name"><a title="lepl.matchers._test.combine.DirectionTest1.matcher
+lepl.matchers._test.combine.DirectionTest2.matcher
+lepl.matchers.matcher" class="py-name" href="#" onclick="return doclink('link-8', 'matcher', 'link-6');">matcher</a></tt><tt class="py-op">.</tt><tt id="link-9" class="py-name" targets="Module lepl.core._test.config=lepl.core._test.config-module.html,Module lepl.core.config=lepl.core.config-module.html"><a title="lepl.core._test.config
+lepl.core.config" class="py-name" href="#" onclick="return doclink('link-9', 'config', 'link-9');">config</a></tt><tt class="py-op">.</tt><tt id="link-10" class="py-name" targets="Method lepl.core.config.ConfigBuilder.compile_to_re()=lepl.core.config.ConfigBuilder-class.html#compile_to_re"><a title="lepl.core.config.ConfigBuilder.compile_to_re" class="py-name" href="#" onclick="return doclink('link-10', 'compile_to_re', 'link-10');">compile_to_re</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-11" class="py-name" targets="Method lepl.core.config.ConfigBuilder.no_memoize()=lepl.core.config.ConfigBuilder-class.html#no_memoize"><a title="lepl.core.config.ConfigBuilder.no_memoize" class="py-name" href="#" onclick="return doclink('link-11', 'no_memoize', 'link-11');">no_memoize</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">     </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">_guarantee_bool</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">    <tt class="py-keyword">def</tt> <tt class="py-def-name">validator</tt><tt class="py-op">(</tt><tt class="py-param">value</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt id="link-12" class="py-name" targets="Function lepl.matchers._test.support.char()=lepl.matchers._test.support-module.html#char,Function lepl.matchers._test3.support.char()=lepl.matchers._test3.support-module.html#char,Method lepl.regexp.str.StrParser.char()=lepl.regexp.str.StrParser-class.html#char"><a title="lepl.matchers._test.support.char
+lepl.matchers._test3.support.char
+lepl.regexp.str.StrParser.char" class="py-name" href="#" onclick="return doclink('link-12', 'char', 'link-12');">char</a></tt> <tt class="py-keyword">in</tt> <tt class="py-string">'\n\r'</tt><tt class="py-op">:</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">            <tt class="py-keyword">assert</tt> <tt id="link-13" class="py-name"><a title="lepl.matchers._test.support.char
+lepl.matchers._test3.support.char
+lepl.regexp.str.StrParser.char" class="py-name" href="#" onclick="return doclink('link-13', 'char', 'link-12');">char</a></tt> <tt class="py-keyword">not</tt> <tt class="py-keyword">in</tt> <tt class="py-name">value</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-14" class="py-name"><a title="lepl.matchers._test.combine.DirectionTest1.matcher
+lepl.matchers._test.combine.DirectionTest2.matcher
+lepl.matchers.matcher" class="py-name" href="#" onclick="return doclink('link-14', 'matcher', 'link-6');">matcher</a></tt><tt class="py-op">.</tt><tt id="link-15" class="py-name" targets="Function lepl.bin.literal.parse()=lepl.bin.literal-module.html#parse,Method lepl.core.config.ParserMixin.parse()=lepl.core.config.ParserMixin-class.html#parse,Method lepl.regexp.core.Alphabet.parse()=lepl.regexp.core.Alphabet-class.html#parse,Method lepl.regexp.str.StrAlphabet.parse()=lepl.regexp.str.StrAlphabet-class.html#parse"><a title="lepl.bin.literal.parse
+lepl.core.config.ParserMixin.parse
+lepl.regexp.core.Alphabet.parse
+lepl.regexp.str.StrAlphabet.parse" class="py-name" href="#" onclick="return doclink('link-15', 'parse', 'link-15');">parse</a></tt><tt class="py-op">(</tt><tt class="py-name">value</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">     </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">validator</tt> </tt>
+</div><a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">         </tt>
+<a name="_LimitLength"></a><div id="_LimitLength-def"><a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line"> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt> <a class="py-toggle" href="#" id="_LimitLength-toggle" onclick="return toggle('_LimitLength');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.apps.rfc3696-module.html#_LimitLength">_LimitLength</a><tt class="py-op">(</tt><tt class="py-param">matcher</tt><tt class="py-op">,</tt> <tt class="py-param">length</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_LimitLength-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="_LimitLength-expanded"><a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">    <tt class="py-docstring">'''</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line"><tt class="py-docstring">    Reject a match if it exceeds a certain length.</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line"><tt class="py-docstring">    '''</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-16" class="py-name" targets="Function lepl.matchers.transform.PostCondition()=lepl.matchers.transform-module.html#PostCondition"><a title="lepl.matchers.transform.PostCondition" class="py-name" href="#" onclick="return doclink('link-16', 'PostCondition', 'link-16');">PostCondition</a></tt><tt class="py-op">(</tt><tt id="link-17" class="py-name"><a title="lepl.matchers._test.combine.DirectionTest1.matcher
+lepl.matchers._test.combine.DirectionTest2.matcher
+lepl.matchers.matcher" class="py-name" href="#" onclick="return doclink('link-17', 'matcher', 'link-6');">matcher</a></tt><tt class="py-op">,</tt> <tt class="py-keyword">lambda</tt> <tt class="py-name">results</tt><tt class="py-op">:</tt> <tt id="link-18" class="py-name" targets="Method lepl.lexer.stream.TokenHelper.len()=lepl.lexer.stream.TokenHelper-class.html#len,Method lepl.regexp.interval.Intervals.len()=lepl.regexp.interval.Intervals-class.html#len,Method lepl.regexp.interval.TaggedFragments.len()=lepl.regexp.interval.TaggedFragments-class.html#len,Method lepl.regexp.interval._Character.len()=lepl.regexp.interval._Character-class.html#len,Method lepl.stream.core.StreamHelper.len()=lepl.stream.core.StreamHelper-class.html#len,Method lepl.stream.facade.HelperFacade.len()=lepl.stream.facade.HelperFacade-class.html#len,Method lepl.stream.iter.IterableHelper.len()=lepl.stream.iter.IterableHelper-class.html#len,Method lepl.stream.simple.SequenceHelper.len()=lepl.stream.simple.SequenceHelper-class.html#len"><a title="lepl.lexer.stream.TokenHelper.len
+lepl.regexp.interval.Intervals.len
+lepl.regexp.interval.TaggedFragments.len
+lepl.regexp.interval._Character.len
+lepl.stream.core.StreamHelper.len
+lepl.stream.facade.HelperFacade.len
+lepl.stream.iter.IterableHelper.len
+lepl.stream.simple.SequenceHelper.len" class="py-name" href="#" onclick="return doclink('link-18', 'len', 'link-18');">len</a></tt><tt class="py-op">(</tt><tt class="py-name">results</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> <tt class="py-op">&lt;=</tt> <tt class="py-name">length</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line"> </tt>
+<a name="_RejectRegexp"></a><div id="_RejectRegexp-def"><a name="L82"></a><tt class="py-lineno"> 82</tt> <a class="py-toggle" href="#" id="_RejectRegexp-toggle" onclick="return toggle('_RejectRegexp');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.apps.rfc3696-module.html#_RejectRegexp">_RejectRegexp</a><tt class="py-op">(</tt><tt class="py-param">matcher</tt><tt class="py-op">,</tt> <tt class="py-param">pattern</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_RejectRegexp-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="_RejectRegexp-expanded"><a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">    <tt class="py-docstring">'''</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line"><tt class="py-docstring">    Reject a match if it matches a (ie some other) regular expression </tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line"><tt class="py-docstring">    '''</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">    <tt id="link-19" class="py-name" targets="Package lepl.regexp=lepl.regexp-module.html"><a title="lepl.regexp" class="py-name" href="#" onclick="return doclink('link-19', 'regexp', 'link-19');">regexp</a></tt> <tt class="py-op">=</tt> <tt class="py-name">compile_</tt><tt class="py-op">(</tt><tt class="py-name">pattern</tt><tt class="py-op">)</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-20" class="py-name"><a title="lepl.matchers.transform.PostCondition" class="py-name" href="#" onclick="return doclink('link-20', 'PostCondition', 'link-16');">PostCondition</a></tt><tt class="py-op">(</tt><tt id="link-21" class="py-name"><a title="lepl.matchers._test.combine.DirectionTest1.matcher
+lepl.matchers._test.combine.DirectionTest2.matcher
+lepl.matchers.matcher" class="py-name" href="#" onclick="return doclink('link-21', 'matcher', 'link-6');">matcher</a></tt><tt class="py-op">,</tt> <tt class="py-keyword">lambda</tt> <tt class="py-name">results</tt><tt class="py-op">:</tt> <tt class="py-keyword">not</tt> <tt id="link-22" class="py-name"><a title="lepl.regexp" class="py-name" href="#" onclick="return doclink('link-22', 'regexp', 'link-19');">regexp</a></tt><tt class="py-op">.</tt><tt id="link-23" class="py-name" targets="Method lepl.core.config.ParserMixin.match()=lepl.core.config.ParserMixin-class.html#match,Method lepl.regexp.core.DfaPattern.match()=lepl.regexp.core.DfaPattern-class.html#match,Method lepl.regexp.core.NfaPattern.match()=lepl.regexp.core.NfaPattern-class.html#match"><a title="lepl.core.config.ParserMixin.match
+lepl.regexp.core.DfaPattern.match
+lepl.regexp.core.NfaPattern.match" class="py-name" href="#" onclick="return doclink('link-23', 'match', 'link-23');">match</a></tt><tt class="py-op">(</tt><tt class="py-name">results</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line"> </tt>
+<a name="_LimitIntValue"></a><div id="_LimitIntValue-def"><a name="L89"></a><tt class="py-lineno"> 89</tt> <a class="py-toggle" href="#" id="_LimitIntValue-toggle" onclick="return toggle('_LimitIntValue');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.apps.rfc3696-module.html#_LimitIntValue">_LimitIntValue</a><tt class="py-op">(</tt><tt class="py-param">matcher</tt><tt class="py-op">,</tt> <tt class="py-param">max</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_LimitIntValue-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="_LimitIntValue-expanded"><a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">    <tt class="py-docstring">'''</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line"><tt class="py-docstring">    Reject a match if the value exceeds some value.</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line"><tt class="py-docstring">    '''</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-24" class="py-name"><a title="lepl.matchers.transform.PostCondition" class="py-name" href="#" onclick="return doclink('link-24', 'PostCondition', 'link-16');">PostCondition</a></tt><tt class="py-op">(</tt><tt id="link-25" class="py-name"><a title="lepl.matchers._test.combine.DirectionTest1.matcher
+lepl.matchers._test.combine.DirectionTest2.matcher
+lepl.matchers.matcher" class="py-name" href="#" onclick="return doclink('link-25', 'matcher', 'link-6');">matcher</a></tt><tt class="py-op">,</tt> <tt class="py-keyword">lambda</tt> <tt class="py-name">results</tt><tt class="py-op">:</tt> <tt class="py-name">int</tt><tt class="py-op">(</tt><tt class="py-name">results</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> <tt class="py-op">&lt;=</tt> <tt id="link-26" class="py-name" targets="Method lepl.regexp.core.Alphabet.max()=lepl.regexp.core.Alphabet-class.html#max"><a title="lepl.regexp.core.Alphabet.max" class="py-name" href="#" onclick="return doclink('link-26', 'max', 'link-26');">max</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line"> </tt>
+<a name="_LimitCount"></a><div id="_LimitCount-def"><a name="L95"></a><tt class="py-lineno"> 95</tt> <a class="py-toggle" href="#" id="_LimitCount-toggle" onclick="return toggle('_LimitCount');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.apps.rfc3696-module.html#_LimitCount">_LimitCount</a><tt class="py-op">(</tt><tt class="py-param">matcher</tt><tt class="py-op">,</tt> <tt class="py-param">char</tt><tt class="py-op">,</tt> <tt class="py-param">max</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_LimitCount-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="_LimitCount-expanded"><a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">    <tt class="py-docstring">'''</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line"><tt class="py-docstring">    Reject a match if the number of times a particular character occurs exceeds</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line"><tt class="py-docstring">    some value.</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line"><tt class="py-docstring">    '''</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-27" class="py-name"><a title="lepl.matchers.transform.PostCondition" class="py-name" href="#" onclick="return doclink('link-27', 'PostCondition', 'link-16');">PostCondition</a></tt><tt class="py-op">(</tt><tt id="link-28" class="py-name"><a title="lepl.matchers._test.combine.DirectionTest1.matcher
+lepl.matchers._test.combine.DirectionTest2.matcher
+lepl.matchers.matcher" class="py-name" href="#" onclick="return doclink('link-28', 'matcher', 'link-6');">matcher</a></tt><tt class="py-op">,</tt> <tt class="py-keyword">lambda</tt> <tt class="py-name">results</tt><tt class="py-op">:</tt> <tt class="py-name">results</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-29" class="py-name" targets="Function lepl.support.lib.count()=lepl.support.lib-module.html#count"><a title="lepl.support.lib.count" class="py-name" href="#" onclick="return doclink('link-29', 'count', 'link-29');">count</a></tt><tt class="py-op">(</tt><tt id="link-30" class="py-name"><a title="lepl.matchers._test.support.char
+lepl.matchers._test3.support.char
+lepl.regexp.str.StrParser.char" class="py-name" href="#" onclick="return doclink('link-30', 'char', 'link-12');">char</a></tt><tt class="py-op">)</tt> <tt class="py-op">&lt;=</tt> <tt id="link-31" class="py-name"><a title="lepl.regexp.core.Alphabet.max" class="py-name" href="#" onclick="return doclink('link-31', 'max', 'link-26');">max</a></tt><tt class="py-op">)</tt>  </tt>
+</div><a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line"> </tt>
+<a name="_PreferredFullyQualifiedDnsName"></a><div id="_PreferredFullyQualifiedDnsName-def"><a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line"> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt> <a class="py-toggle" href="#" id="_PreferredFullyQualifiedDnsName-toggle" onclick="return toggle('_PreferredFullyQualifiedDnsName');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.apps.rfc3696-module.html#_PreferredFullyQualifiedDnsName">_PreferredFullyQualifiedDnsName</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_PreferredFullyQualifiedDnsName-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="_PreferredFullyQualifiedDnsName-expanded"><a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">    <tt class="py-docstring">'''</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line"><tt class="py-docstring">    A matcher for DNS names.</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line"><tt class="py-docstring">    RFC 3696:</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line"><tt class="py-docstring">    Any characters, or combination of bits (as octets), are permitted in</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line"><tt class="py-docstring">    DNS names.  However, there is a preferred form that is required by</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line"><tt class="py-docstring">    most applications.  This preferred form has been the only one</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line"><tt class="py-docstring">    permitted in the names of top-level domains, or TLDs.  In general, it</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line"><tt class="py-docstring">    is also the only form permitted in most second-level names registered</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line"><tt class="py-docstring">    in TLDs, although some names that are normally not seen by users obey</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line"><tt class="py-docstring">    other rules.  It derives from the original ARPANET rules for the</tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line"><tt class="py-docstring">    naming of hosts (i.e., the "hostname" rule) and is perhaps better</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line"><tt class="py-docstring">    described as the "LDH rule", after the characters that it permits.</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line"><tt class="py-docstring">    The LDH rule, as updated, provides that the labels (words or strings</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line"><tt class="py-docstring">    separated by periods) that make up a domain name must consist of only</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line"><tt class="py-docstring">    the ASCII [ASCII] alphabetic and numeric characters, plus the hyphen.</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line"><tt class="py-docstring">    No other symbols or punctuation characters are permitted, nor is</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line"><tt class="py-docstring">    blank space.  If the hyphen is used, it is not permitted to appear at</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line"><tt class="py-docstring">    either the beginning or end of a label.  There is an additional rule</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line"><tt class="py-docstring">    that essentially requires that top-level domain names not be all-</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line"><tt class="py-docstring">    numeric.</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line"><tt class="py-docstring">    [...]</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line"><tt class="py-docstring">    Most internet applications that reference other hosts or systems</tt> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line"><tt class="py-docstring">    assume they will be supplied with "fully-qualified" domain names,</tt> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line"><tt class="py-docstring">    i.e., ones that include all of the labels leading to the root,</tt> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line"><tt class="py-docstring">    including the TLD name.  Those fully-qualified domain names are then</tt> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line"><tt class="py-docstring">    passed to either the domain name resolution protocol itself or to the</tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line"><tt class="py-docstring">    remote systems.  Consequently, purported DNS names to be used in</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line"><tt class="py-docstring">    applications and to locate resources generally must contain at least</tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line"><tt class="py-docstring">    one period (".") character.</tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line"><tt class="py-docstring">    [...]</tt> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line"><tt class="py-docstring">    [...]It is</tt> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line"><tt class="py-docstring">    likely that the better strategy has now become to make the "at least</tt> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line"><tt class="py-docstring">    one period" test, to verify LDH conformance (including verification</tt> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line"><tt class="py-docstring">    that the apparent TLD name is not all-numeric), and then to use the</tt> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line"><tt class="py-docstring">    DNS to determine domain name validity, rather than trying to maintain</tt> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line"><tt class="py-docstring">    a local list of valid TLD names.</tt> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line"><tt class="py-docstring">    [...]</tt> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line"><tt class="py-docstring">    A DNS label may be no more than 63 octets long.  This is in the form</tt> </tt>
+<a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line"><tt class="py-docstring">    actually stored; if a non-ASCII label is converted to encoded</tt> </tt>
+<a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line"><tt class="py-docstring">    "punycode" form (see Section 5), the length of that form may restrict</tt> </tt>
+<a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line"><tt class="py-docstring">    the number of actual characters (in the original character set) that</tt> </tt>
+<a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line"><tt class="py-docstring">    can be accommodated.  A complete, fully-qualified, domain name must</tt> </tt>
+<a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line"><tt class="py-docstring">    not exceed 255 octets.</tt> </tt>
+<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line"><tt class="py-docstring">    '''</tt> </tt>
+<a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line">    <tt class="py-name">ld</tt> <tt class="py-op">=</tt> <tt id="link-32" class="py-name" targets="Function lepl.matchers.core.Any()=lepl.matchers.core-module.html#Any"><a title="lepl.matchers.core.Any" class="py-name" href="#" onclick="return doclink('link-32', 'Any', 'link-32');">Any</a></tt><tt class="py-op">(</tt><tt class="py-name">ascii_letters</tt> <tt class="py-op">+</tt> <tt class="py-name">digits</tt><tt class="py-op">)</tt> </tt>
+<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line">    <tt class="py-name">ldh</tt> <tt class="py-op">=</tt> <tt class="py-name">ld</tt> <tt class="py-op">|</tt> <tt class="py-string">'-'</tt> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line">    <tt id="link-33" class="py-name" targets="Function lepl.regexp._test.binary.label()=lepl.regexp._test.binary-module.html#label,Function lepl.regexp._test.unicode.label()=lepl.regexp._test.unicode-module.html#label"><a title="lepl.regexp._test.binary.label
+lepl.regexp._test.unicode.label" class="py-name" href="#" onclick="return doclink('link-33', 'label', 'link-33');">label</a></tt> <tt class="py-op">=</tt> <tt class="py-name">ld</tt> <tt class="py-op">+</tt> <tt id="link-34" class="py-name" targets="Function lepl.matchers.derived.Optional()=lepl.matchers.derived-module.html#Optional"><a title="lepl.matchers.derived.Optional" class="py-name" href="#" onclick="return doclink('link-34', 'Optional', 'link-34');">Optional</a></tt><tt class="py-op">(</tt><tt class="py-name">ldh</tt><tt class="py-op">[</tt><tt class="py-op">:</tt><tt class="py-op">]</tt> <tt class="py-op">+</tt> <tt class="py-name">ld</tt><tt class="py-op">)</tt> </tt>
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line">    <tt class="py-name">short_label</tt> <tt class="py-op">=</tt> <tt id="link-35" class="py-name" targets="Function lepl.apps.rfc3696._LimitLength()=lepl.apps.rfc3696-module.html#_LimitLength"><a title="lepl.apps.rfc3696._LimitLength" class="py-name" href="#" onclick="return doclink('link-35', '_LimitLength', 'link-35');">_LimitLength</a></tt><tt class="py-op">(</tt><tt id="link-36" class="py-name"><a title="lepl.regexp._test.binary.label
+lepl.regexp._test.unicode.label" class="py-name" href="#" onclick="return doclink('link-36', 'label', 'link-33');">label</a></tt><tt class="py-op">,</tt> <tt class="py-number">63</tt><tt class="py-op">)</tt> </tt>
+<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line">    <tt class="py-name">tld</tt> <tt class="py-op">=</tt> <tt id="link-37" class="py-name" targets="Function lepl.apps.rfc3696._RejectRegexp()=lepl.apps.rfc3696-module.html#_RejectRegexp"><a title="lepl.apps.rfc3696._RejectRegexp" class="py-name" href="#" onclick="return doclink('link-37', '_RejectRegexp', 'link-37');">_RejectRegexp</a></tt><tt class="py-op">(</tt><tt class="py-name">short_label</tt><tt class="py-op">,</tt> <tt class="py-string">r'^[0-9]+$'</tt><tt class="py-op">)</tt> </tt>
+<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line">    <tt class="py-name">any_name</tt> <tt class="py-op">=</tt> <tt class="py-name">short_label</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">:</tt><tt class="py-op">,</tt> <tt class="py-string">r'\.'</tt><tt class="py-op">,</tt> <tt class="py-op">.</tt><tt class="py-op">.</tt><tt class="py-op">.</tt><tt class="py-op">]</tt> <tt class="py-op">+</tt> <tt class="py-string">'.'</tt> <tt class="py-op">+</tt> <tt class="py-name">tld</tt> </tt>
+<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line">    <tt class="py-name">non_numeric</tt> <tt class="py-op">=</tt> <tt id="link-38" class="py-name"><a title="lepl.apps.rfc3696._RejectRegexp" class="py-name" href="#" onclick="return doclink('link-38', '_RejectRegexp', 'link-37');">_RejectRegexp</a></tt><tt class="py-op">(</tt><tt class="py-name">any_name</tt><tt class="py-op">,</tt> <tt class="py-string">r'^[0-9\.]+$'</tt><tt class="py-op">)</tt> </tt>
+<a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line">    <tt class="py-name">short_name</tt> <tt class="py-op">=</tt> <tt id="link-39" class="py-name"><a title="lepl.apps.rfc3696._LimitLength" class="py-name" href="#" onclick="return doclink('link-39', '_LimitLength', 'link-35');">_LimitLength</a></tt><tt class="py-op">(</tt><tt class="py-name">non_numeric</tt><tt class="py-op">,</tt> <tt class="py-number">255</tt><tt class="py-op">)</tt> </tt>
+<a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">short_name</tt> </tt>
+</div><a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line"> </tt>
+<a name="_IpV4Address"></a><div id="_IpV4Address-def"><a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line"> </tt>
+<a name="L164"></a><tt class="py-lineno">164</tt> <a class="py-toggle" href="#" id="_IpV4Address-toggle" onclick="return toggle('_IpV4Address');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.apps.rfc3696-module.html#_IpV4Address">_IpV4Address</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_IpV4Address-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="_IpV4Address-expanded"><a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line">    <tt class="py-docstring">'''</tt> </tt>
+<a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line"><tt class="py-docstring">    A matcher for IPv4 addresses.</tt> </tt>
+<a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line"><tt class="py-docstring">    RFC 3696 doesn't say much about these; RFC 2396 doesn't mention limits</tt> </tt>
+<a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line"><tt class="py-docstring">    on numerical values, but it must be 255.</tt> </tt>
+<a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line"><tt class="py-docstring">    '''</tt> </tt>
+<a name="L171"></a><tt class="py-lineno">171</tt>  <tt class="py-line">    <tt class="py-name">octet</tt> <tt class="py-op">=</tt> <tt id="link-40" class="py-name" targets="Function lepl.apps.rfc3696._LimitIntValue()=lepl.apps.rfc3696-module.html#_LimitIntValue"><a title="lepl.apps.rfc3696._LimitIntValue" class="py-name" href="#" onclick="return doclink('link-40', '_LimitIntValue', 'link-40');">_LimitIntValue</a></tt><tt class="py-op">(</tt><tt id="link-41" class="py-name"><a title="lepl.matchers.core.Any" class="py-name" href="#" onclick="return doclink('link-41', 'Any', 'link-32');">Any</a></tt><tt class="py-op">(</tt><tt class="py-name">digits</tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">:</tt><tt class="py-op">,</tt> <tt class="py-op">.</tt><tt class="py-op">.</tt><tt class="py-op">.</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-number">255</tt><tt class="py-op">)</tt> </tt>
+<a name="L172"></a><tt class="py-lineno">172</tt>  <tt class="py-line">    <tt class="py-name">address</tt> <tt class="py-op">=</tt> <tt class="py-name">octet</tt><tt class="py-op">[</tt><tt class="py-number">4</tt><tt class="py-op">,</tt> <tt class="py-string">'.'</tt><tt class="py-op">,</tt> <tt class="py-op">.</tt><tt class="py-op">.</tt><tt class="py-op">.</tt><tt class="py-op">]</tt> </tt>
+<a name="L173"></a><tt class="py-lineno">173</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">address</tt> </tt>
+</div><a name="L174"></a><tt class="py-lineno">174</tt>  <tt class="py-line"> </tt>
+<a name="_Ipv6Address"></a><div id="_Ipv6Address-def"><a name="L175"></a><tt class="py-lineno">175</tt>  <tt class="py-line"> </tt>
+<a name="L176"></a><tt class="py-lineno">176</tt> <a class="py-toggle" href="#" id="_Ipv6Address-toggle" onclick="return toggle('_Ipv6Address');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.apps.rfc3696-module.html#_Ipv6Address">_Ipv6Address</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_Ipv6Address-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="_Ipv6Address-expanded"><a name="L177"></a><tt class="py-lineno">177</tt>  <tt class="py-line">    <tt class="py-docstring">'''</tt> </tt>
+<a name="L178"></a><tt class="py-lineno">178</tt>  <tt class="py-line"><tt class="py-docstring">    A matcher for IPv6 addresses.</tt> </tt>
+<a name="L179"></a><tt class="py-lineno">179</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L180"></a><tt class="py-lineno">180</tt>  <tt class="py-line"><tt class="py-docstring">    Again, RFC 3696 says little; RFC 2373 (addresses) and 2732 (URLs) have </tt> </tt>
+<a name="L181"></a><tt class="py-lineno">181</tt>  <tt class="py-line"><tt class="py-docstring">    much more information:</tt> </tt>
+<a name="L182"></a><tt class="py-lineno">182</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L183"></a><tt class="py-lineno">183</tt>  <tt class="py-line"><tt class="py-docstring">    1. The preferred form is x:x:x:x:x:x:x:x, where the 'x's are the</tt> </tt>
+<a name="L184"></a><tt class="py-lineno">184</tt>  <tt class="py-line"><tt class="py-docstring">    hexadecimal values of the eight 16-bit pieces of the address.</tt> </tt>
+<a name="L185"></a><tt class="py-lineno">185</tt>  <tt class="py-line"><tt class="py-docstring">    Examples:</tt> </tt>
+<a name="L186"></a><tt class="py-lineno">186</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L187"></a><tt class="py-lineno">187</tt>  <tt class="py-line"><tt class="py-docstring">       FEDC:BA98:7654:3210:FEDC:BA98:7654:3210</tt> </tt>
+<a name="L188"></a><tt class="py-lineno">188</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L189"></a><tt class="py-lineno">189</tt>  <tt class="py-line"><tt class="py-docstring">       1080:0:0:0:8:800:200C:417A</tt> </tt>
+<a name="L190"></a><tt class="py-lineno">190</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L191"></a><tt class="py-lineno">191</tt>  <tt class="py-line"><tt class="py-docstring">    Note that it is not necessary to write the leading zeros in an</tt> </tt>
+<a name="L192"></a><tt class="py-lineno">192</tt>  <tt class="py-line"><tt class="py-docstring">    individual field, but there must be at least one numeral in every</tt> </tt>
+<a name="L193"></a><tt class="py-lineno">193</tt>  <tt class="py-line"><tt class="py-docstring">    field (except for the case described in 2.).</tt> </tt>
+<a name="L194"></a><tt class="py-lineno">194</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L195"></a><tt class="py-lineno">195</tt>  <tt class="py-line"><tt class="py-docstring">    2. Due to some methods of allocating certain styles of IPv6</tt> </tt>
+<a name="L196"></a><tt class="py-lineno">196</tt>  <tt class="py-line"><tt class="py-docstring">    addresses, it will be common for addresses to contain long strings</tt> </tt>
+<a name="L197"></a><tt class="py-lineno">197</tt>  <tt class="py-line"><tt class="py-docstring">    of zero bits.  In order to make writing addresses containing zero</tt> </tt>
+<a name="L198"></a><tt class="py-lineno">198</tt>  <tt class="py-line"><tt class="py-docstring">    bits easier a special syntax is available to compress the zeros.</tt> </tt>
+<a name="L199"></a><tt class="py-lineno">199</tt>  <tt class="py-line"><tt class="py-docstring">    The use of "::" indicates multiple groups of 16-bits of zeros.</tt> </tt>
+<a name="L200"></a><tt class="py-lineno">200</tt>  <tt class="py-line"><tt class="py-docstring">    The "::" can only appear once in an address.  The "::" can also be</tt> </tt>
+<a name="L201"></a><tt class="py-lineno">201</tt>  <tt class="py-line"><tt class="py-docstring">    used to compress the leading and/or trailing zeros in an address.</tt> </tt>
+<a name="L202"></a><tt class="py-lineno">202</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L203"></a><tt class="py-lineno">203</tt>  <tt class="py-line"><tt class="py-docstring">    For example the following addresses:</tt> </tt>
+<a name="L204"></a><tt class="py-lineno">204</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L205"></a><tt class="py-lineno">205</tt>  <tt class="py-line"><tt class="py-docstring">       1080:0:0:0:8:800:200C:417A  a unicast address</tt> </tt>
+<a name="L206"></a><tt class="py-lineno">206</tt>  <tt class="py-line"><tt class="py-docstring">       FF01:0:0:0:0:0:0:101        a multicast address</tt> </tt>
+<a name="L207"></a><tt class="py-lineno">207</tt>  <tt class="py-line"><tt class="py-docstring">       0:0:0:0:0:0:0:1             the loopback address</tt> </tt>
+<a name="L208"></a><tt class="py-lineno">208</tt>  <tt class="py-line"><tt class="py-docstring">       0:0:0:0:0:0:0:0             the unspecified addresses</tt> </tt>
+<a name="L209"></a><tt class="py-lineno">209</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L210"></a><tt class="py-lineno">210</tt>  <tt class="py-line"><tt class="py-docstring">    may be represented as:</tt> </tt>
+<a name="L211"></a><tt class="py-lineno">211</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L212"></a><tt class="py-lineno">212</tt>  <tt class="py-line"><tt class="py-docstring">       1080::8:800:200C:417A       a unicast address</tt> </tt>
+<a name="L213"></a><tt class="py-lineno">213</tt>  <tt class="py-line"><tt class="py-docstring">       FF01::101                   a multicast address</tt> </tt>
+<a name="L214"></a><tt class="py-lineno">214</tt>  <tt class="py-line"><tt class="py-docstring">       ::1                         the loopback address</tt> </tt>
+<a name="L215"></a><tt class="py-lineno">215</tt>  <tt class="py-line"><tt class="py-docstring">       ::                          the unspecified addresses</tt> </tt>
+<a name="L216"></a><tt class="py-lineno">216</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L217"></a><tt class="py-lineno">217</tt>  <tt class="py-line"><tt class="py-docstring">    3. An alternative form that is sometimes more convenient when dealing</tt> </tt>
+<a name="L218"></a><tt class="py-lineno">218</tt>  <tt class="py-line"><tt class="py-docstring">    with a mixed environment of IPv4 and IPv6 nodes is</tt> </tt>
+<a name="L219"></a><tt class="py-lineno">219</tt>  <tt class="py-line"><tt class="py-docstring">    x:x:x:x:x:x:d.d.d.d, where the 'x's are the hexadecimal values of</tt> </tt>
+<a name="L220"></a><tt class="py-lineno">220</tt>  <tt class="py-line"><tt class="py-docstring">    the six high-order 16-bit pieces of the address, and the 'd's are</tt> </tt>
+<a name="L221"></a><tt class="py-lineno">221</tt>  <tt class="py-line"><tt class="py-docstring">    the decimal values of the four low-order 8-bit pieces of the</tt> </tt>
+<a name="L222"></a><tt class="py-lineno">222</tt>  <tt class="py-line"><tt class="py-docstring">    address (standard IPv4 representation).  Examples:</tt> </tt>
+<a name="L223"></a><tt class="py-lineno">223</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L224"></a><tt class="py-lineno">224</tt>  <tt class="py-line"><tt class="py-docstring">       0:0:0:0:0:0:13.1.68.3</tt> </tt>
+<a name="L225"></a><tt class="py-lineno">225</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L226"></a><tt class="py-lineno">226</tt>  <tt class="py-line"><tt class="py-docstring">       0:0:0:0:0:FFFF:129.144.52.38</tt> </tt>
+<a name="L227"></a><tt class="py-lineno">227</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L228"></a><tt class="py-lineno">228</tt>  <tt class="py-line"><tt class="py-docstring">    or in compressed form:</tt> </tt>
+<a name="L229"></a><tt class="py-lineno">229</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L230"></a><tt class="py-lineno">230</tt>  <tt class="py-line"><tt class="py-docstring">       ::13.1.68.3</tt> </tt>
+<a name="L231"></a><tt class="py-lineno">231</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L232"></a><tt class="py-lineno">232</tt>  <tt class="py-line"><tt class="py-docstring">       ::FFFF:129.144.52.38</tt> </tt>
+<a name="L233"></a><tt class="py-lineno">233</tt>  <tt class="py-line"><tt class="py-docstring">    '''</tt> </tt>
+<a name="L234"></a><tt class="py-lineno">234</tt>  <tt class="py-line">    <tt class="py-name">piece</tt> <tt class="py-op">=</tt> <tt id="link-42" class="py-name"><a title="lepl.matchers.core.Any" class="py-name" href="#" onclick="return doclink('link-42', 'Any', 'link-32');">Any</a></tt><tt class="py-op">(</tt><tt id="link-43" class="py-name"><a title="lepl.apps.rfc3696._HEX" class="py-name" href="#" onclick="return doclink('link-43', '_HEX', 'link-3');">_HEX</a></tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">:</tt><tt class="py-number">4</tt><tt class="py-op">,</tt> <tt class="py-op">.</tt><tt class="py-op">.</tt><tt class="py-op">.</tt><tt class="py-op">]</tt> </tt>
+<a name="L235"></a><tt class="py-lineno">235</tt>  <tt class="py-line">    <tt class="py-name">preferred</tt> <tt class="py-op">=</tt> <tt class="py-name">piece</tt><tt class="py-op">[</tt><tt class="py-number">8</tt><tt class="py-op">,</tt> <tt class="py-string">':'</tt><tt class="py-op">,</tt> <tt class="py-op">.</tt><tt class="py-op">.</tt><tt class="py-op">.</tt><tt class="py-op">]</tt> </tt>
+<a name="L236"></a><tt class="py-lineno">236</tt>  <tt class="py-line">     </tt>
+<a name="L237"></a><tt class="py-lineno">237</tt>  <tt class="py-line">    <tt class="py-comment"># we need to be careful about how we match the compressed form, since we</tt> </tt>
+<a name="L238"></a><tt class="py-lineno">238</tt>  <tt class="py-line">    <tt class="py-comment"># have a limit on the total number of pieces.  the simplest approach seems</tt> </tt>
+<a name="L239"></a><tt class="py-lineno">239</tt>  <tt class="py-line">    <tt class="py-comment"># to be to limit the final number of ':' characters, but we must take</tt> </tt>
+<a name="L240"></a><tt class="py-lineno">240</tt>  <tt class="py-line">    <tt class="py-comment"># care to treat the cases where '::' is at one end separately:</tt> </tt>
+<a name="L241"></a><tt class="py-lineno">241</tt>  <tt class="py-line">    <tt class="py-comment">#  1::2:3:4:5:6:7 has 7 ':' characters</tt> </tt>
+<a name="L242"></a><tt class="py-lineno">242</tt>  <tt class="py-line">    <tt class="py-comment">#  1:2:3:4:5:6:7:: has 8 ':' characters</tt> </tt>
+<a name="L243"></a><tt class="py-lineno">243</tt>  <tt class="py-line">    <tt class="py-name">compact</tt> <tt class="py-op">=</tt> <tt id="link-44" class="py-name" targets="Function lepl.matchers.combine.Or()=lepl.matchers.combine-module.html#Or"><a title="lepl.matchers.combine.Or" class="py-name" href="#" onclick="return doclink('link-44', 'Or', 'link-44');">Or</a></tt><tt class="py-op">(</tt><tt id="link-45" class="py-name" targets="Function lepl.apps.rfc3696._LimitCount()=lepl.apps.rfc3696-module.html#_LimitCount"><a title="lepl.apps.rfc3696._LimitCount" class="py-name" href="#" onclick="return doclink('link-45', '_LimitCount', 'link-45');">_LimitCount</a></tt><tt class="py-op">(</tt><tt class="py-name">piece</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">:</tt><tt class="py-number">6</tt><tt class="py-op">,</tt> <tt class="py-string">':'</tt><tt class="py-op">,</tt> <tt class="py-op">.</tt><tt class="py-op">.</tt><tt class="py-op">.</tt><tt class="py-op">]</tt> <tt class="py-op">+</tt> <tt class="py-string">'::'</tt> <tt class="py-op">+</tt> <tt class="py-name">piece</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">:</tt><tt class="py-number">6</tt><tt class="py-op">,</tt> <tt class="py-string">':'</tt><tt class="py-op">,</tt> <tt class="py-op">.</tt><tt class="py-op">.</tt><tt class="py-op">.</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> </tt>
+<a name="L244"></a><tt class="py-lineno">244</tt>  <tt class="py-line">                             <tt class="py-string">':'</tt><tt class="py-op">,</tt> <tt class="py-number">7</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L245"></a><tt class="py-lineno">245</tt>  <tt class="py-line">                 <tt class="py-string">'::'</tt> <tt class="py-op">+</tt> <tt class="py-name">piece</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">:</tt><tt class="py-number">7</tt><tt class="py-op">,</tt> <tt class="py-string">':'</tt><tt class="py-op">,</tt> <tt class="py-op">.</tt><tt class="py-op">.</tt><tt class="py-op">.</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> </tt>
+<a name="L246"></a><tt class="py-lineno">246</tt>  <tt class="py-line">                 <tt class="py-name">piece</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">:</tt><tt class="py-number">7</tt><tt class="py-op">,</tt> <tt class="py-string">':'</tt><tt class="py-op">,</tt> <tt class="py-op">.</tt><tt class="py-op">.</tt><tt class="py-op">.</tt><tt class="py-op">]</tt> <tt class="py-op">+</tt> <tt class="py-string">'::'</tt><tt class="py-op">,</tt> </tt>
+<a name="L247"></a><tt class="py-lineno">247</tt>  <tt class="py-line">                 <tt class="py-string">'::'</tt><tt class="py-op">)</tt> </tt>
+<a name="L248"></a><tt class="py-lineno">248</tt>  <tt class="py-line">     </tt>
+<a name="L249"></a><tt class="py-lineno">249</tt>  <tt class="py-line">    <tt class="py-comment"># similar to above, but we need to also be careful about the separator</tt> </tt>
+<a name="L250"></a><tt class="py-lineno">250</tt>  <tt class="py-line">    <tt class="py-comment"># between the v6 and v4 parts</tt> </tt>
+<a name="L251"></a><tt class="py-lineno">251</tt>  <tt class="py-line">    <tt class="py-name">alternate</tt> <tt class="py-op">=</tt> \ </tt>
+<a name="L252"></a><tt class="py-lineno">252</tt>  <tt class="py-line">        <tt id="link-46" class="py-name"><a title="lepl.matchers.combine.Or" class="py-name" href="#" onclick="return doclink('link-46', 'Or', 'link-44');">Or</a></tt><tt class="py-op">(</tt><tt class="py-name">piece</tt><tt class="py-op">[</tt><tt class="py-number">6</tt><tt class="py-op">,</tt> <tt class="py-string">':'</tt><tt class="py-op">,</tt> <tt class="py-op">.</tt><tt class="py-op">.</tt><tt class="py-op">.</tt><tt class="py-op">]</tt> <tt class="py-op">+</tt> <tt class="py-string">':'</tt><tt class="py-op">,</tt> </tt>
+<a name="L253"></a><tt class="py-lineno">253</tt>  <tt class="py-line">           <tt id="link-47" class="py-name"><a title="lepl.apps.rfc3696._LimitCount" class="py-name" href="#" onclick="return doclink('link-47', '_LimitCount', 'link-45');">_LimitCount</a></tt><tt class="py-op">(</tt><tt class="py-name">piece</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">:</tt><tt class="py-number">4</tt><tt class="py-op">,</tt> <tt class="py-string">':'</tt><tt class="py-op">,</tt> <tt class="py-op">.</tt><tt class="py-op">.</tt><tt class="py-op">.</tt><tt class="py-op">]</tt> <tt class="py-op">+</tt> <tt class="py-string">'::'</tt> <tt class="py-op">+</tt> <tt class="py-name">piece</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">:</tt><tt class="py-number">4</tt><tt class="py-op">,</tt> <tt class="py-string">':'</tt><tt class="py-op">,</tt> <tt class="py-op">.</tt><tt class="py-op">.</tt><tt class="py-op">.</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> </tt>
+<a name="L254"></a><tt class="py-lineno">254</tt>  <tt class="py-line">                       <tt class="py-string">':'</tt><tt class="py-op">,</tt> <tt class="py-number">5</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L255"></a><tt class="py-lineno">255</tt>  <tt class="py-line">           <tt class="py-string">'::'</tt> <tt class="py-op">+</tt> <tt class="py-name">piece</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">:</tt><tt class="py-number">5</tt><tt class="py-op">,</tt> <tt class="py-string">':'</tt><tt class="py-op">,</tt> <tt class="py-op">.</tt><tt class="py-op">.</tt><tt class="py-op">.</tt><tt class="py-op">]</tt> <tt class="py-op">+</tt> <tt class="py-string">':'</tt><tt class="py-op">,</tt> </tt>
+<a name="L256"></a><tt class="py-lineno">256</tt>  <tt class="py-line">           <tt class="py-name">piece</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">:</tt><tt class="py-number">5</tt><tt class="py-op">,</tt> <tt class="py-string">':'</tt><tt class="py-op">,</tt> <tt class="py-op">.</tt><tt class="py-op">.</tt><tt class="py-op">.</tt><tt class="py-op">]</tt> <tt class="py-op">+</tt> <tt class="py-string">'::'</tt><tt class="py-op">,</tt> </tt>
+<a name="L257"></a><tt class="py-lineno">257</tt>  <tt class="py-line">           <tt class="py-string">'::'</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt id="link-48" class="py-name" targets="Function lepl.apps.rfc3696._IpV4Address()=lepl.apps.rfc3696-module.html#_IpV4Address"><a title="lepl.apps.rfc3696._IpV4Address" class="py-name" href="#" onclick="return doclink('link-48', '_IpV4Address', 'link-48');">_IpV4Address</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L258"></a><tt class="py-lineno">258</tt>  <tt class="py-line">            </tt>
+<a name="L259"></a><tt class="py-lineno">259</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-op">(</tt><tt class="py-name">preferred</tt> <tt class="py-op">|</tt> <tt class="py-name">compact</tt> <tt class="py-op">|</tt> <tt class="py-name">alternate</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L260"></a><tt class="py-lineno">260</tt>  <tt class="py-line"> </tt>
+<a name="_EmailLocalPart"></a><div id="_EmailLocalPart-def"><a name="L261"></a><tt class="py-lineno">261</tt>  <tt class="py-line"> </tt>
+<a name="L262"></a><tt class="py-lineno">262</tt> <a class="py-toggle" href="#" id="_EmailLocalPart-toggle" onclick="return toggle('_EmailLocalPart');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.apps.rfc3696-module.html#_EmailLocalPart">_EmailLocalPart</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_EmailLocalPart-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="_EmailLocalPart-expanded"><a name="L263"></a><tt class="py-lineno">263</tt>  <tt class="py-line">    <tt class="py-docstring">'''</tt> </tt>
+<a name="L264"></a><tt class="py-lineno">264</tt>  <tt class="py-line"><tt class="py-docstring">    A matcher for the local part ("username") of an email address.</tt> </tt>
+<a name="L265"></a><tt class="py-lineno">265</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L266"></a><tt class="py-lineno">266</tt>  <tt class="py-line"><tt class="py-docstring">    RFC 3696:</tt> </tt>
+<a name="L267"></a><tt class="py-lineno">267</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L268"></a><tt class="py-lineno">268</tt>  <tt class="py-line"><tt class="py-docstring">    Contemporary email addresses consist of a "local part" separated from</tt> </tt>
+<a name="L269"></a><tt class="py-lineno">269</tt>  <tt class="py-line"><tt class="py-docstring">    a "domain part" (a fully-qualified domain name) by an at-sign ("@").</tt> </tt>
+<a name="L270"></a><tt class="py-lineno">270</tt>  <tt class="py-line"><tt class="py-docstring">    The syntax of the domain part corresponds to that in the previous</tt> </tt>
+<a name="L271"></a><tt class="py-lineno">271</tt>  <tt class="py-line"><tt class="py-docstring">    section.  The concerns identified in that section about filtering and</tt> </tt>
+<a name="L272"></a><tt class="py-lineno">272</tt>  <tt class="py-line"><tt class="py-docstring">    lists of names apply to the domain names used in an email context as</tt> </tt>
+<a name="L273"></a><tt class="py-lineno">273</tt>  <tt class="py-line"><tt class="py-docstring">    well.  The domain name can also be replaced by an IP address in</tt> </tt>
+<a name="L274"></a><tt class="py-lineno">274</tt>  <tt class="py-line"><tt class="py-docstring">    square brackets, but that form is strongly discouraged except for</tt> </tt>
+<a name="L275"></a><tt class="py-lineno">275</tt>  <tt class="py-line"><tt class="py-docstring">    testing and troubleshooting purposes.</tt> </tt>
+<a name="L276"></a><tt class="py-lineno">276</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L277"></a><tt class="py-lineno">277</tt>  <tt class="py-line"><tt class="py-docstring">    The local part may appear using the quoting conventions described</tt> </tt>
+<a name="L278"></a><tt class="py-lineno">278</tt>  <tt class="py-line"><tt class="py-docstring">    below.  The quoted forms are rarely used in practice, but are</tt> </tt>
+<a name="L279"></a><tt class="py-lineno">279</tt>  <tt class="py-line"><tt class="py-docstring">    required for some legitimate purposes.  Hence, they should not be</tt> </tt>
+<a name="L280"></a><tt class="py-lineno">280</tt>  <tt class="py-line"><tt class="py-docstring">    rejected in filtering routines but, should instead be passed to the</tt> </tt>
+<a name="L281"></a><tt class="py-lineno">281</tt>  <tt class="py-line"><tt class="py-docstring">    email system for evaluation by the destination host.</tt> </tt>
+<a name="L282"></a><tt class="py-lineno">282</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L283"></a><tt class="py-lineno">283</tt>  <tt class="py-line"><tt class="py-docstring">    The exact rule is that any ASCII character, including control</tt> </tt>
+<a name="L284"></a><tt class="py-lineno">284</tt>  <tt class="py-line"><tt class="py-docstring">    characters, may appear quoted, or in a quoted string.  When quoting</tt> </tt>
+<a name="L285"></a><tt class="py-lineno">285</tt>  <tt class="py-line"><tt class="py-docstring">    is needed, the backslash character is used to quote the following</tt> </tt>
+<a name="L286"></a><tt class="py-lineno">286</tt>  <tt class="py-line"><tt class="py-docstring">    character.</tt> </tt>
+<a name="L287"></a><tt class="py-lineno">287</tt>  <tt class="py-line"><tt class="py-docstring">    [...]</tt> </tt>
+<a name="L288"></a><tt class="py-lineno">288</tt>  <tt class="py-line"><tt class="py-docstring">    In addition to quoting using the backslash character, conventional</tt> </tt>
+<a name="L289"></a><tt class="py-lineno">289</tt>  <tt class="py-line"><tt class="py-docstring">    double-quote characters may be used to surround strings.</tt> </tt>
+<a name="L290"></a><tt class="py-lineno">290</tt>  <tt class="py-line"><tt class="py-docstring">    [...]</tt> </tt>
+<a name="L291"></a><tt class="py-lineno">291</tt>  <tt class="py-line"><tt class="py-docstring">    Without quotes, local-parts may consist of any combination of</tt> </tt>
+<a name="L292"></a><tt class="py-lineno">292</tt>  <tt class="py-line"><tt class="py-docstring">    alphabetic characters, digits, or any of the special characters</tt> </tt>
+<a name="L293"></a><tt class="py-lineno">293</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L294"></a><tt class="py-lineno">294</tt>  <tt class="py-line"><tt class="py-docstring">    ! # $ % &amp; ' * + - / = ?  ^ _ ` . { | } ~</tt> </tt>
+<a name="L295"></a><tt class="py-lineno">295</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L296"></a><tt class="py-lineno">296</tt>  <tt class="py-line"><tt class="py-docstring">    period (".") may also appear, but may not be used to start or end the</tt> </tt>
+<a name="L297"></a><tt class="py-lineno">297</tt>  <tt class="py-line"><tt class="py-docstring">    local part, nor may two or more consecutive periods appear.  Stated</tt> </tt>
+<a name="L298"></a><tt class="py-lineno">298</tt>  <tt class="py-line"><tt class="py-docstring">    differently, any ASCII graphic (printing) character other than the</tt> </tt>
+<a name="L299"></a><tt class="py-lineno">299</tt>  <tt class="py-line"><tt class="py-docstring">    at-sign ("@"), backslash, double quote, comma, or square brackets may</tt> </tt>
+<a name="L300"></a><tt class="py-lineno">300</tt>  <tt class="py-line"><tt class="py-docstring">    appear without quoting.  If any of that list of excluded characters</tt> </tt>
+<a name="L301"></a><tt class="py-lineno">301</tt>  <tt class="py-line"><tt class="py-docstring">    are to appear, they must be quoted.</tt> </tt>
+<a name="L302"></a><tt class="py-lineno">302</tt>  <tt class="py-line"><tt class="py-docstring">    [...]</tt> </tt>
+<a name="L303"></a><tt class="py-lineno">303</tt>  <tt class="py-line"><tt class="py-docstring">    In addition to restrictions on syntax, there is a length limit on</tt> </tt>
+<a name="L304"></a><tt class="py-lineno">304</tt>  <tt class="py-line"><tt class="py-docstring">    email addresses.  That limit is a maximum of 64 characters (octets)</tt> </tt>
+<a name="L305"></a><tt class="py-lineno">305</tt>  <tt class="py-line"><tt class="py-docstring">    in the "local part" (before the "@") and a maximum of 255 characters</tt> </tt>
+<a name="L306"></a><tt class="py-lineno">306</tt>  <tt class="py-line"><tt class="py-docstring">    (octets) in the domain part (after the "@") for a total length of 320</tt> </tt>
+<a name="L307"></a><tt class="py-lineno">307</tt>  <tt class="py-line"><tt class="py-docstring">    characters.  Systems that handle email should be prepared to process</tt> </tt>
+<a name="L308"></a><tt class="py-lineno">308</tt>  <tt class="py-line"><tt class="py-docstring">    addresses which are that long, even though they are rarely</tt> </tt>
+<a name="L309"></a><tt class="py-lineno">309</tt>  <tt class="py-line"><tt class="py-docstring">    encountered.</tt> </tt>
+<a name="L310"></a><tt class="py-lineno">310</tt>  <tt class="py-line"><tt class="py-docstring">    '''</tt> </tt>
+<a name="L311"></a><tt class="py-lineno">311</tt>  <tt class="py-line">    <tt class="py-name">unescaped_chars</tt> <tt class="py-op">=</tt> <tt class="py-name">ascii_letters</tt> <tt class="py-op">+</tt> <tt class="py-name">digits</tt> <tt class="py-op">+</tt> <tt class="py-string">"!#$%&amp;'*+-/=?^_`.{|}~"</tt> </tt>
+<a name="L312"></a><tt class="py-lineno">312</tt>  <tt class="py-line">    <tt class="py-name">escapable_chars</tt> <tt class="py-op">=</tt> <tt class="py-name">unescaped_chars</tt> <tt class="py-op">+</tt> <tt class="py-string">r'@\",[] '</tt> </tt>
+<a name="L313"></a><tt class="py-lineno">313</tt>  <tt class="py-line">    <tt class="py-name">quotable_chars</tt> <tt class="py-op">=</tt> <tt class="py-name">unescaped_chars</tt> <tt class="py-op">+</tt> <tt class="py-string">r'@\,[] '</tt> </tt>
+<a name="L314"></a><tt class="py-lineno">314</tt>  <tt class="py-line">    <tt class="py-name">unquoted_string</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-string">'\\'</tt> <tt class="py-op">+</tt> <tt id="link-49" class="py-name"><a title="lepl.matchers.core.Any" class="py-name" href="#" onclick="return doclink('link-49', 'Any', 'link-32');">Any</a></tt><tt class="py-op">(</tt><tt class="py-name">escapable_chars</tt><tt class="py-op">)</tt><tt class="py-op">)</tt>  </tt>
+<a name="L315"></a><tt class="py-lineno">315</tt>  <tt class="py-line">                       <tt class="py-op">|</tt> <tt id="link-50" class="py-name"><a title="lepl.matchers.core.Any" class="py-name" href="#" onclick="return doclink('link-50', 'Any', 'link-32');">Any</a></tt><tt class="py-op">(</tt><tt class="py-name">unescaped_chars</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">:</tt><tt class="py-op">,</tt> <tt class="py-op">.</tt><tt class="py-op">.</tt><tt class="py-op">.</tt><tt class="py-op">]</tt> </tt>
+<a name="L316"></a><tt class="py-lineno">316</tt>  <tt class="py-line">    <tt class="py-name">quoted_string</tt> <tt class="py-op">=</tt> <tt class="py-string">'"'</tt> <tt class="py-op">+</tt> <tt id="link-51" class="py-name"><a title="lepl.matchers.core.Any" class="py-name" href="#" onclick="return doclink('link-51', 'Any', 'link-32');">Any</a></tt><tt class="py-op">(</tt><tt class="py-name">quotable_chars</tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">:</tt><tt class="py-op">,</tt> <tt class="py-op">.</tt><tt class="py-op">.</tt><tt class="py-op">.</tt><tt class="py-op">]</tt> <tt class="py-op">+</tt> <tt class="py-string">'"'</tt> </tt>
+<a name="L317"></a><tt class="py-lineno">317</tt>  <tt class="py-line">    <tt class="py-name">local_part</tt> <tt class="py-op">=</tt> <tt class="py-name">quoted_string</tt> <tt class="py-op">|</tt> <tt class="py-name">unquoted_string</tt> </tt>
+<a name="L318"></a><tt class="py-lineno">318</tt>  <tt class="py-line">    <tt class="py-name">no_extreme_dot</tt> <tt class="py-op">=</tt> <tt id="link-52" class="py-name"><a title="lepl.apps.rfc3696._RejectRegexp" class="py-name" href="#" onclick="return doclink('link-52', '_RejectRegexp', 'link-37');">_RejectRegexp</a></tt><tt class="py-op">(</tt><tt class="py-name">local_part</tt><tt class="py-op">,</tt> <tt class="py-string">r'"?\..*\."?'</tt><tt class="py-op">)</tt> </tt>
+<a name="L319"></a><tt class="py-lineno">319</tt>  <tt class="py-line">    <tt class="py-name">no_double_dot</tt> <tt class="py-op">=</tt> <tt id="link-53" class="py-name"><a title="lepl.apps.rfc3696._RejectRegexp" class="py-name" href="#" onclick="return doclink('link-53', '_RejectRegexp', 'link-37');">_RejectRegexp</a></tt><tt class="py-op">(</tt><tt class="py-name">no_extreme_dot</tt><tt class="py-op">,</tt> <tt class="py-string">r'.*\."*\..*'</tt><tt class="py-op">)</tt> </tt>
+<a name="L320"></a><tt class="py-lineno">320</tt>  <tt class="py-line">    <tt class="py-name">short_local_part</tt> <tt class="py-op">=</tt> <tt id="link-54" class="py-name"><a title="lepl.apps.rfc3696._LimitLength" class="py-name" href="#" onclick="return doclink('link-54', '_LimitLength', 'link-35');">_LimitLength</a></tt><tt class="py-op">(</tt><tt class="py-name">no_double_dot</tt><tt class="py-op">,</tt> <tt class="py-number">64</tt><tt class="py-op">)</tt> </tt>
+<a name="L321"></a><tt class="py-lineno">321</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">short_local_part</tt> </tt>
+</div><a name="L322"></a><tt class="py-lineno">322</tt>  <tt class="py-line"> </tt>
+<a name="_Email"></a><div id="_Email-def"><a name="L323"></a><tt class="py-lineno">323</tt>  <tt class="py-line"> </tt>
+<a name="L324"></a><tt class="py-lineno">324</tt> <a class="py-toggle" href="#" id="_Email-toggle" onclick="return toggle('_Email');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.apps.rfc3696-module.html#_Email">_Email</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_Email-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="_Email-expanded"><a name="L325"></a><tt class="py-lineno">325</tt>  <tt class="py-line">    <tt class="py-docstring">'''</tt> </tt>
+<a name="L326"></a><tt class="py-lineno">326</tt>  <tt class="py-line"><tt class="py-docstring">    A matcher for email addresses.</tt> </tt>
+<a name="L327"></a><tt class="py-lineno">327</tt>  <tt class="py-line"><tt class="py-docstring">    '''</tt> </tt>
+<a name="L328"></a><tt class="py-lineno">328</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-55" class="py-name" targets="Function lepl.apps.rfc3696._EmailLocalPart()=lepl.apps.rfc3696-module.html#_EmailLocalPart"><a title="lepl.apps.rfc3696._EmailLocalPart" class="py-name" href="#" onclick="return doclink('link-55', '_EmailLocalPart', 'link-55');">_EmailLocalPart</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-string">'@'</tt> <tt class="py-op">+</tt> <tt id="link-56" class="py-name" targets="Function lepl.apps.rfc3696._PreferredFullyQualifiedDnsName()=lepl.apps.rfc3696-module.html#_PreferredFullyQualifiedDnsName"><a title="lepl.apps.rfc3696._PreferredFullyQualifiedDnsName" class="py-name" href="#" onclick="return doclink('link-56', '_PreferredFullyQualifiedDnsName', 'link-56');">_PreferredFullyQualifiedDnsName</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L329"></a><tt class="py-lineno">329</tt>  <tt class="py-line"> </tt>
+<a name="Email"></a><div id="Email-def"><a name="L330"></a><tt class="py-lineno">330</tt>  <tt class="py-line"> </tt>
+<a name="L331"></a><tt class="py-lineno">331</tt> <a class="py-toggle" href="#" id="Email-toggle" onclick="return toggle('Email');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.apps.rfc3696-module.html#Email">Email</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Email-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Email-expanded"><a name="L332"></a><tt class="py-lineno">332</tt>  <tt class="py-line">    <tt class="py-docstring">'''</tt> </tt>
+<a name="L333"></a><tt class="py-lineno">333</tt>  <tt class="py-line"><tt class="py-docstring">    Generate a validator for emails, according to RFC3696, which returns True</tt> </tt>
+<a name="L334"></a><tt class="py-lineno">334</tt>  <tt class="py-line"><tt class="py-docstring">    if the email is valid, and False otherwise.</tt> </tt>
+<a name="L335"></a><tt class="py-lineno">335</tt>  <tt class="py-line"><tt class="py-docstring">    '''</tt> </tt>
+<a name="L336"></a><tt class="py-lineno">336</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-57" class="py-name" targets="Function lepl.apps.rfc3696._matcher_to_validator()=lepl.apps.rfc3696-module.html#_matcher_to_validator"><a title="lepl.apps.rfc3696._matcher_to_validator" class="py-name" href="#" onclick="return doclink('link-57', '_matcher_to_validator', 'link-57');">_matcher_to_validator</a></tt><tt class="py-op">(</tt><tt id="link-58" class="py-name" targets="Function lepl.apps.rfc3696._Email()=lepl.apps.rfc3696-module.html#_Email"><a title="lepl.apps.rfc3696._Email" class="py-name" href="#" onclick="return doclink('link-58', '_Email', 'link-58');">_Email</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L337"></a><tt class="py-lineno">337</tt>  <tt class="py-line">     </tt>
+<a name="_HttpUrl"></a><div id="_HttpUrl-def"><a name="L338"></a><tt class="py-lineno">338</tt>  <tt class="py-line"> </tt>
+<a name="L339"></a><tt class="py-lineno">339</tt> <a class="py-toggle" href="#" id="_HttpUrl-toggle" onclick="return toggle('_HttpUrl');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.apps.rfc3696-module.html#_HttpUrl">_HttpUrl</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_HttpUrl-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="_HttpUrl-expanded"><a name="L340"></a><tt class="py-lineno">340</tt>  <tt class="py-line">    <tt class="py-docstring">'''</tt> </tt>
+<a name="L341"></a><tt class="py-lineno">341</tt>  <tt class="py-line"><tt class="py-docstring">    A matcher for HTTP URLs.</tt> </tt>
+<a name="L342"></a><tt class="py-lineno">342</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L343"></a><tt class="py-lineno">343</tt>  <tt class="py-line"><tt class="py-docstring">    RFC 3696:</tt> </tt>
+<a name="L344"></a><tt class="py-lineno">344</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L345"></a><tt class="py-lineno">345</tt>  <tt class="py-line"><tt class="py-docstring">    The following characters are reserved in many URIs -- they must be</tt> </tt>
+<a name="L346"></a><tt class="py-lineno">346</tt>  <tt class="py-line"><tt class="py-docstring">    used for either their URI-intended purpose or must be encoded.  Some</tt> </tt>
+<a name="L347"></a><tt class="py-lineno">347</tt>  <tt class="py-line"><tt class="py-docstring">    particular schemes may either broaden or relax these restrictions</tt> </tt>
+<a name="L348"></a><tt class="py-lineno">348</tt>  <tt class="py-line"><tt class="py-docstring">    (see the following sections for URLs applicable to "web pages" and</tt> </tt>
+<a name="L349"></a><tt class="py-lineno">349</tt>  <tt class="py-line"><tt class="py-docstring">    electronic mail), or apply them only to particular URI component</tt> </tt>
+<a name="L350"></a><tt class="py-lineno">350</tt>  <tt class="py-line"><tt class="py-docstring">    parts.</tt> </tt>
+<a name="L351"></a><tt class="py-lineno">351</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L352"></a><tt class="py-lineno">352</tt>  <tt class="py-line"><tt class="py-docstring">       ; / ? : @ &amp; = + $ , ?</tt> </tt>
+<a name="L353"></a><tt class="py-lineno">353</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L354"></a><tt class="py-lineno">354</tt>  <tt class="py-line"><tt class="py-docstring">    In addition, control characters, the space character, the double-</tt> </tt>
+<a name="L355"></a><tt class="py-lineno">355</tt>  <tt class="py-line"><tt class="py-docstring">    quote (") character, and the following special characters</tt> </tt>
+<a name="L356"></a><tt class="py-lineno">356</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L357"></a><tt class="py-lineno">357</tt>  <tt class="py-line"><tt class="py-docstring">       &lt; &gt; # %</tt> </tt>
+<a name="L358"></a><tt class="py-lineno">358</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L359"></a><tt class="py-lineno">359</tt>  <tt class="py-line"><tt class="py-docstring">    are generally forbidden and must either be avoided or escaped, as</tt> </tt>
+<a name="L360"></a><tt class="py-lineno">360</tt>  <tt class="py-line"><tt class="py-docstring">    discussed below.</tt> </tt>
+<a name="L361"></a><tt class="py-lineno">361</tt>  <tt class="py-line"><tt class="py-docstring">    [...]</tt> </tt>
+<a name="L362"></a><tt class="py-lineno">362</tt>  <tt class="py-line"><tt class="py-docstring">    When it is necessary to encode these, or other, characters, the</tt> </tt>
+<a name="L363"></a><tt class="py-lineno">363</tt>  <tt class="py-line"><tt class="py-docstring">    method used is to replace it with a percent-sign ("%") followed by</tt> </tt>
+<a name="L364"></a><tt class="py-lineno">364</tt>  <tt class="py-line"><tt class="py-docstring">    two hexidecimal digits representing its octet value.  See section</tt> </tt>
+<a name="L365"></a><tt class="py-lineno">365</tt>  <tt class="py-line"><tt class="py-docstring">    2.4.1 of [RFC2396] for an exact definition.  Unless it is used as a</tt> </tt>
+<a name="L366"></a><tt class="py-lineno">366</tt>  <tt class="py-line"><tt class="py-docstring">    delimiter of the URI scheme itself, any character may optionally be</tt> </tt>
+<a name="L367"></a><tt class="py-lineno">367</tt>  <tt class="py-line"><tt class="py-docstring">    encoded this way; systems that are testing URI syntax should be</tt> </tt>
+<a name="L368"></a><tt class="py-lineno">368</tt>  <tt class="py-line"><tt class="py-docstring">    prepared for these encodings to appear in any component of the URI</tt> </tt>
+<a name="L369"></a><tt class="py-lineno">369</tt>  <tt class="py-line"><tt class="py-docstring">    except the scheme name itself.</tt> </tt>
+<a name="L370"></a><tt class="py-lineno">370</tt>  <tt class="py-line"><tt class="py-docstring">    [...]</tt> </tt>
+<a name="L371"></a><tt class="py-lineno">371</tt>  <tt class="py-line"><tt class="py-docstring">    Absolute HTTP URLs consist of the scheme name, a host name (expressed</tt> </tt>
+<a name="L372"></a><tt class="py-lineno">372</tt>  <tt class="py-line"><tt class="py-docstring">    as a domain name or IP address), and optional port number, and then,</tt> </tt>
+<a name="L373"></a><tt class="py-lineno">373</tt>  <tt class="py-line"><tt class="py-docstring">    optionally, a path, a search part, and a fragment identifier.  These</tt> </tt>
+<a name="L374"></a><tt class="py-lineno">374</tt>  <tt class="py-line"><tt class="py-docstring">    are separated, respectively, by a colon and the two slashes that</tt> </tt>
+<a name="L375"></a><tt class="py-lineno">375</tt>  <tt class="py-line"><tt class="py-docstring">    precede the host name, a colon, a slash, a question mark, and a hash</tt> </tt>
+<a name="L376"></a><tt class="py-lineno">376</tt>  <tt class="py-line"><tt class="py-docstring">    mark ("#").  So we have</tt> </tt>
+<a name="L377"></a><tt class="py-lineno">377</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L378"></a><tt class="py-lineno">378</tt>  <tt class="py-line"><tt class="py-docstring">       http://host:port/path?search#fragment</tt> </tt>
+<a name="L379"></a><tt class="py-lineno">379</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L380"></a><tt class="py-lineno">380</tt>  <tt class="py-line"><tt class="py-docstring">       http://host/path/</tt> </tt>
+<a name="L381"></a><tt class="py-lineno">381</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L382"></a><tt class="py-lineno">382</tt>  <tt class="py-line"><tt class="py-docstring">       http://host/path#fragment</tt> </tt>
+<a name="L383"></a><tt class="py-lineno">383</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L384"></a><tt class="py-lineno">384</tt>  <tt class="py-line"><tt class="py-docstring">       http://host/path?search</tt> </tt>
+<a name="L385"></a><tt class="py-lineno">385</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L386"></a><tt class="py-lineno">386</tt>  <tt class="py-line"><tt class="py-docstring">       http://host</tt> </tt>
+<a name="L387"></a><tt class="py-lineno">387</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L388"></a><tt class="py-lineno">388</tt>  <tt class="py-line"><tt class="py-docstring">    and other variations on that form.  There is also a "relative" form,</tt> </tt>
+<a name="L389"></a><tt class="py-lineno">389</tt>  <tt class="py-line"><tt class="py-docstring">    but it almost never appears in text that a user might, e.g., enter</tt> </tt>
+<a name="L390"></a><tt class="py-lineno">390</tt>  <tt class="py-line"><tt class="py-docstring">    into a form.  See [RFC2616] for details.</tt> </tt>
+<a name="L391"></a><tt class="py-lineno">391</tt>  <tt class="py-line"><tt class="py-docstring">    [...]</tt> </tt>
+<a name="L392"></a><tt class="py-lineno">392</tt>  <tt class="py-line"><tt class="py-docstring">    The characters</tt> </tt>
+<a name="L393"></a><tt class="py-lineno">393</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L394"></a><tt class="py-lineno">394</tt>  <tt class="py-line"><tt class="py-docstring">       / ; ?</tt> </tt>
+<a name="L395"></a><tt class="py-lineno">395</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L396"></a><tt class="py-lineno">396</tt>  <tt class="py-line"><tt class="py-docstring">    are reserved within the path and search parts and must be encoded;</tt> </tt>
+<a name="L397"></a><tt class="py-lineno">397</tt>  <tt class="py-line"><tt class="py-docstring">    the first of these may be used unencoded, and is often used within</tt> </tt>
+<a name="L398"></a><tt class="py-lineno">398</tt>  <tt class="py-line"><tt class="py-docstring">    the path, to designate hierarchy.</tt> </tt>
+<a name="L399"></a><tt class="py-lineno">399</tt>  <tt class="py-line"><tt class="py-docstring">    '''</tt> </tt>
+<a name="L400"></a><tt class="py-lineno">400</tt>  <tt class="py-line">    <tt class="py-name">path_chars</tt> <tt class="py-op">=</tt> <tt class="py-string">''</tt><tt class="py-op">.</tt><tt id="link-59" class="py-name" targets="Method lepl.regexp.core.Alphabet.join()=lepl.regexp.core.Alphabet-class.html#join,Method lepl.regexp.str.StrAlphabet.join()=lepl.regexp.str.StrAlphabet-class.html#join,Method lepl.stream.core.StreamHelper.join()=lepl.stream.core.StreamHelper-class.html#join,Method lepl.stream.facade.HelperFacade.join()=lepl.stream.facade.HelperFacade-class.html#join,Method lepl.stream.simple.ListHelper.join()=lepl.stream.simple.ListHelper-class.html#join,Method lepl.stream.simple.SequenceHelper.join()=lepl.stream.simple.SequenceHelper-class.html#join,Method lepl.stream.simple.StringHelper.join()=lepl.stream.simple.StringHelper-class.html#join,Variable lepl.support.list.join=lepl.support.list-module.html#join"><a title="lepl.regexp.core.Alphabet.join
+lepl.regexp.str.StrAlphabet.join
+lepl.stream.core.StreamHelper.join
+lepl.stream.facade.HelperFacade.join
+lepl.stream.simple.ListHelper.join
+lepl.stream.simple.SequenceHelper.join
+lepl.stream.simple.StringHelper.join
+lepl.support.list.join" class="py-name" href="#" onclick="return doclink('link-59', 'join', 'link-59');">join</a></tt><tt class="py-op">(</tt><tt id="link-60" class="py-name" targets="Method lepl.support.context.Namespace.set()=lepl.support.context.Namespace-class.html#set,Method lepl.support.context.OnceOnlyNamespace.set()=lepl.support.context.OnceOnlyNamespace-class.html#set"><a title="lepl.support.context.Namespace.set
+lepl.support.context.OnceOnlyNamespace.set" class="py-name" href="#" onclick="return doclink('link-60', 'set', 'link-60');">set</a></tt><tt class="py-op">(</tt><tt class="py-name">printable</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">difference</tt><tt class="py-op">(</tt><tt id="link-61" class="py-name"><a title="lepl.support.context.Namespace.set
+lepl.support.context.OnceOnlyNamespace.set" class="py-name" href="#" onclick="return doclink('link-61', 'set', 'link-60');">set</a></tt><tt class="py-op">(</tt><tt class="py-name">whitespace</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L401"></a><tt class="py-lineno">401</tt>  <tt class="py-line">                                       <tt class="py-op">.</tt><tt class="py-name">difference</tt><tt class="py-op">(</tt><tt class="py-string">'/;?&lt;&gt;#%'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L402"></a><tt class="py-lineno">402</tt>  <tt class="py-line">    <tt class="py-name">other_chars</tt> <tt class="py-op">=</tt> <tt class="py-name">path_chars</tt> <tt class="py-op">+</tt> <tt class="py-string">'/'</tt> </tt>
+<a name="L403"></a><tt class="py-lineno">403</tt>  <tt class="py-line">    <tt class="py-name">path_string</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-string">'%'</tt> <tt class="py-op">+</tt> <tt id="link-62" class="py-name"><a title="lepl.matchers.core.Any" class="py-name" href="#" onclick="return doclink('link-62', 'Any', 'link-32');">Any</a></tt><tt class="py-op">(</tt><tt id="link-63" class="py-name"><a title="lepl.apps.rfc3696._HEX" class="py-name" href="#" onclick="return doclink('link-63', '_HEX', 'link-3');">_HEX</a></tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-number">2</tt><tt class="py-op">,</tt> <tt class="py-op">.</tt><tt class="py-op">.</tt><tt class="py-op">.</tt><tt class="py-op">]</tt> <tt class="py-op">|</tt> <tt id="link-64" class="py-name"><a title="lepl.matchers.core.Any" class="py-name" href="#" onclick="return doclink('link-64', 'Any', 'link-32');">Any</a></tt><tt class="py-op">(</tt><tt class="py-name">path_chars</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">:</tt><tt class="py-op">,</tt> <tt class="py-op">.</tt><tt class="py-op">.</tt><tt class="py-op">.</tt><tt class="py-op">]</tt> </tt>
+<a name="L404"></a><tt class="py-lineno">404</tt>  <tt class="py-line">    <tt class="py-name">other_string</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-string">'%'</tt> <tt class="py-op">+</tt> <tt id="link-65" class="py-name"><a title="lepl.matchers.core.Any" class="py-name" href="#" onclick="return doclink('link-65', 'Any', 'link-32');">Any</a></tt><tt class="py-op">(</tt><tt id="link-66" class="py-name"><a title="lepl.apps.rfc3696._HEX" class="py-name" href="#" onclick="return doclink('link-66', '_HEX', 'link-3');">_HEX</a></tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-number">2</tt><tt class="py-op">,</tt> <tt class="py-op">.</tt><tt class="py-op">.</tt><tt class="py-op">.</tt><tt class="py-op">]</tt> <tt class="py-op">|</tt> <tt id="link-67" class="py-name"><a title="lepl.matchers.core.Any" class="py-name" href="#" onclick="return doclink('link-67', 'Any', 'link-32');">Any</a></tt><tt class="py-op">(</tt><tt class="py-name">other_chars</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">:</tt><tt class="py-op">,</tt> <tt class="py-op">.</tt><tt class="py-op">.</tt><tt class="py-op">.</tt><tt class="py-op">]</tt> </tt>
+<a name="L405"></a><tt class="py-lineno">405</tt>  <tt class="py-line">     </tt>
+<a name="L406"></a><tt class="py-lineno">406</tt>  <tt class="py-line">    <tt class="py-name">host</tt> <tt class="py-op">=</tt> <tt id="link-68" class="py-name"><a title="lepl.apps.rfc3696._IpV4Address" class="py-name" href="#" onclick="return doclink('link-68', '_IpV4Address', 'link-48');">_IpV4Address</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">|</tt> <tt class="py-op">(</tt><tt class="py-string">'['</tt> <tt class="py-op">+</tt> <tt id="link-69" class="py-name" targets="Function lepl.apps.rfc3696._Ipv6Address()=lepl.apps.rfc3696-module.html#_Ipv6Address"><a title="lepl.apps.rfc3696._Ipv6Address" class="py-name" href="#" onclick="return doclink('link-69', '_Ipv6Address', 'link-69');">_Ipv6Address</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-string">']'</tt><tt class="py-op">)</tt> <tt class="py-op">|</tt> \ </tt>
+<a name="L407"></a><tt class="py-lineno">407</tt>  <tt class="py-line">            <tt id="link-70" class="py-name"><a title="lepl.apps.rfc3696._PreferredFullyQualifiedDnsName" class="py-name" href="#" onclick="return doclink('link-70', '_PreferredFullyQualifiedDnsName', 'link-56');">_PreferredFullyQualifiedDnsName</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L408"></a><tt class="py-lineno">408</tt>  <tt class="py-line">     </tt>
+<a name="L409"></a><tt class="py-lineno">409</tt>  <tt class="py-line">    <tt class="py-name">url</tt> <tt class="py-op">=</tt> <tt class="py-string">'http://'</tt> <tt class="py-op">+</tt> <tt class="py-name">host</tt> <tt class="py-op">+</tt> \ </tt>
+<a name="L410"></a><tt class="py-lineno">410</tt>  <tt class="py-line">            <tt id="link-71" class="py-name"><a title="lepl.matchers.derived.Optional" class="py-name" href="#" onclick="return doclink('link-71', 'Optional', 'link-34');">Optional</a></tt><tt class="py-op">(</tt><tt class="py-string">':'</tt> <tt class="py-op">+</tt> <tt id="link-72" class="py-name"><a title="lepl.matchers.core.Any" class="py-name" href="#" onclick="return doclink('link-72', 'Any', 'link-32');">Any</a></tt><tt class="py-op">(</tt><tt class="py-name">digits</tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">:</tt><tt class="py-op">,</tt> <tt class="py-op">.</tt><tt class="py-op">.</tt><tt class="py-op">.</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> \ </tt>
+<a name="L411"></a><tt class="py-lineno">411</tt>  <tt class="py-line">            <tt id="link-73" class="py-name"><a title="lepl.matchers.derived.Optional" class="py-name" href="#" onclick="return doclink('link-73', 'Optional', 'link-34');">Optional</a></tt><tt class="py-op">(</tt><tt class="py-string">'/'</tt> <tt class="py-op">+</tt>  </tt>
+<a name="L412"></a><tt class="py-lineno">412</tt>  <tt class="py-line">                     <tt id="link-74" class="py-name"><a title="lepl.matchers.derived.Optional" class="py-name" href="#" onclick="return doclink('link-74', 'Optional', 'link-34');">Optional</a></tt><tt class="py-op">(</tt><tt class="py-name">path_string</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">:</tt><tt class="py-op">,</tt> <tt class="py-string">'/'</tt><tt class="py-op">,</tt> <tt class="py-op">.</tt><tt class="py-op">.</tt><tt class="py-op">.</tt><tt class="py-op">]</tt> <tt class="py-op">+</tt> <tt id="link-75" class="py-name"><a title="lepl.matchers.derived.Optional" class="py-name" href="#" onclick="return doclink('link-75', 'Optional', 'link-34');">Optional</a></tt><tt class="py-op">(</tt><tt class="py-string">'/'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> </tt>
+<a name="L413"></a><tt class="py-lineno">413</tt>  <tt class="py-line">                     <tt id="link-76" class="py-name"><a title="lepl.matchers.derived.Optional" class="py-name" href="#" onclick="return doclink('link-76', 'Optional', 'link-34');">Optional</a></tt><tt class="py-op">(</tt><tt class="py-string">'?'</tt> <tt class="py-op">+</tt> <tt class="py-name">other_string</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> </tt>
+<a name="L414"></a><tt class="py-lineno">414</tt>  <tt class="py-line">                     <tt id="link-77" class="py-name"><a title="lepl.matchers.derived.Optional" class="py-name" href="#" onclick="return doclink('link-77', 'Optional', 'link-34');">Optional</a></tt><tt class="py-op">(</tt><tt class="py-string">'#'</tt> <tt class="py-op">+</tt> <tt class="py-name">other_string</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L415"></a><tt class="py-lineno">415</tt>  <tt class="py-line"> </tt>
+<a name="L416"></a><tt class="py-lineno">416</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">url</tt> </tt>
+</div><a name="L417"></a><tt class="py-lineno">417</tt>  <tt class="py-line"> </tt>
+<a name="HttpUrl"></a><div id="HttpUrl-def"><a name="L418"></a><tt class="py-lineno">418</tt>  <tt class="py-line"> </tt>
+<a name="L419"></a><tt class="py-lineno">419</tt> <a class="py-toggle" href="#" id="HttpUrl-toggle" onclick="return toggle('HttpUrl');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.apps.rfc3696-module.html#HttpUrl">HttpUrl</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="HttpUrl-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="HttpUrl-expanded"><a name="L420"></a><tt class="py-lineno">420</tt>  <tt class="py-line">    <tt class="py-docstring">'''</tt> </tt>
+<a name="L421"></a><tt class="py-lineno">421</tt>  <tt class="py-line"><tt class="py-docstring">    Generate a validator for HTTP URLs, according to RFC3696, which returns </tt> </tt>
+<a name="L422"></a><tt class="py-lineno">422</tt>  <tt class="py-line"><tt class="py-docstring">    True if the email is valid, and False otherwise.</tt> </tt>
+<a name="L423"></a><tt class="py-lineno">423</tt>  <tt class="py-line"><tt class="py-docstring">    '''</tt> </tt>
+<a name="L424"></a><tt class="py-lineno">424</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-78" class="py-name"><a title="lepl.apps.rfc3696._matcher_to_validator" class="py-name" href="#" onclick="return doclink('link-78', '_matcher_to_validator', 'link-57');">_matcher_to_validator</a></tt><tt class="py-op">(</tt><tt id="link-79" class="py-name" targets="Function lepl.apps.rfc3696._HttpUrl()=lepl.apps.rfc3696-module.html#_HttpUrl"><a title="lepl.apps.rfc3696._HttpUrl" class="py-name" href="#" onclick="return doclink('link-79', '_HttpUrl', 'link-79');">_HttpUrl</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L425"></a><tt class="py-lineno">425</tt>  <tt class="py-line"> </tt>
+<a name="MailToUrl"></a><div id="MailToUrl-def"><a name="L426"></a><tt class="py-lineno">426</tt>  <tt class="py-line"> </tt>
+<a name="L427"></a><tt class="py-lineno">427</tt> <a class="py-toggle" href="#" id="MailToUrl-toggle" onclick="return toggle('MailToUrl');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.apps.rfc3696-module.html#MailToUrl">MailToUrl</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="MailToUrl-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="MailToUrl-expanded"><a name="L428"></a><tt class="py-lineno">428</tt>  <tt class="py-line">    <tt class="py-docstring">'''</tt> </tt>
+<a name="L429"></a><tt class="py-lineno">429</tt>  <tt class="py-line"><tt class="py-docstring">    Generate a validator for email addresses, according to RFC3696, which </tt> </tt>
+<a name="L430"></a><tt class="py-lineno">430</tt>  <tt class="py-line"><tt class="py-docstring">    returns True if the URL is valid, and False otherwise.</tt> </tt>
+<a name="L431"></a><tt class="py-lineno">431</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L432"></a><tt class="py-lineno">432</tt>  <tt class="py-line"><tt class="py-docstring">    RFC 3696:</tt> </tt>
+<a name="L433"></a><tt class="py-lineno">433</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L434"></a><tt class="py-lineno">434</tt>  <tt class="py-line"><tt class="py-docstring">    The following characters may appear in MAILTO URLs only with the</tt> </tt>
+<a name="L435"></a><tt class="py-lineno">435</tt>  <tt class="py-line"><tt class="py-docstring">    specific defined meanings given.  If they appear in an email address</tt> </tt>
+<a name="L436"></a><tt class="py-lineno">436</tt>  <tt class="py-line"><tt class="py-docstring">    (i.e., for some other purpose), they must be encoded:</tt> </tt>
+<a name="L437"></a><tt class="py-lineno">437</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L438"></a><tt class="py-lineno">438</tt>  <tt class="py-line"><tt class="py-docstring">       :       The colon in "mailto:"</tt> </tt>
+<a name="L439"></a><tt class="py-lineno">439</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L440"></a><tt class="py-lineno">440</tt>  <tt class="py-line"><tt class="py-docstring">       &lt; &gt; # " % { } | \ ^ ~ `</tt> </tt>
+<a name="L441"></a><tt class="py-lineno">441</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L442"></a><tt class="py-lineno">442</tt>  <tt class="py-line"><tt class="py-docstring">       These characters are "unsafe" in any URL, and must always be</tt> </tt>
+<a name="L443"></a><tt class="py-lineno">443</tt>  <tt class="py-line"><tt class="py-docstring">       encoded.</tt> </tt>
+<a name="L444"></a><tt class="py-lineno">444</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L445"></a><tt class="py-lineno">445</tt>  <tt class="py-line"><tt class="py-docstring">    The following characters must also be encoded if they appear in a</tt> </tt>
+<a name="L446"></a><tt class="py-lineno">446</tt>  <tt class="py-line"><tt class="py-docstring">    MAILTO URL</tt> </tt>
+<a name="L447"></a><tt class="py-lineno">447</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L448"></a><tt class="py-lineno">448</tt>  <tt class="py-line"><tt class="py-docstring">       ? &amp; =</tt> </tt>
+<a name="L449"></a><tt class="py-lineno">449</tt>  <tt class="py-line"><tt class="py-docstring">          Used to delimit headers and their values when these are encoded</tt> </tt>
+<a name="L450"></a><tt class="py-lineno">450</tt>  <tt class="py-line"><tt class="py-docstring">          into URLs.</tt> </tt>
+<a name="L451"></a><tt class="py-lineno">451</tt>  <tt class="py-line"><tt class="py-docstring">    ----------</tt> </tt>
+<a name="L452"></a><tt class="py-lineno">452</tt>  <tt class="py-line"><tt class="py-docstring">    The RFC isn't that great a guide here.  The best approach, I think, is</tt> </tt>
+<a name="L453"></a><tt class="py-lineno">453</tt>  <tt class="py-line"><tt class="py-docstring">    to check the URL for "forbidden" characters, then decode it, and finally</tt> </tt>
+<a name="L454"></a><tt class="py-lineno">454</tt>  <tt class="py-line"><tt class="py-docstring">    validate the decoded email.  So we implement the validator directly (ie</tt> </tt>
+<a name="L455"></a><tt class="py-lineno">455</tt>  <tt class="py-line"><tt class="py-docstring">    this is not a matcher).</tt> </tt>
+<a name="L456"></a><tt class="py-lineno">456</tt>  <tt class="py-line"><tt class="py-docstring">    '''</tt> </tt>
+<a name="L457"></a><tt class="py-lineno">457</tt>  <tt class="py-line">     </tt>
+<a name="L458"></a><tt class="py-lineno">458</tt>  <tt class="py-line">    <tt class="py-name">MAIL_TO</tt> <tt class="py-op">=</tt> <tt class="py-string">'mailto:'</tt> </tt>
+<a name="L459"></a><tt class="py-lineno">459</tt>  <tt class="py-line">    <tt class="py-name">encoded_token</tt> <tt class="py-op">=</tt> <tt class="py-name">compile_</tt><tt class="py-op">(</tt><tt class="py-string">'(%.{0,2})'</tt><tt class="py-op">)</tt> </tt>
+<a name="L460"></a><tt class="py-lineno">460</tt>  <tt class="py-line">    <tt class="py-name">email</tt> <tt class="py-op">=</tt> <tt id="link-80" class="py-name"><a title="lepl.apps.rfc3696._Email" class="py-name" href="#" onclick="return doclink('link-80', '_Email', 'link-58');">_Email</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L461"></a><tt class="py-lineno">461</tt>  <tt class="py-line">    <tt class="py-name">email</tt><tt class="py-op">.</tt><tt id="link-81" class="py-name"><a title="lepl.core._test.config
+lepl.core.config" class="py-name" href="#" onclick="return doclink('link-81', 'config', 'link-9');">config</a></tt><tt class="py-op">.</tt><tt id="link-82" class="py-name"><a title="lepl.core.config.ConfigBuilder.compile_to_re" class="py-name" href="#" onclick="return doclink('link-82', 'compile_to_re', 'link-10');">compile_to_re</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-83" class="py-name"><a title="lepl.core.config.ConfigBuilder.no_memoize" class="py-name" href="#" onclick="return doclink('link-83', 'no_memoize', 'link-11');">no_memoize</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L462"></a><tt class="py-lineno">462</tt>  <tt class="py-line">     </tt>
+<a name="L463"></a><tt class="py-lineno">463</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">_guarantee_bool</tt> </tt>
+<a name="L464"></a><tt class="py-lineno">464</tt>  <tt class="py-line">    <tt class="py-keyword">def</tt> <tt class="py-def-name">validator</tt><tt class="py-op">(</tt><tt class="py-param">url</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L465"></a><tt class="py-lineno">465</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt class="py-name">url</tt><tt class="py-op">.</tt><tt class="py-name">startswith</tt><tt class="py-op">(</tt><tt class="py-name">MAIL_TO</tt><tt class="py-op">)</tt> </tt>
+<a name="L466"></a><tt class="py-lineno">466</tt>  <tt class="py-line">        <tt class="py-name">url</tt> <tt class="py-op">=</tt> <tt class="py-name">url</tt><tt class="py-op">[</tt><tt id="link-84" class="py-name"><a title="lepl.lexer.stream.TokenHelper.len
+lepl.regexp.interval.Intervals.len
+lepl.regexp.interval.TaggedFragments.len
+lepl.regexp.interval._Character.len
+lepl.stream.core.StreamHelper.len
+lepl.stream.facade.HelperFacade.len
+lepl.stream.iter.IterableHelper.len
+lepl.stream.simple.SequenceHelper.len" class="py-name" href="#" onclick="return doclink('link-84', 'len', 'link-18');">len</a></tt><tt class="py-op">(</tt><tt class="py-name">MAIL_TO</tt><tt class="py-op">)</tt><tt class="py-op">:</tt><tt class="py-op">]</tt> </tt>
+<a name="L467"></a><tt class="py-lineno">467</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt id="link-85" class="py-name"><a title="lepl.matchers._test.support.char
+lepl.matchers._test3.support.char
+lepl.regexp.str.StrParser.char" class="py-name" href="#" onclick="return doclink('link-85', 'char', 'link-12');">char</a></tt> <tt class="py-keyword">in</tt> <tt class="py-string">r':&lt;&gt;#"{}|\^~`'</tt><tt class="py-op">:</tt> </tt>
+<a name="L468"></a><tt class="py-lineno">468</tt>  <tt class="py-line">            <tt class="py-keyword">assert</tt> <tt id="link-86" class="py-name"><a title="lepl.matchers._test.support.char
+lepl.matchers._test3.support.char
+lepl.regexp.str.StrParser.char" class="py-name" href="#" onclick="return doclink('link-86', 'char', 'link-12');">char</a></tt> <tt class="py-keyword">not</tt> <tt class="py-keyword">in</tt> <tt class="py-name">url</tt> </tt>
+<a name="L469"></a><tt class="py-lineno">469</tt>  <tt class="py-line">        <tt class="py-keyword">def</tt> <tt class="py-def-name">unpack</tt><tt class="py-op">(</tt><tt class="py-param">chunk</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L470"></a><tt class="py-lineno">470</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">chunk</tt><tt class="py-op">.</tt><tt class="py-name">startswith</tt><tt class="py-op">(</tt><tt class="py-string">'%'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L471"></a><tt class="py-lineno">471</tt>  <tt class="py-line">                <tt class="py-keyword">assert</tt> <tt id="link-87" class="py-name"><a title="lepl.lexer.stream.TokenHelper.len
+lepl.regexp.interval.Intervals.len
+lepl.regexp.interval.TaggedFragments.len
+lepl.regexp.interval._Character.len
+lepl.stream.core.StreamHelper.len
+lepl.stream.facade.HelperFacade.len
+lepl.stream.iter.IterableHelper.len
+lepl.stream.simple.SequenceHelper.len" class="py-name" href="#" onclick="return doclink('link-87', 'len', 'link-18');">len</a></tt><tt class="py-op">(</tt><tt class="py-name">chunk</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-number">3</tt> </tt>
+<a name="L472"></a><tt class="py-lineno">472</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt id="link-88" class="py-name" targets="Function lepl.support.lib.chr()=lepl.support.lib-module.html#chr"><a title="lepl.support.lib.chr" class="py-name" href="#" onclick="return doclink('link-88', 'chr', 'link-88');">chr</a></tt><tt class="py-op">(</tt><tt class="py-name">int</tt><tt class="py-op">(</tt><tt class="py-name">chunk</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">:</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-number">16</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L473"></a><tt class="py-lineno">473</tt>  <tt class="py-line">            <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L474"></a><tt class="py-lineno">474</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">chunk</tt> </tt>
+</div><a name="L475"></a><tt class="py-lineno">475</tt>  <tt class="py-line">        <tt class="py-name">url</tt> <tt class="py-op">=</tt> <tt class="py-string">''</tt><tt class="py-op">.</tt><tt id="link-89" class="py-name"><a title="lepl.regexp.core.Alphabet.join
+lepl.regexp.str.StrAlphabet.join
+lepl.stream.core.StreamHelper.join
+lepl.stream.facade.HelperFacade.join
+lepl.stream.simple.ListHelper.join
+lepl.stream.simple.SequenceHelper.join
+lepl.stream.simple.StringHelper.join
+lepl.support.list.join" class="py-name" href="#" onclick="return doclink('link-89', 'join', 'link-59');">join</a></tt><tt class="py-op">(</tt><tt class="py-name">unpack</tt><tt class="py-op">(</tt><tt class="py-name">chunk</tt><tt class="py-op">)</tt> <tt class="py-keyword">for</tt> <tt class="py-name">chunk</tt> <tt class="py-keyword">in</tt> <tt class="py-name">encoded_token</tt><tt class="py-op">.</tt><tt class="py-name">split</tt><tt class="py-op">(</tt><tt class="py-name">url</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L476"></a><tt class="py-lineno">476</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt class="py-name">url</tt> </tt>
+<a name="L477"></a><tt class="py-lineno">477</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">email</tt><tt class="py-op">.</tt><tt id="link-90" class="py-name"><a title="lepl.bin.literal.parse
+lepl.core.config.ParserMixin.parse
+lepl.regexp.core.Alphabet.parse
+lepl.regexp.str.StrAlphabet.parse" class="py-name" href="#" onclick="return doclink('link-90', 'parse', 'link-15');">parse</a></tt><tt class="py-op">(</tt><tt class="py-name">url</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L478"></a><tt class="py-lineno">478</tt>  <tt class="py-line"> </tt>
+<a name="L479"></a><tt class="py-lineno">479</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">validator</tt> </tt>
+</div><a name="L480"></a><tt class="py-lineno">480</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lepl-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sun May 13 16:31:10 2012
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

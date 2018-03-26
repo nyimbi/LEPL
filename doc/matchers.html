@@ -1,0 +1,505 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Matchers &mdash; LEPL 5.1.2 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '5.1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="LEPL 5.1.2 documentation" href="index.html" />
+    <link rel="up" title="Lepl Manual" href="manual.html" />
+    <link rel="next" title="Operators" href="operators.html" />
+    <link rel="prev" title="Getting Started" href="started.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="operators.html" title="Operators"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="started.html" title="Getting Started"
+             accesskey="P">previous</a> |</li>
+        <li><a href="contents.html">LEPL 5.1.2 documentation</a> &raquo;</li>
+          <li><a href="manual.html" accesskey="U">Lepl Manual</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="matchers">
+<span id="index-0"></span><span id="id1"></span><h1>Matchers<a class="headerlink" href="#matchers" title="Permalink to this headline">¶</a></h1>
+<p>The <a class="reference external" href="api/redirect.html#lepl.matchers">API Documentation</a> contains an
+exhaustive list of the matches available.  This chapter only describes the
+most important.</p>
+<p>The final section gives some <a class="reference internal" href="#id28">implementation details</a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The examples here are fragments that illustrate some small detail.  They
+often include <a class="reference external" href="api/redirect.html#lepl.core.config.ConfigBuilder.no_full_first_match">.config.no_full_first_match()</a> so
+that a partial match can be displayed instead of an error message.</p>
+</div>
+<div class="section" id="literal">
+<span id="index-1"></span><h2>Literal<a class="headerlink" href="#literal" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="api/redirect.html#lepl.matchers.core.Literal">[API]</a> This matcher
+identifies a given string.  For example, <a class="reference external" href="api/redirect.html#lepl.matchers.core.Literal">Literal(&#8216;hello&#8217;)</a> will give the result &#8220;hello&#8221;
+when that text is at the start of a stream:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span> <span class="o">=</span> <span class="n">Literal</span><span class="p">(</span><span class="s">&#39;hello&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">no_full_first_match</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;hello world&#39;</span><span class="p">)</span>
+<span class="go">[&#39;hello&#39;]</span>
+</pre></div>
+</div>
+<p>In many cases it is not necessary to use <a class="reference external" href="api/redirect.html#lepl.matchers.core.Literal">Literal()</a> explicitly.  Most matchers,
+when they receive a string as a constructor argument, will automatically
+create a literal match from the given text.</p>
+</div>
+<div class="section" id="any">
+<span id="index-2"></span><h2>Any<a class="headerlink" href="#any" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="api/redirect.html#lepl.functions.Any">[API]</a> This matcher identifies any
+single character.  It can be restricted to match only characters that appear
+in a given string.  For example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span> <span class="o">=</span> <span class="n">Any</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">no_full_first_match</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;hello world&#39;</span><span class="p">)</span>
+<span class="go">[&#39;h&#39;]</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span> <span class="o">=</span> <span class="n">Any</span><span class="p">(</span><span class="s">&#39;abcdefghijklm&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">:]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">no_full_first_match</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;hello world&#39;</span><span class="p">)</span>
+<span class="go">[&#39;h&#39;, &#39;e&#39;, &#39;l&#39;, &#39;l&#39;]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="and">
+<span id="index-3"></span><h2>And (&amp;)<a class="headerlink" href="#and" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="api/redirect.html#lepl.matchers.combine.And">[API]</a> This matcher combines
+other matchers in order.  For example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span> <span class="o">=</span> <span class="n">And</span><span class="p">(</span><span class="n">Any</span><span class="p">(</span><span class="s">&#39;h&#39;</span><span class="p">),</span> <span class="n">Any</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">no_full_first_match</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;hello world&#39;</span><span class="p">)</span>
+<span class="go">[&#39;h&#39;, &#39;e&#39;]</span>
+</pre></div>
+</div>
+<p>All matchers must succeed for <a class="reference external" href="api/redirect.html#lepl.matchers.combine.And">And()</a> as a whole to succeed:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span> <span class="o">=</span> <span class="n">And</span><span class="p">(</span><span class="n">Any</span><span class="p">(</span><span class="s">&#39;a&#39;</span><span class="p">),</span> <span class="n">Any</span><span class="p">(</span><span class="s">&#39;b&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;pq&#39;</span><span class="p">)</span>
+<span class="go">[...]</span>
+<span class="go">lepl.stream.maxdepth.FullFirstMatchException: The match failed in &lt;string&gt; at &#39;q&#39; (line 1, character 2).</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;ax&#39;</span><span class="p">)</span>
+<span class="go">[...]</span>
+<span class="go">lepl.stream.maxdepth.FullFirstMatchException: The match failed in &lt;string&gt; at &#39;&#39; (line 1, character 3).</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;ab&#39;</span><span class="p">)</span>
+<span class="go">[&#39;a&#39;, &#39;b&#39;]</span>
+
+<span class="go">.. note::</span>
+
+<span class="go">It&#39;s worth noting that because the error message is based on the deepest</span>
+<span class="go">match it can sometimes be &quot;off by one&quot; if a character was read but failed to</span>
+<span class="go">match.</span>
+</pre></div>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">&amp;</span></tt> operator is equivalent unless a <a class="reference internal" href="operators.html#spaces"><em>separator</em></a> is being
+used:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span> <span class="o">=</span> <span class="n">Any</span><span class="p">(</span><span class="s">&#39;a&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">Any</span><span class="p">(</span><span class="s">&#39;b&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;ab&#39;</span><span class="p">)</span>
+<span class="go">[&#39;a&#39;, &#39;b&#39;]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="or">
+<span id="index-4"></span><h2>Or (|)<a class="headerlink" href="#or" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="api/redirect.html#lepl.matchers.combine.Or">[API]</a> This matcher searches
+through a list of other matchers to find a successful match.  For example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span> <span class="o">=</span> <span class="n">Or</span><span class="p">(</span><span class="n">Any</span><span class="p">(</span><span class="s">&#39;x&#39;</span><span class="p">),</span> <span class="n">Any</span><span class="p">(</span><span class="s">&#39;h&#39;</span><span class="p">),</span> <span class="n">Any</span><span class="p">(</span><span class="s">&#39;z&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">no_full_first_match</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;hello world&#39;</span><span class="p">)</span>
+<span class="go">[&#39;h&#39;]</span>
+</pre></div>
+</div>
+<p>The first match found is the one returned:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span> <span class="o">=</span> <span class="n">Or</span><span class="p">(</span><span class="n">Any</span><span class="p">(</span><span class="s">&#39;h&#39;</span><span class="p">),</span> <span class="n">Any</span><span class="p">()[</span><span class="mi">3</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">no_full_first_match</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;hello world&#39;</span><span class="p">)</span>
+<span class="go">[&#39;h&#39;]</span>
+</pre></div>
+</div>
+<p>But subsequent calls return other possibilities:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">matcher</span><span class="o">.</span><span class="n">parse_all</span><span class="p">(</span><span class="s">&#39;hello world&#39;</span><span class="p">))</span>
+<span class="go">[[&#39;h&#39;], [&#39;h&#39;, &#39;e&#39;, &#39;l&#39;]]</span>
+</pre></div>
+</div>
+<p>This shows how Lepl supports &#8220;backtracking&#8221; &#8212; a matcher may be called
+several times before a result is found that &#8220;fits&#8221; with the rest of the
+grammar.  All matchers upport this behaviour, but it is easiest to see with
+<a class="reference external" href="api/redirect.html#lepl.matchers.combine.Or">Or()</a>.</p>
+<p>The <a class="reference external" href="api/redirect.html#lepl.core.config.ParserMixin.parse_all">matcher.parse_all()</a> method is similar
+to <a class="reference external" href="api/redirect.html#lepl.core.config.ParserMixin.match">matcher.match()</a>
+introduced in the previous section, but returns only the results (it discards
+the remaining streams).  Using <tt class="docutils literal"><span class="pre">list()</span></tt> converts the iterator returned by
+the parser into a list that can be displayed.</p>
+</div>
+<div class="section" id="repeat">
+<span id="index-5"></span><span id="id8"></span><h2>Repeat ([...])<a class="headerlink" href="#repeat" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="api/redirect.html#lepl.matchers.derived.Repeat">[API]</a> Although <a class="reference external" href="api/redirect.html#lepl.matchers.derived.Repeat">Repeat()</a> can be used directly, it&#8217;s
+normal to use the <tt class="docutils literal"><span class="pre">[]</span></tt> array syntax instead (which, when used on a matcher,
+is automatically translated into <a class="reference external" href="api/redirect.html#lepl.matchers.derived.Repeat">Repeat()</a>).</p>
+<p>At its simplest, <tt class="docutils literal"><span class="pre">[]</span></tt> indicates that a matcher should repeat a given number
+of times:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span> <span class="o">=</span> <span class="n">Any</span><span class="p">()[</span><span class="mi">3</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">no_full_first_match</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;12345&#39;</span><span class="p">)</span>
+<span class="go">[&#39;1&#39;, &#39;2&#39;, &#39;3&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">matcher</span><span class="o">.</span><span class="n">parse_all</span><span class="p">(</span><span class="s">&#39;12345&#39;</span><span class="p">))</span>
+<span class="go">[[&#39;1&#39;, &#39;2&#39;, &#39;3&#39;]]</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span> <span class="o">=</span> <span class="n">Any</span><span class="p">()[</span><span class="mi">3</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">no_full_first_match</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;12345&#39;</span><span class="p">)</span>
+<span class="go">[&#39;1&#39;, &#39;2&#39;, &#39;3&#39;]</span>
+</pre></div>
+</div>
+<p>If only a lower bound to the number of repeats is given the match will be
+repeated as often as possible:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span> <span class="o">=</span> <span class="n">Any</span><span class="p">()[</span><span class="mi">3</span><span class="p">:]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">no_full_first_match</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;12345&#39;</span><span class="p">)</span>
+<span class="go">[&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">matcher</span><span class="o">.</span><span class="n">parse_all</span><span class="p">(</span><span class="s">&#39;12345&#39;</span><span class="p">))</span>
+<span class="go">[[&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;], [&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;], [&#39;1&#39;, &#39;2&#39;, &#39;3&#39;]]</span>
+</pre></div>
+</div>
+<p>If the match cannot be repeated the requested number of times no result is
+returned:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span> <span class="o">=</span> <span class="n">Any</span><span class="p">()[</span><span class="mi">3</span><span class="p">:]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">no_full_first_match</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;12&#39;</span><span class="p">)</span>
+<span class="go">None</span>
+</pre></div>
+</div>
+<p>As well as repetition, <tt class="docutils literal"><span class="pre">[]</span></tt> can also indicate that results should be joined
+together.  This is done by adding <tt class="docutils literal"><span class="pre">...</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span> <span class="o">=</span> <span class="n">Any</span><span class="p">()[</span><span class="mi">3</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">no_full_first_match</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;12345&#39;</span><span class="p">)</span>
+<span class="go">[&#39;123&#39;]</span>
+</pre></div>
+</div>
+<p>And you can specify a separator that muct occur between repetitions (usually
+this is used with <a class="reference external" href="api/redirect.html#lepl.matchers.derived.Drop">Drop()</a>
+which discards the value):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span> <span class="o">=</span> <span class="n">Any</span><span class="p">()[</span><span class="mi">3</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="n">Drop</span><span class="p">(</span><span class="s">&#39;x&#39;</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">no_full_first_match</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;1x2x3x4x5&#39;</span><span class="p">)</span>
+<span class="go">[&#39;123&#39;]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="lookahead">
+<span id="index-6"></span><span id="id12"></span><h2>Lookahead<a class="headerlink" href="#lookahead" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="api/redirect.html#lepl.matchers.core.Lookahead">[API]</a> This matcher checks
+whether another matcher &#8212; its argument &#8212; would succeed, but doesn&#8217;t
+actually match anything.  If the argument doesn&#8217;t match then it fails, so any
+following matchers joined with <a class="reference external" href="api/redirect.html#lepl.matchers.combine.And">And()</a> will not be called.</p>
+<p>For example, to only parse numbers that begin with &#8220;2&#8221; (specifying a string as
+matcher is equivalent to using <a class="reference external" href="api/redirect.html#lepl.matchers.core.Literal">Literal()</a>):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span> <span class="o">=</span> <span class="n">Lookahead</span><span class="p">(</span><span class="s">&#39;2&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">Integer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;234&#39;</span><span class="p">)</span>
+<span class="go">[&#39;234&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;123&#39;</span><span class="p">)</span>
+<span class="go">[...]</span>
+<span class="go">lepl.stream.maxdepth.FullFirstMatchException: The match failed in &lt;string&gt; at &#39;23&#39; (line 1, character 2).</span>
+</pre></div>
+</div>
+<p>When preceded by a <tt class="docutils literal"><span class="pre">~</span></tt> the logic is reversed:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span> <span class="o">=</span> <span class="o">~</span><span class="n">Lookahead</span><span class="p">(</span><span class="s">&#39;2&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">Integer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;234&#39;</span><span class="p">)</span>
+<span class="go">[...]</span>
+<span class="go">lepl.stream.maxdepth.FullFirstMatchException: The match failed in &lt;string&gt; at &#39;34&#39; (line 1, character 2).</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;123&#39;</span><span class="p">)</span>
+<span class="go">[&#39;123&#39;]</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This change in behaviour is specific to <a class="reference external" href="api/redirect.html#lepl.matchers.core.Lookahead">Lookahead()</a> &#8212; usually <tt class="docutils literal"><span class="pre">~</span></tt> applies
+<a class="reference external" href="api/redirect.html#lepl.matchers.derived.Drop">Drop()</a> as described below.</p>
+</div>
+</div>
+<div class="section" id="index-7">
+<span id="id18"></span><h2>Drop (~)<a class="headerlink" href="#index-7" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="api/redirect.html#lepl.matchers.derived.Drop">[API]</a> This matcher calls
+another matcher, but discards the results:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">Drop</span><span class="p">(</span><span class="s">&#39;hello&#39;</span><span class="p">)</span> <span class="o">/</span> <span class="s">&#39;world&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;hello world&#39;</span><span class="p">)</span>
+<span class="go">[&#39; &#39;, &#39;world&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="o">~</span><span class="n">Literal</span><span class="p">(</span><span class="s">&#39;hello&#39;</span><span class="p">)</span> <span class="o">/</span> <span class="s">&#39;world&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;hello world&#39;</span><span class="p">)</span>
+<span class="go">[&#39; &#39;, &#39;world&#39;]</span>
+</pre></div>
+</div>
+<p>(The empty string in the result is from <tt class="docutils literal"><span class="pre">/</span></tt> which joins two matchers
+together, with optional spaces between).</p>
+<p>This is different to <a class="reference external" href="api/redirect.html#lepl.matchers.core.Lookahead">Lookahead()</a> because the matcher after
+<a class="reference external" href="api/redirect.html#lepl.matchers.derived.Drop">Drop()</a> receives a stream
+that has &#8220;moved on&#8221; to the next part of the input.  With <a class="reference external" href="api/redirect.html#lepl.matchers.core.Lookahead">Lookahead()</a> the stream is not advanced
+and so this example will fail:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">Lookahead</span><span class="p">(</span><span class="s">&#39;hello&#39;</span><span class="p">)</span> <span class="o">/</span> <span class="s">&#39;world&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;hello world&#39;</span><span class="p">)</span>
+<span class="go">[...]</span>
+<span class="go">lepl.stream.maxdepth.FullFirstMatchException: The match failed in &lt;string&gt; at &#39; world&#39; (line 1, character 6).</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The error message is misleading here because it is based on the deepest
+match in the stream, which in this case is due to <a class="reference external" href="api/redirect.html#lepl.matchers.core.Lookahead">Lookahead()</a>.</p>
+</div>
+</div>
+<div class="section" id="apply-args">
+<span id="index-8"></span><h2>Apply (&gt;, &gt;=, args)<a class="headerlink" href="#apply-args" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">See also <a class="reference internal" href="faq.html#faq-apply"><em>How do I choose between &gt; and &gt;&gt; ?</em></a></p>
+</div>
+<p><a class="reference external" href="api/redirect.html#lepl.matchers.derived.Apply">[API]</a> This matcher passes
+the results of another matcher to a function, then returns the value from the
+function as a new result:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">show</span><span class="p">(</span><span class="n">results</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="s">&#39;results:&#39;</span><span class="p">,</span> <span class="n">results</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">results</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Apply</span><span class="p">(</span><span class="n">Any</span><span class="p">()[:,</span><span class="o">...</span><span class="p">],</span> <span class="n">show</span><span class="p">)</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;hello world&#39;</span><span class="p">)</span>
+<span class="go">results: [&#39;hello world&#39;]</span>
+<span class="go">[[&#39;hello world&#39;]]</span>
+</pre></div>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">&gt;</span></tt> operator is equivalent:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">Any</span><span class="p">()[:,</span><span class="o">...</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">show</span><span class="p">)</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;hello world&#39;</span><span class="p">)</span>
+<span class="go">results: [&#39;hello world&#39;]</span>
+<span class="go">[[&#39;hello world&#39;]]</span>
+</pre></div>
+</div>
+<p>The returned result is placed in a new list, which is not always what is
+wanted (it is useful when you want <a class="reference internal" href="nodes.html#nestedlists"><em>Nested Lists</em></a>); setting <tt class="docutils literal"><span class="pre">raw=True</span></tt>
+uses the result directly:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">Apply</span><span class="p">(</span><span class="n">Any</span><span class="p">()[:,</span><span class="o">...</span><span class="p">],</span> <span class="n">show</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;hello world&#39;</span><span class="p">)</span>
+<span class="go">results: [&#39;hello world&#39;]</span>
+<span class="go">[&#39;hello world&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">Any</span><span class="p">()[:,</span><span class="o">...</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">show</span><span class="p">)</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;hello world&#39;</span><span class="p">)</span>
+<span class="go">results: [&#39;hello world&#39;]</span>
+<span class="go">[&#39;hello world&#39;]</span>
+</pre></div>
+</div>
+<p>Setting another optional argument, <a class="reference external" href="api/redirect.html#lepl.matchers.derived.args">args</a>, to <tt class="docutils literal"><span class="pre">True</span></tt> changes the way the
+function is called.  Instead of passing the results as a single list each is
+treated as a separate argument.  This is familiar as the way <tt class="docutils literal"><span class="pre">*args</span></tt> works
+in Python:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">format3</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="s">&#39;a: {0}; b: {1}; c: {2}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Apply</span><span class="p">(</span><span class="n">Any</span><span class="p">()[</span><span class="mi">3</span><span class="p">],</span> <span class="n">format3</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;xyz&#39;</span><span class="p">)</span>
+<span class="go">[&#39;a: x; b: y; c: z&#39;]</span>
+</pre></div>
+</div>
+<p>There&#8217;s no operator equivaluent for this, but a little helper function called
+<a class="reference external" href="api/redirect.html#lepl.matchers.derived.args">args()</a> allows <tt class="docutils literal"><span class="pre">&gt;</span></tt> to be
+reused:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">Any</span><span class="p">()[</span><span class="mi">3</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">args</span><span class="p">(</span><span class="n">format3</span><span class="p">))</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;xyz&#39;</span><span class="p">)</span>
+<span class="go">[&#39;a: x; b: y; c: z&#39;]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="kapply">
+<span id="index-9"></span><h2>KApply (**)<a class="headerlink" href="#kapply" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="api/redirect.html#lepl.matchers.derived.KApply">[API]</a> This matcher passes
+the results of another matcher to a function, along with additional
+information about the match, then returns the value from the function as a new
+result.  Unlike <a class="reference external" href="api/redirect.html#lepl.matchers.derived.Apply">Apply()</a>,
+this names the arguments as follows:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>stream_in</dt>
+<dd>The stream passed to the matcher before matching.</dd>
+<dt>stream_out</dt>
+<dd>The stream returned from the matcher after matching.</dd>
+<dt>results</dt>
+<dd>A list of the results returned.</dd>
+</dl>
+</div></blockquote>
+</div>
+<div class="section" id="more">
+<span id="index-10"></span><h2>More<a class="headerlink" href="#more" title="Permalink to this headline">¶</a></h2>
+<p>Many more matchers are described in the <a class="reference external" href="api/redirect.html#lepl.matchers">API Documentation</a>, including
+<a class="reference external" href="api/redirect.html#lepl.matchers.derived.Add">Add()</a>,
+<a class="reference external" href="api/redirect.html#lepl.matchers.derived.AnyBut">AnyBut()</a>,
+<a class="reference external" href="api/redirect.html#lepl.matchers.complex.Columns">Columns()</a>,
+<a class="reference external" href="api/redirect.html#lepl.matchers.core.Delayed">Delayed()</a>,
+<a class="reference external" href="api/redirect.html#lepl.matchers.derived.Digit">Digit()</a>,
+<a class="reference external" href="api/redirect.html#lepl.matchers.core.Empty">Empty()</a>,
+<a class="reference external" href="api/redirect.html#lepl.matchers.core.Eof">Eof()</a>,
+<a class="reference external" href="api/redirect.html#lepl.matchers.core.Eos">Eos()</a>,
+<a class="reference external" href="api/redirect.html#lepl.matchers.combine.First">First()</a>,
+<a class="reference external" href="api/redirect.html#lepl.support.warn.Float">Float()</a>,
+<a class="reference external" href="api/redirect.html#lepl.matchers.derived.Identity">Identity()</a>,
+<a class="reference external" href="api/redirect.html#lepl.matchers.derived.Integer">Integer()</a>,
+<a class="reference external" href="api/redirect.html#lepl.matchers.derived.Letter">Letter()</a>,
+<a class="reference external" href="api/redirect.html#lepl.matchers.derived.Lower">Lower()</a>,
+<a class="reference external" href="api/redirect.html#lepl.matchers.derived.Map">Map()</a>,
+<a class="reference external" href="api/redirect.html#lepl.matchers.derived.Name">Name()</a>,
+<a class="reference external" href="api/redirect.html#lepl.matchers.derived.Newline">Newline()</a>,
+<a class="reference external" href="api/redirect.html#lepl.matchers.derived.OneOrMore">OneOrMore()</a>,
+<a class="reference external" href="api/redirect.html#lepl.matchers.derived.Optional">Optional()</a>,
+<a class="reference external" href="api/redirect.html#lepl.matchers.derived.Plus">Plus()</a>,
+<a class="reference external" href="api/redirect.html#lepl.matchers.derived.Printable">Printable()</a>,
+<a class="reference external" href="api/redirect.html#lepl.matchers.derived.Punctuation">Punctuation()</a>,
+<a class="reference external" href="api/redirect.html#lepl.matchers.core.Regexp">Regexp()</a>,
+<a class="reference external" href="api/redirect.html#lepl.support.warn.SignedEFloat">SignedEFloat()</a>,
+<a class="reference external" href="api/redirect.html#lepl.support.warn.SignedFloat">SignedFloat()</a>,
+<a class="reference external" href="api/redirect.html#lepl.matchers.derived.SignedInteger">SignedInteger()</a>,
+<a class="reference external" href="api/redirect.html#lepl.matchers.derived.SkipTo">SkipTo()</a>,
+<a class="reference external" href="api/redirect.html#lepl.matchers.derived.Space">Space()</a>,
+<a class="reference external" href="api/redirect.html#lepl.matchers.derived.Star">Star()</a>,
+<a class="reference external" href="api/redirect.html#lepl.matchers.derived.String">String()</a>,
+<a class="reference external" href="api/redirect.html#lepl.matchers.derived.Substitute">Substitute()</a>,
+<a class="reference external" href="api/redirect.html#lepl.matchers.monitor.Trace">Trace()</a>,
+<a class="reference external" href="api/redirect.html#lepl.support.warn.UnsignedFloat">UnsignedFloat()</a>,
+<a class="reference external" href="api/redirect.html#lepl.matchers.derived.UnsignedInteger">UnsignedInteger()</a>,
+<a class="reference external" href="api/redirect.html#lepl.matchers.derived.Upper">Upper()</a>,
+<a class="reference external" href="api/redirect.html#lepl.matchers.derived.Whitespace">Whitespace()</a>,
+<a class="reference external" href="api/redirect.html#lepl.matchers.derived.Word">Word()</a> and
+<a class="reference external" href="api/redirect.html#lepl.matchers.derived.ZeroOrMore">ZeroOrMore()</a>.</p>
+</div>
+<div class="section" id="implementation-details">
+<span id="index-11"></span><span id="id28"></span><h2>Implementation Details<a class="headerlink" href="#implementation-details" title="Permalink to this headline">¶</a></h2>
+<p>All matchers accept a stream of data and return an iterator over possible
+<tt class="docutils literal"><span class="pre">([results],</span> <span class="pre">stream)</span></tt> pairs, where the new stream continues from after the
+matched text (and which may then be passed to another matcher to continue the
+process of parsing).  These iterators are typically implemented as Python
+generators <a class="footnote-reference" href="#id31" id="id29">[*]</a>.</p>
+<p>A matcher may succeed, but provide no results &#8212; the iterator will include a
+tuple containing an empty list and the new stream.  When there are no more
+possible matches, the iterator will terminate.</p>
+<p>Simple matchers will return an iterator containing a single entry.  Matchers
+that return multiple values support backtracking.  For example, the <a class="reference external" href="api/redirect.html#lepl.matchers.combine.Or">Or()</a> generator may yield once for
+each sub&#8211;match in turn (in practice some sub-matchers may return generators
+that themselves return many values, while others may fail immediately, so it
+is not a direct 1&#8211;to&#8211;1 correspondence).</p>
+<p>(It is probably obvious if you have used combinator libraries before, but all
+matchers implement this same interface, whether they are &#8220;fundamental&#8221; &#8212; do
+the real work of matching against the stream &#8212; or delegate work to other
+sub&#8211;matchers, or modify results.  This consistency is the source of their
+expressive power.)</p>
+<p>Lepl includes several function decorators that help simplify the creation of
+new matchers.  See <a class="reference internal" href="implementation.html#new-matchers"><em>Simple Functional Matchers</em></a> and following sections.</p>
+<table class="docutils footnote" frame="void" id="id31" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id29">[*]</a></td><td>I am intentionally omitting details about trampolining here to focus on
+the process of matching.  A more complete description of the entire
+implementation can be found in <a class="reference internal" href="implementation.html#trampolining"><em>Trampolining</em></a>.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="contents.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Matchers</a><ul>
+<li><a class="reference internal" href="#literal">Literal</a></li>
+<li><a class="reference internal" href="#any">Any</a></li>
+<li><a class="reference internal" href="#and">And (&amp;)</a></li>
+<li><a class="reference internal" href="#or">Or (|)</a></li>
+<li><a class="reference internal" href="#repeat">Repeat ([...])</a></li>
+<li><a class="reference internal" href="#lookahead">Lookahead</a></li>
+<li><a class="reference internal" href="#index-7">Drop (~)</a></li>
+<li><a class="reference internal" href="#apply-args">Apply (&gt;, &gt;=, args)</a></li>
+<li><a class="reference internal" href="#kapply">KApply (**)</a></li>
+<li><a class="reference internal" href="#more">More</a></li>
+<li><a class="reference internal" href="#implementation-details">Implementation Details</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="started.html"
+                        title="previous chapter">Getting Started</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="operators.html"
+                        title="next chapter">Operators</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/matchers.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="operators.html" title="Operators"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="started.html" title="Getting Started"
+             >previous</a> |</li>
+        <li><a href="contents.html">LEPL 5.1.2 documentation</a> &raquo;</li>
+          <li><a href="manual.html" >Lepl Manual</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2009-2011, Andrew Cooke.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

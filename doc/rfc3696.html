@@ -1,0 +1,184 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>RFC 3696 - Email and URL Validation &mdash; LEPL 5.1.2 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '5.1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="LEPL 5.1.2 documentation" href="index.html" />
+    <link rel="up" title="Applications" href="applications.html" />
+    <link rel="next" title="JSON Parser" href="json.html" />
+    <link rel="prev" title="Applications" href="applications.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="json.html" title="JSON Parser"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="applications.html" title="Applications"
+             accesskey="P">previous</a> |</li>
+        <li><a href="contents.html">LEPL 5.1.2 documentation</a> &raquo;</li>
+          <li><a href="applications.html" accesskey="U">Applications</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="rfc-3696-email-and-url-validation">
+<span id="rfc3696"></span><span id="index-0"></span><h1>RFC 3696 - Email and URL Validation<a class="headerlink" href="#rfc-3696-email-and-url-validation" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="http://www.faqs.org/rfcs/rfc3696.html">RFC 3696</a> contains advice on how
+best to validate email addresses, HTTP URLs, and &#8220;mailto&#8221; URLs.  I strongly
+recommend that you read that document before using this library &#8212; it will
+help you better understand the motivation for these functions.  In particular,
+they do not test whether arguments are <em>exactly compliant</em> with the
+appropriate specificatons; nor do they guarantee any particular properties.</p>
+<p>My interpretation of that document is that these are reasonable heuristics
+that should help validate user input without causing too many false negatives.
+That is all.</p>
+<p>As such, the public interface exposes only three simple functions.  These are
+factories that return a <tt class="docutils literal"><span class="pre">validator</span></tt> for each of the three types.</p>
+<span class="target" id="validator"></span><dl class="function">
+<dt>
+<tt class="descname">validator</tt><big>(</big><em>value : string</em><big>)</big> &rarr; bool</dt>
+<dd><p>A function which, given a string, returns either <tt class="docutils literal"><span class="pre">True</span></tt> (in which case
+the value is consistent wth RFC 3696) or <tt class="docutils literal"><span class="pre">False</span></tt> (inconsistent).</p>
+</dd></dl>
+
+<p>The package <em>implementation</em> also contains various matchers for IP addresses,
+etc.  The names of these functions are prefixed by an underscore, and there is
+no gaurantee that they will remain stable between any revision of this
+library.  Despite that, they may be useful as a reference, or to understand
+better how Lepl can be used for validation.</p>
+<span class="target" id="module-lepl.apps.rfc3696"></span><p>All (public) functions can be imported with:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">lepl.apps.rfc3696</span> <span class="kn">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+<p>They are <em>not</em> available directly in the <a class="reference external" href="api/redirect.html#lepl">lepl</a> package.</p>
+<dl class="function">
+<dt id="lepl.apps.rfc3696.Email">
+<tt class="descclassname">lepl.apps.rfc3696.</tt><tt class="descname">Email</tt><big>(</big><big>)</big> &rarr; validator<a class="headerlink" href="#lepl.apps.rfc3696.Email" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference external" href="api/redirect.html#lepl.apps.rfc3696.Email">Email()</a>: Generate a
+<cite>validator</cite> for email addresses.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="lepl.apps.rfc3696.HttpUrl">
+<tt class="descclassname">lepl.apps.rfc3696.</tt><tt class="descname">HttpUrl</tt><big>(</big><big>)</big> &rarr; validator<a class="headerlink" href="#lepl.apps.rfc3696.HttpUrl" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference external" href="api/redirect.html#lepl.apps.rfc3696.HttpUrl">HttpUrl()</a>: Generate a
+<cite>validator</cite> for HTTP URLs.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="lepl.apps.rfc3696.MailToUrl">
+<tt class="descclassname">lepl.apps.rfc3696.</tt><tt class="descname">MailToUrl</tt><big>(</big><big>)</big> &rarr; validator<a class="headerlink" href="#lepl.apps.rfc3696.MailToUrl" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference external" href="api/redirect.html#lepl.apps.rfc3696.MailToUrl">MailToUrl()</a>: Generate a
+<cite>validator</cite> for &#8220;mailto&#8221; URLs.</p>
+</dd></dl>
+
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<blockquote>
+<div><p>A warning like:</p>
+<div class="highlight-python"><pre>No handlers could be found for logger "lepl.parser.trampoline"</pre>
+</div>
+</div></blockquote>
+<p>means that you do not have Python&#8217;s logging configured.  If you are not
+using the logging package elsewhere then you can do the following to
+suppress the error:</p>
+<div class="last highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">logging</span> <span class="kn">import</span> <span class="n">basicConfig</span><span class="p">,</span> <span class="n">ERROR</span>
+<span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">ERROR</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="applications.html"
+                        title="previous chapter">Applications</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="json.html"
+                        title="next chapter">JSON Parser</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/rfc3696.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="json.html" title="JSON Parser"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="applications.html" title="Applications"
+             >previous</a> |</li>
+        <li><a href="contents.html">LEPL 5.1.2 documentation</a> &raquo;</li>
+          <li><a href="applications.html" >Applications</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2009-2011, Andrew Cooke.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

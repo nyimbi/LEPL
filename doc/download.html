@@ -1,0 +1,226 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Download And Installation &mdash; LEPL 5.1.2 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '5.1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="LEPL 5.1.2 documentation" href="index.html" />
+    <link rel="up" title="Support" href="support.html" />
+    <link rel="next" title="Release History" href="releases.html" />
+    <link rel="prev" title="Support" href="support.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="releases.html" title="Release History"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="support.html" title="Support"
+             accesskey="P">previous</a> |</li>
+        <li><a href="contents.html">LEPL 5.1.2 documentation</a> &raquo;</li>
+          <li><a href="support.html" accesskey="U">Support</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="download-and-installation">
+<span id="install"></span><h1>Download And Installation<a class="headerlink" href="#download-and-installation" title="Permalink to this headline">¶</a></h1>
+<p>Lepl is available for Python 2.6+ and 3+.  See <a class="reference internal" href="#versions"><em>Testing</em></a> for more
+information.</p>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>There are several ways to install Lepl &#8212; they are described below, simplest
+first.  If you want a local copy of the manual you should also read the
+<a class="reference internal" href="support.html#localdocs"><em>Documentation</em></a> section.</p>
+<div class="section" id="install-with-distribute-setuptools-easy-install">
+<h3>Install With Distribute / Setuptools (easy_install)<a class="headerlink" href="#install-with-distribute-setuptools-easy-install" title="Permalink to this headline">¶</a></h3>
+<p>This installs the latest version.</p>
+<p><a class="reference external" href="http://pypi.python.org/pypi/distribute">Distribute</a> and
+<a class="reference external" href="http://pypi.python.org/pypi/setuptools">setuptools</a> are very similar,
+and either will install Lepl on Python 2.6.  However, I recommend using
+<a class="reference external" href="http://pypi.python.org/pypi/distribute">distribute</a> since it also
+works with Python 3 and appears to be better supported.</p>
+<p>Once you have installed
+<a class="reference external" href="http://pypi.python.org/pypi/distribute">distribute</a> or
+<a class="reference external" href="http://pypi.python.org/pypi/setuptools">setuptools</a> you can install
+Lepl with the command:</p>
+<div class="highlight-python"><pre>easy_install lepl</pre>
+</div>
+<p>That&#8217;s it.  There is no need to download anything beforehand;
+<tt class="docutils literal"><span class="pre">easy_install</span></tt> will do all the work.</p>
+</div>
+<div class="section" id="install-with-distutils-setup-py">
+<span id="manual-install"></span><h3>Install With Distutils / setup.py<a class="headerlink" href="#install-with-distutils-setup-py" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="#download"><em>Download</em></a> and unpack a source package then run:</p>
+<div class="highlight-python"><pre>python setup.py install</pre>
+</div>
+<p>For example, on Gnu/Linux (in the instructions below, &#8220;lepl-xxx&#8221; would be
+&#8220;lepl-5.1.2&#8221; for the current release):</p>
+<div class="highlight-python"><pre>wget http://lepl.googlecode.com/files/lepl-xxx.tar.gz
+tar xvfz lepl-xxx.tar.gz
+cd lepl-xxx
+python setup.py install</pre>
+</div>
+</div>
+<div class="section" id="manual-install-experts-only">
+<h3>Manual Install (experts only)<a class="headerlink" href="#manual-install-experts-only" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="#download"><em>Download</em></a> and unpack a source package then add to your <tt class="docutils literal"><span class="pre">PYTHONPATH</span></tt>
+or <tt class="docutils literal"><span class="pre">site-packages</span></tt>.</p>
+</div>
+</div>
+<div class="section" id="download">
+<span id="id4"></span><h2>Download<a class="headerlink" href="#download" title="Permalink to this headline">¶</a></h2>
+<p>You can download the source and documentation packages from the <a class="reference external" href="http://code.google.com/p/lepl/downloads">Support Site</a>.</p>
+<p>Source packages are also available from the <a class="reference external" href="http://pypi.python.org/pypi/LEPL/">Python Package Index</a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>The Google Code site doesn&#8217;t allow free access to all people (in particular,
+Cubans are blocked).  However, the Python Package Index site (second link
+above) is hosted in the Netherlands and, I believe, does work.</p>
+<p class="last">I do not live in the USA, and acooke.org is not hosted in the USA.</p>
+</div>
+</div>
+<div class="section" id="testing">
+<span id="versions"></span><span id="index-0"></span><h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
+<p>Once installed you can test Lepl by running the self-test:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">lepl._test</span> <span class="kn">import</span> <span class="nb">all</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">all</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>Some test failures are expected with certain Python versions.  The test
+described above will check the failures against the version used and,
+if all is as expected, display &#8220;Looks OK to me!&#8221;.</p>
+<p class="last">Also, with easy_install and Python 2.6, a syntax error is printed during
+install (from a Python 3 print statement in lepl._example.separators).  You
+can safely ignore this.</p>
+</div>
+</div>
+<div class="section" id="supported-versions">
+<h2>Supported Versions<a class="headerlink" href="#supported-versions" title="Permalink to this headline">¶</a></h2>
+<p>The code is targetted at Python 3, but various small modifications are added
+to keep most packages (currently everything except binary parsing) working
+with Python 2.6.</p>
+<p>It is regularly tested on 2.6 and 3.1.</p>
+<p>It does not work with Python 2.5.  Incompatibilities include:</p>
+<blockquote>
+<div><ul class="simple">
+<li>with contexts</li>
+<li>setter decorators</li>
+<li>{} formatting</li>
+<li>ABC metaclasses</li>
+<li>changed heapq API</li>
+<li>except syntax</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="contents.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Download And Installation</a><ul>
+<li><a class="reference internal" href="#installation">Installation</a><ul>
+<li><a class="reference internal" href="#install-with-distribute-setuptools-easy-install">Install With Distribute / Setuptools (easy_install)</a></li>
+<li><a class="reference internal" href="#install-with-distutils-setup-py">Install With Distutils / setup.py</a></li>
+<li><a class="reference internal" href="#manual-install-experts-only">Manual Install (experts only)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#download">Download</a></li>
+<li><a class="reference internal" href="#testing">Testing</a></li>
+<li><a class="reference internal" href="#supported-versions">Supported Versions</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="support.html"
+                        title="previous chapter">Support</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="releases.html"
+                        title="next chapter">Release History</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/download.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="releases.html" title="Release History"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="support.html" title="Support"
+             >previous</a> |</li>
+        <li><a href="contents.html">LEPL 5.1.2 documentation</a> &raquo;</li>
+          <li><a href="support.html" >Support</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2009-2011, Andrew Cooke.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

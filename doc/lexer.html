@@ -1,0 +1,395 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Lexer &mdash; LEPL 5.1.2 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '5.1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="LEPL 5.1.2 documentation" href="index.html" />
+    <link rel="up" title="Lepl Manual" href="manual.html" />
+    <link rel="next" title="Line–Aware Parsing and the Offside Rule" href="offside.html" />
+    <link rel="prev" title="Debugging" href="debugging.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="offside.html" title="Line–Aware Parsing and the Offside Rule"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="debugging.html" title="Debugging"
+             accesskey="P">previous</a> |</li>
+        <li><a href="contents.html">LEPL 5.1.2 documentation</a> &raquo;</li>
+          <li><a href="manual.html" accesskey="U">Lepl Manual</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="lexer">
+<span id="index-0"></span><span id="id1"></span><h1>Lexer<a class="headerlink" href="#lexer" title="Permalink to this headline">¶</a></h1>
+<p>Lepl&#8217;s lexer has not been used in earlier chapters of this manual.  However,
+for many applications it will both simplify the grammar and give a more
+efficient parser.  Some extensions, like <a class="reference internal" href="offside.html#offside"><em>Line-Aware Parsing</em></a>, assume its use.</p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>The lexer pre-processes the stream that is being parsed, dividing it into
+tokens that correspond to regular expressions.  The tokens, and their
+contents, can then be matched in the grammar using the <a class="reference external" href="api/redirect.html#lepl.lexer.matchers.Token">Token()</a> matcher.</p>
+<p>Tokens give a &#8220;rough&#8221; description of the text to be parsed.  A simple parser
+of numerical expressions might have the following different token types:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Numeric values (eg. 1, 2.3, 4e5).</li>
+<li>Function names (eg. sin, cos).</li>
+<li>Symbols (eg. <tt class="docutils literal"><span class="pre">(</span></tt>, <tt class="docutils literal"><span class="pre">+</span></tt>).</li>
+</ul>
+</div></blockquote>
+<p>Note that in the sketch above, a token is not defined for spaces.  The lexer
+includes a spearate pattern that is used only if all others fail &#8212; if this
+matches, the matching text is discarded (otherwise, the lexer raise an error).
+By default this &#8220;discard pattern&#8221; matches whitespace, so spaces are
+automatically discarded and do not need to be specified in the grammar.</p>
+</div>
+<div class="section" id="use">
+<span id="index-1"></span><h2>Use<a class="headerlink" href="#use" title="Permalink to this headline">¶</a></h2>
+<p>Within a grammar, a <a class="reference external" href="api/redirect.html#lepl.lexer.matchers.Token">Token()</a>
+appears much like any other matcher.  For a full example, see
+<a class="reference internal" href="intro.html#tutorial"><em>A Tutorial for Lepl</em></a>.</p>
+<p>However, to use tokens correctly, it is necessary to understand how they work
+in a little more detail.</p>
+<p>Tokens are used in two ways.</p>
+<p>First, they work like matchers (with the exceptions noted below) for the
+regular expression given as their argument.  For example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">name</span> <span class="o">=</span> <span class="n">Token</span><span class="p">(</span><span class="s">&#39;[A-Z][a-z]*&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">number</span> <span class="o">=</span> <span class="n">Token</span><span class="p">(</span><span class="n">Integer</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>Here, <tt class="docutils literal"><span class="pre">name</span></tt> will match a string that starts with a capital letter and then
+has zero or more lower case letters.  The second <a class="reference external" href="api/redirect.html#lepl.lexer.matchers.Token">Token()</a>, <tt class="docutils literal"><span class="pre">number</span></tt>, is similar, but
+uses another matcher (<a class="reference external" href="api/redirect.html#lepl.matchers.derived.Integer">Integer()</a>) to define the regular
+expression that is matched.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Not all matchers can be used to define the pattern for a <a class="reference external" href="api/redirect.html#lepl.lexer.matchers.Token">Token()</a> &#8212; only those that Lepl
+knows how to convert into regular expressions.</p>
+</div>
+<p>The second way in which tokens are used is by specialisation, which generates
+a <em>new</em> matcher with an <em>additional</em> constraint.  This is easiest to see with
+another example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">params</span> <span class="o">=</span> <span class="o">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">function</span> <span class="o">=</span> <span class="n">Token</span><span class="p">(</span><span class="s">&#39;[a-z]*&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sin</span> <span class="o">=</span> <span class="n">function</span><span class="p">(</span><span class="s">&#39;sine&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cos</span> <span class="o">=</span> <span class="n">function</span><span class="p">(</span><span class="s">&#39;cosine&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">call</span> <span class="o">=</span> <span class="p">(</span><span class="n">sin</span> <span class="o">|</span> <span class="n">cos</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">params</span>
+</pre></div>
+</div>
+<p>Here the <tt class="docutils literal"><span class="pre">function</span></tt> <a class="reference external" href="api/redirect.html#lepl.lexer.matchers.Token">Token()</a>
+is restricted to match the strings &#8220;sine&#8221; and &#8220;cosine&#8221;, creating two <em>new</em>
+matchers, <tt class="docutils literal"><span class="pre">sin</span></tt> and <tt class="docutils literal"><span class="pre">cos</span></tt>.</p>
+<p>The example above used simple strings (which are converted to <a class="reference external" href="api/redirect.html#lepl.matchers.core.Literal">Literal()</a> matchers) as the additional
+constraints, but any matcher expression can be used.</p>
+<p>For a more realistic example of multiple specialisations, see the use of
+<tt class="docutils literal"><span class="pre">symbol</span></tt> in <a class="reference internal" href="intro-2.html#token-example"><em>this example</em></a>.</p>
+<p>Note that specialisation is optional.  It&#8217;s OK to use <a class="reference external" href="api/redirect.html#lepl.lexer.matchers.Token">Token()</a> as a simple matcher without
+adding any more constraints (providing that the use is consistent with the
+limitations outlined below).</p>
+</div>
+<div class="section" id="limitations">
+<span id="id7"></span><h2>Limitations<a class="headerlink" href="#limitations" title="Permalink to this headline">¶</a></h2>
+<p>The lexer has two limitations: it cannot backtrack and <a class="reference external" href="api/redirect.html#lepl.lexer.matchers.Token">Token()</a> matchers cannot be mixed with
+non&#8211;Token matchers that consume input.</p>
+<p>The first limitation means that the regular expressions associated with tokens
+only match text once.  The lexer divides the input into fixed blocks that
+match the largest possible fragment; no alternatives are considered.</p>
+<p>This does not mean that a particular <a class="reference external" href="api/redirect.html#lepl.lexer.matchers.Token">Token()</a> is only called once, or that
+it will return only a single result.  <em>Backtracking is still possible, but the
+parser is restricted to exploring different interpretations of a single,
+unchanging token stream.</em></p>
+<p>For example, consider &#8220;1-2&#8221;, which might be parsed as two integers (1 and -2),
+or as a subtraction expression (1 minus 2).  An appropriate matcher will give
+both results, through backtracking:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">matchers</span> <span class="o">=</span> <span class="p">(</span><span class="n">Integer</span><span class="p">()</span> <span class="o">|</span> <span class="n">Literal</span><span class="p">(</span><span class="s">&#39;-&#39;</span><span class="p">))[:]</span> <span class="o">&amp;</span> <span class="n">Eos</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">matchers</span><span class="o">.</span><span class="n">parse_all</span><span class="p">(</span><span class="s">&#39;1-2&#39;</span><span class="p">))</span>
+<span class="go">[[&#39;1&#39;, &#39;-2&#39;], [&#39;1&#39;, &#39;-&#39;, &#39;2&#39;]]</span>
+</pre></div>
+</div>
+<p>But when tokens are used, &#8220;-2&#8221; is preferred to &#8220;-&#8221;, because it is a longer
+match, so we get only the single result:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">tokens</span> <span class="o">=</span> <span class="p">(</span><span class="n">Token</span><span class="p">(</span><span class="n">Integer</span><span class="p">())</span> <span class="o">|</span> <span class="n">Token</span><span class="p">(</span><span class="s">r&#39;\-&#39;</span><span class="p">))[:]</span> <span class="o">&amp;</span> <span class="n">Eos</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">tokens</span><span class="o">.</span><span class="n">parse_all</span><span class="p">(</span><span class="s">&#39;1-2&#39;</span><span class="p">))</span>
+<span class="go">[[&#39;1&#39;, &#39;-2&#39;]]</span>
+</pre></div>
+</div>
+<p>(In the examples above, <tt class="docutils literal"><span class="pre">list()</span></tt> is used to expand the generator and the
+<a class="reference external" href="api/redirect.html#lepl.lexer.matchers.Token">Token()</a> is given <tt class="docutils literal"><span class="pre">r'\-'</span></tt>
+because its argument is a regular expression, not a literal value.)</p>
+<p>The second limitation is more subtle.  The lexer is implemented via a
+<em class="xref std std-ref">rewriter</em> which adds a <a class="reference external" href="api/redirect.html#lepl.lexer.lexer.Lexer">Lexer()</a> instance to the head of the
+matcher graph.  This divides the input into the &#8220;pieces&#8221; that the <a class="reference external" href="api/redirect.html#lepl.lexer.matchers.Token">Token()</a> matchers expect.</p>
+<p>So matchers receive a stream of labelled fragments from <a class="reference external" href="api/redirect.html#lepl.lexer.lexer.Lexer">Lexer()</a>.  It is only &#8220;inside&#8221; each
+<a class="reference external" href="api/redirect.html#lepl.lexer.matchers.Token">Token()</a>, when the fragment is
+passed to the sub&#8211;matcher, that the stream is returned to its original
+format.</p>
+<p>As a consequence, matchers that read the stream &#8212; those that consume data,
+like <a class="reference external" href="api/redirect.html#lepl.matchers.core.Any">Any()</a> or <a class="reference external" href="api/redirect.html#lepl.matchers.core.Literal">Literal()</a> &#8212; can only be used <em>inside</em>
+<a class="reference external" href="api/redirect.html#lepl.lexer.matchers.Token">Token()</a>.  If they are used
+alongside the following error occurs:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span> <span class="o">=</span> <span class="n">Token</span><span class="p">(</span><span class="n">Any</span><span class="p">())</span> <span class="o">&amp;</span> <span class="n">Any</span><span class="p">()</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="go">lepl.lexer.support.LexerError: The grammar contains a mix of Tokens and non-Token matchers at the top level.</span>
+<span class="go">If Tokens are used then non-token matchers that consume input must only appear &quot;inside&quot; Tokens.</span>
+<span class="go">The non-Token matchers include: Any(None).</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="advanced-options">
+<span id="index-2"></span><h2>Advanced Options<a class="headerlink" href="#advanced-options" title="Permalink to this headline">¶</a></h2>
+<p>Configuration</p>
+<blockquote>
+<div>The lexer can be configured using <a class="reference external" href="api/redirect.html#lepl.core.config.ConfigBuilder.lexer">.config.lexer()</a> (see
+ref:<cite>configuration</cite>).  This can take an additional argument that specified
+the discard pattern.  Note that this is included in the default
+configuration (it does no harm if tokens are not used).</div></blockquote>
+<p>Completeness</p>
+<blockquote>
+<div><p>By default Tokens require that any sub&#8211;expression consumes the entire
+contents:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">abc</span> <span class="o">=</span> <span class="n">Token</span><span class="p">(</span><span class="s">&#39;abc&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">incomplete</span> <span class="o">=</span> <span class="n">abc</span><span class="p">(</span><span class="n">Literal</span><span class="p">(</span><span class="s">&#39;ab&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">incomplete</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;abc&#39;</span><span class="p">)</span>
+<span class="go">[...]</span>
+<span class="go">lepl.stream.maxdepth.FullFirstMatchException: The match failed in &lt;string&gt; at &#39;c&#39; (line 1, character 3).</span>
+</pre></div>
+</div>
+<p>However, this constraint can be relaxed, in which case the matched portion is
+returned as a result:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">abc</span> <span class="o">=</span> <span class="n">Token</span><span class="p">(</span><span class="s">&#39;abc&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">incomplete</span> <span class="o">=</span> <span class="n">abc</span><span class="p">(</span><span class="n">Literal</span><span class="p">(</span><span class="s">&#39;ab&#39;</span><span class="p">),</span> <span class="n">complete</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">incomplete</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;abc&#39;</span><span class="p">)</span>
+<span class="go">[&#39;ab&#39;]</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="intro.html#tutorial"><em>A Tutorial for Lepl</em></a> contains a complete, worked example using <a class="reference external" href="api/redirect.html#lepl.lexer.matchers.Token">Token()</a>.</p>
+</div>
+<div class="section" id="the-lexer-process">
+<span id="lexer-process"></span><h2>The Lexer Process<a class="headerlink" href="#the-lexer-process" title="Permalink to this headline">¶</a></h2>
+<p>In the explanations above I try to describe the <a class="reference external" href="api/redirect.html#lepl.lexer.matchers.Token">Token()</a> matcher in a fairly
+declarative way.  However, I know that it is sometimes easier to understand
+how to use a tool by first understanding how the tool itself works.  So here I
+will sketch how the lexer is implemented by describing the steps involved when
+a Python program uses the Lepl parser, with the lexer, to parse some text.</p>
+<ol class="arabic">
+<li><p class="first">Python compilation</p>
+<p>The program containing Lepl code (and the Lepl library) are compiled.</p>
+</li>
+<li><p class="first">Python execution</p>
+<p>The program is then run.</p>
+</li>
+<li><p class="first">Creation of matcher graph</p>
+<p>A function, or set of statements, that generates the Lepl matchers is
+evaluated.  Matchers like <a class="reference external" href="api/redirect.html#lepl.lexer.matchers.Token">Token()</a>, <a class="reference external" href="api/redirect.html#lepl.matchers.combine.And">And()</a>, etc., are objects that
+link to each other.  The objects and their links form a graph (with a
+matcher object at each node).</p>
+<ul>
+<li><p class="first">Token numbering</p>
+<p>Each time a <a class="reference external" href="api/redirect.html#lepl.lexer.matchers.Token">Token()</a> is
+created it is assigned a unique number, which I will call the &#8220;tag&#8221;.</p>
+</li>
+<li><p class="first">Regular expression extraction</p>
+<p>Whenever a <a class="reference external" href="api/redirect.html#lepl.lexer.matchers.Token">Token()</a> is
+created with another matcher as an argument Lepl attempts to convert the
+matcher to a regular expression.  If it cannot do so, it raises an error.</p>
+</li>
+<li><p class="first">Token specialisation</p>
+<p>A token is &#8220;specialised&#8221; when it is given a sub&#8211;matcher:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">function</span> <span class="o">=</span> <span class="n">Token</span><span class="p">(</span><span class="s">&#39;[a-z]*&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sin</span> <span class="o">=</span> <span class="n">function</span><span class="p">(</span><span class="s">&#39;sine&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In the example above, the first line creates a new <a class="reference external" href="api/redirect.html#lepl.lexer.matchers.Token">Token()</a>, with a unique tag and a
+regular expression, as explained just above.  On the second line the
+token is specialised.  This creates another <a class="reference external" href="api/redirect.html#lepl.lexer.matchers.Token">Token()</a>, which contains the given
+sub&#8211;matcher (a <a class="reference external" href="api/redirect.html#lepl.matchers.core.Literal">Literal()</a> in this case), but with
+the same tag and regular expression as the &#8220;parent&#8221;.</p>
+<p>I call a token like this, which has the same tag and regular expression
+as the parent, but also contains a sub&#8211;matcher, a &#8220;specialised token&#8221; in
+the description below.</p>
+</li>
+</ul>
+</li>
+<li><p class="first">Parser compilation</p>
+<p>At some point Lepl internally &#8220;compiles&#8221; the matcher graph to generate a
+parser.  Exactly when this happens depends on how the matchers are used,
+but at the latest it happens just before the first match is calculated.</p>
+<p>&#8220;Compilation&#8221; is perhaps misleading &#8212; the parser is not compiled to
+Python byte codes, for example.  What happens is that the matcher graph is
+processed in various ways.  The most important processing, in terms of the
+lexer, is...</p>
+</li>
+<li><p class="first">Lexer rewriting</p>
+<p>The lexer rewriter uses the matcher graph to construct a <a class="reference external" href="api/redirect.html#lepl.lexer.lexer.Lexer">Lexer()</a>
+instance:</p>
+<ul class="simple">
+<li><a class="reference external" href="api/redirect.html#lepl.lexer.matchers.Token">Token()</a> instances are
+collected.</li>
+<li>The graph is checked to make sure that tokens and non-token matchers are
+not used together (see <a class="reference internal" href="#limitations"><em>Limitations</em></a> above).</li>
+<li>The regular expressions and tags associated with the tokens are collected
+together.  Duplicate tags and expressions (from specialised tokens) are
+ignored &#8212; at this part of the process, a specialised token is no
+different to the original unspecialised parent.</li>
+<li>A regular expression matcher is generated, which can match the different
+expressions and return the text and tag(s) associated with the longest
+match.</li>
+<li>A <a class="reference external" href="api/redirect.html#lepl.lexer.lexer.Lexer">Lexer()</a> is added to
+the &#8220;head&#8221; of the matcher graph.  It contains the regular expression
+matcher.</li>
+</ul>
+<p>The modified matcher graph is then complete and returned for evaluation.</p>
+</li>
+<li><p class="first">Parser evaluation</p>
+<p>When the parser is finally called, by passing it some text to process, the
+matcher graph has already been prepared for lexing, as described above.
+The following processes then occur:</p>
+<ul class="simple">
+<li>A stream may be constructed that wraps the input text.  Whether this
+happens depends on the method called.</li>
+<li>The input (as stream or text) is passed to the head of the matcher graph,
+which is the <a class="reference external" href="api/redirect.html#lepl.lexer.lexer.Lexer">Lexer()</a>
+instance constructed earlier.</li>
+<li>The lexer generates a new stream, which encapsulates both the input text
+and the regular expression matcher.  This new stream is a stream of
+tagged fragments &#8212; each fragment is a match from the regular expression
+matcher, and it is associated with the list of tags that identifies which
+tokens had regular expressions that matched the fragment (more than one
+of the token regular expressions may match a single piece of text).</li>
+<li>The new stream of tagged fragments is passed to to the matcher graph in
+the same way as normal.</li>
+<li>When a <a class="reference external" href="api/redirect.html#lepl.lexer.matchers.Token">Token()</a> receives
+the stream it checks whether the first item in the stream is tagged with
+its own tag.<ul>
+<li>If the tag does not match, the token matcher fails.</li>
+<li>If the tag matches and the token contains a sub&#8211;matcher (ie, if it is
+a specialised token), then the fragment of text is passed to the
+sub&#8211;matcher for processing.  If the sub&#8211;matcher returns a result then
+that result is returned by the token.  Alternatively, if the
+sub&#8211;matcher fails then the token fails too.</li>
+<li>If the tag matches and the token has no sub&#8211;matcher (ie, if it is not
+specialised), then the token returns the entire fragment as the result
+of a successful match.</li>
+</ul>
+</li>
+<li>Evaluation continues in the usual manner, returning a list of results.</li>
+</ul>
+</li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="contents.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Lexer</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#use">Use</a></li>
+<li><a class="reference internal" href="#limitations">Limitations</a></li>
+<li><a class="reference internal" href="#advanced-options">Advanced Options</a></li>
+<li><a class="reference internal" href="#example">Example</a></li>
+<li><a class="reference internal" href="#the-lexer-process">The Lexer Process</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="debugging.html"
+                        title="previous chapter">Debugging</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="offside.html"
+                        title="next chapter">Line&#8211;Aware Parsing and the Offside Rule</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/lexer.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="offside.html" title="Line–Aware Parsing and the Offside Rule"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="debugging.html" title="Debugging"
+             >previous</a> |</li>
+        <li><a href="contents.html">LEPL 5.1.2 documentation</a> &raquo;</li>
+          <li><a href="manual.html" >Lepl Manual</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2009-2011, Andrew Cooke.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

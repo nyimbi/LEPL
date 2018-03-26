@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lepl.regexp._test.random</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lepl-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lepl-module.html">Package&nbsp;lepl</a> ::
+        <a href="lepl.regexp-module.html">Package&nbsp;regexp</a> ::
+        <a href="lepl.regexp._test-module.html">Package&nbsp;_test</a> ::
+        Module&nbsp;random
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lepl.regexp._test.random-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="lepl.regexp._test.random-module.html">Module lepl.regexp._test.random</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment"># The contents of this file are subject to the Mozilla Public License</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-comment"># (MPL) Version 1.1 (the "License"); you may not use this file except</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-comment"># in compliance with the License. You may obtain a copy of the License</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-comment"># at http://www.mozilla.org/MPL/</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-comment"># Software distributed under the License is distributed on an "AS IS"</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-comment"># basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-comment"># the License for the specific language governing rights and</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-comment"># limitations under the License.</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-comment"># The Original Code is LEPL (http://www.acooke.org/lepl)</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-comment"># The Initial Developer of the Original Code is Andrew Cooke.</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-comment"># Portions created by the Initial Developer are Copyright (C) 2009-2010</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-comment"># Andrew Cooke (andrew@acooke.org). All Rights Reserved.</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-comment"># Alternatively, the contents of this file may be used under the terms</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt class="py-comment"># of the LGPL license (the GNU Lesser General Public License,</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-comment"># http://www.gnu.org/licenses/lgpl.html), in which case the provisions</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-comment"># of the LGPL License are applicable instead of those above.</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt class="py-comment"># If you wish to allow use of your version of this file only under the</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt class="py-comment"># terms of the LGPL License and not to allow others to use your version</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"><tt class="py-comment"># of this file under the MPL, indicate your decision by deleting the</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt class="py-comment"># provisions above and replace them with the notice and other provisions</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt class="py-comment"># required by the LGPL License.  If you do not delete the provisions</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"><tt class="py-comment"># above, a recipient may use your version of this file under either the</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"><tt class="py-comment"># MPL or the LGPL License.</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"><tt class="py-docstring">'''</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line"><tt class="py-docstring">Tests for the lepl.regexp package.  We generate random expressions and</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line"><tt class="py-docstring">test the results against the python regexp matcher.</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"><tt class="py-docstring">'''</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line"> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">logging</tt> <tt class="py-keyword">import</tt> <tt class="py-name">basicConfig</tt><tt class="py-op">,</tt> <tt class="py-name">DEBUG</tt><tt class="py-op">,</tt> <tt class="py-name">getLogger</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Module lepl.regexp._test.random=lepl.regexp._test.random-module.html"><a title="lepl.regexp._test.random" class="py-name" href="#" onclick="return doclink('link-0', 'random', 'link-0');">random</a></tt> <tt class="py-keyword">import</tt> <tt class="py-name">randint</tt><tt class="py-op">,</tt> <tt id="link-1" class="py-name" targets="Method lepl.regexp.str.StrParser.choice()=lepl.regexp.str.StrParser-class.html#choice"><a title="lepl.regexp.str.StrParser.choice" class="py-name" href="#" onclick="return doclink('link-1', 'choice', 'link-1');">choice</a></tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-2" class="py-name" targets="Method lepl.regexp.core.Compiler.re()=lepl.regexp.core.Compiler-class.html#re"><a title="lepl.regexp.core.Compiler.re" class="py-name" href="#" onclick="return doclink('link-2', 're', 'link-2');">re</a></tt> <tt class="py-keyword">import</tt> <tt id="link-3" class="py-name" targets="Method lepl.lexer.matchers.BaseToken.compile()=lepl.lexer.matchers.BaseToken-class.html#compile"><a title="lepl.lexer.matchers.BaseToken.compile" class="py-name" href="#" onclick="return doclink('link-3', 'compile', 'link-3');">compile</a></tt> <tt class="py-keyword">as</tt> <tt class="py-name">compile_</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">sys</tt> <tt class="py-keyword">import</tt> <tt class="py-name">exc_info</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">unittest</tt> <tt class="py-keyword">import</tt> <tt class="py-name">TestCase</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line"> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-4" class="py-name" targets="Package lepl=lepl-module.html"><a title="lepl" class="py-name" href="#" onclick="return doclink('link-4', 'lepl', 'link-4');">lepl</a></tt><tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Package lepl.regexp=lepl.regexp-module.html"><a title="lepl.regexp" class="py-name" href="#" onclick="return doclink('link-5', 'regexp', 'link-5');">regexp</a></tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Module lepl.bin._test.matchers=lepl.bin._test.matchers-module.html,Module lepl.bin.matchers=lepl.bin.matchers-module.html,Module lepl.contrib.matchers=lepl.contrib.matchers-module.html,Module lepl.lexer._test.matchers=lepl.lexer._test.matchers-module.html,Module lepl.lexer.lines.matchers=lepl.lexer.lines.matchers-module.html,Module lepl.lexer.matchers=lepl.lexer.matchers-module.html,Package lepl.matchers=lepl.matchers-module.html,Module lepl.regexp._test.matchers=lepl.regexp._test.matchers-module.html,Module lepl.regexp.matchers=lepl.regexp.matchers-module.html"><a title="lepl.bin._test.matchers
+lepl.bin.matchers
+lepl.contrib.matchers
+lepl.lexer._test.matchers
+lepl.lexer.lines.matchers
+lepl.lexer.matchers
+lepl.matchers
+lepl.regexp._test.matchers
+lepl.regexp.matchers" class="py-name" href="#" onclick="return doclink('link-6', 'matchers', 'link-6');">matchers</a></tt> <tt class="py-keyword">import</tt> <tt id="link-7" class="py-name" targets="Class lepl.regexp.matchers.DfaRegexp=lepl.regexp.matchers.DfaRegexp-class.html"><a title="lepl.regexp.matchers.DfaRegexp" class="py-name" href="#" onclick="return doclink('link-7', 'DfaRegexp', 'link-7');">DfaRegexp</a></tt><tt class="py-op">,</tt> <tt id="link-8" class="py-name" targets="Class lepl.regexp.matchers.NfaRegexp=lepl.regexp.matchers.NfaRegexp-class.html"><a title="lepl.regexp.matchers.NfaRegexp" class="py-name" href="#" onclick="return doclink('link-8', 'NfaRegexp', 'link-8');">NfaRegexp</a></tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-9" class="py-name"><a title="lepl" class="py-name" href="#" onclick="return doclink('link-9', 'lepl', 'link-4');">lepl</a></tt><tt class="py-op">.</tt><tt id="link-10" class="py-name" targets="Module lepl.lexer.support=lepl.lexer.support-module.html,Module lepl.matchers._test.support=lepl.matchers._test.support-module.html,Module lepl.matchers._test3.support=lepl.matchers._test3.support-module.html,Module lepl.matchers.support=lepl.matchers.support-module.html,Package lepl.support=lepl.support-module.html"><a title="lepl.lexer.support
+lepl.matchers._test.support
+lepl.matchers._test3.support
+lepl.matchers.support
+lepl.support" class="py-name" href="#" onclick="return doclink('link-10', 'support', 'link-10');">support</a></tt><tt class="py-op">.</tt><tt id="link-11" class="py-name" targets="Module lepl.support._test.lib=lepl.support._test.lib-module.html,Module lepl.support.lib=lepl.support.lib-module.html"><a title="lepl.support._test.lib
+lepl.support.lib" class="py-name" href="#" onclick="return doclink('link-11', 'lib', 'link-11');">lib</a></tt> <tt class="py-keyword">import</tt> <tt id="link-12" class="py-name" targets="Method lepl.stream.core.StreamHelper.fmt()=lepl.stream.core.StreamHelper-class.html#fmt,Method lepl.stream.facade.HelperFacade.fmt()=lepl.stream.facade.HelperFacade-class.html#fmt,Function lepl.support.lib.fmt()=lepl.support.lib-module.html#fmt"><a title="lepl.stream.core.StreamHelper.fmt
+lepl.stream.facade.HelperFacade.fmt
+lepl.support.lib.fmt" class="py-name" href="#" onclick="return doclink('link-12', 'fmt', 'link-12');">fmt</a></tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line"> </tt>
+<a name="randbool"></a><div id="randbool-def"><a name="L44"></a><tt class="py-lineno"> 44</tt> <a class="py-toggle" href="#" id="randbool-toggle" onclick="return toggle('randbool');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.regexp._test.random-module.html#randbool">randbool</a><tt class="py-op">(</tt><tt class="py-param">weight</tt><tt class="py-op">=</tt><tt class="py-number">1</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="randbool-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="randbool-expanded"><a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-13" class="py-name"><a title="lepl.regexp.str.StrParser.choice" class="py-name" href="#" onclick="return doclink('link-13', 'choice', 'link-1');">choice</a></tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-name">True</tt><tt class="py-op">]</tt> <tt class="py-op">*</tt> <tt class="py-name">weight</tt> <tt class="py-op">+</tt> <tt class="py-op">[</tt><tt class="py-name">False</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line"> </tt>
+<a name="random_expression"></a><div id="random_expression-def"><a name="L47"></a><tt class="py-lineno"> 47</tt> <a class="py-toggle" href="#" id="random_expression-toggle" onclick="return toggle('random_expression');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.regexp._test.random-module.html#random_expression">random_expression</a><tt class="py-op">(</tt><tt class="py-param">depth_left</tt><tt class="py-op">,</tt> <tt class="py-param">alphabet</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="random_expression-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="random_expression-expanded"><a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">    <tt class="py-docstring">'''</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line"><tt class="py-docstring">    Generate an expression.  If depth_left is 0 then the result must be</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line"><tt class="py-docstring">    a simple character; other levels build on this.  Alphabet is a list of</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line"><tt class="py-docstring">    possible regular characters.</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line"><tt class="py-docstring">    '''</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">depth_left</tt><tt class="py-op">:</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-14" class="py-name"><a title="lepl.regexp.str.StrParser.choice" class="py-name" href="#" onclick="return doclink('link-14', 'choice', 'link-1');">choice</a></tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt id="link-15" class="py-name" targets="Function lepl.regexp._test.random.random_sequence()=lepl.regexp._test.random-module.html#random_sequence"><a title="lepl.regexp._test.random.random_sequence" class="py-name" href="#" onclick="return doclink('link-15', 'random_sequence', 'link-15');">random_sequence</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">                       <tt id="link-16" class="py-name" targets="Function lepl.regexp._test.random.random_option()=lepl.regexp._test.random-module.html#random_option"><a title="lepl.regexp._test.random.random_option" class="py-name" href="#" onclick="return doclink('link-16', 'random_option', 'link-16');">random_option</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">                       <tt id="link-17" class="py-name" targets="Function lepl.regexp._test.random.random_repeat()=lepl.regexp._test.random-module.html#random_repeat"><a title="lepl.regexp._test.random.random_repeat" class="py-name" href="#" onclick="return doclink('link-17', 'random_repeat', 'link-17');">random_repeat</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">                       <tt id="link-18" class="py-name" targets="Function lepl.regexp._test.random.random_choice()=lepl.regexp._test.random-module.html#random_choice"><a title="lepl.regexp._test.random.random_choice" class="py-name" href="#" onclick="return doclink('link-18', 'random_choice', 'link-18');">random_choice</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">                       <tt id="link-19" class="py-name" targets="Function lepl.regexp._test.random.random_range()=lepl.regexp._test.random-module.html#random_range"><a title="lepl.regexp._test.random.random_range" class="py-name" href="#" onclick="return doclink('link-19', 'random_range', 'link-19');">random_range</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">                       <tt id="link-20" class="py-name" targets="Function lepl.regexp._test.random.random_expression()=lepl.regexp._test.random-module.html#random_expression"><a title="lepl.regexp._test.random.random_expression" class="py-name" href="#" onclick="return doclink('link-20', 'random_expression', 'link-20');">random_expression</a></tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">(</tt><tt class="py-name">depth_left</tt><tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt id="link-21" class="py-name" targets="Method lepl.core.config.ConfigBuilder.alphabet()=lepl.core.config.ConfigBuilder-class.html#alphabet"><a title="lepl.core.config.ConfigBuilder.alphabet" class="py-name" href="#" onclick="return doclink('link-21', 'alphabet', 'link-21');">alphabet</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-22" class="py-name"><a title="lepl.regexp.str.StrParser.choice" class="py-name" href="#" onclick="return doclink('link-22', 'choice', 'link-1');">choice</a></tt><tt class="py-op">(</tt><tt id="link-23" class="py-name"><a title="lepl.core.config.ConfigBuilder.alphabet" class="py-name" href="#" onclick="return doclink('link-23', 'alphabet', 'link-21');">alphabet</a></tt> <tt class="py-op">+</tt> <tt class="py-string">'.'</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line"> </tt>
+<a name="random_sequence"></a><div id="random_sequence-def"><a name="L63"></a><tt class="py-lineno"> 63</tt> <a class="py-toggle" href="#" id="random_sequence-toggle" onclick="return toggle('random_sequence');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.regexp._test.random-module.html#random_sequence">random_sequence</a><tt class="py-op">(</tt><tt class="py-param">depth_left</tt><tt class="py-op">,</tt> <tt class="py-param">alphabet</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="random_sequence-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="random_sequence-expanded"><a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-string">''</tt><tt class="py-op">.</tt><tt id="link-24" class="py-name" targets="Method lepl.regexp.core.Alphabet.join()=lepl.regexp.core.Alphabet-class.html#join,Method lepl.regexp.str.StrAlphabet.join()=lepl.regexp.str.StrAlphabet-class.html#join,Method lepl.stream.core.StreamHelper.join()=lepl.stream.core.StreamHelper-class.html#join,Method lepl.stream.facade.HelperFacade.join()=lepl.stream.facade.HelperFacade-class.html#join,Method lepl.stream.simple.ListHelper.join()=lepl.stream.simple.ListHelper-class.html#join,Method lepl.stream.simple.SequenceHelper.join()=lepl.stream.simple.SequenceHelper-class.html#join,Method lepl.stream.simple.StringHelper.join()=lepl.stream.simple.StringHelper-class.html#join,Variable lepl.support.list.join=lepl.support.list-module.html#join"><a title="lepl.regexp.core.Alphabet.join
+lepl.regexp.str.StrAlphabet.join
+lepl.stream.core.StreamHelper.join
+lepl.stream.facade.HelperFacade.join
+lepl.stream.simple.ListHelper.join
+lepl.stream.simple.SequenceHelper.join
+lepl.stream.simple.StringHelper.join
+lepl.support.list.join" class="py-name" href="#" onclick="return doclink('link-24', 'join', 'link-24');">join</a></tt><tt class="py-op">(</tt><tt id="link-25" class="py-name"><a title="lepl.regexp._test.random.random_expression" class="py-name" href="#" onclick="return doclink('link-25', 'random_expression', 'link-20');">random_expression</a></tt><tt class="py-op">(</tt><tt class="py-name">depth_left</tt><tt class="py-op">,</tt> <tt id="link-26" class="py-name"><a title="lepl.core.config.ConfigBuilder.alphabet" class="py-name" href="#" onclick="return doclink('link-26', 'alphabet', 'link-21');">alphabet</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">                   <tt class="py-keyword">for</tt> <tt class="py-name">_</tt> <tt class="py-keyword">in</tt> <tt id="link-27" class="py-name" targets="Method lepl.regexp.str.StrAlphabet.range()=lepl.regexp.str.StrAlphabet-class.html#range"><a title="lepl.regexp.str.StrAlphabet.range" class="py-name" href="#" onclick="return doclink('link-27', 'range', 'link-27');">range</a></tt><tt class="py-op">(</tt><tt class="py-name">randint</tt><tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-number">3</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line"> </tt>
+<a name="random_option"></a><div id="random_option-def"><a name="L67"></a><tt class="py-lineno"> 67</tt> <a class="py-toggle" href="#" id="random_option-toggle" onclick="return toggle('random_option');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.regexp._test.random-module.html#random_option">random_option</a><tt class="py-op">(</tt><tt class="py-param">depth_left</tt><tt class="py-op">,</tt> <tt class="py-param">alphabet</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="random_option-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="random_option-expanded"><a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">    <tt class="py-name">subexpr</tt> <tt class="py-op">=</tt> <tt id="link-28" class="py-name"><a title="lepl.regexp._test.random.random_expression" class="py-name" href="#" onclick="return doclink('link-28', 'random_expression', 'link-20');">random_expression</a></tt><tt class="py-op">(</tt><tt class="py-name">depth_left</tt><tt class="py-op">,</tt> <tt id="link-29" class="py-name"><a title="lepl.core.config.ConfigBuilder.alphabet" class="py-name" href="#" onclick="return doclink('link-29', 'alphabet', 'link-21');">alphabet</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt id="link-30" class="py-name" targets="Method lepl.lexer.stream.TokenHelper.len()=lepl.lexer.stream.TokenHelper-class.html#len,Method lepl.regexp.interval.Intervals.len()=lepl.regexp.interval.Intervals-class.html#len,Method lepl.regexp.interval.TaggedFragments.len()=lepl.regexp.interval.TaggedFragments-class.html#len,Method lepl.regexp.interval._Character.len()=lepl.regexp.interval._Character-class.html#len,Method lepl.stream.core.StreamHelper.len()=lepl.stream.core.StreamHelper-class.html#len,Method lepl.stream.facade.HelperFacade.len()=lepl.stream.facade.HelperFacade-class.html#len,Method lepl.stream.iter.IterableHelper.len()=lepl.stream.iter.IterableHelper-class.html#len,Method lepl.stream.simple.SequenceHelper.len()=lepl.stream.simple.SequenceHelper-class.html#len"><a title="lepl.lexer.stream.TokenHelper.len
+lepl.regexp.interval.Intervals.len
+lepl.regexp.interval.TaggedFragments.len
+lepl.regexp.interval._Character.len
+lepl.stream.core.StreamHelper.len
+lepl.stream.facade.HelperFacade.len
+lepl.stream.iter.IterableHelper.len
+lepl.stream.simple.SequenceHelper.len" class="py-name" href="#" onclick="return doclink('link-30', 'len', 'link-30');">len</a></tt><tt class="py-op">(</tt><tt class="py-name">subexpr</tt><tt class="py-op">)</tt> <tt class="py-op">&gt;</tt> <tt class="py-number">1</tt><tt class="py-op">:</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-31" class="py-name"><a title="lepl.stream.core.StreamHelper.fmt
+lepl.stream.facade.HelperFacade.fmt
+lepl.support.lib.fmt" class="py-name" href="#" onclick="return doclink('link-31', 'fmt', 'link-12');">fmt</a></tt><tt class="py-op">(</tt><tt class="py-string">'(?:{0})?'</tt><tt class="py-op">,</tt> <tt class="py-name">subexpr</tt><tt class="py-op">)</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">subexpr</tt> <tt class="py-op">+</tt> <tt class="py-string">'?'</tt> </tt>
+</div><a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line"> </tt>
+<a name="random_repeat"></a><div id="random_repeat-def"><a name="L74"></a><tt class="py-lineno"> 74</tt> <a class="py-toggle" href="#" id="random_repeat-toggle" onclick="return toggle('random_repeat');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.regexp._test.random-module.html#random_repeat">random_repeat</a><tt class="py-op">(</tt><tt class="py-param">depth_left</tt><tt class="py-op">,</tt> <tt class="py-param">alphabet</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="random_repeat-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="random_repeat-expanded"><a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">    <tt class="py-name">subexpr</tt> <tt class="py-op">=</tt> <tt id="link-32" class="py-name"><a title="lepl.regexp._test.random.random_expression" class="py-name" href="#" onclick="return doclink('link-32', 'random_expression', 'link-20');">random_expression</a></tt><tt class="py-op">(</tt><tt class="py-name">depth_left</tt><tt class="py-op">,</tt> <tt id="link-33" class="py-name"><a title="lepl.core.config.ConfigBuilder.alphabet" class="py-name" href="#" onclick="return doclink('link-33', 'alphabet', 'link-21');">alphabet</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt id="link-34" class="py-name"><a title="lepl.lexer.stream.TokenHelper.len
+lepl.regexp.interval.Intervals.len
+lepl.regexp.interval.TaggedFragments.len
+lepl.regexp.interval._Character.len
+lepl.stream.core.StreamHelper.len
+lepl.stream.facade.HelperFacade.len
+lepl.stream.iter.IterableHelper.len
+lepl.stream.simple.SequenceHelper.len" class="py-name" href="#" onclick="return doclink('link-34', 'len', 'link-30');">len</a></tt><tt class="py-op">(</tt><tt class="py-name">subexpr</tt><tt class="py-op">)</tt> <tt class="py-op">&gt;</tt> <tt class="py-number">1</tt><tt class="py-op">:</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-35" class="py-name"><a title="lepl.stream.core.StreamHelper.fmt
+lepl.stream.facade.HelperFacade.fmt
+lepl.support.lib.fmt" class="py-name" href="#" onclick="return doclink('link-35', 'fmt', 'link-12');">fmt</a></tt><tt class="py-op">(</tt><tt class="py-string">'(?:{0})*'</tt><tt class="py-op">,</tt> <tt class="py-name">subexpr</tt><tt class="py-op">)</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">subexpr</tt> <tt class="py-op">+</tt> <tt class="py-string">'*'</tt> </tt>
+</div><a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line"> </tt>
+<a name="random_choice"></a><div id="random_choice-def"><a name="L81"></a><tt class="py-lineno"> 81</tt> <a class="py-toggle" href="#" id="random_choice-toggle" onclick="return toggle('random_choice');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.regexp._test.random-module.html#random_choice">random_choice</a><tt class="py-op">(</tt><tt class="py-param">depth_left</tt><tt class="py-op">,</tt> <tt class="py-param">alphabet</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="random_choice-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="random_choice-expanded"><a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-36" class="py-name"><a title="lepl.stream.core.StreamHelper.fmt
+lepl.stream.facade.HelperFacade.fmt
+lepl.support.lib.fmt" class="py-name" href="#" onclick="return doclink('link-36', 'fmt', 'link-12');">fmt</a></tt><tt class="py-op">(</tt><tt class="py-string">'(?:{0})'</tt><tt class="py-op">,</tt> <tt class="py-string">'|'</tt><tt class="py-op">.</tt><tt id="link-37" class="py-name"><a title="lepl.regexp.core.Alphabet.join
+lepl.regexp.str.StrAlphabet.join
+lepl.stream.core.StreamHelper.join
+lepl.stream.facade.HelperFacade.join
+lepl.stream.simple.ListHelper.join
+lepl.stream.simple.SequenceHelper.join
+lepl.stream.simple.StringHelper.join
+lepl.support.list.join" class="py-name" href="#" onclick="return doclink('link-37', 'join', 'link-24');">join</a></tt><tt class="py-op">(</tt><tt id="link-38" class="py-name"><a title="lepl.regexp._test.random.random_expression" class="py-name" href="#" onclick="return doclink('link-38', 'random_expression', 'link-20');">random_expression</a></tt><tt class="py-op">(</tt><tt class="py-name">depth_left</tt><tt class="py-op">,</tt> <tt id="link-39" class="py-name"><a title="lepl.core.config.ConfigBuilder.alphabet" class="py-name" href="#" onclick="return doclink('link-39', 'alphabet', 'link-21');">alphabet</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">                                      <tt class="py-keyword">for</tt> <tt class="py-name">_</tt> <tt class="py-keyword">in</tt> <tt id="link-40" class="py-name"><a title="lepl.regexp.str.StrAlphabet.range" class="py-name" href="#" onclick="return doclink('link-40', 'range', 'link-27');">range</a></tt><tt class="py-op">(</tt><tt class="py-name">randint</tt><tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-number">3</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line"> </tt>
+<a name="random_range"></a><div id="random_range-def"><a name="L85"></a><tt class="py-lineno"> 85</tt> <a class="py-toggle" href="#" id="random_range-toggle" onclick="return toggle('random_range');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.regexp._test.random-module.html#random_range">random_range</a><tt class="py-op">(</tt><tt class="py-param">_depth_left</tt><tt class="py-op">,</tt> <tt class="py-param">alphabet</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="random_range-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="random_range-expanded"><a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">    <tt class="py-keyword">def</tt> <tt class="py-def-name">random_chars</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">        <tt class="py-name">subexpr</tt> <tt class="py-op">=</tt> <tt class="py-string">''</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">_</tt> <tt class="py-keyword">in</tt> <tt id="link-41" class="py-name"><a title="lepl.regexp.str.StrAlphabet.range" class="py-name" href="#" onclick="return doclink('link-41', 'range', 'link-27');">range</a></tt><tt class="py-op">(</tt><tt class="py-name">randint</tt><tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-number">2</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt id="link-42" class="py-name" targets="Function lepl.regexp._test.random.randbool()=lepl.regexp._test.random-module.html#randbool"><a title="lepl.regexp._test.random.randbool" class="py-name" href="#" onclick="return doclink('link-42', 'randbool', 'link-42');">randbool</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">                <tt class="py-name">subexpr</tt> <tt class="py-op">+=</tt> <tt id="link-43" class="py-name"><a title="lepl.regexp.str.StrParser.choice" class="py-name" href="#" onclick="return doclink('link-43', 'choice', 'link-1');">choice</a></tt><tt class="py-op">(</tt><tt id="link-44" class="py-name"><a title="lepl.core.config.ConfigBuilder.alphabet" class="py-name" href="#" onclick="return doclink('link-44', 'alphabet', 'link-21');">alphabet</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">            <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">                <tt id="link-45" class="py-name" targets="Variable lepl.cairo.colour.Colour.a=lepl.cairo.colour.Colour-class.html#a"><a title="lepl.cairo.colour.Colour.a" class="py-name" href="#" onclick="return doclink('link-45', 'a', 'link-45');">a</a></tt><tt class="py-op">,</tt> <tt id="link-46" class="py-name" targets="Variable lepl.cairo.colour.Colour.b=lepl.cairo.colour.Colour-class.html#b"><a title="lepl.cairo.colour.Colour.b" class="py-name" href="#" onclick="return doclink('link-46', 'b', 'link-46');">b</a></tt> <tt class="py-op">=</tt> <tt id="link-47" class="py-name"><a title="lepl.regexp.str.StrParser.choice" class="py-name" href="#" onclick="return doclink('link-47', 'choice', 'link-1');">choice</a></tt><tt class="py-op">(</tt><tt id="link-48" class="py-name"><a title="lepl.core.config.ConfigBuilder.alphabet" class="py-name" href="#" onclick="return doclink('link-48', 'alphabet', 'link-21');">alphabet</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt id="link-49" class="py-name"><a title="lepl.regexp.str.StrParser.choice" class="py-name" href="#" onclick="return doclink('link-49', 'choice', 'link-1');">choice</a></tt><tt class="py-op">(</tt><tt id="link-50" class="py-name"><a title="lepl.core.config.ConfigBuilder.alphabet" class="py-name" href="#" onclick="return doclink('link-50', 'alphabet', 'link-21');">alphabet</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt id="link-51" class="py-name"><a title="lepl.cairo.colour.Colour.a" class="py-name" href="#" onclick="return doclink('link-51', 'a', 'link-45');">a</a></tt> <tt class="py-op">&gt;</tt> <tt id="link-52" class="py-name"><a title="lepl.cairo.colour.Colour.b" class="py-name" href="#" onclick="return doclink('link-52', 'b', 'link-46');">b</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">                    <tt id="link-53" class="py-name"><a title="lepl.cairo.colour.Colour.a" class="py-name" href="#" onclick="return doclink('link-53', 'a', 'link-45');">a</a></tt><tt class="py-op">,</tt> <tt id="link-54" class="py-name"><a title="lepl.cairo.colour.Colour.b" class="py-name" href="#" onclick="return doclink('link-54', 'b', 'link-46');">b</a></tt> <tt class="py-op">=</tt> <tt id="link-55" class="py-name"><a title="lepl.cairo.colour.Colour.b" class="py-name" href="#" onclick="return doclink('link-55', 'b', 'link-46');">b</a></tt><tt class="py-op">,</tt> <tt id="link-56" class="py-name"><a title="lepl.cairo.colour.Colour.a" class="py-name" href="#" onclick="return doclink('link-56', 'a', 'link-45');">a</a></tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">                <tt class="py-name">subexpr</tt> <tt class="py-op">+=</tt> <tt id="link-57" class="py-name"><a title="lepl.stream.core.StreamHelper.fmt
+lepl.stream.facade.HelperFacade.fmt
+lepl.support.lib.fmt" class="py-name" href="#" onclick="return doclink('link-57', 'fmt', 'link-12');">fmt</a></tt><tt class="py-op">(</tt><tt class="py-string">'{0}-{1}'</tt><tt class="py-op">,</tt> <tt id="link-58" class="py-name"><a title="lepl.cairo.colour.Colour.a" class="py-name" href="#" onclick="return doclink('link-58', 'a', 'link-45');">a</a></tt><tt class="py-op">,</tt> <tt id="link-59" class="py-name"><a title="lepl.cairo.colour.Colour.b" class="py-name" href="#" onclick="return doclink('link-59', 'b', 'link-46');">b</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">subexpr</tt> </tt>
+</div><a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">    <tt class="py-keyword">def</tt> <tt class="py-def-name">random_content</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-60" class="py-name"><a title="lepl.regexp._test.random.randbool" class="py-name" href="#" onclick="return doclink('link-60', 'randbool', 'link-42');">randbool</a></tt><tt class="py-op">(</tt><tt id="link-61" class="py-name"><a title="lepl.lexer.stream.TokenHelper.len
+lepl.regexp.interval.Intervals.len
+lepl.regexp.interval.TaggedFragments.len
+lepl.regexp.interval._Character.len
+lepl.stream.core.StreamHelper.len
+lepl.stream.facade.HelperFacade.len
+lepl.stream.iter.IterableHelper.len
+lepl.stream.simple.SequenceHelper.len" class="py-name" href="#" onclick="return doclink('link-61', 'len', 'link-30');">len</a></tt><tt class="py-op">(</tt><tt id="link-62" class="py-name"><a title="lepl.core.config.ConfigBuilder.alphabet" class="py-name" href="#" onclick="return doclink('link-62', 'alphabet', 'link-21');">alphabet</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">random_content</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-string">'.'</tt> </tt>
+</div><a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">    <tt class="py-comment"># cannot use random_content below with current lepl regexp</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt id="link-63" class="py-name"><a title="lepl.regexp._test.random.randbool" class="py-name" href="#" onclick="return doclink('link-63', 'randbool', 'link-42');">randbool</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-64" class="py-name"><a title="lepl.stream.core.StreamHelper.fmt
+lepl.stream.facade.HelperFacade.fmt
+lepl.support.lib.fmt" class="py-name" href="#" onclick="return doclink('link-64', 'fmt', 'link-12');">fmt</a></tt><tt class="py-op">(</tt><tt class="py-string">'[{0}]'</tt><tt class="py-op">,</tt> <tt class="py-name">random_chars</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-65" class="py-name"><a title="lepl.stream.core.StreamHelper.fmt
+lepl.stream.facade.HelperFacade.fmt
+lepl.support.lib.fmt" class="py-name" href="#" onclick="return doclink('link-65', 'fmt', 'link-12');">fmt</a></tt><tt class="py-op">(</tt><tt class="py-string">'[^{0}]'</tt><tt class="py-op">,</tt> <tt class="py-name">random_chars</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line"> </tt>
+<a name="random_string"></a><div id="random_string-def"><a name="L108"></a><tt class="py-lineno">108</tt> <a class="py-toggle" href="#" id="random_string-toggle" onclick="return toggle('random_string');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.regexp._test.random-module.html#random_string">random_string</a><tt class="py-op">(</tt><tt class="py-param">depth_left</tt><tt class="py-op">,</tt> <tt class="py-param">alphabet</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="random_string-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="random_string-expanded"><a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">depth_left</tt><tt class="py-op">:</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-66" class="py-name"><a title="lepl.regexp.str.StrParser.choice" class="py-name" href="#" onclick="return doclink('link-66', 'choice', 'link-1');">choice</a></tt><tt class="py-op">(</tt><tt id="link-67" class="py-name"><a title="lepl.core.config.ConfigBuilder.alphabet" class="py-name" href="#" onclick="return doclink('link-67', 'alphabet', 'link-21');">alphabet</a></tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt id="link-68" class="py-name" targets="Function lepl.regexp._test.random.random_string()=lepl.regexp._test.random-module.html#random_string"><a title="lepl.regexp._test.random.random_string" class="py-name" href="#" onclick="return doclink('link-68', 'random_string', 'link-68');">random_string</a></tt><tt class="py-op">(</tt><tt class="py-name">depth_left</tt><tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt id="link-69" class="py-name"><a title="lepl.core.config.ConfigBuilder.alphabet" class="py-name" href="#" onclick="return doclink('link-69', 'alphabet', 'link-21');">alphabet</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-string">''</tt> </tt>
+</div><a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line"> </tt>
+<a name="RandomTest"></a><div id="RandomTest-def"><a name="L114"></a><tt class="py-lineno">114</tt> <a class="py-toggle" href="#" id="RandomTest-toggle" onclick="return toggle('RandomTest');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lepl.regexp._test.random.RandomTest-class.html">RandomTest</a><tt class="py-op">(</tt><tt class="py-base-class">TestCase</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="RandomTest-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="RandomTest-expanded"><a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line">     </tt>
+<a name="RandomTest.test_random"></a><div id="RandomTest.test_random-def"><a name="L116"></a><tt class="py-lineno">116</tt> <a class="py-toggle" href="#" id="RandomTest.test_random-toggle" onclick="return toggle('RandomTest.test_random');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.regexp._test.random.RandomTest-class.html#test_random">test_random</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="RandomTest.test_random-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="RandomTest.test_random-expanded"><a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line">        <tt class="py-docstring">'''</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line"><tt class="py-docstring">        Compares lepl + python expressions.  This runs 'til it fails, and it</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line"><tt class="py-docstring">        always does fail, because lepl's expressions are guaranteed greedy</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line"><tt class="py-docstring">        while python's aren't.  This is "normal" (Perl is the same as Python)</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line"><tt class="py-docstring">        but I cannot fathom why it should be - it seems *harder* to make them</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line"><tt class="py-docstring">        work that way... </tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">        <tt class="py-comment">#basicConfig(level=DEBUG)</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line">        <tt id="link-70" class="py-name" targets="Variable lepl.regexp.rewriters.RegexpContainer.log=lepl.regexp.rewriters.RegexpContainer-class.html#log"><a title="lepl.regexp.rewriters.RegexpContainer.log" class="py-name" href="#" onclick="return doclink('link-70', 'log', 'link-70');">log</a></tt> <tt class="py-op">=</tt> <tt class="py-name">getLogger</tt><tt class="py-op">(</tt><tt class="py-string">'lepl.regexp._test.random'</tt><tt class="py-op">)</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">        <tt class="py-name">match_alphabet</tt> <tt class="py-op">=</tt> <tt class="py-string">'012'</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line">        <tt class="py-name">string_alphabet</tt> <tt class="py-op">=</tt> <tt class="py-string">'013'</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">_</tt> <tt class="py-keyword">in</tt> <tt id="link-71" class="py-name"><a title="lepl.regexp.str.StrAlphabet.range" class="py-name" href="#" onclick="return doclink('link-71', 'range', 'link-27');">range</a></tt><tt class="py-op">(</tt><tt class="py-number">100</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line">            <tt class="py-name">expression</tt> <tt class="py-op">=</tt> <tt id="link-72" class="py-name"><a title="lepl.regexp._test.random.random_expression" class="py-name" href="#" onclick="return doclink('link-72', 'random_expression', 'link-20');">random_expression</a></tt><tt class="py-op">(</tt><tt class="py-number">3</tt><tt class="py-op">,</tt> <tt class="py-name">match_alphabet</tt><tt class="py-op">)</tt>  </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line">            <tt class="py-name">string</tt> <tt class="py-op">=</tt> <tt id="link-73" class="py-name"><a title="lepl.regexp._test.random.random_string" class="py-name" href="#" onclick="return doclink('link-73', 'random_string', 'link-68');">random_string</a></tt><tt class="py-op">(</tt><tt class="py-number">3</tt><tt class="py-op">,</tt> <tt class="py-name">string_alphabet</tt><tt class="py-op">)</tt> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line">            <tt id="link-74" class="py-name" targets="Method lepl.matchers._test.combine.DirectionTest1.matcher()=lepl.matchers._test.combine.DirectionTest1-class.html#matcher,Method lepl.matchers._test.combine.DirectionTest2.matcher()=lepl.matchers._test.combine.DirectionTest2-class.html#matcher,Module lepl.matchers.matcher=lepl.matchers.matcher-module.html"><a title="lepl.matchers._test.combine.DirectionTest1.matcher
+lepl.matchers._test.combine.DirectionTest2.matcher
+lepl.matchers.matcher" class="py-name" href="#" onclick="return doclink('link-74', 'matcher', 'link-74');">matcher</a></tt> <tt class="py-op">=</tt> <tt id="link-75" class="py-name"><a title="lepl.regexp.matchers.DfaRegexp" class="py-name" href="#" onclick="return doclink('link-75', 'DfaRegexp', 'link-7');">DfaRegexp</a></tt><tt class="py-op">(</tt><tt class="py-name">expression</tt><tt class="py-op">)</tt> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line"><tt class="py-comment">#            matcher = NfaRegexp(expression)</tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line">            <tt id="link-76" class="py-name"><a title="lepl.matchers._test.combine.DirectionTest1.matcher
+lepl.matchers._test.combine.DirectionTest2.matcher
+lepl.matchers.matcher" class="py-name" href="#" onclick="return doclink('link-76', 'matcher', 'link-74');">matcher</a></tt><tt class="py-op">.</tt><tt id="link-77" class="py-name" targets="Module lepl.core._test.config=lepl.core._test.config-module.html,Module lepl.core.config=lepl.core.config-module.html"><a title="lepl.core._test.config
+lepl.core.config" class="py-name" href="#" onclick="return doclink('link-77', 'config', 'link-77');">config</a></tt><tt class="py-op">.</tt><tt id="link-78" class="py-name" targets="Method lepl.core.config.ConfigBuilder.no_full_first_match()=lepl.core.config.ConfigBuilder-class.html#no_full_first_match"><a title="lepl.core.config.ConfigBuilder.no_full_first_match" class="py-name" href="#" onclick="return doclink('link-78', 'no_full_first_match', 'link-78');">no_full_first_match</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line">            <tt class="py-name">lepl_result</tt> <tt class="py-op">=</tt> <tt id="link-79" class="py-name"><a title="lepl.matchers._test.combine.DirectionTest1.matcher
+lepl.matchers._test.combine.DirectionTest2.matcher
+lepl.matchers.matcher" class="py-name" href="#" onclick="return doclink('link-79', 'matcher', 'link-74');">matcher</a></tt><tt class="py-op">.</tt><tt id="link-80" class="py-name" targets="Function lepl.bin.literal.parse()=lepl.bin.literal-module.html#parse,Method lepl.core.config.ParserMixin.parse()=lepl.core.config.ParserMixin-class.html#parse,Method lepl.regexp.core.Alphabet.parse()=lepl.regexp.core.Alphabet-class.html#parse,Method lepl.regexp.str.StrAlphabet.parse()=lepl.regexp.str.StrAlphabet-class.html#parse"><a title="lepl.bin.literal.parse
+lepl.core.config.ParserMixin.parse
+lepl.regexp.core.Alphabet.parse
+lepl.regexp.str.StrAlphabet.parse" class="py-name" href="#" onclick="return doclink('link-80', 'parse', 'link-80');">parse</a></tt><tt class="py-op">(</tt><tt class="py-name">string</tt><tt class="py-op">)</tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">lepl_result</tt><tt class="py-op">:</tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line">                <tt class="py-name">lepl_result</tt> <tt class="py-op">=</tt> <tt class="py-name">lepl_result</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line">            <tt id="link-81" class="py-name"><a title="lepl.regexp.rewriters.RegexpContainer.log" class="py-name" href="#" onclick="return doclink('link-81', 'log', 'link-70');">log</a></tt><tt class="py-op">.</tt><tt id="link-82" class="py-name" targets="Method lepl.stream.core.StreamHelper.debug()=lepl.stream.core.StreamHelper-class.html#debug,Method lepl.stream.facade.HelperFacade.debug()=lepl.stream.facade.HelperFacade-class.html#debug,Method lepl.stream.simple.SequenceHelper.debug()=lepl.stream.simple.SequenceHelper-class.html#debug"><a title="lepl.stream.core.StreamHelper.debug
+lepl.stream.facade.HelperFacade.debug
+lepl.stream.simple.SequenceHelper.debug" class="py-name" href="#" onclick="return doclink('link-82', 'debug', 'link-82');">debug</a></tt><tt class="py-op">(</tt><tt id="link-83" class="py-name"><a title="lepl.stream.core.StreamHelper.fmt
+lepl.stream.facade.HelperFacade.fmt
+lepl.support.lib.fmt" class="py-name" href="#" onclick="return doclink('link-83', 'fmt', 'link-12');">fmt</a></tt><tt class="py-op">(</tt><tt class="py-string">'{0} {1} {2}'</tt><tt class="py-op">,</tt> <tt class="py-name">expression</tt><tt class="py-op">,</tt> <tt class="py-name">string</tt><tt class="py-op">,</tt> <tt class="py-name">lepl_result</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line">            <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line">                <tt class="py-name">python_result</tt> <tt class="py-op">=</tt> <tt class="py-name">compile_</tt><tt class="py-op">(</tt><tt class="py-name">expression</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-84" class="py-name" targets="Method lepl.core.config.ParserMixin.match()=lepl.core.config.ParserMixin-class.html#match,Method lepl.regexp.core.DfaPattern.match()=lepl.regexp.core.DfaPattern-class.html#match,Method lepl.regexp.core.NfaPattern.match()=lepl.regexp.core.NfaPattern-class.html#match"><a title="lepl.core.config.ParserMixin.match
+lepl.regexp.core.DfaPattern.match
+lepl.regexp.core.NfaPattern.match" class="py-name" href="#" onclick="return doclink('link-84', 'match', 'link-84');">match</a></tt><tt class="py-op">(</tt><tt class="py-name">string</tt><tt class="py-op">)</tt>  </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">python_result</tt><tt class="py-op">:</tt> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line">                    <tt class="py-name">python_result</tt> <tt class="py-op">=</tt> <tt class="py-name">python_result</tt><tt class="py-op">.</tt><tt class="py-name">group</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line">                <tt class="py-keyword">assert</tt> <tt class="py-name">lepl_result</tt> <tt class="py-op">==</tt> <tt class="py-name">python_result</tt><tt class="py-op">,</tt> \ </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line">                    <tt id="link-85" class="py-name"><a title="lepl.stream.core.StreamHelper.fmt
+lepl.stream.facade.HelperFacade.fmt
+lepl.support.lib.fmt" class="py-name" href="#" onclick="return doclink('link-85', 'fmt', 'link-12');">fmt</a></tt><tt class="py-op">(</tt><tt class="py-string">'{0} != {1}\n{2} {3}'</tt><tt class="py-op">,</tt>  </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line">                           <tt class="py-name">lepl_result</tt><tt class="py-op">,</tt> <tt class="py-name">python_result</tt><tt class="py-op">,</tt> <tt class="py-name">expression</tt><tt class="py-op">,</tt> <tt class="py-name">string</tt><tt class="py-op">)</tt> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line">            <tt class="py-keyword">except</tt><tt class="py-op">:</tt> </tt>
+<a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line">                <tt class="py-op">(</tt><tt class="py-name">e</tt><tt class="py-op">,</tt> <tt class="py-name">v</tt><tt class="py-op">,</tt> <tt class="py-name">_t</tt><tt class="py-op">)</tt> <tt class="py-op">=</tt> <tt class="py-name">exc_info</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">repr</tt><tt class="py-op">(</tt><tt class="py-name">v</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-string">"error('nothing to repeat',)"</tt><tt class="py-op">:</tt> </tt>
+<a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line">                    <tt class="py-keyword">pass</tt> </tt>
+<a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line">                <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line">                    <tt class="py-keyword">raise</tt> <tt class="py-name">e</tt> </tt>
+</div></div><a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lepl-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sun May 13 16:31:09 2012
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

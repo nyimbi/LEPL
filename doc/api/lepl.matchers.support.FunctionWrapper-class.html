@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lepl.matchers.support.FunctionWrapper</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lepl-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lepl-module.html">Package&nbsp;lepl</a> ::
+        <a href="lepl.matchers-module.html">Package&nbsp;matchers</a> ::
+        <a href="lepl.matchers.support-module.html">Module&nbsp;support</a> ::
+        Class&nbsp;FunctionWrapper
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lepl.matchers.support.FunctionWrapper-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class FunctionWrapper</h1><p class="nomargin-top"><span class="codelink"><a href="lepl.matchers.support-pysrc.html#FunctionWrapper">source&nbsp;code</a></span></p>
+<center>
+<center>  <map id="uml_class_diagram_for_lepl_mat_70" name="uml_class_diagram_for_lepl_mat_70">
+<area shape="rect" id="node1_40" href="lepl.matchers.support.BaseFactoryMatcher-class.html#__init__" title="lepl.matchers.support.BaseFactoryMatcher.__init__" alt="" coords="492,583,661,601"/>
+<area shape="rect" id="node1_41" href="lepl.matchers.support.BaseFactoryMatcher-class.html#factory" title="lepl.matchers.support.BaseFactoryMatcher.factory" alt="" coords="492,601,661,620"/>
+<area shape="rect" id="node1" href="lepl.matchers.support.BaseFactoryMatcher-class.html" title="This must be used as a mixin with something that inherits from ArgsAsAttribute (ie the usual matcher classes)." alt="" coords="479,550,673,626"/>
+<area shape="rect" id="node9_42" href="lepl.matchers.support.TransformableWrapper-class.html#compose" title="Combine with a transformation wrapper, returning a new instance." alt="" coords="413,679,557,697"/>
+<area shape="rect" id="node9_43" href="lepl.matchers.support.TransformableWrapper-class.html#tree_repr" title="The text to display via tree()" alt="" coords="413,697,557,716"/>
+<area shape="rect" id="node9" href="lepl.matchers.support.TransformableWrapper-class.html" title="A common support class for various wrappers." alt="" coords="401,646,569,722"/>
+<area shape="rect" id="node2" href="lepl.matchers.support.NoTrampolineWrapper-class.html" title="A wrapper for source of generators that do not evaluate other matchers via the trampoline." alt="" coords="322,742,478,786"/>
+<area shape="rect" id="node12" href="lepl.matchers.support.FunctionWrapper-class.html" title="A wrapper for simple function factories, where the final matcher is a function that returns a single match or None." alt="" coords="339,806,464,850"/>
+<area shape="rect" id="node3_44" href="lepl.matchers.matcher.Matcher-class.html#indented_repr" title="Called by repr; should recursively call contents." alt="" coords="388,103,613,121"/>
+<area shape="rect" id="node3" href="lepl.matchers.matcher.Matcher-class.html" title="lepl.matchers.matcher.Matcher" alt="" coords="375,70,625,127"/>
+<area shape="rect" id="node15_45" href="lepl.matchers.support.BaseMatcher-class.html#__repr__" title="repr(x)" alt="" coords="683,273,769,292"/>
+<area shape="rect" id="node15_46" href="lepl.matchers.support.BaseMatcher-class.html#__str__" title="str(x)" alt="" coords="683,292,769,311"/>
+<area shape="rect" id="node15_47" href="lepl.matchers.support.BaseMatcher-class.html#kargs" title="lepl.matchers.support.BaseMatcher.kargs" alt="" coords="683,311,769,329"/>
+<area shape="rect" id="node15_48" href="lepl.matchers.support.BaseMatcher-class.html#tree" title="An ASCII tree for display." alt="" coords="683,329,769,348"/>
+<area shape="rect" id="node15_49" href="lepl.matchers.support.BaseMatcher-class.html#clone" title="Clone this matcher (and associated graph)." alt="" coords="683,348,769,367"/>
+<area shape="rect" id="node15" href="lepl.matchers.support.BaseMatcher-class.html" title="A base class that provides support to all matchers." alt="" coords="670,241,781,373"/>
+<area shape="rect" id="node4" href="lepl.support.lib.LogMixin-class.html" title="Add standard Python logging to a class." alt="" coords="654,77,797,121"/>
+<area shape="rect" id="node5_50" href="lepl.support.graph.PostorderWalkerMixin-class.html#postorder" title="A shortcut that allows a visitor to be applied postorder." alt="" coords="837,103,1051,121"/>
+<area shape="rect" id="node5" href="lepl.support.graph.PostorderWalkerMixin-class.html" title="Add a &#39;postorder&#39; method." alt="" coords="825,70,1063,127"/>
+<area shape="rect" id="node6" href="lepl.matchers.support.Transformable-class.html" title="All subclasses must expose and apply wrapper, and implement compose." alt="" coords="340,566,449,610"/>
+<area shape="rect" id="node7" href="lepl.matchers.matcher.FactoryMatcher-class.html" title="Imagine an abstract property called &#39;factory&#39; below." alt="" coords="493,486,661,530"/>
+<area shape="rect" id="node8" href="lepl.support.context.NamespaceMixin-class.html" title="Allow access to global (per&#45;thread) values." alt="" coords="124,77,345,121"/>
+<area shape="rect" id="node14_51" href="lepl.matchers.operators.OperatorMixin-class.html#__add__" title="self + other &#45; Join strings, merge lists." alt="" coords="320,180,468,199"/>
+<area shape="rect" id="node14_52" href="lepl.matchers.operators.OperatorMixin-class.html#__radd__" title="other + self &#45; Join strings, merge lists." alt="" coords="320,199,468,217"/>
+<area shape="rect" id="node14_53" href="lepl.matchers.operators.OperatorMixin-class.html#__and__" title="self &amp; other &#45; Append results." alt="" coords="320,217,468,236"/>
+<area shape="rect" id="node14_54" href="lepl.matchers.operators.OperatorMixin-class.html#__rand__" title="other &amp; self &#45; Append results." alt="" coords="320,236,468,255"/>
+<area shape="rect" id="node14_55" href="lepl.matchers.operators.OperatorMixin-class.html#__div__" title="For 2.6" alt="" coords="320,255,468,273"/>
+<area shape="rect" id="node14_56" href="lepl.matchers.operators.OperatorMixin-class.html#__rdiv__" title="For 2.6" alt="" coords="320,273,468,292"/>
+<area shape="rect" id="node14_57" href="lepl.matchers.operators.OperatorMixin-class.html#__truediv__" title="self / other &#45; Append results, with optional separating space." alt="" coords="320,292,468,311"/>
+<area shape="rect" id="node14_58" href="lepl.matchers.operators.OperatorMixin-class.html#__rtruediv__" title="other / self &#45; Append results, with optional separating space." alt="" coords="320,311,468,329"/>
+<area shape="rect" id="node14_59" href="lepl.matchers.operators.OperatorMixin-class.html#__floordiv__" title="self // other &#45; Append results, with required separating space." alt="" coords="320,329,468,348"/>
+<area shape="rect" id="node14_60" href="lepl.matchers.operators.OperatorMixin-class.html#__rfloordiv__" title="other // self &#45; Append results, with required separating space." alt="" coords="320,348,468,367"/>
+<area shape="rect" id="node14_61" href="lepl.matchers.operators.OperatorMixin-class.html#__or__" title="self | other &#45; Try alternative matchers." alt="" coords="320,367,468,385"/>
+<area shape="rect" id="node14_62" href="lepl.matchers.operators.OperatorMixin-class.html#__ror__" title="other | self &#45; Try alternative matchers." alt="" coords="320,385,468,404"/>
+<area shape="rect" id="node14_63" href="lepl.matchers.operators.OperatorMixin-class.html#__mod__" title="self % other &#45; Take first match (committed choice)." alt="" coords="320,404,468,423"/>
+<area shape="rect" id="node14_64" href="lepl.matchers.operators.OperatorMixin-class.html#__xor__" title="self ^ message" alt="" coords="320,441,468,460"/>
+<area shape="rect" id="node14" href="lepl.matchers.operators.OperatorMixin-class.html" title="Define the operators used to combine elements in a grammar specification." alt="" coords="307,147,479,466"/>
+<area shape="rect" id="node10" href="lepl.matchers.support.OperatorMatcher-class.html" title="A base class that provides support to all matchers with operators." alt="" coords="333,486,456,530"/>
+<area shape="rect" id="node11_65" href="lepl.core.config.ParserMixin-class.html#get_match_file" title="Get a function that will parse the contents of a file, returning a sequence of (results, stream) pairs." alt="" coords="17,180,267,199"/>
+<area shape="rect" id="node11_66" href="lepl.core.config.ParserMixin-class.html#get_match_iterable" title="Get a function that will parse the contents of an iterable (eg." alt="" coords="17,199,267,217"/>
+<area shape="rect" id="node11_67" href="lepl.core.config.ParserMixin-class.html#get_match_list" title="Get a function that will parse the contents of a list returning a sequence of (results, stream) pairs." alt="" coords="17,217,267,236"/>
+<area shape="rect" id="node11_68" href="lepl.core.config.ParserMixin-class.html#get_match_string" title="Get a function that will parse the contents of a string returning a sequence of (results, stream) pairs." alt="" coords="17,236,267,255"/>
+<area shape="rect" id="node11_69" href="lepl.core.config.ParserMixin-class.html#get_match_sequence" title="Get a function that will parse the contents of a generic sequence (with [] and len()) returning a sequence of (results, stream) pairs." alt="" coords="17,255,267,273"/>
+<area shape="rect" id="node11_70" href="lepl.core.config.ParserMixin-class.html#get_match" title="Get a function that will parse input, returning a sequence of (results, stream) pairs." alt="" coords="17,273,267,292"/>
+<area shape="rect" id="node11_71" href="lepl.core.config.ParserMixin-class.html#match_file" title="Parse the contents of a file, returning a sequence of (results, stream) pairs." alt="" coords="17,292,267,311"/>
+<area shape="rect" id="node11_72" href="lepl.core.config.ParserMixin-class.html#match_iterable" title="Parse the contents of an iterable (eg." alt="" coords="17,311,267,329"/>
+<area shape="rect" id="node11_73" href="lepl.core.config.ParserMixin-class.html#match_list" title="Parse the contents of a list returning a sequence of (results, stream) pairs." alt="" coords="17,329,267,348"/>
+<area shape="rect" id="node11_74" href="lepl.core.config.ParserMixin-class.html#match_string" title="Parse the contents of a string, returning a sequence of (results, stream) pairs." alt="" coords="17,348,267,367"/>
+<area shape="rect" id="node11_75" href="lepl.core.config.ParserMixin-class.html#match_sequence" title="Parse the contents of a generic sequence (with [] and len()) returning a sequence of (results, stream) pairs." alt="" coords="17,367,267,385"/>
+<area shape="rect" id="node11_76" href="lepl.core.config.ParserMixin-class.html#match" title="Parse input, returning a sequence of (results, stream) pairs." alt="" coords="17,385,267,404"/>
+<area shape="rect" id="node11_77" href="lepl.core.config.ParserMixin-class.html#get_parse_file" title="Get a function that will parse the contents of a file, returning a single match." alt="" coords="17,404,267,423"/>
+<area shape="rect" id="node11_78" href="lepl.core.config.ParserMixin-class.html#parse_all" title="Parse input, returning a sequence of matches." alt="" coords="17,441,267,460"/>
+<area shape="rect" id="node11" href="lepl.core.config.ParserMixin-class.html" title="Methods to configure and generate a parser or matcher." alt="" coords="5,147,278,466"/>
+<area shape="rect" id="node13" href="lepl.matchers.support.NoTrampoline-class.html" title="A matcher that does not require the trampoline." alt="" coords="265,662,372,706"/>
+<area shape="rect" id="node16" href="lepl.support.graph.ConstructorGraphNode-class.html" title="An interface that provides information on constructor arguments." alt="" coords="1084,6,1327,50"/>
+<area shape="rect" id="node17_79" href="lepl.support.graph.ArgAsAttributeMixin-class.html#__iter__" title="Return all children, in order." alt="" coords="1104,103,1305,121"/>
+<area shape="rect" id="node17" href="lepl.support.graph.ArgAsAttributeMixin-class.html" title="Constructor arguments are stored as attributes; their names are also stored in order so that the arguments can be constructed." alt="" coords="1091,70,1317,127"/>
+</map>
+  <img src="uml_class_diagram_for_lepl_mat_70.gif" alt='' usemap="#uml_class_diagram_for_lepl_mat_70" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
+<hr />
+A wrapper for simple function factories, where the final matcher is a
+function that returns a single match or None.
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.matchers.support.FunctionWrapper-class.html#_match" class="summary-sig-name" onclick="show_private();">_match</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">stream_in</span>)</span><br />
+      This is the core method called during recursive decent.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.matchers.support-pysrc.html#FunctionWrapper._match">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.matchers.support.FunctionWrapper-class.html#_untagged_match" class="summary-sig-name" onclick="show_private();">_untagged_match</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">stream_in</span>)</span><br />
+      This should work like <a href="lepl.matchers.support.FunctionWrapper-class.html#_match" class="link" onclick="show_private();">_match()</a>, but without any tagged wrapper.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.matchers.support-pysrc.html#FunctionWrapper._untagged_match">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lepl.matchers.support.TransformableWrapper-class.html">TransformableWrapper</a></code></b>:
+      <code><a href="lepl.matchers.support.TransformableWrapper-class.html#compose">compose</a></code>,
+      <code><a href="lepl.matchers.support.TransformableWrapper-class.html#tree_repr">tree_repr</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lepl.matchers.support.BaseFactoryMatcher-class.html">BaseFactoryMatcher</a></code></b>:
+      <code><a href="lepl.matchers.support.BaseFactoryMatcher-class.html#__init__">__init__</a></code>,
+      <code><a href="lepl.matchers.support.BaseFactoryMatcher-class.html#factory">factory</a></code>
+      </p>
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lepl.matchers.support.BaseFactoryMatcher-class.html">BaseFactoryMatcher</a></code></b> (private):
+      <code><a href="lepl.matchers.support.BaseFactoryMatcher-class.html#_cached_matcher" onclick="show_private();">_cached_matcher</a></code>
+      </p></div>
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lepl.matchers.support.Transformable-class.html">Transformable</a></code></b> (private):
+      <code><a href="lepl.matchers.support.Transformable-class.html#_format_repr" onclick="show_private();">_format_repr</a></code>
+      </p></div>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lepl.matchers.operators.OperatorMixin-class.html">operators.OperatorMixin</a></code></b>:
+      <code><a href="lepl.matchers.operators.OperatorMixin-class.html#__add__">__add__</a></code>,
+      <code><a href="lepl.matchers.operators.OperatorMixin-class.html#__and__">__and__</a></code>,
+      <code><a href="lepl.matchers.operators.OperatorMixin-class.html#__div__">__div__</a></code>,
+      <code><a href="lepl.matchers.operators.OperatorMixin-class.html#__floordiv__">__floordiv__</a></code>,
+      <code><a href="lepl.matchers.operators.OperatorMixin-class.html#__ge__">__ge__</a></code>,
+      <code><a href="lepl.matchers.operators.OperatorMixin-class.html#__getitem__">__getitem__</a></code>,
+      <code><a href="lepl.matchers.operators.OperatorMixin-class.html#__gt__">__gt__</a></code>,
+      <code><a href="lepl.matchers.operators.OperatorMixin-class.html#__invert__">__invert__</a></code>,
+      <code><a href="lepl.matchers.operators.OperatorMixin-class.html#__mod__">__mod__</a></code>,
+      <code><a href="lepl.matchers.operators.OperatorMixin-class.html#__or__">__or__</a></code>,
+      <code><a href="lepl.matchers.operators.OperatorMixin-class.html#__pow__">__pow__</a></code>,
+      <code><a href="lepl.matchers.operators.OperatorMixin-class.html#__radd__">__radd__</a></code>,
+      <code><a href="lepl.matchers.operators.OperatorMixin-class.html#__rand__">__rand__</a></code>,
+      <code><a href="lepl.matchers.operators.OperatorMixin-class.html#__rdiv__">__rdiv__</a></code>,
+      <code><a href="lepl.matchers.operators.OperatorMixin-class.html#__rfloordiv__">__rfloordiv__</a></code>,
+      <code><a href="lepl.matchers.operators.OperatorMixin-class.html#__rmod__">__rmod__</a></code>,
+      <code><a href="lepl.matchers.operators.OperatorMixin-class.html#__ror__">__ror__</a></code>,
+      <code><a href="lepl.matchers.operators.OperatorMixin-class.html#__rshift__">__rshift__</a></code>,
+      <code><a href="lepl.matchers.operators.OperatorMixin-class.html#__rtruediv__">__rtruediv__</a></code>,
+      <code><a href="lepl.matchers.operators.OperatorMixin-class.html#__truediv__">__truediv__</a></code>,
+      <code><a href="lepl.matchers.operators.OperatorMixin-class.html#__xor__">__xor__</a></code>
+      </p>
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lepl.support.context.NamespaceMixin-class.html">support.context.NamespaceMixin</a></code></b> (private):
+      <code><a href="lepl.support.context.NamespaceMixin-class.html#_lookup" onclick="show_private();">_lookup</a></code>
+      </p></div>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lepl.core.config.ParserMixin-class.html">core.config.ParserMixin</a></code></b>:
+      <code><a href="lepl.core.config.ParserMixin-class.html#get_match">get_match</a></code>,
+      <code><a href="lepl.core.config.ParserMixin-class.html#get_match_file">get_match_file</a></code>,
+      <code><a href="lepl.core.config.ParserMixin-class.html#get_match_iterable">get_match_iterable</a></code>,
+      <code><a href="lepl.core.config.ParserMixin-class.html#get_match_list">get_match_list</a></code>,
+      <code><a href="lepl.core.config.ParserMixin-class.html#get_match_sequence">get_match_sequence</a></code>,
+      <code><a href="lepl.core.config.ParserMixin-class.html#get_match_string">get_match_string</a></code>,
+      <code><a href="lepl.core.config.ParserMixin-class.html#get_parse">get_parse</a></code>,
+      <code><a href="lepl.core.config.ParserMixin-class.html#get_parse_all">get_parse_all</a></code>,
+      <code><a href="lepl.core.config.ParserMixin-class.html#get_parse_file">get_parse_file</a></code>,
+      <code><a href="lepl.core.config.ParserMixin-class.html#get_parse_file_all">get_parse_file_all</a></code>,
+      <code><a href="lepl.core.config.ParserMixin-class.html#get_parse_iterable">get_parse_iterable</a></code>,
+      <code><a href="lepl.core.config.ParserMixin-class.html#get_parse_iterable_all">get_parse_iterable_all</a></code>,
+      <code><a href="lepl.core.config.ParserMixin-class.html#get_parse_list">get_parse_list</a></code>,
+      <code><a href="lepl.core.config.ParserMixin-class.html#get_parse_list_all">get_parse_list_all</a></code>,
+      <code><a href="lepl.core.config.ParserMixin-class.html#get_parse_sequence">get_parse_sequence</a></code>,
+      <code><a href="lepl.core.config.ParserMixin-class.html#get_parse_sequence_all">get_parse_sequence_all</a></code>,
+      <code><a href="lepl.core.config.ParserMixin-class.html#get_parse_string">get_parse_string</a></code>,
+      <code><a href="lepl.core.config.ParserMixin-class.html#get_parse_string_all">get_parse_string_all</a></code>,
+      <code><a href="lepl.core.config.ParserMixin-class.html#match">match</a></code>,
+      <code><a href="lepl.core.config.ParserMixin-class.html#match_file">match_file</a></code>,
+      <code><a href="lepl.core.config.ParserMixin-class.html#match_iterable">match_iterable</a></code>,
+      <code><a href="lepl.core.config.ParserMixin-class.html#match_list">match_list</a></code>,
+      <code><a href="lepl.core.config.ParserMixin-class.html#match_sequence">match_sequence</a></code>,
+      <code><a href="lepl.core.config.ParserMixin-class.html#match_string">match_string</a></code>,
+      <code><a href="lepl.core.config.ParserMixin-class.html#parse">parse</a></code>,
+      <code><a href="lepl.core.config.ParserMixin-class.html#parse_all">parse_all</a></code>,
+      <code><a href="lepl.core.config.ParserMixin-class.html#parse_file">parse_file</a></code>,
+      <code><a href="lepl.core.config.ParserMixin-class.html#parse_file_all">parse_file_all</a></code>,
+      <code><a href="lepl.core.config.ParserMixin-class.html#parse_iterable">parse_iterable</a></code>,
+      <code><a href="lepl.core.config.ParserMixin-class.html#parse_iterable_all">parse_iterable_all</a></code>,
+      <code><a href="lepl.core.config.ParserMixin-class.html#parse_list">parse_list</a></code>,
+      <code><a href="lepl.core.config.ParserMixin-class.html#parse_list_all">parse_list_all</a></code>,
+      <code><a href="lepl.core.config.ParserMixin-class.html#parse_sequence">parse_sequence</a></code>,
+      <code><a href="lepl.core.config.ParserMixin-class.html#parse_sequence_all">parse_sequence_all</a></code>,
+      <code><a href="lepl.core.config.ParserMixin-class.html#parse_string">parse_string</a></code>,
+      <code><a href="lepl.core.config.ParserMixin-class.html#parse_string_all">parse_string_all</a></code>
+      </p>
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lepl.core.config.ParserMixin-class.html">core.config.ParserMixin</a></code></b> (private):
+      <code><a href="lepl.core.config.ParserMixin-class.html#_raw_parser" onclick="show_private();">_raw_parser</a></code>
+      </p></div>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lepl.matchers.support.BaseMatcher-class.html">BaseMatcher</a></code></b>:
+      <code><a href="lepl.matchers.support.BaseMatcher-class.html#__repr__">__repr__</a></code>,
+      <code><a href="lepl.matchers.support.BaseMatcher-class.html#__str__">__str__</a></code>,
+      <code><a href="lepl.matchers.support.BaseMatcher-class.html#clone">clone</a></code>,
+      <code><a href="lepl.matchers.support.BaseMatcher-class.html#kargs">kargs</a></code>,
+      <code><a href="lepl.matchers.support.BaseMatcher-class.html#tree">tree</a></code>
+      </p>
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lepl.matchers.support.BaseMatcher-class.html">BaseMatcher</a></code></b> (private):
+      <code><a href="lepl.matchers.support.BaseMatcher-class.html#_fmt_compact" onclick="show_private();">_fmt_compact</a></code>,
+      <code><a href="lepl.matchers.support.BaseMatcher-class.html#_fmt_repr" onclick="show_private();">_fmt_repr</a></code>,
+      <code><a href="lepl.matchers.support.BaseMatcher-class.html#_fmt_str" onclick="show_private();">_fmt_str</a></code>,
+      <code><a href="lepl.matchers.support.BaseMatcher-class.html#_indented_repr" onclick="show_private();">_indented_repr</a></code>
+      </p></div>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lepl.support.graph.ArgAsAttributeMixin-class.html">support.graph.ArgAsAttributeMixin</a></code></b>:
+      <code><a href="lepl.support.graph.ArgAsAttributeMixin-class.html#__iter__">__iter__</a></code>
+      </p>
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lepl.support.graph.ArgAsAttributeMixin-class.html">support.graph.ArgAsAttributeMixin</a></code></b> (private):
+      <code><a href="lepl.support.graph.ArgAsAttributeMixin-class.html#_arg" onclick="show_private();">_arg</a></code>,
+      <code><a href="lepl.support.graph.ArgAsAttributeMixin-class.html#_args" onclick="show_private();">_args</a></code>,
+      <code><a href="lepl.support.graph.ArgAsAttributeMixin-class.html#_constructor_args" onclick="show_private();">_constructor_args</a></code>,
+      <code><a href="lepl.support.graph.ArgAsAttributeMixin-class.html#_karg" onclick="show_private();">_karg</a></code>,
+      <code><a href="lepl.support.graph.ArgAsAttributeMixin-class.html#_kargs" onclick="show_private();">_kargs</a></code>
+      </p></div>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lepl.support.graph.PostorderWalkerMixin-class.html">support.graph.PostorderWalkerMixin</a></code></b>:
+      <code><a href="lepl.support.graph.PostorderWalkerMixin-class.html#postorder">postorder</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lepl.matchers.matcher.Matcher-class.html">matcher.Matcher</a></code></b>:
+      <code><a href="lepl.matchers.matcher.Matcher-class.html#indented_repr">indented_repr</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="_match"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_match</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">stream_in</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.matchers.support-pysrc.html#FunctionWrapper._match">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+This is the core method called during recursive decent.  It must
+yield (stream, results) pairs until the matcher has exhausted all
+possible matches.
+
+To evaluate a sub-matcher it should yield the result of calling
+this method on the sub-matcher:
+
+    generator = sub_matcher._match(stream_in)
+    try:
+        while True:
+            # evaluate the sub-matcher
+            (stream_out, result) = yield generator
+            ....
+            # return the result from this matcher
+            yield (stream_out, result)
+    except StopIteration:
+        ...
+        
+The implementation should be decorated with @tagged in almost all
+cases.
+
+</pre>
+  <dl class="fields">
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@tagged</code></li>
+    </ul></dd>
+    <dt>Overrides:
+        <a href="lepl.matchers.matcher.Matcher-class.html#_match" onclick="show_private();">matcher.Matcher._match</a>
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="_untagged_match"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_untagged_match</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">stream_in</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.matchers.support-pysrc.html#FunctionWrapper._untagged_match">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>This should work like <a href="lepl.matchers.support.FunctionWrapper-class.html#_match" class="link" onclick="show_private();">_match()</a>, but without any tagged wrapper.</p>
+<p>It would be nice if both could be generated dynamically, but
+cut + paste appears to be faster, and this is an optimisation.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="lepl.matchers.support.NoTrampoline-class.html#_untagged_match" onclick="show_private();">NoTrampoline._untagged_match</a>
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lepl-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sun May 13 16:31:05 2012
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

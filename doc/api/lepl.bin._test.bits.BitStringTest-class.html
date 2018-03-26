@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lepl.bin._test.bits.BitStringTest</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lepl-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lepl-module.html">Package&nbsp;lepl</a> ::
+        <a href="lepl.bin-module.html">Package&nbsp;bin</a> ::
+        <a href="lepl.bin._test-module.html">Package&nbsp;_test</a> ::
+        <a href="lepl.bin._test.bits-module.html">Module&nbsp;bits</a> ::
+        Class&nbsp;BitStringTest
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lepl.bin._test.bits.BitStringTest-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class BitStringTest</h1><p class="nomargin-top"><span class="codelink"><a href="lepl.bin._test.bits-pysrc.html#BitStringTest">source&nbsp;code</a></span></p>
+<center>
+<center>  <map id="uml_class_diagram_for_lepl_bin" name="uml_class_diagram_for_lepl_bin">
+<area shape="rect" id="node1_14" href="lepl.bin._test.bits.BitStringTest-class.html#test_lengths" title="lepl.bin._test.bits.BitStringTest.test_lengths" alt="" coords="17,39,341,57"/>
+<area shape="rect" id="node1_15" href="lepl.bin._test.bits.BitStringTest-class.html#assert_error" title="lepl.bin._test.bits.BitStringTest.assert_error" alt="" coords="17,57,341,76"/>
+<area shape="rect" id="node1_16" href="lepl.bin._test.bits.BitStringTest-class.html#assert_length_value" title="lepl.bin._test.bits.BitStringTest.assert_length_value" alt="" coords="17,76,341,95"/>
+<area shape="rect" id="node1_17" href="lepl.bin._test.bits.BitStringTest-class.html#test_from_byte" title="lepl.bin._test.bits.BitStringTest.test_from_byte" alt="" coords="17,95,341,113"/>
+<area shape="rect" id="node1_18" href="lepl.bin._test.bits.BitStringTest-class.html#test_from_bytearray" title="lepl.bin._test.bits.BitStringTest.test_from_bytearray" alt="" coords="17,113,341,132"/>
+<area shape="rect" id="node1_19" href="lepl.bin._test.bits.BitStringTest-class.html#test_from_int" title="lepl.bin._test.bits.BitStringTest.test_from_int" alt="" coords="17,132,341,151"/>
+<area shape="rect" id="node1_20" href="lepl.bin._test.bits.BitStringTest-class.html#test_from_sequence" title="lepl.bin._test.bits.BitStringTest.test_from_sequence" alt="" coords="17,151,341,169"/>
+<area shape="rect" id="node1_21" href="lepl.bin._test.bits.BitStringTest-class.html#test_from_int_with_length" title="lepl.bin._test.bits.BitStringTest.test_from_int_with_length" alt="" coords="17,169,341,188"/>
+<area shape="rect" id="node1_22" href="lepl.bin._test.bits.BitStringTest-class.html#test_str" title="lepl.bin._test.bits.BitStringTest.test_str" alt="" coords="17,188,341,207"/>
+<area shape="rect" id="node1_23" href="lepl.bin._test.bits.BitStringTest-class.html#test_invert" title="lepl.bin._test.bits.BitStringTest.test_invert" alt="" coords="17,207,341,225"/>
+<area shape="rect" id="node1_24" href="lepl.bin._test.bits.BitStringTest-class.html#test_add" title="lepl.bin._test.bits.BitStringTest.test_add" alt="" coords="17,225,341,244"/>
+<area shape="rect" id="node1_25" href="lepl.bin._test.bits.BitStringTest-class.html#test_get_item" title="lepl.bin._test.bits.BitStringTest.test_get_item" alt="" coords="17,244,341,263"/>
+<area shape="rect" id="node1_26" href="lepl.bin._test.bits.BitStringTest-class.html#assert_round_trip" title="lepl.bin._test.bits.BitStringTest.assert_round_trip" alt="" coords="17,263,341,281"/>
+<area shape="rect" id="node1_27" href="lepl.bin._test.bits.BitStringTest-class.html#test_to_int" title="lepl.bin._test.bits.BitStringTest.test_to_int" alt="" coords="17,281,341,300"/>
+<area shape="rect" id="node1" href="lepl.bin._test.bits.BitStringTest-class.html" title="lepl.bin._test.bits.BitStringTest" alt="" coords="5,6,353,306"/>
+</map>
+  <img src="uml_class_diagram_for_lepl_bin.gif" alt='' usemap="#uml_class_diagram_for_lepl_bin" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
+<hr />
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="test_lengths"></a><span class="summary-sig-name">test_lengths</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.bin._test.bits-pysrc.html#BitStringTest.test_lengths">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="assert_error"></a><span class="summary-sig-name">assert_error</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">thunk</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.bin._test.bits-pysrc.html#BitStringTest.assert_error">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="assert_length_value"></a><span class="summary-sig-name">assert_length_value</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">length</span>,
+        <span class="summary-sig-arg">value</span>,
+        <span class="summary-sig-arg">b</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.bin._test.bits-pysrc.html#BitStringTest.assert_length_value">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="test_from_byte"></a><span class="summary-sig-name">test_from_byte</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.bin._test.bits-pysrc.html#BitStringTest.test_from_byte">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="test_from_bytearray"></a><span class="summary-sig-name">test_from_bytearray</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.bin._test.bits-pysrc.html#BitStringTest.test_from_bytearray">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="test_from_int"></a><span class="summary-sig-name">test_from_int</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.bin._test.bits-pysrc.html#BitStringTest.test_from_int">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="test_from_sequence"></a><span class="summary-sig-name">test_from_sequence</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.bin._test.bits-pysrc.html#BitStringTest.test_from_sequence">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="test_from_int_with_length"></a><span class="summary-sig-name">test_from_int_with_length</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.bin._test.bits-pysrc.html#BitStringTest.test_from_int_with_length">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="test_str"></a><span class="summary-sig-name">test_str</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.bin._test.bits-pysrc.html#BitStringTest.test_str">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="test_invert"></a><span class="summary-sig-name">test_invert</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.bin._test.bits-pysrc.html#BitStringTest.test_invert">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="test_add"></a><span class="summary-sig-name">test_add</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.bin._test.bits-pysrc.html#BitStringTest.test_add">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="test_get_item"></a><span class="summary-sig-name">test_get_item</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.bin._test.bits-pysrc.html#BitStringTest.test_get_item">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="assert_round_trip"></a><span class="summary-sig-name">assert_round_trip</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">start</span>,
+        <span class="summary-sig-arg">stop</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">length</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.bin._test.bits-pysrc.html#BitStringTest.assert_round_trip">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="test_to_int"></a><span class="summary-sig-name">test_to_int</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.bin._test.bits-pysrc.html#BitStringTest.test_to_int">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lepl-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sun May 13 16:30:59 2012
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

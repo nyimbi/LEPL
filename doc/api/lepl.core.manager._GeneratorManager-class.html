@@ -1,0 +1,455 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lepl.core.manager._GeneratorManager</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lepl-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lepl-module.html">Package&nbsp;lepl</a> ::
+        <a href="lepl.core-module.html">Package&nbsp;core</a> ::
+        <a href="lepl.core.manager-module.html">Module&nbsp;manager</a> ::
+        Class&nbsp;_GeneratorManager
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lepl.core.manager._GeneratorManager-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class _GeneratorManager</h1><p class="nomargin-top"><span class="codelink"><a href="lepl.core.manager-pysrc.html#_GeneratorManager">source&nbsp;code</a></span></p>
+<center>
+<center>  <map id="uml_class_diagram_for_lepl_cor_24" name="uml_class_diagram_for_lepl_cor_24">
+<area shape="rect" id="node1_13" href="lepl.core.manager._GeneratorManager-class.html#__init__" title="queue_len is the number of generators that can exist." alt="" coords="153,265,453,284"/>
+<area shape="rect" id="node1_14" href="lepl.core.manager._GeneratorManager-class.html#next_iteration" title="Store the current epoch." alt="" coords="153,284,453,303"/>
+<area shape="rect" id="node1_15" href="lepl.core.manager._GeneratorManager-class.html#push" title="Add a generator if it is not already known, or increment it&#39;s ref count." alt="" coords="153,303,453,321"/>
+<area shape="rect" id="node1_16" href="lepl.core.manager._GeneratorManager-class.html#pop" title="Decrement a ref&#39;s count and update the epoch." alt="" coords="153,321,453,340"/>
+<area shape="rect" id="node1" href="lepl.core.manager._GeneratorManager-class.html" title="A &#39;Monitor&#39; (implements MonitorInterface, can be supplied to Configuration) that tracks (and can limit the number of) generators." alt="" coords="141,233,465,346"/>
+<area shape="rect" id="node2" href="lepl.core.monitor.StackMonitor-class.html" title="An interface expected by trampoline(), called to track stack growth." alt="" coords="5,87,155,131"/>
+<area shape="rect" id="node3_17" href="lepl.core.monitor.ValueMonitor-class.html#before_next" title="Called before invoking next on a generator." alt="" coords="197,39,409,57"/>
+<area shape="rect" id="node3_18" href="lepl.core.monitor.ValueMonitor-class.html#after_next" title="Called after invoking next on a generator." alt="" coords="197,57,409,76"/>
+<area shape="rect" id="node3_19" href="lepl.core.monitor.ValueMonitor-class.html#before_throw" title="Called before invoking throw on a generator." alt="" coords="197,76,409,95"/>
+<area shape="rect" id="node3_20" href="lepl.core.monitor.ValueMonitor-class.html#after_throw" title="Called after invoking throw on a generator." alt="" coords="197,95,409,113"/>
+<area shape="rect" id="node3_21" href="lepl.core.monitor.ValueMonitor-class.html#before_send" title="Called before invoking send on a generator." alt="" coords="197,113,409,132"/>
+<area shape="rect" id="node3_22" href="lepl.core.monitor.ValueMonitor-class.html#after_send" title="Called after invoking send on a generator." alt="" coords="197,132,409,151"/>
+<area shape="rect" id="node3_23" href="lepl.core.monitor.ValueMonitor-class.html#exception" title="Called when an exception is caught (instead of any &#39;after&#39; method)." alt="" coords="197,151,409,169"/>
+<area shape="rect" id="node3_24" href="lepl.core.monitor.ValueMonitor-class.html#raise_" title="Called before raising an exception to the caller." alt="" coords="197,169,409,188"/>
+<area shape="rect" id="node3_25" href="lepl.core.monitor.ValueMonitor-class.html#yield_" title="Called before yielding a value to the caller." alt="" coords="197,188,409,207"/>
+<area shape="rect" id="node3" href="lepl.core.monitor.ValueMonitor-class.html" title="An interface expected by trampoline(), called to track data flow." alt="" coords="185,6,421,213"/>
+<area shape="rect" id="node4" href="lepl.support.lib.LogMixin-class.html" title="Add standard Python logging to a class." alt="" coords="450,87,593,131"/>
+</map>
+  <img src="uml_class_diagram_for_lepl_cor_24.gif" alt='' usemap="#uml_class_diagram_for_lepl_cor_24" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
+<hr />
+A 'Monitor' (implements <code class="link">MonitorInterface</code>, can be supplied
+to <a href="lepl-module.html#Configuration" class="link">Configuration</a>) that tracks (and can limit the number of)
+generators.
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.manager._GeneratorManager-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">queue_len</span>)</span><br />
+      <code class="link">queue_len</code> is the number of generators that can exist.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.manager-pysrc.html#_GeneratorManager.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.manager._GeneratorManager-class.html#next_iteration" class="summary-sig-name">next_iteration</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">epoch</span>,
+        <span class="summary-sig-arg">value</span>,
+        <span class="summary-sig-arg">exception</span>,
+        <span class="summary-sig-arg">stack</span>)</span><br />
+      Store the current epoch.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.manager-pysrc.html#_GeneratorManager.next_iteration">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.manager._GeneratorManager-class.html#push" class="summary-sig-name">push</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">generator</span>)</span><br />
+      Add a generator if it is not already known, or increment it's ref count.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.manager-pysrc.html#_GeneratorManager.push">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.manager._GeneratorManager-class.html#pop" class="summary-sig-name">pop</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">generator</span>)</span><br />
+      Decrement a ref's count and update the epoch.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.manager-pysrc.html#_GeneratorManager.pop">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__add"></a><span class="summary-sig-name">__add</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">generator</span>)</span><br />
+      Add a generator, trying to keep the number of active generators to
+that given in the constructor.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.manager-pysrc.html#_GeneratorManager.__add">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__add_unlimited"></a><span class="summary-sig-name">__add_unlimited</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">reference</span>)</span><br />
+      Add the new reference and discard any unused candidates that happen
+to be on the top of the heap.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.manager-pysrc.html#_GeneratorManager.__add_unlimited">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__add_limited"></a><span class="summary-sig-name">__add_limited</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">reference</span>)</span><br />
+      Add the new reference, discarding an old entry if possible.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.manager-pysrc.html#_GeneratorManager.__add_limited">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lepl.core.monitor.ValueMonitor-class.html">monitor.ValueMonitor</a></code></b>:
+      <code><a href="lepl.core.monitor.ValueMonitor-class.html#after_next">after_next</a></code>,
+      <code><a href="lepl.core.monitor.ValueMonitor-class.html#after_send">after_send</a></code>,
+      <code><a href="lepl.core.monitor.ValueMonitor-class.html#after_throw">after_throw</a></code>,
+      <code><a href="lepl.core.monitor.ValueMonitor-class.html#before_next">before_next</a></code>,
+      <code><a href="lepl.core.monitor.ValueMonitor-class.html#before_send">before_send</a></code>,
+      <code><a href="lepl.core.monitor.ValueMonitor-class.html#before_throw">before_throw</a></code>,
+      <code><a href="lepl.core.monitor.ValueMonitor-class.html#exception">exception</a></code>,
+      <code><a href="lepl.core.monitor.ValueMonitor-class.html#raise_">raise_</a></code>,
+      <code><a href="lepl.core.monitor.ValueMonitor-class.html#yield_">yield_</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__str__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">queue_len</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.manager-pysrc.html#_GeneratorManager.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <code class="link">queue_len</code> is the number of generators that can exist.  When the
+number is exceeded the oldest generators are closed, unless currently
+active (in which case the queue size is extended).  If zero then no
+limit is applied.
+  <dl class="fields">
+    <dt>Overrides:
+        object.__init__
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="next_iteration"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">next_iteration</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">epoch</span>,
+        <span class="sig-arg">value</span>,
+        <span class="sig-arg">exception</span>,
+        <span class="sig-arg">stack</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.manager-pysrc.html#_GeneratorManager.next_iteration">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Store the current epoch.
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="lepl.core.monitor.ValueMonitor-class.html#next_iteration">monitor.ValueMonitor.next_iteration</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="push"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">push</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">generator</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.manager-pysrc.html#_GeneratorManager.push">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Add a generator if it is not already known, or increment it's ref count.
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="lepl.core.monitor.StackMonitor-class.html#push">monitor.StackMonitor.push</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="pop"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">pop</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">generator</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.manager-pysrc.html#_GeneratorManager.pop">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Decrement a ref's count and update the epoch.
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="lepl.core.monitor.StackMonitor-class.html#pop">monitor.StackMonitor.pop</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lepl-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sun May 13 16:31:01 2012
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

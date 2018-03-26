@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lepl.stream.factory</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lepl-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lepl-module.html">Package&nbsp;lepl</a> ::
+        <a href="lepl.stream-module.html">Package&nbsp;stream</a> ::
+        Module&nbsp;factory
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lepl.stream.factory-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="lepl.stream.factory-module.html">Module lepl.stream.factory</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment"># The contents of this file are subject to the Mozilla Public License</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-comment"># (MPL) Version 1.1 (the "License"); you may not use this file except</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-comment"># in compliance with the License. You may obtain a copy of the License</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-comment"># at http://www.mozilla.org/MPL/</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-comment"># Software distributed under the License is distributed on an "AS IS"</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-comment"># basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-comment"># the License for the specific language governing rights and</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-comment"># limitations under the License.</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-comment"># The Original Code is LEPL (http://www.acooke.org/lepl)</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-comment"># The Initial Developer of the Original Code is Andrew Cooke.</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-comment"># Portions created by the Initial Developer are Copyright (C) 2009-2010</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-comment"># Andrew Cooke (andrew@acooke.org). All Rights Reserved.</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-comment"># Alternatively, the contents of this file may be used under the terms</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt class="py-comment"># of the LGPL license (the GNU Lesser General Public License,</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-comment"># http://www.gnu.org/licenses/lgpl.html), in which case the provisions</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-comment"># of the LGPL License are applicable instead of those above.</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt class="py-comment"># If you wish to allow use of your version of this file only under the</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt class="py-comment"># terms of the LGPL License and not to allow others to use your version</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"><tt class="py-comment"># of this file under the MPL, indicate your decision by deleting the</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt class="py-comment"># provisions above and replace them with the notice and other provisions</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt class="py-comment"># required by the LGPL License.  If you do not delete the provisions</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"><tt class="py-comment"># above, a recipient may use your version of this file under either the</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"><tt class="py-comment"># MPL or the LGPL License.</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">collections</tt> <tt class="py-keyword">import</tt> <tt class="py-name">Iterable</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line"> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package lepl=lepl-module.html"><a title="lepl" class="py-name" href="#" onclick="return doclink('link-0', 'lepl', 'link-0');">lepl</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Module lepl.lexer.lines._test.stream=lepl.lexer.lines._test.stream-module.html,Module lepl.lexer.stream=lepl.lexer.stream-module.html,Method lepl.lexer.stream.TokenHelper.stream()=lepl.lexer.stream.TokenHelper-class.html#stream,Package lepl.stream=lepl.stream-module.html,Method lepl.stream.core.StreamHelper.stream()=lepl.stream.core.StreamHelper-class.html#stream,Method lepl.stream.facade.HelperFacade.stream()=lepl.stream.facade.HelperFacade-class.html#stream,Method lepl.stream.iter.IterableHelper.stream()=lepl.stream.iter.IterableHelper-class.html#stream,Method lepl.stream.simple.SequenceHelper.stream()=lepl.stream.simple.SequenceHelper-class.html#stream,Method lepl.stream.simple.StringHelper.stream()=lepl.stream.simple.StringHelper-class.html#stream"><a title="lepl.lexer.lines._test.stream
+lepl.lexer.stream
+lepl.lexer.stream.TokenHelper.stream
+lepl.stream
+lepl.stream.core.StreamHelper.stream
+lepl.stream.facade.HelperFacade.stream
+lepl.stream.iter.IterableHelper.stream
+lepl.stream.simple.SequenceHelper.stream
+lepl.stream.simple.StringHelper.stream" class="py-name" href="#" onclick="return doclink('link-1', 'stream', 'link-1');">stream</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Module lepl.stream._test.simple=lepl.stream._test.simple-module.html,Module lepl.stream.simple=lepl.stream.simple-module.html"><a title="lepl.stream._test.simple
+lepl.stream.simple" class="py-name" href="#" onclick="return doclink('link-2', 'simple', 'link-2');">simple</a></tt> <tt class="py-keyword">import</tt> <tt id="link-3" class="py-name" targets="Class lepl.stream.simple.SequenceHelper=lepl.stream.simple.SequenceHelper-class.html"><a title="lepl.stream.simple.SequenceHelper" class="py-name" href="#" onclick="return doclink('link-3', 'SequenceHelper', 'link-3');">SequenceHelper</a></tt><tt class="py-op">,</tt> <tt id="link-4" class="py-name" targets="Class lepl.stream.simple.StringHelper=lepl.stream.simple.StringHelper-class.html"><a title="lepl.stream.simple.StringHelper" class="py-name" href="#" onclick="return doclink('link-4', 'StringHelper', 'link-4');">StringHelper</a></tt><tt class="py-op">,</tt> <tt id="link-5" class="py-name" targets="Class lepl.stream.simple.ListHelper=lepl.stream.simple.ListHelper-class.html"><a title="lepl.stream.simple.ListHelper" class="py-name" href="#" onclick="return doclink('link-5', 'ListHelper', 'link-5');">ListHelper</a></tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-6" class="py-name"><a title="lepl" class="py-name" href="#" onclick="return doclink('link-6', 'lepl', 'link-0');">lepl</a></tt><tt class="py-op">.</tt><tt id="link-7" class="py-name"><a title="lepl.lexer.lines._test.stream
+lepl.lexer.stream
+lepl.lexer.stream.TokenHelper.stream
+lepl.stream
+lepl.stream.core.StreamHelper.stream
+lepl.stream.facade.HelperFacade.stream
+lepl.stream.iter.IterableHelper.stream
+lepl.stream.simple.SequenceHelper.stream
+lepl.stream.simple.StringHelper.stream" class="py-name" href="#" onclick="return doclink('link-7', 'stream', 'link-1');">stream</a></tt><tt class="py-op">.</tt><tt id="link-8" class="py-name" targets="Module lepl.stream._test.iter=lepl.stream._test.iter-module.html,Module lepl.stream.iter=lepl.stream.iter-module.html"><a title="lepl.stream._test.iter
+lepl.stream.iter" class="py-name" href="#" onclick="return doclink('link-8', 'iter', 'link-8');">iter</a></tt> <tt class="py-keyword">import</tt> <tt id="link-9" class="py-name" targets="Class lepl.stream.iter.IterableHelper=lepl.stream.iter.IterableHelper-class.html"><a title="lepl.stream.iter.IterableHelper" class="py-name" href="#" onclick="return doclink('link-9', 'IterableHelper', 'link-9');">IterableHelper</a></tt><tt class="py-op">,</tt> <tt id="link-10" class="py-name" targets="Class lepl.stream.iter.Cons=lepl.stream.iter.Cons-class.html"><a title="lepl.stream.iter.Cons" class="py-name" href="#" onclick="return doclink('link-10', 'Cons', 'link-10');">Cons</a></tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-11" class="py-name"><a title="lepl" class="py-name" href="#" onclick="return doclink('link-11', 'lepl', 'link-0');">lepl</a></tt><tt class="py-op">.</tt><tt id="link-12" class="py-name" targets="Module lepl.lexer.support=lepl.lexer.support-module.html,Module lepl.matchers._test.support=lepl.matchers._test.support-module.html,Module lepl.matchers._test3.support=lepl.matchers._test3.support-module.html,Module lepl.matchers.support=lepl.matchers.support-module.html,Package lepl.support=lepl.support-module.html"><a title="lepl.lexer.support
+lepl.matchers._test.support
+lepl.matchers._test3.support
+lepl.matchers.support
+lepl.support" class="py-name" href="#" onclick="return doclink('link-12', 'support', 'link-12');">support</a></tt><tt class="py-op">.</tt><tt id="link-13" class="py-name" targets="Module lepl.support._test.lib=lepl.support._test.lib-module.html,Module lepl.support.lib=lepl.support.lib-module.html"><a title="lepl.support._test.lib
+lepl.support.lib" class="py-name" href="#" onclick="return doclink('link-13', 'lib', 'link-13');">lib</a></tt> <tt class="py-keyword">import</tt> <tt class="py-name">basestring</tt><tt class="py-op">,</tt> <tt id="link-14" class="py-name" targets="Method lepl.stream.core.StreamHelper.fmt()=lepl.stream.core.StreamHelper-class.html#fmt,Method lepl.stream.facade.HelperFacade.fmt()=lepl.stream.facade.HelperFacade-class.html#fmt,Function lepl.support.lib.fmt()=lepl.support.lib-module.html#fmt"><a title="lepl.stream.core.StreamHelper.fmt
+lepl.stream.facade.HelperFacade.fmt
+lepl.support.lib.fmt" class="py-name" href="#" onclick="return doclink('link-14', 'fmt', 'link-14');">fmt</a></tt><tt class="py-op">,</tt> <tt id="link-15" class="py-name" targets="Function lepl.support.lib.add_defaults()=lepl.support.lib-module.html#add_defaults"><a title="lepl.support.lib.add_defaults" class="py-name" href="#" onclick="return doclink('link-15', 'add_defaults', 'link-15');">add_defaults</a></tt><tt class="py-op">,</tt> <tt id="link-16" class="py-name" targets="Module lepl.stream._test.file=lepl.stream._test.file-module.html,Variable lepl.support.lib.file=lepl.support.lib-module.html#file"><a title="lepl.stream._test.file
+lepl.support.lib.file" class="py-name" href="#" onclick="return doclink('link-16', 'file', 'link-16');">file</a></tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-17" class="py-name"><a title="lepl" class="py-name" href="#" onclick="return doclink('link-17', 'lepl', 'link-0');">lepl</a></tt><tt class="py-op">.</tt><tt id="link-18" class="py-name" targets="Method lepl.core.config.ConfigBuilder.lexer()=lepl.core.config.ConfigBuilder-class.html#lexer,Package lepl.lexer=lepl.lexer-module.html,Module lepl.lexer.lexer=lepl.lexer.lexer-module.html,Module lepl.lexer.lines.lexer=lepl.lexer.lines.lexer-module.html"><a title="lepl.core.config.ConfigBuilder.lexer
+lepl.lexer
+lepl.lexer.lexer
+lepl.lexer.lines.lexer" class="py-name" href="#" onclick="return doclink('link-18', 'lexer', 'link-18');">lexer</a></tt><tt class="py-op">.</tt><tt id="link-19" class="py-name"><a title="lepl.lexer.lines._test.stream
+lepl.lexer.stream
+lepl.lexer.stream.TokenHelper.stream
+lepl.stream
+lepl.stream.core.StreamHelper.stream
+lepl.stream.facade.HelperFacade.stream
+lepl.stream.iter.IterableHelper.stream
+lepl.stream.simple.SequenceHelper.stream
+lepl.stream.simple.StringHelper.stream" class="py-name" href="#" onclick="return doclink('link-19', 'stream', 'link-1');">stream</a></tt> <tt class="py-keyword">import</tt> <tt id="link-20" class="py-name" targets="Class lepl.lexer.stream.TokenHelper=lepl.lexer.stream.TokenHelper-class.html"><a title="lepl.lexer.stream.TokenHelper" class="py-name" href="#" onclick="return doclink('link-20', 'TokenHelper', 'link-20');">TokenHelper</a></tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line"> </tt>
+<a name="StreamFactory"></a><div id="StreamFactory-def"><a name="L39"></a><tt class="py-lineno"> 39</tt> <a class="py-toggle" href="#" id="StreamFactory-toggle" onclick="return toggle('StreamFactory');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lepl.stream.factory.StreamFactory-class.html">StreamFactory</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="StreamFactory-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="StreamFactory-expanded"><a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">    <tt class="py-docstring">'''</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line"><tt class="py-docstring">    Given a value (typically a sequence), generate a stream.</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line"><tt class="py-docstring">    '''</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">     </tt>
+<a name="StreamFactory.from_string"></a><div id="StreamFactory.from_string-def"><a name="L44"></a><tt class="py-lineno"> 44</tt> <a class="py-toggle" href="#" id="StreamFactory.from_string-toggle" onclick="return toggle('StreamFactory.from_string');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.stream.factory.StreamFactory-class.html#from_string">from_string</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">text</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kargs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="StreamFactory.from_string-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="StreamFactory.from_string-expanded"><a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">        <tt class="py-docstring">'''</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line"><tt class="py-docstring">        Provide a stream for the contents of the string.</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">        <tt id="link-21" class="py-name"><a title="lepl.support.lib.add_defaults" class="py-name" href="#" onclick="return doclink('link-21', 'add_defaults', 'link-15');">add_defaults</a></tt><tt class="py-op">(</tt><tt id="link-22" class="py-name" targets="Method lepl.matchers.support.BaseMatcher.kargs()=lepl.matchers.support.BaseMatcher-class.html#kargs,Method lepl.stream.core.StreamHelper.kargs()=lepl.stream.core.StreamHelper-class.html#kargs,Method lepl.stream.facade.HelperFacade.kargs()=lepl.stream.facade.HelperFacade-class.html#kargs,Method lepl.stream.simple.SequenceHelper.kargs()=lepl.stream.simple.SequenceHelper-class.html#kargs,Method lepl.stream.simple.StringHelper.kargs()=lepl.stream.simple.StringHelper-class.html#kargs"><a title="lepl.matchers.support.BaseMatcher.kargs
+lepl.stream.core.StreamHelper.kargs
+lepl.stream.facade.HelperFacade.kargs
+lepl.stream.simple.SequenceHelper.kargs
+lepl.stream.simple.StringHelper.kargs" class="py-name" href="#" onclick="return doclink('link-22', 'kargs', 'link-22');">kargs</a></tt><tt class="py-op">,</tt> <tt class="py-op">{</tt><tt class="py-string">'factory'</tt><tt class="py-op">:</tt> <tt class="py-name">self</tt><tt class="py-op">}</tt><tt class="py-op">)</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt id="link-23" class="py-name"><a title="lepl.stream.simple.StringHelper" class="py-name" href="#" onclick="return doclink('link-23', 'StringHelper', 'link-4');">StringHelper</a></tt><tt class="py-op">(</tt><tt id="link-24" class="py-name" targets="Module lepl.lexer.lines._test.text=lepl.lexer.lines._test.text-module.html"><a title="lepl.lexer.lines._test.text" class="py-name" href="#" onclick="return doclink('link-24', 'text', 'link-24');">text</a></tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt id="link-25" class="py-name"><a title="lepl.matchers.support.BaseMatcher.kargs
+lepl.stream.core.StreamHelper.kargs
+lepl.stream.facade.HelperFacade.kargs
+lepl.stream.simple.SequenceHelper.kargs
+lepl.stream.simple.StringHelper.kargs" class="py-name" href="#" onclick="return doclink('link-25', 'kargs', 'link-22');">kargs</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line"> </tt>
+<a name="StreamFactory.from_list"></a><div id="StreamFactory.from_list-def"><a name="L51"></a><tt class="py-lineno"> 51</tt> <a class="py-toggle" href="#" id="StreamFactory.from_list-toggle" onclick="return toggle('StreamFactory.from_list');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.stream.factory.StreamFactory-class.html#from_list">from_list</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">list_</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kargs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="StreamFactory.from_list-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="StreamFactory.from_list-expanded"><a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">        <tt class="py-docstring">'''</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line"><tt class="py-docstring">        Provide a stream for the contents of the list.</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">        <tt id="link-26" class="py-name"><a title="lepl.support.lib.add_defaults" class="py-name" href="#" onclick="return doclink('link-26', 'add_defaults', 'link-15');">add_defaults</a></tt><tt class="py-op">(</tt><tt id="link-27" class="py-name"><a title="lepl.matchers.support.BaseMatcher.kargs
+lepl.stream.core.StreamHelper.kargs
+lepl.stream.facade.HelperFacade.kargs
+lepl.stream.simple.SequenceHelper.kargs
+lepl.stream.simple.StringHelper.kargs" class="py-name" href="#" onclick="return doclink('link-27', 'kargs', 'link-22');">kargs</a></tt><tt class="py-op">,</tt> <tt class="py-op">{</tt><tt class="py-string">'factory'</tt><tt class="py-op">:</tt> <tt class="py-name">self</tt><tt class="py-op">}</tt><tt class="py-op">)</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt id="link-28" class="py-name"><a title="lepl.stream.simple.ListHelper" class="py-name" href="#" onclick="return doclink('link-28', 'ListHelper', 'link-5');">ListHelper</a></tt><tt class="py-op">(</tt><tt class="py-name">list_</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt id="link-29" class="py-name"><a title="lepl.matchers.support.BaseMatcher.kargs
+lepl.stream.core.StreamHelper.kargs
+lepl.stream.facade.HelperFacade.kargs
+lepl.stream.simple.SequenceHelper.kargs
+lepl.stream.simple.StringHelper.kargs" class="py-name" href="#" onclick="return doclink('link-29', 'kargs', 'link-22');">kargs</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line"> </tt>
+<a name="StreamFactory.from_sequence"></a><div id="StreamFactory.from_sequence-def"><a name="L58"></a><tt class="py-lineno"> 58</tt> <a class="py-toggle" href="#" id="StreamFactory.from_sequence-toggle" onclick="return toggle('StreamFactory.from_sequence');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.stream.factory.StreamFactory-class.html#from_sequence">from_sequence</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">sequence</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kargs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="StreamFactory.from_sequence-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="StreamFactory.from_sequence-expanded"><a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">        <tt class="py-docstring">'''</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line"><tt class="py-docstring">        Return a generic stream for any indexable sequence.</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">        <tt id="link-30" class="py-name"><a title="lepl.support.lib.add_defaults" class="py-name" href="#" onclick="return doclink('link-30', 'add_defaults', 'link-15');">add_defaults</a></tt><tt class="py-op">(</tt><tt id="link-31" class="py-name"><a title="lepl.matchers.support.BaseMatcher.kargs
+lepl.stream.core.StreamHelper.kargs
+lepl.stream.facade.HelperFacade.kargs
+lepl.stream.simple.SequenceHelper.kargs
+lepl.stream.simple.StringHelper.kargs" class="py-name" href="#" onclick="return doclink('link-31', 'kargs', 'link-22');">kargs</a></tt><tt class="py-op">,</tt> <tt class="py-op">{</tt><tt class="py-string">'factory'</tt><tt class="py-op">:</tt> <tt class="py-name">self</tt><tt class="py-op">}</tt><tt class="py-op">)</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt id="link-32" class="py-name"><a title="lepl.stream.simple.SequenceHelper" class="py-name" href="#" onclick="return doclink('link-32', 'SequenceHelper', 'link-3');">SequenceHelper</a></tt><tt class="py-op">(</tt><tt id="link-33" class="py-name" targets="Method lepl.regexp.str.StrParser.sequence()=lepl.regexp.str.StrParser-class.html#sequence"><a title="lepl.regexp.str.StrParser.sequence" class="py-name" href="#" onclick="return doclink('link-33', 'sequence', 'link-33');">sequence</a></tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt id="link-34" class="py-name"><a title="lepl.matchers.support.BaseMatcher.kargs
+lepl.stream.core.StreamHelper.kargs
+lepl.stream.facade.HelperFacade.kargs
+lepl.stream.simple.SequenceHelper.kargs
+lepl.stream.simple.StringHelper.kargs" class="py-name" href="#" onclick="return doclink('link-34', 'kargs', 'link-22');">kargs</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line"> </tt>
+<a name="StreamFactory.from_iterable"></a><div id="StreamFactory.from_iterable-def"><a name="L65"></a><tt class="py-lineno"> 65</tt> <a class="py-toggle" href="#" id="StreamFactory.from_iterable-toggle" onclick="return toggle('StreamFactory.from_iterable');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.stream.factory.StreamFactory-class.html#from_iterable">from_iterable</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">iterable</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kargs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="StreamFactory.from_iterable-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="StreamFactory.from_iterable-expanded"><a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">        <tt class="py-docstring">'''</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line"><tt class="py-docstring">        Provide a stream for the contents of the iterable.  This assumes that</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line"><tt class="py-docstring">        each value from the iterable is a "line" which will, in turn, be</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line"><tt class="py-docstring">        passed to the stream factory.</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">        <tt id="link-35" class="py-name"><a title="lepl.support.lib.add_defaults" class="py-name" href="#" onclick="return doclink('link-35', 'add_defaults', 'link-15');">add_defaults</a></tt><tt class="py-op">(</tt><tt id="link-36" class="py-name"><a title="lepl.matchers.support.BaseMatcher.kargs
+lepl.stream.core.StreamHelper.kargs
+lepl.stream.facade.HelperFacade.kargs
+lepl.stream.simple.SequenceHelper.kargs
+lepl.stream.simple.StringHelper.kargs" class="py-name" href="#" onclick="return doclink('link-36', 'kargs', 'link-22');">kargs</a></tt><tt class="py-op">,</tt> <tt class="py-op">{</tt><tt class="py-string">'factory'</tt><tt class="py-op">:</tt> <tt class="py-name">self</tt><tt class="py-op">}</tt><tt class="py-op">)</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">        <tt class="py-name">cons</tt> <tt class="py-op">=</tt> <tt id="link-37" class="py-name"><a title="lepl.stream.iter.Cons" class="py-name" href="#" onclick="return doclink('link-37', 'Cons', 'link-10');">Cons</a></tt><tt class="py-op">(</tt><tt class="py-name">iterable</tt><tt class="py-op">)</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-name">cons</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">(</tt><tt class="py-name">cons</tt><tt class="py-op">.</tt><tt id="link-38" class="py-name" targets="Method lepl.stream.iter.Cons.head()=lepl.stream.iter.Cons-class.html#head"><a title="lepl.stream.iter.Cons.head" class="py-name" href="#" onclick="return doclink('link-38', 'head', 'link-38');">head</a></tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt id="link-39" class="py-name"><a title="lepl.matchers.support.BaseMatcher.kargs
+lepl.stream.core.StreamHelper.kargs
+lepl.stream.facade.HelperFacade.kargs
+lepl.stream.simple.SequenceHelper.kargs
+lepl.stream.simple.StringHelper.kargs" class="py-name" href="#" onclick="return doclink('link-39', 'kargs', 'link-22');">kargs</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt id="link-40" class="py-name"><a title="lepl.stream.iter.IterableHelper" class="py-name" href="#" onclick="return doclink('link-40', 'IterableHelper', 'link-9');">IterableHelper</a></tt><tt class="py-op">(</tt><tt class="py-op">**</tt><tt id="link-41" class="py-name"><a title="lepl.matchers.support.BaseMatcher.kargs
+lepl.stream.core.StreamHelper.kargs
+lepl.stream.facade.HelperFacade.kargs
+lepl.stream.simple.SequenceHelper.kargs
+lepl.stream.simple.StringHelper.kargs" class="py-name" href="#" onclick="return doclink('link-41', 'kargs', 'link-22');">kargs</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">     </tt>
+<a name="StreamFactory.from_file"></a><div id="StreamFactory.from_file-def"><a name="L75"></a><tt class="py-lineno"> 75</tt> <a class="py-toggle" href="#" id="StreamFactory.from_file-toggle" onclick="return toggle('StreamFactory.from_file');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.stream.factory.StreamFactory-class.html#from_file">from_file</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">file_</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kargs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="StreamFactory.from_file-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="StreamFactory.from_file-expanded"><a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">        <tt class="py-docstring">'''</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line"><tt class="py-docstring">        Provide a stream for the contents of the file.  There is no </tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line"><tt class="py-docstring">        corresponding `from_path` because the opening and closing of the</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line"><tt class="py-docstring">        path must be done outside the parsing (or the contents will become</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line"><tt class="py-docstring">        unavailable), so use instead:</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line"><tt class="py-docstring">          with open(path) as f:</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line"><tt class="py-docstring">              parser.parse_file(f)</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line"><tt class="py-docstring">        which will close the file after parsing.</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">        <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">            <tt class="py-name">gkargs</tt> <tt class="py-op">=</tt> <tt id="link-42" class="py-name"><a title="lepl.matchers.support.BaseMatcher.kargs
+lepl.stream.core.StreamHelper.kargs
+lepl.stream.facade.HelperFacade.kargs
+lepl.stream.simple.SequenceHelper.kargs
+lepl.stream.simple.StringHelper.kargs" class="py-name" href="#" onclick="return doclink('link-42', 'kargs', 'link-22');">kargs</a></tt><tt class="py-op">.</tt><tt id="link-43" class="py-name" targets="Method lepl.stream.core.MutableMaxDepth.get()=lepl.stream.core.MutableMaxDepth-class.html#get,Method lepl.support.context.Namespace.get()=lepl.support.context.Namespace-class.html#get,Method lepl.support.context.NamespaceMap.get()=lepl.support.context.NamespaceMap-class.html#get,Method lepl.support.state.State.get()=lepl.support.state.State-class.html#get"><a title="lepl.stream.core.MutableMaxDepth.get
+lepl.support.context.Namespace.get
+lepl.support.context.NamespaceMap.get
+lepl.support.state.State.get" class="py-name" href="#" onclick="return doclink('link-43', 'get', 'link-43');">get</a></tt><tt class="py-op">(</tt><tt class="py-string">'global_kargs'</tt><tt class="py-op">,</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt><tt class="py-op">)</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">            <tt id="link-44" class="py-name"><a title="lepl.support.lib.add_defaults" class="py-name" href="#" onclick="return doclink('link-44', 'add_defaults', 'link-15');">add_defaults</a></tt><tt class="py-op">(</tt><tt class="py-name">gkargs</tt><tt class="py-op">,</tt> <tt class="py-op">{</tt><tt class="py-string">'filename'</tt><tt class="py-op">:</tt> <tt class="py-name">file_</tt><tt class="py-op">.</tt><tt id="link-45" class="py-name" targets="Function lepl.matchers.variables.name()=lepl.matchers.variables-module.html#name"><a title="lepl.matchers.variables.name" class="py-name" href="#" onclick="return doclink('link-45', 'name', 'link-45');">name</a></tt><tt class="py-op">}</tt><tt class="py-op">)</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">            <tt id="link-46" class="py-name"><a title="lepl.support.lib.add_defaults" class="py-name" href="#" onclick="return doclink('link-46', 'add_defaults', 'link-15');">add_defaults</a></tt><tt class="py-op">(</tt><tt id="link-47" class="py-name"><a title="lepl.matchers.support.BaseMatcher.kargs
+lepl.stream.core.StreamHelper.kargs
+lepl.stream.facade.HelperFacade.kargs
+lepl.stream.simple.SequenceHelper.kargs
+lepl.stream.simple.StringHelper.kargs" class="py-name" href="#" onclick="return doclink('link-47', 'kargs', 'link-22');">kargs</a></tt><tt class="py-op">,</tt> <tt class="py-op">{</tt><tt class="py-string">'global_kargs'</tt><tt class="py-op">:</tt> <tt class="py-name">gkargs</tt><tt class="py-op">}</tt><tt class="py-op">)</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt> <tt class="py-name">AttributeError</tt><tt class="py-op">:</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">            <tt class="py-keyword">pass</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-48" class="py-name" targets="Method lepl.stream.factory.StreamFactory.from_iterable()=lepl.stream.factory.StreamFactory-class.html#from_iterable"><a title="lepl.stream.factory.StreamFactory.from_iterable" class="py-name" href="#" onclick="return doclink('link-48', 'from_iterable', 'link-48');">from_iterable</a></tt><tt class="py-op">(</tt><tt class="py-name">file_</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt id="link-49" class="py-name"><a title="lepl.matchers.support.BaseMatcher.kargs
+lepl.stream.core.StreamHelper.kargs
+lepl.stream.facade.HelperFacade.kargs
+lepl.stream.simple.SequenceHelper.kargs
+lepl.stream.simple.StringHelper.kargs" class="py-name" href="#" onclick="return doclink('link-49', 'kargs', 'link-22');">kargs</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">     </tt>
+<a name="StreamFactory.to_token"></a><div id="StreamFactory.to_token-def"><a name="L93"></a><tt class="py-lineno"> 93</tt> <a class="py-toggle" href="#" id="StreamFactory.to_token-toggle" onclick="return toggle('StreamFactory.to_token');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.stream.factory.StreamFactory-class.html#to_token">to_token</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">iterable</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kargs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="StreamFactory.to_token-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="StreamFactory.to_token-expanded"><a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">        <tt class="py-docstring">'''</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line"><tt class="py-docstring">        Create a stream for tokens.  The `iterable` is a source of</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line"><tt class="py-docstring">        (token_ids, sub_stream) tuples, where `sub_stream` will be</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line"><tt class="py-docstring">        matched within the token.</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-op">(</tt><tt id="link-50" class="py-name"><a title="lepl.stream.iter.Cons" class="py-name" href="#" onclick="return doclink('link-50', 'Cons', 'link-10');">Cons</a></tt><tt class="py-op">(</tt><tt class="py-name">iterable</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt id="link-51" class="py-name"><a title="lepl.lexer.stream.TokenHelper" class="py-name" href="#" onclick="return doclink('link-51', 'TokenHelper', 'link-20');">TokenHelper</a></tt><tt class="py-op">(</tt><tt class="py-op">**</tt><tt id="link-52" class="py-name"><a title="lepl.matchers.support.BaseMatcher.kargs
+lepl.stream.core.StreamHelper.kargs
+lepl.stream.facade.HelperFacade.kargs
+lepl.stream.simple.SequenceHelper.kargs
+lepl.stream.simple.StringHelper.kargs" class="py-name" href="#" onclick="return doclink('link-52', 'kargs', 'link-22');">kargs</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">             </tt>
+<a name="StreamFactory.__call__"></a><div id="StreamFactory.__call__-def"><a name="L101"></a><tt class="py-lineno">101</tt> <a class="py-toggle" href="#" id="StreamFactory.__call__-toggle" onclick="return toggle('StreamFactory.__call__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.stream.factory.StreamFactory-class.html#__call__">__call__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">sequence</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kargs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="StreamFactory.__call__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="StreamFactory.__call__-expanded"><a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">        <tt class="py-docstring">'''</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line"><tt class="py-docstring">        Auto-detect type and wrap appropriately.</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt id="link-53" class="py-name"><a title="lepl.regexp.str.StrParser.sequence" class="py-name" href="#" onclick="return doclink('link-53', 'sequence', 'link-33');">sequence</a></tt><tt class="py-op">,</tt> <tt class="py-name">basestring</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-54" class="py-name" targets="Method lepl.stream.factory.StreamFactory.from_string()=lepl.stream.factory.StreamFactory-class.html#from_string"><a title="lepl.stream.factory.StreamFactory.from_string" class="py-name" href="#" onclick="return doclink('link-54', 'from_string', 'link-54');">from_string</a></tt><tt class="py-op">(</tt><tt id="link-55" class="py-name"><a title="lepl.regexp.str.StrParser.sequence" class="py-name" href="#" onclick="return doclink('link-55', 'sequence', 'link-33');">sequence</a></tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt id="link-56" class="py-name"><a title="lepl.matchers.support.BaseMatcher.kargs
+lepl.stream.core.StreamHelper.kargs
+lepl.stream.facade.HelperFacade.kargs
+lepl.stream.simple.SequenceHelper.kargs
+lepl.stream.simple.StringHelper.kargs" class="py-name" href="#" onclick="return doclink('link-56', 'kargs', 'link-22');">kargs</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt id="link-57" class="py-name"><a title="lepl.regexp.str.StrParser.sequence" class="py-name" href="#" onclick="return doclink('link-57', 'sequence', 'link-33');">sequence</a></tt><tt class="py-op">,</tt> <tt id="link-58" class="py-name" targets="Module lepl.support._test.list=lepl.support._test.list-module.html,Module lepl.support.list=lepl.support.list-module.html"><a title="lepl.support._test.list
+lepl.support.list" class="py-name" href="#" onclick="return doclink('link-58', 'list', 'link-58');">list</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-59" class="py-name" targets="Method lepl.stream.factory.StreamFactory.from_list()=lepl.stream.factory.StreamFactory-class.html#from_list"><a title="lepl.stream.factory.StreamFactory.from_list" class="py-name" href="#" onclick="return doclink('link-59', 'from_list', 'link-59');">from_list</a></tt><tt class="py-op">(</tt><tt id="link-60" class="py-name"><a title="lepl.regexp.str.StrParser.sequence" class="py-name" href="#" onclick="return doclink('link-60', 'sequence', 'link-33');">sequence</a></tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt id="link-61" class="py-name"><a title="lepl.matchers.support.BaseMatcher.kargs
+lepl.stream.core.StreamHelper.kargs
+lepl.stream.facade.HelperFacade.kargs
+lepl.stream.simple.SequenceHelper.kargs
+lepl.stream.simple.StringHelper.kargs" class="py-name" href="#" onclick="return doclink('link-61', 'kargs', 'link-22');">kargs</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt id="link-62" class="py-name"><a title="lepl.regexp.str.StrParser.sequence" class="py-name" href="#" onclick="return doclink('link-62', 'sequence', 'link-33');">sequence</a></tt><tt class="py-op">,</tt> <tt id="link-63" class="py-name"><a title="lepl.stream._test.file
+lepl.support.lib.file" class="py-name" href="#" onclick="return doclink('link-63', 'file', 'link-16');">file</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-64" class="py-name" targets="Method lepl.stream.factory.StreamFactory.from_file()=lepl.stream.factory.StreamFactory-class.html#from_file"><a title="lepl.stream.factory.StreamFactory.from_file" class="py-name" href="#" onclick="return doclink('link-64', 'from_file', 'link-64');">from_file</a></tt><tt class="py-op">(</tt><tt id="link-65" class="py-name"><a title="lepl.regexp.str.StrParser.sequence" class="py-name" href="#" onclick="return doclink('link-65', 'sequence', 'link-33');">sequence</a></tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt id="link-66" class="py-name"><a title="lepl.matchers.support.BaseMatcher.kargs
+lepl.stream.core.StreamHelper.kargs
+lepl.stream.facade.HelperFacade.kargs
+lepl.stream.simple.SequenceHelper.kargs
+lepl.stream.simple.StringHelper.kargs" class="py-name" href="#" onclick="return doclink('link-66', 'kargs', 'link-22');">kargs</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt class="py-name">hasattr</tt><tt class="py-op">(</tt><tt id="link-67" class="py-name"><a title="lepl.regexp.str.StrParser.sequence" class="py-name" href="#" onclick="return doclink('link-67', 'sequence', 'link-33');">sequence</a></tt><tt class="py-op">,</tt> <tt class="py-string">'__getitem__'</tt><tt class="py-op">)</tt> <tt class="py-keyword">and</tt> <tt class="py-name">hasattr</tt><tt class="py-op">(</tt><tt id="link-68" class="py-name"><a title="lepl.regexp.str.StrParser.sequence" class="py-name" href="#" onclick="return doclink('link-68', 'sequence', 'link-33');">sequence</a></tt><tt class="py-op">,</tt> <tt class="py-string">'__len__'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-69" class="py-name" targets="Static Method lepl.bin.bits.BitString.from_sequence()=lepl.bin.bits.BitString-class.html#from_sequence,Method lepl.stream.factory.StreamFactory.from_sequence()=lepl.stream.factory.StreamFactory-class.html#from_sequence"><a title="lepl.bin.bits.BitString.from_sequence
+lepl.stream.factory.StreamFactory.from_sequence" class="py-name" href="#" onclick="return doclink('link-69', 'from_sequence', 'link-69');">from_sequence</a></tt><tt class="py-op">(</tt><tt id="link-70" class="py-name"><a title="lepl.regexp.str.StrParser.sequence" class="py-name" href="#" onclick="return doclink('link-70', 'sequence', 'link-33');">sequence</a></tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt id="link-71" class="py-name"><a title="lepl.matchers.support.BaseMatcher.kargs
+lepl.stream.core.StreamHelper.kargs
+lepl.stream.facade.HelperFacade.kargs
+lepl.stream.simple.SequenceHelper.kargs
+lepl.stream.simple.StringHelper.kargs" class="py-name" href="#" onclick="return doclink('link-71', 'kargs', 'link-22');">kargs</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt id="link-72" class="py-name"><a title="lepl.regexp.str.StrParser.sequence" class="py-name" href="#" onclick="return doclink('link-72', 'sequence', 'link-33');">sequence</a></tt><tt class="py-op">,</tt> <tt class="py-name">Iterable</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-73" class="py-name"><a title="lepl.stream.factory.StreamFactory.from_iterable" class="py-name" href="#" onclick="return doclink('link-73', 'from_iterable', 'link-48');">from_iterable</a></tt><tt class="py-op">(</tt><tt id="link-74" class="py-name"><a title="lepl.regexp.str.StrParser.sequence" class="py-name" href="#" onclick="return doclink('link-74', 'sequence', 'link-33');">sequence</a></tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt id="link-75" class="py-name"><a title="lepl.matchers.support.BaseMatcher.kargs
+lepl.stream.core.StreamHelper.kargs
+lepl.stream.facade.HelperFacade.kargs
+lepl.stream.simple.SequenceHelper.kargs
+lepl.stream.simple.StringHelper.kargs" class="py-name" href="#" onclick="return doclink('link-75', 'kargs', 'link-22');">kargs</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt class="py-name">TypeError</tt><tt class="py-op">(</tt><tt id="link-76" class="py-name"><a title="lepl.stream.core.StreamHelper.fmt
+lepl.stream.facade.HelperFacade.fmt
+lepl.support.lib.fmt" class="py-name" href="#" onclick="return doclink('link-76', 'fmt', 'link-14');">fmt</a></tt><tt class="py-op">(</tt><tt class="py-string">'Cannot generate a stream for type {0}'</tt><tt class="py-op">,</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line">                                   <tt class="py-name">type</tt><tt class="py-op">(</tt><tt id="link-77" class="py-name"><a title="lepl.regexp.str.StrParser.sequence" class="py-name" href="#" onclick="return doclink('link-77', 'sequence', 'link-33');">sequence</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line"> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line"><tt id="link-78" class="py-name" targets="Variable lepl.stream.factory.DEFAULT_STREAM_FACTORY=lepl.stream.factory-module.html#DEFAULT_STREAM_FACTORY"><a title="lepl.stream.factory.DEFAULT_STREAM_FACTORY" class="py-name" href="#" onclick="return doclink('link-78', 'DEFAULT_STREAM_FACTORY', 'link-78');">DEFAULT_STREAM_FACTORY</a></tt> <tt class="py-op">=</tt> <tt id="link-79" class="py-name" targets="Class lepl.stream.factory.StreamFactory=lepl.stream.factory.StreamFactory-class.html"><a title="lepl.stream.factory.StreamFactory" class="py-name" href="#" onclick="return doclink('link-79', 'StreamFactory', 'link-79');">StreamFactory</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lepl-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sun May 13 16:31:10 2012
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

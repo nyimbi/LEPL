@@ -1,0 +1,556 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lepl.core.rewriters</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lepl-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lepl-module.html">Package&nbsp;lepl</a> ::
+        <a href="lepl.core-module.html">Package&nbsp;core</a> ::
+        Module&nbsp;rewriters
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lepl.core.rewriters-module.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module rewriters</h1><p class="nomargin-top"><span class="codelink"><a href="lepl.core.rewriters-pysrc.html">source&nbsp;code</a></span></p>
+Rewriters modify the graph of matchers before it is used to generate a
+parser.
+
+<!-- ==================== CLASSES ==================== -->
+<a name="section-Classes"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Classes</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Classes"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lepl.core.rewriters.Rewriter-class.html" class="summary-name">Rewriter</a><br />
+      base class for rewriters, supporting a fixed ordering.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lepl.core.rewriters.Flatten-class.html" class="summary-name">Flatten</a><br />
+      A rewriter that flattens <a href="lepl.matchers.combine-module.html#And" class="link">And</a> and <a href="lepl.matchers.combine-module.html#Or" class="link">Or</a> lists.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lepl.core.rewriters.ComposeTransforms-class.html" class="summary-name">ComposeTransforms</a><br />
+      A rewriter that joins adjacent transformations into a single
+operation, avoiding trampolining in some cases.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lepl.core.rewriters.TraceVariables-class.html" class="summary-name">TraceVariables</a><br />
+      A rewriter needed for TraceVariables which adds the trace_variables
+attribute to untransformable matchers that need a transform.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lepl.core.rewriters.RightMemoize-class.html" class="summary-name">RightMemoize</a><br />
+      A rewriter that adds RMemo to all nodes in the matcher graph.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lepl.core.rewriters.LeftMemoize-class.html" class="summary-name">LeftMemoize</a><br />
+      A rewriter that adds LMemo to all nodes in the matcher graph.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lepl.core.rewriters.AutoMemoize-class.html" class="summary-name">AutoMemoize</a><br />
+      Apply two different memoizers, one to left recursive loops and the
+other elsewhere (either can be omitted).
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lepl.core.rewriters.OptimizeOr-class.html" class="summary-name">OptimizeOr</a><br />
+      A rewriter that re-arranges <a href="lepl.matchers.combine-module.html#Or" class="link">Or</a> matcher contents for left--recursive
+loops.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lepl.core.rewriters.SetArguments-class.html" class="summary-name">SetArguments</a><br />
+      Add/replace named arguments while cloning.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lepl.core.rewriters.DirectEvaluation-class.html" class="summary-name">DirectEvaluation</a><br />
+      Replace given matchers if all Matcher arguments are subclasses of
+<a href="lepl.matchers.support.NoTrampolineWrapper-class.html" class="link">NoTrampolineWrapper</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lepl.core.rewriters.FullFirstMatch-class.html" class="summary-name">FullFirstMatch</a><br />
+      If the parser fails, raise an error at the maxiumum depth.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lepl.core.rewriters.NodeStats-class.html" class="summary-name">NodeStats</a><br />
+      Provide statistics and access by type to nodes.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lepl.core.rewriters.NodeStats2-class.html" class="summary-name">NodeStats2</a><br />
+      Avoid using graph code (so we can check that...)
+    </td>
+  </tr>
+</table>
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Functions</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Functions"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="clone"></a><span class="summary-sig-name">clone</span>(<span class="summary-sig-arg">i</span>,
+        <span class="summary-sig-arg">j</span>,
+        <span class="summary-sig-arg">node</span>,
+        <span class="summary-sig-arg">args</span>,
+        <span class="summary-sig-arg">kargs</span>)</span><br />
+      Clone a single node, including matcher-specific attributes.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.rewriters-pysrc.html#clone">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="copy_standard_attributes"></a><span class="summary-sig-name">copy_standard_attributes</span>(<span class="summary-sig-arg">node</span>,
+        <span class="summary-sig-arg">copy</span>)</span><br />
+      Handle the additional attributes that matchers may have.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.rewriters-pysrc.html#copy_standard_attributes">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.rewriters-module.html#linearise_matcher" class="summary-sig-name">linearise_matcher</a>(<span class="summary-sig-arg">node</span>)</span><br />
+      Return <code class="link">[(head, reversed), ...]</code> where each tuple describes  a tree of
+matchers without loops.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.rewriters-pysrc.html#linearise_matcher">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.rewriters-module.html#clone_tree" class="summary-sig-name">clone_tree</a>(<span class="summary-sig-arg">i</span>,
+        <span class="summary-sig-arg">head</span>,
+        <span class="summary-sig-arg">reversed</span>,
+        <span class="summary-sig-arg">mapping</span>,
+        <span class="summary-sig-arg">delayed</span>,
+        <span class="summary-sig-arg">clone</span>,
+        <span class="summary-sig-arg">duplicate</span>=<span class="summary-sig-default">False</span>)</span><br />
+      Clone a tree of matchers.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.rewriters-pysrc.html#clone_tree">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.rewriters-module.html#clone_matcher" class="summary-sig-name">clone_matcher</a>(<span class="summary-sig-arg">node</span>,
+        <span class="summary-sig-arg">clone</span>=<span class="summary-sig-default">clone</span>,
+        <span class="summary-sig-arg">duplicate</span>=<span class="summary-sig-default">False</span>)</span><br />
+      This used to be implemented using the graph support classes
+(<a href="lepl.support.graph.ConstructorWalker-class.html" class="link">ConstructorWalker()</a> etc).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.rewriters-pysrc.html#clone_matcher">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="post_clone"></a><span class="summary-sig-name">post_clone</span>(<span class="summary-sig-arg">function</span>)</span><br />
+      Generate a clone function that applies the given function to the newly
+constructed node, except for Delayed instances (which are effectively
+proxies and so have no functionality of their own) (so, when used with
+<code class="link">DelayedClone</code>, effectively performs a map on the graph).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.rewriters-pysrc.html#post_clone">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.core.rewriters-module.html#left_loops" class="summary-sig-name">left_loops</a>(<span class="summary-sig-arg">node</span>)</span><br />
+      Return (an estimate of) all left-recursive loops from the given node.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.rewriters-pysrc.html#left_loops">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="either_loops"></a><span class="summary-sig-name">either_loops</span>(<span class="summary-sig-arg">node</span>,
+        <span class="summary-sig-arg">conservative</span>)</span><br />
+      Select between the conservative and liberal loop detection algorithms.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.rewriters-pysrc.html#either_loops">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== FUNCTION DETAILS ==================== -->
+<a name="section-FunctionDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Function Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-FunctionDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="linearise_matcher"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">linearise_matcher</span>(<span class="sig-arg">node</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.rewriters-pysrc.html#linearise_matcher">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Return <code class="link">[(head, reversed), ...]</code> where each tuple describes  a tree of
+matchers without loops.  The first head is the root node.  The reversed
+list contains nodes ordered children-first (except for <a href="lepl.matchers.core.Delayed-class.html" class="link">Delayed()</a>
+instances, whose children are other <code class="link">head</code> elements).</p>
+<p>This allows us to clone a DAG of matchers in the same way as it was first
+created - by creating linear trees and then connecting the <a href="lepl.matchers.core.Delayed-class.html" class="link">Delayed()</a>
+instances.</p>
+<p>The postorder ordering is used to match the ordering in the more general
+iteration over matchers based on the graph support classes and helps
+keep things consistent (there was a strange issue where the <code class="link">.tree()</code>
+display of a cloned graph differed from the original that, I think, was
+due to a different ordering).</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="clone_tree"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">clone_tree</span>(<span class="sig-arg">i</span>,
+        <span class="sig-arg">head</span>,
+        <span class="sig-arg">reversed</span>,
+        <span class="sig-arg">mapping</span>,
+        <span class="sig-arg">delayed</span>,
+        <span class="sig-arg">clone</span>,
+        <span class="sig-arg">duplicate</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.rewriters-pysrc.html#clone_tree">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Clone a tree of matchers.  This clones all the matchers in a linearised
+set, except for the <a href="lepl.matchers.core.Delayed-class.html" class="link">Delayed()</a> instances, which are re-created without
+their contents (these are set later, to connect the trees into the
+final matcher DAG).</p>
+<p><code class="link">i</code> is the index of the tree (0 for the first tree, which cannot be part
+of a loop itself).  It is passed to the clone function.</p>
+<p><code class="link">head</code> is the root of the tree.</p>
+<p><code class="link">reversed</code> are the tree nodes in postorder</p>
+<p><code class="link">mapping</code> is a map from old to new node of all the nodes created.  For
+<a href="lepl.matchers.core.Delayed-class.html" class="link">Delayed()</a> instances, if <code class="link">duplicate=True</code>, then the new node is just
+one of possibly many copies.</p>
+<p><a href="lepl.core.rewriters-module.html#clone" class="link">clone</a> is the function used to create a new node instance.</p>
+<p><code class="link">duplicate</code> controls how <a href="lepl.matchers.core.Delayed-class.html" class="link">Delayed()</a> instances are handled.  If true then
+a new instance is created for each one.  This does not preserve the
+graph, but is used by memoisation.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="clone_matcher"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">clone_matcher</span>(<span class="sig-arg">node</span>,
+        <span class="sig-arg">clone</span>=<span class="sig-default">clone</span>,
+        <span class="sig-arg">duplicate</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.rewriters-pysrc.html#clone_matcher">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>This used to be implemented using the graph support classes
+(<a href="lepl.support.graph.ConstructorWalker-class.html" class="link">ConstructorWalker()</a> etc).  But the left-recursive handling was
+unreliable and that was too opaque to debug easily.  It's possible this
+code could now be moved back to that approach, as not everything
+here is used (the <code class="link">j</code> index turned out not to be useful, for example).
+But this approach is easier to understand and I am not 100% sure that
+the code is correct, so I may need to continue working on this.</p>
+<p><code class="link">node</code> is the root of the matcher graph.</p>
+<p><a href="lepl.core.rewriters-module.html#clone" class="link">clone</a> is a function used to create new instances.</p>
+<p><code class="link">duplicate</code> controls how <a href="lepl.matchers.core.Delayed-class.html" class="link">Delayed()</a> instances are handled.  If true then
+a new instance is created for each one.  This does not preserve the
+graph, but is used by memoisation.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="left_loops"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">left_loops</span>(<span class="sig-arg">node</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.core.rewriters-pysrc.html#left_loops">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Return (an estimate of) all left-recursive loops from the given node.</p>
+<p>We cannot know for certain whether a loop is left recursive because we
+don't know exactly which parsers will consume data.  But we can estimate
+by assuming that all matchers eventually (ie via their children) consume
+something.  We can also improve that slightly by ignoring <a href="lepl.matchers.core.Lookahead-class.html" class="link">Lookahead</a>.</p>
+<p>So we estimate left-recursive loops as paths that start and end at
+the given node, and which are first children of intermediate nodes
+unless the node is <a href="lepl.matchers.combine-module.html#Or" class="link">Or</a>, or the preceding matcher is a
+<a href="lepl.matchers.core.Lookahead-class.html" class="link">Lookahead</a>.</p>
+<p>Each loop is a list that starts and ends with the given node.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lepl-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sun May 13 16:30:59 2012
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

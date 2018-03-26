@@ -1,0 +1,279 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Lepl Manual &mdash; LEPL 5.1.2 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '5.1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="LEPL 5.1.2 documentation" href="index.html" />
+    <link rel="next" title="Getting Started" href="started.html" />
+    <link rel="prev" title="Part 4 - Evaluation, Efficiency" href="intro-4.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="started.html" title="Getting Started"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="intro-4.html" title="Part 4 - Evaluation, Efficiency"
+             accesskey="P">previous</a> |</li>
+        <li><a href="contents.html">LEPL 5.1.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="lepl-manual">
+<span id="manual"></span><h1>Lepl Manual<a class="headerlink" href="#lepl-manual" title="Permalink to this headline">¶</a></h1>
+<p>There&#8217;s also a <a class="reference internal" href="intro.html#tutorial"><em>Tutorial</em></a> which works through an example of a
+parser in considerable detail.  New users may want to start there.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="started.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="started.html#first-example">First Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="started.html#matchers">Matchers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="started.html#more-detail">More Detail</a></li>
+<li class="toctree-l2"><a class="reference internal" href="started.html#repetition">Repetition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="started.html#single-dictionary">Single Dictionary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="started.html#summary-and-going-further">Summary and Going Further</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="matchers.html">Matchers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="matchers.html#literal">Literal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="matchers.html#any">Any</a></li>
+<li class="toctree-l2"><a class="reference internal" href="matchers.html#and">And (&amp;)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="matchers.html#or">Or (|)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="matchers.html#repeat">Repeat ([...])</a></li>
+<li class="toctree-l2"><a class="reference internal" href="matchers.html#lookahead">Lookahead</a></li>
+<li class="toctree-l2"><a class="reference internal" href="matchers.html#index-7">Drop (~)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="matchers.html#apply-args">Apply (&gt;, &gt;=, args)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="matchers.html#kapply">KApply (**)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="matchers.html#more">More</a></li>
+<li class="toctree-l2"><a class="reference internal" href="matchers.html#implementation-details">Implementation Details</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="operators.html">Operators</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="operators.html#caveats-and-limitations">Caveats and Limitations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operators.html#binary-operators-between-matchers">Binary Operators Between Matchers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operators.html#prefix-and-postfix-operators-on-matchers">Prefix And Postfix Operators On Matchers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operators.html#operators-that-apply-functions-to-results">Operators That Apply Functions To Results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operators.html#replacement">Replacement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operators.html#spaces">Spaces</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="nodes.html">Results</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="nodes.html#flat-list">Flat List</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nodes.html#nested-lists">Nested Lists</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="nodes.html#simple-lists">Simple Lists</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nodes.html#extended-list-support">Extended List Support</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="nodes.html#nodes">Nodes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="errors.html">Error Reporting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="errors.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="errors.html#example">Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="errors.html#operators-functions-and-classes">Operators, Functions and Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="debugging.html">Debugging</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="debugging.html#logging">Logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging.html#stack-traces">Stack Traces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging.html#variable-traces">Variable Traces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging.html#deepest-matches">Deepest Matches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging.html#trace-output">Trace Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging.html#common-errors">Common Errors</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="debugging.html#missing-tokens">Missing Tokens</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="lexer.html">Lexer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="lexer.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lexer.html#use">Use</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lexer.html#limitations">Limitations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lexer.html#advanced-options">Advanced Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lexer.html#example">Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lexer.html#the-lexer-process">The Lexer Process</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="offside.html">Line&#8211;Aware Parsing and the Offside Rule</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="offside.html#simple-line-aware-parsing-lines-only">Simple Line&#8211;Aware Parsing (Lines Only)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="offside.html#continued-and-extended-lines">Continued and Extended Lines</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="offside.html#offside-parsing-blocks-of-lines">Offside Parsing (Blocks of Lines)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="offside.html#configuration">Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="offside.html#example">Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="offside.html#python-example">Continued and Extended Lines</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="advanced.html">Advanced Use</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="advanced.html#configuration">Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="advanced.html#common-packaged-actions">Common, Packaged Actions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="advanced.html#debug-actions">Debug Actions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="advanced.html#optimisation-actions">Optimisation Actions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="advanced.html#low-level-actions">Low Level Actions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="advanced.html#argument-actions">Argument Actions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="advanced.html#search-and-backtracking">Search and Backtracking</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="advanced.html#restricting-search">Restricting Search</a></li>
+<li class="toctree-l3"><a class="reference internal" href="advanced.html#excluding-matches">Excluding Matches</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="advanced.html#memoisation">Memoisation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="style.html">Patterns</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="style.html#operators-are-matchers">Operators are Matchers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="style.html#use-or-with-complex-alternatives">Use Or() With Complex Alternatives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="style.html#capitalised-lowercase"><tt class="docutils literal"><span class="pre">&gt;</span></tt> Capitalised; <tt class="docutils literal"><span class="pre">&gt;&gt;</span></tt> lowercase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="style.html#define-words-before-using-droppedspace-or-separator">Define Words Before Using DroppedSpace (or Separator)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="style.html#explicitly-exclude-spaces">Explicitly Exclude Spaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="style.html#use-delayed-for-recursive-definitions">Use Delayed() For Recursive Definitions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="style.html#imports">Imports</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="implementation.html">Implementation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="implementation.html#trampolining">Trampolining</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="implementation.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="implementation.html#optimisations">Optimisations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="implementation.html#simple-functional-matchers">Simple Functional Matchers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="implementation.html#sequence-matchers">Sequence Matchers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="implementation.html#trampoline-matchers">Trampoline Matchers</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="implementation.html#memoisation">Memoisation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="implementation.html#parser-rewriting">Parser Rewriting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="implementation.html#streams">Streams</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="resources.html">Resource Management</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="resources.html#the-input-problem">The Input Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resources.html#the-output-problem">The Output Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resources.html#the-input-solution">The Input Solution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resources.html#the-output-solution">The Output Solution</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="binary.html">Binary Data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="binary.html#abstract-model">Abstract Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="binary.html#literal-representation">Literal Representation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="binary.html#examples">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="binary.html#lengths">Lengths</a></li>
+<li class="toctree-l2"><a class="reference internal" href="binary.html#bitstring">BitString</a></li>
+<li class="toctree-l2"><a class="reference internal" href="binary.html#matching">Matching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="binary.html#binary-literals">Binary Literals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="binary.html#serialisation">Serialisation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="binary.html#sized-integers">Sized Integers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#parsing-a-python-argument-list">Parsing a Python Argument List</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#configuration-and-efficiency">Configuration and Efficiency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#tabular-data">Tabular Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#simpler-offside-example">Simpler Offside Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#parsing-lines-of-words">Parsing Lines of Words</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#low-memory-use">Low Memory Use</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="closing.html">Closing Remarks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="closing.html#credits">Credits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="closing.html#endnote">Endnote</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="intro-4.html"
+                        title="previous chapter">Part 4 - Evaluation, Efficiency</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="started.html"
+                        title="next chapter">Getting Started</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/manual.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="started.html" title="Getting Started"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="intro-4.html" title="Part 4 - Evaluation, Efficiency"
+             >previous</a> |</li>
+        <li><a href="contents.html">LEPL 5.1.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2009-2011, Andrew Cooke.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

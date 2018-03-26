@@ -1,0 +1,1128 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lepl.regexp.interval</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lepl-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lepl-module.html">Package&nbsp;lepl</a> ::
+        <a href="lepl.regexp-module.html">Package&nbsp;regexp</a> ::
+        Module&nbsp;interval
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lepl.regexp.interval-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="lepl.regexp.interval-module.html">Module lepl.regexp.interval</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package lepl=lepl-module.html"><a title="lepl" class="py-name" href="#" onclick="return doclink('link-0', 'lepl', 'link-0');">lepl</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Module lepl.lexer.support=lepl.lexer.support-module.html,Module lepl.matchers._test.support=lepl.matchers._test.support-module.html,Module lepl.matchers._test3.support=lepl.matchers._test3.support-module.html,Module lepl.matchers.support=lepl.matchers.support-module.html,Package lepl.support=lepl.support-module.html"><a title="lepl.lexer.support
+lepl.matchers._test.support
+lepl.matchers._test3.support
+lepl.matchers.support
+lepl.support" class="py-name" href="#" onclick="return doclink('link-1', 'support', 'link-1');">support</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Method lepl.matchers.support.TreeStr.node()=lepl.matchers.support.TreeStr-class.html#node,Method lepl.regexp.core.DfaGraph.node()=lepl.regexp.core.DfaGraph-class.html#node,Module lepl.support._test.node=lepl.support._test.node-module.html,Method lepl.support.graph.Clone.node()=lepl.support.graph.Clone-class.html#node,Method lepl.support.graph.ConstructorStr.node()=lepl.support.graph.ConstructorStr-class.html#node,Method lepl.support.graph.GraphStr.node()=lepl.support.graph.GraphStr-class.html#node,Method lepl.support.graph.Visitor.node()=lepl.support.graph.Visitor-class.html#node,Module lepl.support.node=lepl.support.node-module.html"><a title="lepl.matchers.support.TreeStr.node
+lepl.regexp.core.DfaGraph.node
+lepl.support._test.node
+lepl.support.graph.Clone.node
+lepl.support.graph.ConstructorStr.node
+lepl.support.graph.GraphStr.node
+lepl.support.graph.Visitor.node
+lepl.support.node" class="py-name" href="#" onclick="return doclink('link-2', 'node', 'link-2');">node</a></tt> <tt class="py-keyword">import</tt> <tt id="link-3" class="py-name" targets="Class lepl.support.node.Node=lepl.support.node.Node-class.html"><a title="lepl.support.node.Node" class="py-name" href="#" onclick="return doclink('link-3', 'Node', 'link-3');">Node</a></tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-comment"># The contents of this file are subject to the Mozilla Public License</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-comment"># (MPL) Version 1.1 (the "License"); you may not use this file except</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-comment"># in compliance with the License. You may obtain a copy of the License</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-comment"># at http://www.mozilla.org/MPL/</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-comment"># Software distributed under the License is distributed on an "AS IS"</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-comment"># basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-comment"># the License for the specific language governing rights and</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-comment"># limitations under the License.</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-comment"># The Original Code is LEPL (http://www.acooke.org/lepl)</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-comment"># The Initial Developer of the Original Code is Andrew Cooke.</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-comment"># Portions created by the Initial Developer are Copyright (C) 2009-2010</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-comment"># Andrew Cooke (andrew@acooke.org). All Rights Reserved.</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt class="py-comment"># Alternatively, the contents of this file may be used under the terms</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-comment"># of the LGPL license (the GNU Lesser General Public License,</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-comment"># http://www.gnu.org/licenses/lgpl.html), in which case the provisions</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt class="py-comment"># of the LGPL License are applicable instead of those above.</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt class="py-comment"># If you wish to allow use of your version of this file only under the</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"><tt class="py-comment"># terms of the LGPL License and not to allow others to use your version</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt class="py-comment"># of this file under the MPL, indicate your decision by deleting the</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt class="py-comment"># provisions above and replace them with the notice and other provisions</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"><tt class="py-comment"># required by the LGPL License.  If you do not delete the provisions</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"><tt class="py-comment"># above, a recipient may use your version of this file under either the</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"><tt class="py-comment"># MPL or the LGPL License.</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line"><tt class="py-string">'''</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line"><tt class="py-string">Support for managing sets of intervals (not all used).  </tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"><tt class="py-string">An interval is an open range implemented as a tuple pair.  For example (2,5) </tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line"><tt class="py-string">is an interval that represents the integers 2,3,4 and 5.</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line"><tt class="py-string">'''</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line"> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">bisect</tt> <tt class="py-keyword">import</tt> <tt class="py-name">bisect_left</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">collections</tt> <tt class="py-keyword">import</tt> <tt class="py-name">deque</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line"> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line"> </tt>
+<a name="Intervals"></a><div id="Intervals-def"><a name="L41"></a><tt class="py-lineno"> 41</tt> <a class="py-toggle" href="#" id="Intervals-toggle" onclick="return toggle('Intervals');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lepl.regexp.interval.Intervals-class.html">Intervals</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Intervals-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Intervals-expanded"><a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">    <tt class="py-docstring">'''</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line"><tt class="py-docstring">    A set of possible values for a character, described as a collection of </tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line"><tt class="py-docstring">    intervals.  Each interval is [a, b] (ie a &lt;= x &lt;= b, where x is a character </tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line"><tt class="py-docstring">    code).  We use open bounds to avoid having to specify an "out of range"</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line"><tt class="py-docstring">    value, making it easier to work with a variety of alphabets.</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line"><tt class="py-docstring">    The intervals are stored in a list, ordered by a, joining overlapping </tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line"><tt class="py-docstring">    intervals as necessary.</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line"><tt class="py-docstring">    '''</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">     </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">    <tt class="py-comment"># pylint: disable-msg=C0103 </tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">    <tt class="py-comment"># (use (a,b) variables consistently)</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">     </tt>
+<a name="Intervals.__init__"></a><div id="Intervals.__init__-def"><a name="L55"></a><tt class="py-lineno"> 55</tt> <a class="py-toggle" href="#" id="Intervals.__init__-toggle" onclick="return toggle('Intervals.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.regexp.interval.Intervals-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">intervals</tt><tt class="py-op">,</tt> <tt class="py-param">alphabet</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Intervals.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Intervals.__init__-expanded"><a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Method lepl.core.config.ConfigBuilder.alphabet()=lepl.core.config.ConfigBuilder-class.html#alphabet"><a title="lepl.core.config.ConfigBuilder.alphabet" class="py-name" href="#" onclick="return doclink('link-4', 'alphabet', 'link-4');">alphabet</a></tt> <tt class="py-op">=</tt> <tt id="link-5" class="py-name"><a title="lepl.core.config.ConfigBuilder.alphabet" class="py-name" href="#" onclick="return doclink('link-5', 'alphabet', 'link-4');">alphabet</a></tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__intervals</tt> <tt class="py-op">=</tt> <tt class="py-name">deque</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt id="link-6" class="py-name" targets="Module lepl.regexp._test.interval=lepl.regexp._test.interval-module.html,Module lepl.regexp.interval=lepl.regexp.interval-module.html"><a title="lepl.regexp._test.interval
+lepl.regexp.interval" class="py-name" href="#" onclick="return doclink('link-6', 'interval', 'link-6');">interval</a></tt> <tt class="py-keyword">in</tt> <tt class="py-name">intervals</tt><tt class="py-op">:</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-7" class="py-name" targets="Method lepl.regexp.interval.Intervals.__append()=lepl.regexp.interval.Intervals-class.html#__append,Method lepl.regexp.interval.TaggedFragments.__append()=lepl.regexp.interval.TaggedFragments-class.html#__append"><a title="lepl.regexp.interval.Intervals.__append
+lepl.regexp.interval.TaggedFragments.__append" class="py-name" href="#" onclick="return doclink('link-7', '__append', 'link-7');">__append</a></tt><tt class="py-op">(</tt><tt id="link-8" class="py-name"><a title="lepl.regexp._test.interval
+lepl.regexp.interval" class="py-name" href="#" onclick="return doclink('link-8', 'interval', 'link-6');">interval</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__intervals</tt> <tt class="py-op">=</tt> <tt id="link-9" class="py-name" targets="Module lepl.support._test.list=lepl.support._test.list-module.html,Module lepl.support.list=lepl.support.list-module.html"><a title="lepl.support._test.list
+lepl.support.list" class="py-name" href="#" onclick="return doclink('link-9', 'list', 'link-9');">list</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__intervals</tt><tt class="py-op">)</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__str</tt> <tt class="py-op">=</tt> <tt id="link-10" class="py-name"><a title="lepl.core.config.ConfigBuilder.alphabet" class="py-name" href="#" onclick="return doclink('link-10', 'alphabet', 'link-4');">alphabet</a></tt><tt class="py-op">.</tt><tt id="link-11" class="py-name" targets="Method lepl.regexp.core.Alphabet.fmt_intervals()=lepl.regexp.core.Alphabet-class.html#fmt_intervals,Method lepl.regexp.str.StrAlphabet.fmt_intervals()=lepl.regexp.str.StrAlphabet-class.html#fmt_intervals"><a title="lepl.regexp.core.Alphabet.fmt_intervals
+lepl.regexp.str.StrAlphabet.fmt_intervals" class="py-name" href="#" onclick="return doclink('link-11', 'fmt_intervals', 'link-11');">fmt_intervals</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__intervals</tt><tt class="py-op">)</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__index</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-12" class="py-name" targets="Module lepl.support.state=lepl.support.state-module.html"><a title="lepl.support.state" class="py-name" href="#" onclick="return doclink('link-12', 'state', 'link-12');">state</a></tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-13" class="py-name" targets="Method lepl.regexp.interval.Intervals.__build_index()=lepl.regexp.interval.Intervals-class.html#__build_index"><a title="lepl.regexp.interval.Intervals.__build_index" class="py-name" href="#" onclick="return doclink('link-13', '__build_index', 'link-13');">__build_index</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">         </tt>
+<a name="Intervals.append"></a><div id="Intervals.append-def"><a name="L66"></a><tt class="py-lineno"> 66</tt> <a class="py-toggle" href="#" id="Intervals.append-toggle" onclick="return toggle('Intervals.append');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.regexp.interval.Intervals-class.html#append">append</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">interval</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Intervals.append-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Intervals.append-expanded"><a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">        <tt class="py-docstring">'''</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line"><tt class="py-docstring">        Add an interval to the range.</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-14" class="py-name"><a title="lepl.regexp.interval.Intervals.__append
+lepl.regexp.interval.TaggedFragments.__append" class="py-name" href="#" onclick="return doclink('link-14', '__append', 'link-7');">__append</a></tt><tt class="py-op">(</tt><tt id="link-15" class="py-name"><a title="lepl.regexp._test.interval
+lepl.regexp.interval" class="py-name" href="#" onclick="return doclink('link-15', 'interval', 'link-6');">interval</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-16" class="py-name"><a title="lepl.regexp.interval.Intervals.__build_index" class="py-name" href="#" onclick="return doclink('link-16', '__build_index', 'link-13');">__build_index</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">         </tt>
+<a name="Intervals.__build_index"></a><div id="Intervals.__build_index-def"><a name="L73"></a><tt class="py-lineno"> 73</tt> <a class="py-toggle" href="#" id="Intervals.__build_index-toggle" onclick="return toggle('Intervals.__build_index');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.regexp.interval.Intervals-class.html#__build_index">__build_index</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Intervals.__build_index-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Intervals.__build_index-expanded"><a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">        <tt class="py-docstring">'''</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line"><tt class="py-docstring">        Pre-construct the index used for bisection.</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__index</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt id="link-17" class="py-name"><a title="lepl.regexp._test.interval
+lepl.regexp.interval" class="py-name" href="#" onclick="return doclink('link-17', 'interval', 'link-6');">interval</a></tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> <tt class="py-keyword">for</tt> <tt id="link-18" class="py-name"><a title="lepl.regexp._test.interval
+lepl.regexp.interval" class="py-name" href="#" onclick="return doclink('link-18', 'interval', 'link-6');">interval</a></tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__intervals</tt><tt class="py-op">]</tt> </tt>
+</div><a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">         </tt>
+<a name="Intervals.__append"></a><div id="Intervals.__append-def"><a name="L79"></a><tt class="py-lineno"> 79</tt> <a class="py-toggle" href="#" id="Intervals.__append-toggle" onclick="return toggle('Intervals.__append');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.regexp.interval.Intervals-class.html#__append">__append</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">interval</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Intervals.__append-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Intervals.__append-expanded"><a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">        <tt class="py-docstring">'''</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line"><tt class="py-docstring">        Add an interval to the existing intervals.</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line"><tt class="py-docstring">        This maintains self.__intervals in the normalized form described above.</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-name">a1</tt><tt class="py-op">,</tt> <tt class="py-name">b1</tt><tt class="py-op">)</tt> <tt class="py-op">=</tt> <tt id="link-19" class="py-name"><a title="lepl.regexp._test.interval
+lepl.regexp.interval" class="py-name" href="#" onclick="return doclink('link-19', 'interval', 'link-6');">interval</a></tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">b1</tt> <tt class="py-op">&lt;</tt> <tt class="py-name">a1</tt><tt class="py-op">:</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-name">a1</tt><tt class="py-op">,</tt> <tt class="py-name">b1</tt><tt class="py-op">)</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-name">b1</tt><tt class="py-op">,</tt> <tt class="py-name">a1</tt><tt class="py-op">)</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">        <tt class="py-name">intervals</tt> <tt class="py-op">=</tt> <tt class="py-name">deque</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">        <tt class="py-name">done</tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">        <tt class="py-keyword">while</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__intervals</tt><tt class="py-op">:</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">            <tt class="py-comment"># pylint: disable-msg=E1103</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">            <tt class="py-comment"># (pylint fails to infer type)</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-name">a0</tt><tt class="py-op">,</tt> <tt class="py-name">b0</tt><tt class="py-op">)</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__intervals</tt><tt class="py-op">.</tt><tt class="py-name">popleft</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">a0</tt> <tt class="py-op">&lt;=</tt> <tt class="py-name">a1</tt><tt class="py-op">:</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">b0</tt> <tt class="py-op">&lt;</tt> <tt class="py-name">a1</tt> <tt class="py-keyword">and</tt> <tt class="py-name">b0</tt> <tt class="py-op">!=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-20" class="py-name"><a title="lepl.core.config.ConfigBuilder.alphabet" class="py-name" href="#" onclick="return doclink('link-20', 'alphabet', 'link-4');">alphabet</a></tt><tt class="py-op">.</tt><tt id="link-21" class="py-name" targets="Method lepl.regexp.binary.BinaryAlphabet.before()=lepl.regexp.binary.BinaryAlphabet-class.html#before,Method lepl.regexp.core.Alphabet.before()=lepl.regexp.core.Alphabet-class.html#before,Method lepl.regexp.unicode.UnicodeAlphabet.before()=lepl.regexp.unicode.UnicodeAlphabet-class.html#before"><a title="lepl.regexp.binary.BinaryAlphabet.before
+lepl.regexp.core.Alphabet.before
+lepl.regexp.unicode.UnicodeAlphabet.before" class="py-name" href="#" onclick="return doclink('link-21', 'before', 'link-21');">before</a></tt><tt class="py-op">(</tt><tt class="py-name">a1</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">                    <tt class="py-comment"># old interval starts and ends before new interval</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">                    <tt class="py-comment"># so keep old interval and continue</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">                    <tt class="py-name">intervals</tt><tt class="py-op">.</tt><tt id="link-22" class="py-name" targets="Function lepl.core._test.rewriters.append()=lepl.core._test.rewriters-module.html#append,Method lepl.core.monitor.MultipleStackMonitors.append()=lepl.core.monitor.MultipleStackMonitors-class.html#append,Method lepl.core.monitor.MultipleValueMonitors.append()=lepl.core.monitor.MultipleValueMonitors-class.html#append,Method lepl.matchers.transform.TransformationWrapper.append()=lepl.matchers.transform.TransformationWrapper-class.html#append,Method lepl.regexp.interval.Intervals.append()=lepl.regexp.interval.Intervals-class.html#append,Method lepl.regexp.interval.TaggedFragments.append()=lepl.regexp.interval.TaggedFragments-class.html#append,Method lepl.regexp.interval._Character.append()=lepl.regexp.interval._Character-class.html#append,Method lepl.support.lib.CircularFifo.append()=lepl.support.lib.CircularFifo-class.html#append"><a title="lepl.core._test.rewriters.append
+lepl.core.monitor.MultipleStackMonitors.append
+lepl.core.monitor.MultipleValueMonitors.append
+lepl.matchers.transform.TransformationWrapper.append
+lepl.regexp.interval.Intervals.append
+lepl.regexp.interval.TaggedFragments.append
+lepl.regexp.interval._Character.append
+lepl.support.lib.CircularFifo.append" class="py-name" href="#" onclick="return doclink('link-22', 'append', 'link-22');">append</a></tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-name">a0</tt><tt class="py-op">,</tt> <tt class="py-name">b0</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">                <tt class="py-keyword">elif</tt> <tt class="py-name">b1</tt> <tt class="py-op">&lt;=</tt> <tt class="py-name">b0</tt><tt class="py-op">:</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">                    <tt class="py-comment"># old interval starts before and ends after new interval</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">                    <tt class="py-comment"># so keep old interval, discard new interval and slurp</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">                    <tt class="py-name">intervals</tt><tt class="py-op">.</tt><tt id="link-23" class="py-name"><a title="lepl.core._test.rewriters.append
+lepl.core.monitor.MultipleStackMonitors.append
+lepl.core.monitor.MultipleValueMonitors.append
+lepl.matchers.transform.TransformationWrapper.append
+lepl.regexp.interval.Intervals.append
+lepl.regexp.interval.TaggedFragments.append
+lepl.regexp.interval._Character.append
+lepl.support.lib.CircularFifo.append" class="py-name" href="#" onclick="return doclink('link-23', 'append', 'link-22');">append</a></tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-name">a0</tt><tt class="py-op">,</tt> <tt class="py-name">b0</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">                    <tt class="py-name">done</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">                    <tt class="py-keyword">break</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">                <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">                    <tt class="py-comment"># old interval starts before new, but partially overlaps</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">                    <tt class="py-comment"># so discard old interval, extend new interval and continue</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">                    <tt class="py-comment"># (since it may overlap more intervals...)</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">                    <tt class="py-op">(</tt><tt class="py-name">a1</tt><tt class="py-op">,</tt> <tt class="py-name">b1</tt><tt class="py-op">)</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-name">a0</tt><tt class="py-op">,</tt> <tt class="py-name">b1</tt><tt class="py-op">)</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">            <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">b1</tt> <tt class="py-op">&lt;</tt> <tt class="py-name">a0</tt> <tt class="py-keyword">and</tt> <tt class="py-name">b1</tt> <tt class="py-op">!=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-24" class="py-name"><a title="lepl.core.config.ConfigBuilder.alphabet" class="py-name" href="#" onclick="return doclink('link-24', 'alphabet', 'link-4');">alphabet</a></tt><tt class="py-op">.</tt><tt id="link-25" class="py-name"><a title="lepl.regexp.binary.BinaryAlphabet.before
+lepl.regexp.core.Alphabet.before
+lepl.regexp.unicode.UnicodeAlphabet.before" class="py-name" href="#" onclick="return doclink('link-25', 'before', 'link-21');">before</a></tt><tt class="py-op">(</tt><tt class="py-name">a0</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">                    <tt class="py-comment"># new interval starts and ends before old, so add both</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line">                    <tt class="py-comment"># and slurp</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line">                    <tt class="py-name">intervals</tt><tt class="py-op">.</tt><tt id="link-26" class="py-name"><a title="lepl.core._test.rewriters.append
+lepl.core.monitor.MultipleStackMonitors.append
+lepl.core.monitor.MultipleValueMonitors.append
+lepl.matchers.transform.TransformationWrapper.append
+lepl.regexp.interval.Intervals.append
+lepl.regexp.interval.TaggedFragments.append
+lepl.regexp.interval._Character.append
+lepl.support.lib.CircularFifo.append" class="py-name" href="#" onclick="return doclink('link-26', 'append', 'link-22');">append</a></tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-name">a1</tt><tt class="py-op">,</tt> <tt class="py-name">b1</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line">                    <tt class="py-name">intervals</tt><tt class="py-op">.</tt><tt id="link-27" class="py-name"><a title="lepl.core._test.rewriters.append
+lepl.core.monitor.MultipleStackMonitors.append
+lepl.core.monitor.MultipleValueMonitors.append
+lepl.matchers.transform.TransformationWrapper.append
+lepl.regexp.interval.Intervals.append
+lepl.regexp.interval.TaggedFragments.append
+lepl.regexp.interval._Character.append
+lepl.support.lib.CircularFifo.append" class="py-name" href="#" onclick="return doclink('link-27', 'append', 'link-22');">append</a></tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-name">a0</tt><tt class="py-op">,</tt> <tt class="py-name">b0</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line">                    <tt class="py-name">done</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line">                    <tt class="py-keyword">break</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line">                <tt class="py-keyword">elif</tt> <tt class="py-name">b0</tt> <tt class="py-op">&lt;=</tt> <tt class="py-name">b1</tt><tt class="py-op">:</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line">                    <tt class="py-comment"># new interval starts before and ends after old interval</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line">                    <tt class="py-comment"># so discard old and continue (since it may overlap...)</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">                    <tt class="py-keyword">pass</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">                <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line">                    <tt class="py-comment"># new interval starts before old, but partially overlaps,</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">                    <tt class="py-comment"># add extended interval and slurp rest</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line">                    <tt class="py-name">intervals</tt><tt class="py-op">.</tt><tt id="link-28" class="py-name"><a title="lepl.core._test.rewriters.append
+lepl.core.monitor.MultipleStackMonitors.append
+lepl.core.monitor.MultipleValueMonitors.append
+lepl.matchers.transform.TransformationWrapper.append
+lepl.regexp.interval.Intervals.append
+lepl.regexp.interval.TaggedFragments.append
+lepl.regexp.interval._Character.append
+lepl.support.lib.CircularFifo.append" class="py-name" href="#" onclick="return doclink('link-28', 'append', 'link-22');">append</a></tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-name">a1</tt><tt class="py-op">,</tt> <tt class="py-name">b0</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">                    <tt class="py-name">done</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line">                    <tt class="py-keyword">break</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">done</tt><tt class="py-op">:</tt> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line">            <tt class="py-name">intervals</tt><tt class="py-op">.</tt><tt id="link-29" class="py-name"><a title="lepl.core._test.rewriters.append
+lepl.core.monitor.MultipleStackMonitors.append
+lepl.core.monitor.MultipleValueMonitors.append
+lepl.matchers.transform.TransformationWrapper.append
+lepl.regexp.interval.Intervals.append
+lepl.regexp.interval.TaggedFragments.append
+lepl.regexp.interval._Character.append
+lepl.support.lib.CircularFifo.append" class="py-name" href="#" onclick="return doclink('link-29', 'append', 'link-22');">append</a></tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-name">a1</tt><tt class="py-op">,</tt> <tt class="py-name">b1</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line">        <tt class="py-name">intervals</tt><tt class="py-op">.</tt><tt id="link-30" class="py-name" targets="Method lepl.matchers.transform.TransformationWrapper.extend()=lepl.matchers.transform.TransformationWrapper-class.html#extend,Method lepl.regexp.str.StrParser.extend()=lepl.regexp.str.StrParser-class.html#extend"><a title="lepl.matchers.transform.TransformationWrapper.extend
+lepl.regexp.str.StrParser.extend" class="py-name" href="#" onclick="return doclink('link-30', 'extend', 'link-30');">extend</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__intervals</tt><tt class="py-op">)</tt> <tt class="py-comment"># slurp remaining</tt> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__intervals</tt> <tt class="py-op">=</tt> <tt class="py-name">intervals</tt> </tt>
+</div><a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line">         </tt>
+<a name="Intervals.__str__"></a><div id="Intervals.__str__-def"><a name="L133"></a><tt class="py-lineno">133</tt> <a class="py-toggle" href="#" id="Intervals.__str__-toggle" onclick="return toggle('Intervals.__str__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.regexp.interval.Intervals-class.html#__str__">__str__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Intervals.__str__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Intervals.__str__-expanded"><a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__str</tt> </tt>
+</div><a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line">     </tt>
+<a name="Intervals.__repr__"></a><div id="Intervals.__repr__-def"><a name="L136"></a><tt class="py-lineno">136</tt> <a class="py-toggle" href="#" id="Intervals.__repr__-toggle" onclick="return toggle('Intervals.__repr__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.regexp.interval.Intervals-class.html#__repr__">__repr__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Intervals.__repr__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Intervals.__repr__-expanded"><a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__str</tt> </tt>
+</div><a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line">     </tt>
+<a name="Intervals.len"></a><div id="Intervals.len-def"><a name="L139"></a><tt class="py-lineno">139</tt> <a class="py-toggle" href="#" id="Intervals.len-toggle" onclick="return toggle('Intervals.len');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.regexp.interval.Intervals-class.html#len">len</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Intervals.len-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Intervals.len-expanded"><a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line">        <tt class="py-docstring">'''</tt> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line"><tt class="py-docstring">        The number of intervals in the range.</tt> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-31" class="py-name" targets="Method lepl.lexer.stream.TokenHelper.len()=lepl.lexer.stream.TokenHelper-class.html#len,Method lepl.regexp.interval.Intervals.len()=lepl.regexp.interval.Intervals-class.html#len,Method lepl.regexp.interval.TaggedFragments.len()=lepl.regexp.interval.TaggedFragments-class.html#len,Method lepl.regexp.interval._Character.len()=lepl.regexp.interval._Character-class.html#len,Method lepl.stream.core.StreamHelper.len()=lepl.stream.core.StreamHelper-class.html#len,Method lepl.stream.facade.HelperFacade.len()=lepl.stream.facade.HelperFacade-class.html#len,Method lepl.stream.iter.IterableHelper.len()=lepl.stream.iter.IterableHelper-class.html#len,Method lepl.stream.simple.SequenceHelper.len()=lepl.stream.simple.SequenceHelper-class.html#len"><a title="lepl.lexer.stream.TokenHelper.len
+lepl.regexp.interval.Intervals.len
+lepl.regexp.interval.TaggedFragments.len
+lepl.regexp.interval._Character.len
+lepl.stream.core.StreamHelper.len
+lepl.stream.facade.HelperFacade.len
+lepl.stream.iter.IterableHelper.len
+lepl.stream.simple.SequenceHelper.len" class="py-name" href="#" onclick="return doclink('link-31', 'len', 'link-31');">len</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__intervals</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line">     </tt>
+<a name="Intervals.__getitem__"></a><div id="Intervals.__getitem__-def"><a name="L145"></a><tt class="py-lineno">145</tt> <a class="py-toggle" href="#" id="Intervals.__getitem__-toggle" onclick="return toggle('Intervals.__getitem__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.regexp.interval.Intervals-class.html#__getitem__">__getitem__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">index</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Intervals.__getitem__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Intervals.__getitem__-expanded"><a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__intervals</tt><tt class="py-op">[</tt><tt id="link-32" class="py-name" targets="Method lepl.regexp.interval.IntervalMap.index()=lepl.regexp.interval.IntervalMap-class.html#index"><a title="lepl.regexp.interval.IntervalMap.index" class="py-name" href="#" onclick="return doclink('link-32', 'index', 'link-32');">index</a></tt><tt class="py-op">]</tt> </tt>
+</div><a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line">     </tt>
+<a name="Intervals.__iter__"></a><div id="Intervals.__iter__-def"><a name="L148"></a><tt class="py-lineno">148</tt> <a class="py-toggle" href="#" id="Intervals.__iter__-toggle" onclick="return toggle('Intervals.__iter__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.regexp.interval.Intervals-class.html#__iter__">__iter__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Intervals.__iter__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Intervals.__iter__-expanded"><a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-33" class="py-name" targets="Module lepl.stream._test.iter=lepl.stream._test.iter-module.html,Module lepl.stream.iter=lepl.stream.iter-module.html"><a title="lepl.stream._test.iter
+lepl.stream.iter" class="py-name" href="#" onclick="return doclink('link-33', 'iter', 'link-33');">iter</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__intervals</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line">     </tt>
+<a name="Intervals.__contains__"></a><div id="Intervals.__contains__-def"><a name="L151"></a><tt class="py-lineno">151</tt> <a class="py-toggle" href="#" id="Intervals.__contains__-toggle" onclick="return toggle('Intervals.__contains__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.regexp.interval.Intervals-class.html#__contains__">__contains__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">c</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Intervals.__contains__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Intervals.__contains__-expanded"><a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line">        <tt class="py-docstring">'''</tt> </tt>
+<a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line"><tt class="py-docstring">        Does the value lie within the intervals?</tt> </tt>
+<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__index</tt><tt class="py-op">:</tt> </tt>
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line">            <tt id="link-34" class="py-name"><a title="lepl.regexp.interval.IntervalMap.index" class="py-name" href="#" onclick="return doclink('link-34', 'index', 'link-32');">index</a></tt> <tt class="py-op">=</tt> <tt class="py-name">bisect_left</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__index</tt><tt class="py-op">,</tt> <tt class="py-name">c</tt><tt class="py-op">)</tt> </tt>
+<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt id="link-35" class="py-name"><a title="lepl.regexp.interval.IntervalMap.index" class="py-name" href="#" onclick="return doclink('link-35', 'index', 'link-32');">index</a></tt> <tt class="py-op">&lt;</tt> <tt id="link-36" class="py-name"><a title="lepl.lexer.stream.TokenHelper.len
+lepl.regexp.interval.Intervals.len
+lepl.regexp.interval.TaggedFragments.len
+lepl.regexp.interval._Character.len
+lepl.stream.core.StreamHelper.len
+lepl.stream.facade.HelperFacade.len
+lepl.stream.iter.IterableHelper.len
+lepl.stream.simple.SequenceHelper.len" class="py-name" href="#" onclick="return doclink('link-36', 'len', 'link-31');">len</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__intervals</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line">                <tt class="py-op">(</tt><tt id="link-37" class="py-name" targets="Variable lepl.cairo.colour.Colour.a=lepl.cairo.colour.Colour-class.html#a"><a title="lepl.cairo.colour.Colour.a" class="py-name" href="#" onclick="return doclink('link-37', 'a', 'link-37');">a</a></tt><tt class="py-op">,</tt> <tt id="link-38" class="py-name" targets="Variable lepl.cairo.colour.Colour.b=lepl.cairo.colour.Colour-class.html#b"><a title="lepl.cairo.colour.Colour.b" class="py-name" href="#" onclick="return doclink('link-38', 'b', 'link-38');">b</a></tt><tt class="py-op">)</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__intervals</tt><tt class="py-op">[</tt><tt id="link-39" class="py-name"><a title="lepl.regexp.interval.IntervalMap.index" class="py-name" href="#" onclick="return doclink('link-39', 'index', 'link-32');">index</a></tt><tt class="py-op">]</tt> </tt>
+<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt id="link-40" class="py-name"><a title="lepl.cairo.colour.Colour.a" class="py-name" href="#" onclick="return doclink('link-40', 'a', 'link-37');">a</a></tt> <tt class="py-op">&lt;=</tt> <tt class="py-name">c</tt> <tt class="py-op">&lt;=</tt> <tt id="link-41" class="py-name"><a title="lepl.cairo.colour.Colour.b" class="py-name" href="#" onclick="return doclink('link-41', 'b', 'link-38');">b</a></tt> </tt>
+<a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">False</tt> </tt>
+</div><a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line">     </tt>
+<a name="Intervals.__hash__"></a><div id="Intervals.__hash__-def"><a name="L162"></a><tt class="py-lineno">162</tt> <a class="py-toggle" href="#" id="Intervals.__hash__-toggle" onclick="return toggle('Intervals.__hash__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.regexp.interval.Intervals-class.html#__hash__">__hash__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Intervals.__hash__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Intervals.__hash__-expanded"><a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">hash</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__str</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line">     </tt>
+<a name="Intervals.__eq__"></a><div id="Intervals.__eq__-def"><a name="L165"></a><tt class="py-lineno">165</tt> <a class="py-toggle" href="#" id="Intervals.__eq__-toggle" onclick="return toggle('Intervals.__eq__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.regexp.interval.Intervals-class.html#__eq__">__eq__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">other</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Intervals.__eq__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Intervals.__eq__-expanded"><a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line">        <tt class="py-comment"># pylint: disable-msg=W0212</tt> </tt>
+<a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line">        <tt class="py-comment"># (test for same class)</tt> </tt>
+<a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">other</tt><tt class="py-op">,</tt> <tt id="link-42" class="py-name" targets="Class lepl.regexp.interval.Intervals=lepl.regexp.interval.Intervals-class.html"><a title="lepl.regexp.interval.Intervals" class="py-name" href="#" onclick="return doclink('link-42', 'Intervals', 'link-42');">Intervals</a></tt><tt class="py-op">)</tt> <tt class="py-keyword">and</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__str</tt> <tt class="py-op">==</tt> <tt class="py-name">other</tt><tt class="py-op">.</tt><tt class="py-name">__str</tt> </tt>
+</div></div><a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line">         </tt>
+<a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line"> </tt>
+<a name="_Character"></a><div id="_Character-def"><a name="L171"></a><tt class="py-lineno">171</tt> <a class="py-toggle" href="#" id="_Character-toggle" onclick="return toggle('_Character');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lepl.regexp.interval._Character-class.html">_Character</a><tt class="py-op">(</tt><tt class="py-base-class">Node</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_Character-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="_Character-expanded"><a name="L172"></a><tt class="py-lineno">172</tt>  <tt class="py-line">    <tt class="py-docstring">'''</tt> </tt>
+<a name="L173"></a><tt class="py-lineno">173</tt>  <tt class="py-line"><tt class="py-docstring">    A set of intervals that is part of a DFA/NFA graph.  This is separate</tt> </tt>
+<a name="L174"></a><tt class="py-lineno">174</tt>  <tt class="py-line"><tt class="py-docstring">    from the `Intervals` instance since we need to clone the node, but can</tt> </tt>
+<a name="L175"></a><tt class="py-lineno">175</tt>  <tt class="py-line"><tt class="py-docstring">    keep the intervals (necessary so that node equality works correctly when</tt> </tt>
+<a name="L176"></a><tt class="py-lineno">176</tt>  <tt class="py-line"><tt class="py-docstring">    the same character is used more than once).</tt> </tt>
+<a name="L177"></a><tt class="py-lineno">177</tt>  <tt class="py-line"><tt class="py-docstring">    '''</tt> </tt>
+<a name="L178"></a><tt class="py-lineno">178</tt>  <tt class="py-line">     </tt>
+<a name="_Character.__init__"></a><div id="_Character.__init__-def"><a name="L179"></a><tt class="py-lineno">179</tt> <a class="py-toggle" href="#" id="_Character.__init__-toggle" onclick="return toggle('_Character.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.regexp.interval._Character-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">intervals</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_Character.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="_Character.__init__-expanded"><a name="L180"></a><tt class="py-lineno">180</tt>  <tt class="py-line">        <tt class="py-name">super</tt><tt class="py-op">(</tt><tt id="link-43" class="py-name" targets="Class lepl.regexp.interval._Character=lepl.regexp.interval._Character-class.html"><a title="lepl.regexp.interval._Character" class="py-name" href="#" onclick="return doclink('link-43', '_Character', 'link-43');">_Character</a></tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-44" class="py-name" targets="Method lepl.bin.bits.BitIterator.__init__()=lepl.bin.bits.BitIterator-class.html#__init__,Method lepl.bin.bits.BitString.__init__()=lepl.bin.bits.BitString-class.html#__init__,Method lepl.bin.bits.ByteIterator.__init__()=lepl.bin.bits.ByteIterator-class.html#__init__,Method lepl.bin.bits.Int.__init__()=lepl.bin.bits.Int-class.html#__init__,Method lepl.bin.matchers.BEnd.__init__()=lepl.bin.matchers.BEnd-class.html#__init__,Method lepl.bin.matchers.Const.__init__()=lepl.bin.matchers.Const-class.html#__init__,Method lepl.bin.matchers._ByteArray.__init__()=lepl.bin.matchers._ByteArray-class.html#__init__,Method lepl.bin.matchers._Constant.__init__()=lepl.bin.matchers._Constant-class.html#__init__,Method lepl.bin.matchers._String.__init__()=lepl.bin.matchers._String-class.html#__init__,Method lepl.bin.matchers._Variable.__init__()=lepl.bin.matchers._Variable-class.html#__init__,Method lepl.cairo.context.cset.__init__()=lepl.cairo.context.cset-class.html#__init__,Method lepl.core._test.parser.InstanceMethodTest.Foo.__init__()=lepl.core._test.parser.InstanceMethodTest.Foo-class.html#__init__,Method lepl.core.config.ConfigBuilder.__init__()=lepl.core.config.ConfigBuilder-class.html#__init__,Method lepl.core.config.ParserMixin.__init__()=lepl.core.config.ParserMixin-class.html#__init__,Method lepl.core.dynamic.BaseVar.__init__()=lepl.core.dynamic.BaseVar-class.html#__init__,Method lepl.core.manager.GeneratorRef.__init__()=lepl.core.manager.GeneratorRef-class.html#__init__,Method lepl.core.manager._GeneratorManager.__init__()=lepl.core.manager._GeneratorManager-class.html#__init__,Method lepl.core.monitor.MultipleStackMonitors.__init__()=lepl.core.monitor.MultipleStackMonitors-class.html#__init__,Method lepl.core.monitor.MultipleValueMonitors.__init__()=lepl.core.monitor.MultipleValueMonitors-class.html#__init__,Method lepl.core.parser.GeneratorWrapper.__init__()=lepl.core.parser.GeneratorWrapper-class.html#__init__,Method lepl.core.rewriters.AutoMemoize.__init__()=lepl.core.rewriters.AutoMemoize-class.html#__init__,Method lepl.core.rewriters.ComposeTransforms.__init__()=lepl.core.rewriters.ComposeTransforms-class.html#__init__,Method lepl.core.rewriters.DirectEvaluation.__init__()=lepl.core.rewriters.DirectEvaluation-class.html#__init__,Method lepl.core.rewriters.Flatten.__init__()=lepl.core.rewriters.Flatten-class.html#__init__,Method lepl.core.rewriters.FullFirstMatch.__init__()=lepl.core.rewriters.FullFirstMatch-class.html#__init__,Method lepl.core.rewriters.LeftMemoize.__init__()=lepl.core.rewriters.LeftMemoize-class.html#__init__,Method lepl.core.rewriters.NodeStats.__init__()=lepl.core.rewriters.NodeStats-class.html#__init__,Method lepl.core.rewriters.NodeStats2.__init__()=lepl.core.rewriters.NodeStats2-class.html#__init__,Method lepl.core.rewriters.OptimizeOr.__init__()=lepl.core.rewriters.OptimizeOr-class.html#__init__,Method lepl.core.rewriters.Rewriter.__init__()=lepl.core.rewriters.Rewriter-class.html#__init__,Method lepl.core.rewriters.RightMemoize.__init__()=lepl.core.rewriters.RightMemoize-class.html#__init__,Method lepl.core.rewriters.SetArguments.__init__()=lepl.core.rewriters.SetArguments-class.html#__init__,Method lepl.core.rewriters.TraceVariables.__init__()=lepl.core.rewriters.TraceVariables-class.html#__init__,Method lepl.core.trace._RecordDeepest.__init__()=lepl.core.trace._RecordDeepest-class.html#__init__,Method lepl.core.trace._TraceStack.__init__()=lepl.core.trace._TraceStack-class.html#__init__,Method lepl.lexer.lexer.Lexer.__init__()=lepl.lexer.lexer.Lexer-class.html#__init__,Method lepl.lexer.lines.lexer._OffsideLexer.__init__()=lepl.lexer.lines.lexer._OffsideLexer-class.html#__init__,Method lepl.lexer.lines.matchers.Block.__init__()=lepl.lexer.lines.matchers.Block-class.html#__init__,Method lepl.lexer.lines.matchers.LineEnd.__init__()=lepl.lexer.lines.matchers.LineEnd-class.html#__init__,Method lepl.lexer.lines.matchers.LineStart.__init__()=lepl.lexer.lines.matchers.LineStart-class.html#__init__,Method lepl.lexer.lines.monitor.BlockMonitor.__init__()=lepl.lexer.lines.monitor.BlockMonitor-class.html#__init__,Method lepl.lexer.matchers.BaseToken.__init__()=lepl.lexer.matchers.BaseToken-class.html#__init__,Method lepl.lexer.matchers.Token.__init__()=lepl.lexer.matchers.Token-class.html#__init__,Method lepl.lexer.operators.TokenNamespace.__init__()=lepl.lexer.operators.TokenNamespace-class.html#__init__,Method lepl.lexer.rewriters.AddLexer.__init__()=lepl.lexer.rewriters.AddLexer-class.html#__init__,Method lepl.lexer.stream.FilteredTokenHelper.__init__()=lepl.lexer.stream.FilteredTokenHelper-class.html#__init__,Method lepl.lexer.stream.TokenHelper.__init__()=lepl.lexer.stream.TokenHelper-class.html#__init__,Method lepl.matchers._test.derived.RangeMatch.__init__()=lepl.matchers._test.derived.RangeMatch-class.html#__init__,Method lepl.matchers.combine._BaseCombiner.__init__()=lepl.matchers.combine._BaseCombiner-class.html#__init__,Method lepl.matchers.core.Delayed.__init__()=lepl.matchers.core.Delayed-class.html#__init__,Method lepl.matchers.core.Lookahead.__init__()=lepl.matchers.core.Lookahead-class.html#__init__,Method lepl.matchers.error.Error.__init__()=lepl.matchers.error.Error-class.html#__init__,Method lepl.matchers.matcher.Matcher.__init__()=lepl.matchers.matcher.Matcher-class.html#__init__,Method lepl.matchers.matcher.Relations.__init__()=lepl.matchers.matcher.Relations-class.html#__init__,Method lepl.matchers.memo._LMemo.__init__()=lepl.matchers.memo._LMemo-class.html#__init__,Method lepl.matchers.memo._RMemo.__init__()=lepl.matchers.memo._RMemo-class.html#__init__,Method lepl.matchers.monitor.Trace.__init__()=lepl.matchers.monitor.Trace-class.html#__init__,Method lepl.matchers.operators.DroppedSpace.__init__()=lepl.matchers.operators.DroppedSpace-class.html#__init__,Method lepl.matchers.operators.OperatorMixin.__init__()=lepl.matchers.operators.OperatorMixin-class.html#__init__,Method lepl.matchers.operators.OperatorNamespace.__init__()=lepl.matchers.operators.OperatorNamespace-class.html#__init__,Method lepl.matchers.operators.Override.__init__()=lepl.matchers.operators.Override-class.html#__init__,Method lepl.matchers.operators._BaseSeparator.__init__()=lepl.matchers.operators._BaseSeparator-class.html#__init__,Method lepl.matchers.support.BaseFactoryMatcher.__init__()=lepl.matchers.support.BaseFactoryMatcher-class.html#__init__,Method lepl.matchers.support.OperatorMatcher.__init__()=lepl.matchers.support.OperatorMatcher-class.html#__init__,Method lepl.matchers.support.Transformable.__init__()=lepl.matchers.support.Transformable-class.html#__init__,Method lepl.matchers.transform.Transform.__init__()=lepl.matchers.transform.Transform-class.html#__init__,Method lepl.matchers.transform.TransformationWrapper.__init__()=lepl.matchers.transform.TransformationWrapper-class.html#__init__,Method lepl.regexp.binary.BinaryAlphabet.__init__()=lepl.regexp.binary.BinaryAlphabet-class.html#__init__,Method lepl.regexp.core.Alphabet.__init__()=lepl.regexp.core.Alphabet-class.html#__init__,Method lepl.regexp.core.BaseGraph.__init__()=lepl.regexp.core.BaseGraph-class.html#__init__,Method lepl.regexp.core.Compiler.__init__()=lepl.regexp.core.Compiler-class.html#__init__,Method lepl.regexp.core.DfaGraph.__init__()=lepl.regexp.core.DfaGraph-class.html#__init__,Method lepl.regexp.core.DfaPattern.__init__()=lepl.regexp.core.DfaPattern-class.html#__init__,Method lepl.regexp.core.Labelled.__init__()=lepl.regexp.core.Labelled-class.html#__init__,Method lepl.regexp.core.NfaGraph.__init__()=lepl.regexp.core.NfaGraph-class.html#__init__,Method lepl.regexp.core.NfaPattern.__init__()=lepl.regexp.core.NfaPattern-class.html#__init__,Method lepl.regexp.core.NfaToDfa.__init__()=lepl.regexp.core.NfaToDfa-class.html#__init__,Method lepl.regexp.core.Sequence.__init__()=lepl.regexp.core.Sequence-class.html#__init__,Method lepl.regexp.interval.IntervalMap.__init__()=lepl.regexp.interval.IntervalMap-class.html#__init__,Method lepl.regexp.interval.Intervals.__init__()=lepl.regexp.interval.Intervals-class.html#__init__,Method lepl.regexp.interval.TaggedFragments.__init__()=lepl.regexp.interval.TaggedFragments-class.html#__init__,Method lepl.regexp.interval._Character.__init__()=lepl.regexp.interval._Character-class.html#__init__,Method lepl.regexp.matchers.BaseRegexp.__init__()=lepl.regexp.matchers.BaseRegexp-class.html#__init__,Method lepl.regexp.matchers.DfaRegexp.__init__()=lepl.regexp.matchers.DfaRegexp-class.html#__init__,Method lepl.regexp.matchers.NfaRegexp.__init__()=lepl.regexp.matchers.NfaRegexp-class.html#__init__,Method lepl.regexp.rewriters.CompileRegexp.__init__()=lepl.regexp.rewriters.CompileRegexp-class.html#__init__,Method lepl.regexp.rewriters.RegexpContainer.__init__()=lepl.regexp.rewriters.RegexpContainer-class.html#__init__,Method lepl.regexp.str.StrAlphabet.__init__()=lepl.regexp.str.StrAlphabet-class.html#__init__,Method lepl.regexp.str.StrParser.__init__()=lepl.regexp.str.StrParser-class.html#__init__,Method lepl.regexp.unicode.UnicodeAlphabet.__init__()=lepl.regexp.unicode.UnicodeAlphabet-class.html#__init__,Method lepl.stream.core.HashKey.__init__()=lepl.stream.core.HashKey-class.html#__init__,Method lepl.stream.core.MutableMaxDepth.__init__()=lepl.stream.core.MutableMaxDepth-class.html#__init__,Method lepl.stream.core.StreamHelper.__init__()=lepl.stream.core.StreamHelper-class.html#__init__,Method lepl.stream.facade.HelperFacade.__init__()=lepl.stream.facade.HelperFacade-class.html#__init__,Method lepl.stream.iter.Cons.__init__()=lepl.stream.iter.Cons-class.html#__init__,Method lepl.stream.maxdepth.FullFirstMatchException.__init__()=lepl.stream.maxdepth.FullFirstMatchException-class.html#__init__,Method lepl.stream.simple.BaseHelper.__init__()=lepl.stream.simple.BaseHelper-class.html#__init__,Method lepl.stream.simple.SequenceHelper.__init__()=lepl.stream.simple.SequenceHelper-class.html#__init__,Method lepl.stream.simple.StringHelper.__init__()=lepl.stream.simple.StringHelper-class.html#__init__,Method lepl.support._test.graph.SimpleNode.__init__()=lepl.support._test.graph.SimpleNode-class.html#__init__,Method lepl.support.context.Namespace.__init__()=lepl.support.context.Namespace-class.html#__init__,Method lepl.support.context.NamespaceMap.__init__()=lepl.support.context.NamespaceMap-class.html#__init__,Method lepl.support.context.NamespaceMixin.__init__()=lepl.support.context.NamespaceMixin-class.html#__init__,Method lepl.support.context.OnceOnlyNamespace.__init__()=lepl.support.context.OnceOnlyNamespace-class.html#__init__,Method lepl.support.context.Scope.__init__()=lepl.support.context.Scope-class.html#__init__,Method lepl.support.graph.ArgAsAttributeMixin.__init__()=lepl.support.graph.ArgAsAttributeMixin-class.html#__init__,Method lepl.support.graph.Clone.__init__()=lepl.support.graph.Clone-class.html#__init__,Method lepl.support.graph.ConstructorStr.__init__()=lepl.support.graph.ConstructorStr-class.html#__init__,Method lepl.support.graph.ConstructorWalker.__init__()=lepl.support.graph.ConstructorWalker-class.html#__init__,Method lepl.support.graph.GraphStr.__init__()=lepl.support.graph.GraphStr-class.html#__init__,Method lepl.support.graph.PostorderWalkerMixin.__init__()=lepl.support.graph.PostorderWalkerMixin-class.html#__init__,Method lepl.support.graph.Proxy.__init__()=lepl.support.graph.Proxy-class.html#__init__,Method lepl.support.graph.SimpleWalker.__init__()=lepl.support.graph.SimpleWalker-class.html#__init__,Method lepl.support.lib.CircularFifo.__init__()=lepl.support.lib.CircularFifo-class.html#__init__,Method lepl.support.lib.LogMixin.__init__()=lepl.support.lib.LogMixin-class.html#__init__,Method lepl.support.node.Node.__init__()=lepl.support.node.Node-class.html#__init__,Method lepl.support.state.State.__init__()=lepl.support.state.State-class.html#__init__,Method lepl.support.warn.Warning.__init__()=lepl.support.warn.Warning-class.html#__init__"><a title="lepl.bin.bits.BitIterator.__init__
+lepl.bin.bits.BitString.__init__
+lepl.bin.bits.ByteIterator.__init__
+lepl.bin.bits.Int.__init__
+lepl.bin.matchers.BEnd.__init__
+lepl.bin.matchers.Const.__init__
+lepl.bin.matchers._ByteArray.__init__
+lepl.bin.matchers._Constant.__init__
+lepl.bin.matchers._String.__init__
+lepl.bin.matchers._Variable.__init__
+lepl.cairo.context.cset.__init__
+lepl.core._test.parser.InstanceMethodTest.Foo.__init__
+lepl.core.config.ConfigBuilder.__init__
+lepl.core.config.ParserMixin.__init__
+lepl.core.dynamic.BaseVar.__init__
+lepl.core.manager.GeneratorRef.__init__
+lepl.core.manager._GeneratorManager.__init__
+lepl.core.monitor.MultipleStackMonitors.__init__
+lepl.core.monitor.MultipleValueMonitors.__init__
+lepl.core.parser.GeneratorWrapper.__init__
+lepl.core.rewriters.AutoMemoize.__init__
+lepl.core.rewriters.ComposeTransforms.__init__
+lepl.core.rewriters.DirectEvaluation.__init__
+lepl.core.rewriters.Flatten.__init__
+lepl.core.rewriters.FullFirstMatch.__init__
+lepl.core.rewriters.LeftMemoize.__init__
+lepl.core.rewriters.NodeStats.__init__
+lepl.core.rewriters.NodeStats2.__init__
+lepl.core.rewriters.OptimizeOr.__init__
+lepl.core.rewriters.Rewriter.__init__
+lepl.core.rewriters.RightMemoize.__init__
+lepl.core.rewriters.SetArguments.__init__
+lepl.core.rewriters.TraceVariables.__init__
+lepl.core.trace._RecordDeepest.__init__
+lepl.core.trace._TraceStack.__init__
+lepl.lexer.lexer.Lexer.__init__
+lepl.lexer.lines.lexer._OffsideLexer.__init__
+lepl.lexer.lines.matchers.Block.__init__
+lepl.lexer.lines.matchers.LineEnd.__init__
+lepl.lexer.lines.matchers.LineStart.__init__
+lepl.lexer.lines.monitor.BlockMonitor.__init__
+lepl.lexer.matchers.BaseToken.__init__
+lepl.lexer.matchers.Token.__init__
+lepl.lexer.operators.TokenNamespace.__init__
+lepl.lexer.rewriters.AddLexer.__init__
+lepl.lexer.stream.FilteredTokenHelper.__init__
+lepl.lexer.stream.TokenHelper.__init__
+lepl.matchers._test.derived.RangeMatch.__init__
+lepl.matchers.combine._BaseCombiner.__init__
+lepl.matchers.core.Delayed.__init__
+lepl.matchers.core.Lookahead.__init__
+lepl.matchers.error.Error.__init__
+lepl.matchers.matcher.Matcher.__init__
+lepl.matchers.matcher.Relations.__init__
+lepl.matchers.memo._LMemo.__init__
+lepl.matchers.memo._RMemo.__init__
+lepl.matchers.monitor.Trace.__init__
+lepl.matchers.operators.DroppedSpace.__init__
+lepl.matchers.operators.OperatorMixin.__init__
+lepl.matchers.operators.OperatorNamespace.__init__
+lepl.matchers.operators.Override.__init__
+lepl.matchers.operators._BaseSeparator.__init__
+lepl.matchers.support.BaseFactoryMatcher.__init__
+lepl.matchers.support.OperatorMatcher.__init__
+lepl.matchers.support.Transformable.__init__
+lepl.matchers.transform.Transform.__init__
+lepl.matchers.transform.TransformationWrapper.__init__
+lepl.regexp.binary.BinaryAlphabet.__init__
+lepl.regexp.core.Alphabet.__init__
+lepl.regexp.core.BaseGraph.__init__
+lepl.regexp.core.Compiler.__init__
+lepl.regexp.core.DfaGraph.__init__
+lepl.regexp.core.DfaPattern.__init__
+lepl.regexp.core.Labelled.__init__
+lepl.regexp.core.NfaGraph.__init__
+lepl.regexp.core.NfaPattern.__init__
+lepl.regexp.core.NfaToDfa.__init__
+lepl.regexp.core.Sequence.__init__
+lepl.regexp.interval.IntervalMap.__init__
+lepl.regexp.interval.Intervals.__init__
+lepl.regexp.interval.TaggedFragments.__init__
+lepl.regexp.interval._Character.__init__
+lepl.regexp.matchers.BaseRegexp.__init__
+lepl.regexp.matchers.DfaRegexp.__init__
+lepl.regexp.matchers.NfaRegexp.__init__
+lepl.regexp.rewriters.CompileRegexp.__init__
+lepl.regexp.rewriters.RegexpContainer.__init__
+lepl.regexp.str.StrAlphabet.__init__
+lepl.regexp.str.StrParser.__init__
+lepl.regexp.unicode.UnicodeAlphabet.__init__
+lepl.stream.core.HashKey.__init__
+lepl.stream.core.MutableMaxDepth.__init__
+lepl.stream.core.StreamHelper.__init__
+lepl.stream.facade.HelperFacade.__init__
+lepl.stream.iter.Cons.__init__
+lepl.stream.maxdepth.FullFirstMatchException.__init__
+lepl.stream.simple.BaseHelper.__init__
+lepl.stream.simple.SequenceHelper.__init__
+lepl.stream.simple.StringHelper.__init__
+lepl.support._test.graph.SimpleNode.__init__
+lepl.support.context.Namespace.__init__
+lepl.support.context.NamespaceMap.__init__
+lepl.support.context.NamespaceMixin.__init__
+lepl.support.context.OnceOnlyNamespace.__init__
+lepl.support.context.Scope.__init__
+lepl.support.graph.ArgAsAttributeMixin.__init__
+lepl.support.graph.Clone.__init__
+lepl.support.graph.ConstructorStr.__init__
+lepl.support.graph.ConstructorWalker.__init__
+lepl.support.graph.GraphStr.__init__
+lepl.support.graph.PostorderWalkerMixin.__init__
+lepl.support.graph.Proxy.__init__
+lepl.support.graph.SimpleWalker.__init__
+lepl.support.lib.CircularFifo.__init__
+lepl.support.lib.LogMixin.__init__
+lepl.support.node.Node.__init__
+lepl.support.state.State.__init__
+lepl.support.warn.Warning.__init__" class="py-name" href="#" onclick="return doclink('link-44', '__init__', 'link-44');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">intervals</tt><tt class="py-op">)</tt> </tt>
+<a name="L181"></a><tt class="py-lineno">181</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__intervals</tt> <tt class="py-op">=</tt> <tt class="py-name">intervals</tt> </tt>
+</div><a name="L182"></a><tt class="py-lineno">182</tt>  <tt class="py-line">         </tt>
+<a name="_Character.append"></a><div id="_Character.append-def"><a name="L183"></a><tt class="py-lineno">183</tt> <a class="py-toggle" href="#" id="_Character.append-toggle" onclick="return toggle('_Character.append');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.regexp.interval._Character-class.html#append">append</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">interval</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_Character.append-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="_Character.append-expanded"><a name="L184"></a><tt class="py-lineno">184</tt>  <tt class="py-line">        <tt class="py-docstring">'''</tt> </tt>
+<a name="L185"></a><tt class="py-lineno">185</tt>  <tt class="py-line"><tt class="py-docstring">        Add an interval to the range.</tt> </tt>
+<a name="L186"></a><tt class="py-lineno">186</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L187"></a><tt class="py-lineno">187</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__intervals</tt><tt class="py-op">.</tt><tt id="link-45" class="py-name"><a title="lepl.core._test.rewriters.append
+lepl.core.monitor.MultipleStackMonitors.append
+lepl.core.monitor.MultipleValueMonitors.append
+lepl.matchers.transform.TransformationWrapper.append
+lepl.regexp.interval.Intervals.append
+lepl.regexp.interval.TaggedFragments.append
+lepl.regexp.interval._Character.append
+lepl.support.lib.CircularFifo.append" class="py-name" href="#" onclick="return doclink('link-45', 'append', 'link-22');">append</a></tt><tt class="py-op">(</tt><tt id="link-46" class="py-name"><a title="lepl.regexp._test.interval
+lepl.regexp.interval" class="py-name" href="#" onclick="return doclink('link-46', 'interval', 'link-6');">interval</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L188"></a><tt class="py-lineno">188</tt>  <tt class="py-line">         </tt>
+<a name="_Character.__str__"></a><div id="_Character.__str__-def"><a name="L189"></a><tt class="py-lineno">189</tt> <a class="py-toggle" href="#" id="_Character.__str__-toggle" onclick="return toggle('_Character.__str__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.regexp.interval._Character-class.html#__str__">__str__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_Character.__str__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="_Character.__str__-expanded"><a name="L190"></a><tt class="py-lineno">190</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-47" class="py-name" targets="Module lepl.regexp.str=lepl.regexp.str-module.html"><a title="lepl.regexp.str" class="py-name" href="#" onclick="return doclink('link-47', 'str', 'link-47');">str</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__intervals</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L191"></a><tt class="py-lineno">191</tt>  <tt class="py-line">     </tt>
+<a name="_Character.__repr__"></a><div id="_Character.__repr__-def"><a name="L192"></a><tt class="py-lineno">192</tt> <a class="py-toggle" href="#" id="_Character.__repr__-toggle" onclick="return toggle('_Character.__repr__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.regexp.interval._Character-class.html#__repr__">__repr__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_Character.__repr__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="_Character.__repr__-expanded"><a name="L193"></a><tt class="py-lineno">193</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">repr</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__intervals</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L194"></a><tt class="py-lineno">194</tt>  <tt class="py-line">     </tt>
+<a name="_Character.len"></a><div id="_Character.len-def"><a name="L195"></a><tt class="py-lineno">195</tt> <a class="py-toggle" href="#" id="_Character.len-toggle" onclick="return toggle('_Character.len');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.regexp.interval._Character-class.html#len">len</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_Character.len-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="_Character.len-expanded"><a name="L196"></a><tt class="py-lineno">196</tt>  <tt class="py-line">        <tt class="py-docstring">'''</tt> </tt>
+<a name="L197"></a><tt class="py-lineno">197</tt>  <tt class="py-line"><tt class="py-docstring">        The number of intervals in the range.</tt> </tt>
+<a name="L198"></a><tt class="py-lineno">198</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L199"></a><tt class="py-lineno">199</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-48" class="py-name"><a title="lepl.lexer.stream.TokenHelper.len
+lepl.regexp.interval.Intervals.len
+lepl.regexp.interval.TaggedFragments.len
+lepl.regexp.interval._Character.len
+lepl.stream.core.StreamHelper.len
+lepl.stream.facade.HelperFacade.len
+lepl.stream.iter.IterableHelper.len
+lepl.stream.simple.SequenceHelper.len" class="py-name" href="#" onclick="return doclink('link-48', 'len', 'link-31');">len</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__intervals</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L200"></a><tt class="py-lineno">200</tt>  <tt class="py-line">     </tt>
+<a name="_Character.__getitem__"></a><div id="_Character.__getitem__-def"><a name="L201"></a><tt class="py-lineno">201</tt> <a class="py-toggle" href="#" id="_Character.__getitem__-toggle" onclick="return toggle('_Character.__getitem__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.regexp.interval._Character-class.html#__getitem__">__getitem__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">index</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_Character.__getitem__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="_Character.__getitem__-expanded"><a name="L202"></a><tt class="py-lineno">202</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__intervals</tt><tt class="py-op">[</tt><tt id="link-49" class="py-name"><a title="lepl.regexp.interval.IntervalMap.index" class="py-name" href="#" onclick="return doclink('link-49', 'index', 'link-32');">index</a></tt><tt class="py-op">]</tt> </tt>
+</div><a name="L203"></a><tt class="py-lineno">203</tt>  <tt class="py-line">     </tt>
+<a name="_Character.__iter__"></a><div id="_Character.__iter__-def"><a name="L204"></a><tt class="py-lineno">204</tt> <a class="py-toggle" href="#" id="_Character.__iter__-toggle" onclick="return toggle('_Character.__iter__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.regexp.interval._Character-class.html#__iter__">__iter__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_Character.__iter__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="_Character.__iter__-expanded"><a name="L205"></a><tt class="py-lineno">205</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-50" class="py-name"><a title="lepl.stream._test.iter
+lepl.stream.iter" class="py-name" href="#" onclick="return doclink('link-50', 'iter', 'link-33');">iter</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__intervals</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L206"></a><tt class="py-lineno">206</tt>  <tt class="py-line">     </tt>
+<a name="_Character.__contains__"></a><div id="_Character.__contains__-def"><a name="L207"></a><tt class="py-lineno">207</tt> <a class="py-toggle" href="#" id="_Character.__contains__-toggle" onclick="return toggle('_Character.__contains__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.regexp.interval._Character-class.html#__contains__">__contains__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">c</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_Character.__contains__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="_Character.__contains__-expanded"><a name="L208"></a><tt class="py-lineno">208</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">c</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__intervals</tt> </tt>
+</div><a name="L209"></a><tt class="py-lineno">209</tt>  <tt class="py-line">     </tt>
+<a name="_Character.build"></a><div id="_Character.build-def"><a name="L210"></a><tt class="py-lineno">210</tt> <a class="py-toggle" href="#" id="_Character.build-toggle" onclick="return toggle('_Character.build');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.regexp.interval._Character-class.html#build">build</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">graph</tt><tt class="py-op">,</tt> <tt class="py-param">src</tt><tt class="py-op">,</tt> <tt class="py-param">dest</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_Character.build-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="_Character.build-expanded"><a name="L211"></a><tt class="py-lineno">211</tt>  <tt class="py-line">        <tt class="py-docstring">'''</tt> </tt>
+<a name="L212"></a><tt class="py-lineno">212</tt>  <tt class="py-line"><tt class="py-docstring">        Insert within an NFA graph (although at this level, it's not clear it's</tt> </tt>
+<a name="L213"></a><tt class="py-lineno">213</tt>  <tt class="py-line"><tt class="py-docstring">        NFA).</tt> </tt>
+<a name="L214"></a><tt class="py-lineno">214</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L215"></a><tt class="py-lineno">215</tt>  <tt class="py-line">        <tt id="link-51" class="py-name" targets="Module lepl.support._test.graph=lepl.support._test.graph-module.html,Function lepl.support._test.graph.graph()=lepl.support._test.graph-module.html#graph,Module lepl.support.graph=lepl.support.graph-module.html"><a title="lepl.support._test.graph
+lepl.support._test.graph.graph
+lepl.support.graph" class="py-name" href="#" onclick="return doclink('link-51', 'graph', 'link-51');">graph</a></tt><tt class="py-op">.</tt><tt id="link-52" class="py-name" targets="Method lepl.regexp.core.BaseGraph.connect()=lepl.regexp.core.BaseGraph-class.html#connect,Method lepl.regexp.core.NfaGraph.connect()=lepl.regexp.core.NfaGraph-class.html#connect"><a title="lepl.regexp.core.BaseGraph.connect
+lepl.regexp.core.NfaGraph.connect" class="py-name" href="#" onclick="return doclink('link-52', 'connect', 'link-52');">connect</a></tt><tt class="py-op">(</tt><tt class="py-name">src</tt><tt class="py-op">,</tt> <tt class="py-name">dest</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L216"></a><tt class="py-lineno">216</tt>  <tt class="py-line">         </tt>
+<a name="L217"></a><tt class="py-lineno">217</tt>  <tt class="py-line">         </tt>
+<a name="Character"></a><div id="Character-def"><a name="L218"></a><tt class="py-lineno">218</tt> <a class="py-toggle" href="#" id="Character-toggle" onclick="return toggle('Character');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.regexp.interval-module.html#Character">Character</a><tt class="py-op">(</tt><tt class="py-param">intervals</tt><tt class="py-op">,</tt> <tt class="py-param">alphabet</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Character-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Character-expanded"><a name="L219"></a><tt class="py-lineno">219</tt>  <tt class="py-line">    <tt class="py-docstring">'''</tt> </tt>
+<a name="L220"></a><tt class="py-lineno">220</tt>  <tt class="py-line"><tt class="py-docstring">    Allow simple construction of Character instances.</tt> </tt>
+<a name="L221"></a><tt class="py-lineno">221</tt>  <tt class="py-line"><tt class="py-docstring">    '''</tt> </tt>
+<a name="L222"></a><tt class="py-lineno">222</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-53" class="py-name"><a title="lepl.regexp.interval._Character" class="py-name" href="#" onclick="return doclink('link-53', '_Character', 'link-43');">_Character</a></tt><tt class="py-op">(</tt><tt id="link-54" class="py-name"><a title="lepl.regexp.interval.Intervals" class="py-name" href="#" onclick="return doclink('link-54', 'Intervals', 'link-42');">Intervals</a></tt><tt class="py-op">(</tt><tt class="py-name">intervals</tt><tt class="py-op">,</tt> <tt id="link-55" class="py-name"><a title="lepl.core.config.ConfigBuilder.alphabet" class="py-name" href="#" onclick="return doclink('link-55', 'alphabet', 'link-4');">alphabet</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L223"></a><tt class="py-lineno">223</tt>  <tt class="py-line">     </tt>
+<a name="L224"></a><tt class="py-lineno">224</tt>  <tt class="py-line"> </tt>
+<a name="L225"></a><tt class="py-lineno">225</tt>  <tt class="py-line"><tt class="py-comment">#class Fragments(object):</tt> </tt>
+<a name="L226"></a><tt class="py-lineno">226</tt>  <tt class="py-line"><tt class="py-comment">#    '''</tt> </tt>
+<a name="L227"></a><tt class="py-lineno">227</tt>  <tt class="py-line"><tt class="py-comment">#    Similar to Character, but each additional interval fragments the list</tt> </tt>
+<a name="L228"></a><tt class="py-lineno">228</tt>  <tt class="py-line"><tt class="py-comment">#    of intervals, instead of creating a new merged interval.  For example,</tt> </tt>
+<a name="L229"></a><tt class="py-lineno">229</tt>  <tt class="py-line"><tt class="py-comment">#    if (3,5) is added to (1,4) and (7,8) then the result will be the</tt> </tt>
+<a name="L230"></a><tt class="py-lineno">230</tt>  <tt class="py-line"><tt class="py-comment">#    intervals (1,2), (3,4), (5,5) and (7,8) - the interval (3,4) is the</tt> </tt>
+<a name="L231"></a><tt class="py-lineno">231</tt>  <tt class="py-line"><tt class="py-comment">#    overlap between (1,4) and (3,5).   </tt> </tt>
+<a name="L232"></a><tt class="py-lineno">232</tt>  <tt class="py-line"><tt class="py-comment">#    </tt> </tt>
+<a name="L233"></a><tt class="py-lineno">233</tt>  <tt class="py-line"><tt class="py-comment">#    Used internally to combine transitions.</tt> </tt>
+<a name="L234"></a><tt class="py-lineno">234</tt>  <tt class="py-line"><tt class="py-comment">#    '''</tt> </tt>
+<a name="L235"></a><tt class="py-lineno">235</tt>  <tt class="py-line"><tt class="py-comment">#    </tt> </tt>
+<a name="L236"></a><tt class="py-lineno">236</tt>  <tt class="py-line"><tt class="py-comment">#    # pylint: disable-msg=C0103 </tt> </tt>
+<a name="L237"></a><tt class="py-lineno">237</tt>  <tt class="py-line"><tt class="py-comment">#    # (use (a,b) variables consistently)</tt> </tt>
+<a name="L238"></a><tt class="py-lineno">238</tt>  <tt class="py-line"><tt class="py-comment">#    </tt> </tt>
+<a name="L239"></a><tt class="py-lineno">239</tt>  <tt class="py-line"><tt class="py-comment">#    def __init__(self, alphabet, characters=None):</tt> </tt>
+<a name="L240"></a><tt class="py-lineno">240</tt>  <tt class="py-line"><tt class="py-comment">#        self.alphabet = alphabet</tt> </tt>
+<a name="L241"></a><tt class="py-lineno">241</tt>  <tt class="py-line"><tt class="py-comment">#        self.__intervals = deque()</tt> </tt>
+<a name="L242"></a><tt class="py-lineno">242</tt>  <tt class="py-line"><tt class="py-comment">#        if characters:</tt> </tt>
+<a name="L243"></a><tt class="py-lineno">243</tt>  <tt class="py-line"><tt class="py-comment">#            for character in characters:</tt> </tt>
+<a name="L244"></a><tt class="py-lineno">244</tt>  <tt class="py-line"><tt class="py-comment">#                self.append(character)</tt> </tt>
+<a name="L245"></a><tt class="py-lineno">245</tt>  <tt class="py-line"><tt class="py-comment">#                </tt> </tt>
+<a name="L246"></a><tt class="py-lineno">246</tt>  <tt class="py-line"><tt class="py-comment">#    def append(self, character):</tt> </tt>
+<a name="L247"></a><tt class="py-lineno">247</tt>  <tt class="py-line"><tt class="py-comment">#        '''</tt> </tt>
+<a name="L248"></a><tt class="py-lineno">248</tt>  <tt class="py-line"><tt class="py-comment">#        Add a character to the intervals.</tt> </tt>
+<a name="L249"></a><tt class="py-lineno">249</tt>  <tt class="py-line"><tt class="py-comment">#        '''</tt> </tt>
+<a name="L250"></a><tt class="py-lineno">250</tt>  <tt class="py-line"><tt class="py-comment">#        assert type(character) is Character</tt> </tt>
+<a name="L251"></a><tt class="py-lineno">251</tt>  <tt class="py-line"><tt class="py-comment">#        for interval in character:</tt> </tt>
+<a name="L252"></a><tt class="py-lineno">252</tt>  <tt class="py-line"><tt class="py-comment">#            self.__append(interval)</tt> </tt>
+<a name="L253"></a><tt class="py-lineno">253</tt>  <tt class="py-line"><tt class="py-comment">#        </tt> </tt>
+<a name="L254"></a><tt class="py-lineno">254</tt>  <tt class="py-line"><tt class="py-comment">#    def __append(self, interval):</tt> </tt>
+<a name="L255"></a><tt class="py-lineno">255</tt>  <tt class="py-line"><tt class="py-comment">#        '''</tt> </tt>
+<a name="L256"></a><tt class="py-lineno">256</tt>  <tt class="py-line"><tt class="py-comment">#        Add an interval to the existing intervals.</tt> </tt>
+<a name="L257"></a><tt class="py-lineno">257</tt>  <tt class="py-line"><tt class="py-comment">#        '''</tt> </tt>
+<a name="L258"></a><tt class="py-lineno">258</tt>  <tt class="py-line"><tt class="py-comment">#        (a1, b1) = interval</tt> </tt>
+<a name="L259"></a><tt class="py-lineno">259</tt>  <tt class="py-line"><tt class="py-comment">#        if b1 &lt; a1:</tt> </tt>
+<a name="L260"></a><tt class="py-lineno">260</tt>  <tt class="py-line"><tt class="py-comment">#            (a1, b1) = (b1, a1)</tt> </tt>
+<a name="L261"></a><tt class="py-lineno">261</tt>  <tt class="py-line"><tt class="py-comment">#        intervals = deque()</tt> </tt>
+<a name="L262"></a><tt class="py-lineno">262</tt>  <tt class="py-line"><tt class="py-comment">#        alphabet = self.alphabet</tt> </tt>
+<a name="L263"></a><tt class="py-lineno">263</tt>  <tt class="py-line"><tt class="py-comment">#        done = False</tt> </tt>
+<a name="L264"></a><tt class="py-lineno">264</tt>  <tt class="py-line"><tt class="py-comment">#        while self.__intervals:</tt> </tt>
+<a name="L265"></a><tt class="py-lineno">265</tt>  <tt class="py-line"><tt class="py-comment">#            (a0, b0) = self.__intervals.popleft()</tt> </tt>
+<a name="L266"></a><tt class="py-lineno">266</tt>  <tt class="py-line"><tt class="py-comment">#            if a0 &lt;= a1:</tt> </tt>
+<a name="L267"></a><tt class="py-lineno">267</tt>  <tt class="py-line"><tt class="py-comment">#                if b0 &lt; a1:</tt> </tt>
+<a name="L268"></a><tt class="py-lineno">268</tt>  <tt class="py-line"><tt class="py-comment">#                    # old interval starts and ends before new interval</tt> </tt>
+<a name="L269"></a><tt class="py-lineno">269</tt>  <tt class="py-line"><tt class="py-comment">#                    # so keep old interval and continue</tt> </tt>
+<a name="L270"></a><tt class="py-lineno">270</tt>  <tt class="py-line"><tt class="py-comment">#                    intervals.append((a0, b0))</tt> </tt>
+<a name="L271"></a><tt class="py-lineno">271</tt>  <tt class="py-line"><tt class="py-comment">#                elif b1 &lt;= b0:</tt> </tt>
+<a name="L272"></a><tt class="py-lineno">272</tt>  <tt class="py-line"><tt class="py-comment">#                    # old interval starts before or with and ends after or with </tt> </tt>
+<a name="L273"></a><tt class="py-lineno">273</tt>  <tt class="py-line"><tt class="py-comment">#                    # new interval</tt> </tt>
+<a name="L274"></a><tt class="py-lineno">274</tt>  <tt class="py-line"><tt class="py-comment">#                    # so we have one, two or three new intervals</tt> </tt>
+<a name="L275"></a><tt class="py-lineno">275</tt>  <tt class="py-line"><tt class="py-comment">#                    if a0 &lt; a1:</tt> </tt>
+<a name="L276"></a><tt class="py-lineno">276</tt>  <tt class="py-line"><tt class="py-comment">#                         # first part of old</tt> </tt>
+<a name="L277"></a><tt class="py-lineno">277</tt>  <tt class="py-line"><tt class="py-comment">#                        intervals.append((a0, alphabet.before(a1)))</tt> </tt>
+<a name="L278"></a><tt class="py-lineno">278</tt>  <tt class="py-line"><tt class="py-comment">#                    # common to both</tt> </tt>
+<a name="L279"></a><tt class="py-lineno">279</tt>  <tt class="py-line"><tt class="py-comment">#                    intervals.append((a1, b1)) </tt> </tt>
+<a name="L280"></a><tt class="py-lineno">280</tt>  <tt class="py-line"><tt class="py-comment">#                    if b1 &lt; b0:</tt> </tt>
+<a name="L281"></a><tt class="py-lineno">281</tt>  <tt class="py-line"><tt class="py-comment">#                         # last part of old</tt> </tt>
+<a name="L282"></a><tt class="py-lineno">282</tt>  <tt class="py-line"><tt class="py-comment">#                        intervals.append((alphabet.after(b1), b0))</tt> </tt>
+<a name="L283"></a><tt class="py-lineno">283</tt>  <tt class="py-line"><tt class="py-comment">#                    done = True</tt> </tt>
+<a name="L284"></a><tt class="py-lineno">284</tt>  <tt class="py-line"><tt class="py-comment">#                    break</tt> </tt>
+<a name="L285"></a><tt class="py-lineno">285</tt>  <tt class="py-line"><tt class="py-comment">#                else:</tt> </tt>
+<a name="L286"></a><tt class="py-lineno">286</tt>  <tt class="py-line"><tt class="py-comment">#                    # old interval starts before new, but partially overlaps</tt> </tt>
+<a name="L287"></a><tt class="py-lineno">287</tt>  <tt class="py-line"><tt class="py-comment">#                    # so split old and continue</tt> </tt>
+<a name="L288"></a><tt class="py-lineno">288</tt>  <tt class="py-line"><tt class="py-comment">#                    # (since it may overlap more intervals...)</tt> </tt>
+<a name="L289"></a><tt class="py-lineno">289</tt>  <tt class="py-line"><tt class="py-comment">#                    if a0 &lt; a1:</tt> </tt>
+<a name="L290"></a><tt class="py-lineno">290</tt>  <tt class="py-line"><tt class="py-comment">#                        # first part of old</tt> </tt>
+<a name="L291"></a><tt class="py-lineno">291</tt>  <tt class="py-line"><tt class="py-comment">#                        intervals.append((a0, alphabet.before(a1)))</tt> </tt>
+<a name="L292"></a><tt class="py-lineno">292</tt>  <tt class="py-line"><tt class="py-comment">#                    # common to both </tt> </tt>
+<a name="L293"></a><tt class="py-lineno">293</tt>  <tt class="py-line"><tt class="py-comment">#                    intervals.append((a1, b0)) </tt> </tt>
+<a name="L294"></a><tt class="py-lineno">294</tt>  <tt class="py-line"><tt class="py-comment">#                    a1 = alphabet.after(b0)</tt> </tt>
+<a name="L295"></a><tt class="py-lineno">295</tt>  <tt class="py-line"><tt class="py-comment">#            else:</tt> </tt>
+<a name="L296"></a><tt class="py-lineno">296</tt>  <tt class="py-line"><tt class="py-comment">#                if b1 &lt; a0:</tt> </tt>
+<a name="L297"></a><tt class="py-lineno">297</tt>  <tt class="py-line"><tt class="py-comment">#                    # new interval starts and ends before old</tt> </tt>
+<a name="L298"></a><tt class="py-lineno">298</tt>  <tt class="py-line"><tt class="py-comment">#                    intervals.append((a1, b1))</tt> </tt>
+<a name="L299"></a><tt class="py-lineno">299</tt>  <tt class="py-line"><tt class="py-comment">#                    intervals.append((a0, b0))</tt> </tt>
+<a name="L300"></a><tt class="py-lineno">300</tt>  <tt class="py-line"><tt class="py-comment">#                    done = True</tt> </tt>
+<a name="L301"></a><tt class="py-lineno">301</tt>  <tt class="py-line"><tt class="py-comment">#                    break</tt> </tt>
+<a name="L302"></a><tt class="py-lineno">302</tt>  <tt class="py-line"><tt class="py-comment">#                elif b0 &lt;= b1:</tt> </tt>
+<a name="L303"></a><tt class="py-lineno">303</tt>  <tt class="py-line"><tt class="py-comment">#                    # new interval starts before and ends after or with old </tt> </tt>
+<a name="L304"></a><tt class="py-lineno">304</tt>  <tt class="py-line"><tt class="py-comment">#                    # interval</tt> </tt>
+<a name="L305"></a><tt class="py-lineno">305</tt>  <tt class="py-line"><tt class="py-comment">#                    # so split and continue if extends (since last part may </tt> </tt>
+<a name="L306"></a><tt class="py-lineno">306</tt>  <tt class="py-line"><tt class="py-comment">#                    # overlap...)</tt> </tt>
+<a name="L307"></a><tt class="py-lineno">307</tt>  <tt class="py-line"><tt class="py-comment">#                    # first part of new</tt> </tt>
+<a name="L308"></a><tt class="py-lineno">308</tt>  <tt class="py-line"><tt class="py-comment">#                    intervals.append((a1, alphabet.before(a0))) </tt> </tt>
+<a name="L309"></a><tt class="py-lineno">309</tt>  <tt class="py-line"><tt class="py-comment">#                    # overlap</tt> </tt>
+<a name="L310"></a><tt class="py-lineno">310</tt>  <tt class="py-line"><tt class="py-comment">#                    intervals.append((a0, b0)) </tt> </tt>
+<a name="L311"></a><tt class="py-lineno">311</tt>  <tt class="py-line"><tt class="py-comment">#                    if b1 &gt; b0:</tt> </tt>
+<a name="L312"></a><tt class="py-lineno">312</tt>  <tt class="py-line"><tt class="py-comment">#                        a1 = alphabet.after(b0)</tt> </tt>
+<a name="L313"></a><tt class="py-lineno">313</tt>  <tt class="py-line"><tt class="py-comment">#                    else:</tt> </tt>
+<a name="L314"></a><tt class="py-lineno">314</tt>  <tt class="py-line"><tt class="py-comment">#                        done = True</tt> </tt>
+<a name="L315"></a><tt class="py-lineno">315</tt>  <tt class="py-line"><tt class="py-comment">#                        break</tt> </tt>
+<a name="L316"></a><tt class="py-lineno">316</tt>  <tt class="py-line"><tt class="py-comment">#                else:</tt> </tt>
+<a name="L317"></a><tt class="py-lineno">317</tt>  <tt class="py-line"><tt class="py-comment">#                    # new interval starts before old, but partially overlaps,</tt> </tt>
+<a name="L318"></a><tt class="py-lineno">318</tt>  <tt class="py-line"><tt class="py-comment">#                    # split and slurp rest</tt> </tt>
+<a name="L319"></a><tt class="py-lineno">319</tt>  <tt class="py-line"><tt class="py-comment">#                    # first part of new</tt> </tt>
+<a name="L320"></a><tt class="py-lineno">320</tt>  <tt class="py-line"><tt class="py-comment">#                    intervals.append((a1, alphabet.before(a0))) </tt> </tt>
+<a name="L321"></a><tt class="py-lineno">321</tt>  <tt class="py-line"><tt class="py-comment">#                    # overlap</tt> </tt>
+<a name="L322"></a><tt class="py-lineno">322</tt>  <tt class="py-line"><tt class="py-comment">#                    intervals.append((a0, b1)) </tt> </tt>
+<a name="L323"></a><tt class="py-lineno">323</tt>  <tt class="py-line"><tt class="py-comment">#                    # last part of old</tt> </tt>
+<a name="L324"></a><tt class="py-lineno">324</tt>  <tt class="py-line"><tt class="py-comment">#                    intervals.append((alphabet.after(b1), b0)) </tt> </tt>
+<a name="L325"></a><tt class="py-lineno">325</tt>  <tt class="py-line"><tt class="py-comment">#                    done = True</tt> </tt>
+<a name="L326"></a><tt class="py-lineno">326</tt>  <tt class="py-line"><tt class="py-comment">#                    break</tt> </tt>
+<a name="L327"></a><tt class="py-lineno">327</tt>  <tt class="py-line"><tt class="py-comment">#        if not done:</tt> </tt>
+<a name="L328"></a><tt class="py-lineno">328</tt>  <tt class="py-line"><tt class="py-comment">#            intervals.append((a1, b1))</tt> </tt>
+<a name="L329"></a><tt class="py-lineno">329</tt>  <tt class="py-line"><tt class="py-comment">#        intervals.extend(self.__intervals) # slurp remaining</tt> </tt>
+<a name="L330"></a><tt class="py-lineno">330</tt>  <tt class="py-line"><tt class="py-comment">#        self.__intervals = intervals</tt> </tt>
+<a name="L331"></a><tt class="py-lineno">331</tt>  <tt class="py-line"><tt class="py-comment">#        </tt> </tt>
+<a name="L332"></a><tt class="py-lineno">332</tt>  <tt class="py-line"><tt class="py-comment">#    def len(self):</tt> </tt>
+<a name="L333"></a><tt class="py-lineno">333</tt>  <tt class="py-line"><tt class="py-comment">#        '''</tt> </tt>
+<a name="L334"></a><tt class="py-lineno">334</tt>  <tt class="py-line"><tt class="py-comment">#        The number of intervals contained.</tt> </tt>
+<a name="L335"></a><tt class="py-lineno">335</tt>  <tt class="py-line"><tt class="py-comment">#        '''</tt> </tt>
+<a name="L336"></a><tt class="py-lineno">336</tt>  <tt class="py-line"><tt class="py-comment">#        return len(self.__intervals)</tt> </tt>
+<a name="L337"></a><tt class="py-lineno">337</tt>  <tt class="py-line"><tt class="py-comment">#    </tt> </tt>
+<a name="L338"></a><tt class="py-lineno">338</tt>  <tt class="py-line"><tt class="py-comment">#    def __getitem__(self, index):</tt> </tt>
+<a name="L339"></a><tt class="py-lineno">339</tt>  <tt class="py-line"><tt class="py-comment">#        return self.__intervals[index]</tt> </tt>
+<a name="L340"></a><tt class="py-lineno">340</tt>  <tt class="py-line"><tt class="py-comment">#    </tt> </tt>
+<a name="L341"></a><tt class="py-lineno">341</tt>  <tt class="py-line"><tt class="py-comment">#    def __iter__(self):</tt> </tt>
+<a name="L342"></a><tt class="py-lineno">342</tt>  <tt class="py-line"><tt class="py-comment">#        return iter(self.__intervals)</tt> </tt>
+<a name="L343"></a><tt class="py-lineno">343</tt>  <tt class="py-line">     </tt>
+<a name="L344"></a><tt class="py-lineno">344</tt>  <tt class="py-line">     </tt>
+<a name="IntervalMap"></a><div id="IntervalMap-def"><a name="L345"></a><tt class="py-lineno">345</tt> <a class="py-toggle" href="#" id="IntervalMap-toggle" onclick="return toggle('IntervalMap');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lepl.regexp.interval.IntervalMap-class.html">IntervalMap</a><tt class="py-op">(</tt><tt class="py-base-class">dict</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="IntervalMap-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="IntervalMap-expanded"><a name="L346"></a><tt class="py-lineno">346</tt>  <tt class="py-line">    <tt class="py-docstring">'''</tt> </tt>
+<a name="L347"></a><tt class="py-lineno">347</tt>  <tt class="py-line"><tt class="py-docstring">    Map from intervals to values.</tt> </tt>
+<a name="L348"></a><tt class="py-lineno">348</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L349"></a><tt class="py-lineno">349</tt>  <tt class="py-line"><tt class="py-docstring">    Note - this is for open intervals!  This means it will not work as</tt> </tt>
+<a name="L350"></a><tt class="py-lineno">350</tt>  <tt class="py-line"><tt class="py-docstring">    expected for continuous variables (which will overlap when two intervals</tt> </tt>
+<a name="L351"></a><tt class="py-lineno">351</tt>  <tt class="py-line"><tt class="py-docstring">    share a single boundary value).  In other words, you cannot store </tt> </tt>
+<a name="L352"></a><tt class="py-lineno">352</tt>  <tt class="py-line"><tt class="py-docstring">    (1,2) and (2,3) together because both contain 2.</tt> </tt>
+<a name="L353"></a><tt class="py-lineno">353</tt>  <tt class="py-line"><tt class="py-docstring">    '''</tt> </tt>
+<a name="L354"></a><tt class="py-lineno">354</tt>  <tt class="py-line">     </tt>
+<a name="L355"></a><tt class="py-lineno">355</tt>  <tt class="py-line">    <tt class="py-comment"># pylint: disable-msg=C0103 </tt> </tt>
+<a name="L356"></a><tt class="py-lineno">356</tt>  <tt class="py-line">    <tt class="py-comment"># (use (a,b) variables consistently)</tt> </tt>
+<a name="L357"></a><tt class="py-lineno">357</tt>  <tt class="py-line">     </tt>
+<a name="IntervalMap.__init__"></a><div id="IntervalMap.__init__-def"><a name="L358"></a><tt class="py-lineno">358</tt> <a class="py-toggle" href="#" id="IntervalMap.__init__-toggle" onclick="return toggle('IntervalMap.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.regexp.interval.IntervalMap-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="IntervalMap.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="IntervalMap.__init__-expanded"><a name="L359"></a><tt class="py-lineno">359</tt>  <tt class="py-line">        <tt class="py-name">super</tt><tt class="py-op">(</tt><tt id="link-56" class="py-name" targets="Class lepl.regexp.interval.IntervalMap=lepl.regexp.interval.IntervalMap-class.html"><a title="lepl.regexp.interval.IntervalMap" class="py-name" href="#" onclick="return doclink('link-56', 'IntervalMap', 'link-56');">IntervalMap</a></tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-57" class="py-name"><a title="lepl.bin.bits.BitIterator.__init__
+lepl.bin.bits.BitString.__init__
+lepl.bin.bits.ByteIterator.__init__
+lepl.bin.bits.Int.__init__
+lepl.bin.matchers.BEnd.__init__
+lepl.bin.matchers.Const.__init__
+lepl.bin.matchers._ByteArray.__init__
+lepl.bin.matchers._Constant.__init__
+lepl.bin.matchers._String.__init__
+lepl.bin.matchers._Variable.__init__
+lepl.cairo.context.cset.__init__
+lepl.core._test.parser.InstanceMethodTest.Foo.__init__
+lepl.core.config.ConfigBuilder.__init__
+lepl.core.config.ParserMixin.__init__
+lepl.core.dynamic.BaseVar.__init__
+lepl.core.manager.GeneratorRef.__init__
+lepl.core.manager._GeneratorManager.__init__
+lepl.core.monitor.MultipleStackMonitors.__init__
+lepl.core.monitor.MultipleValueMonitors.__init__
+lepl.core.parser.GeneratorWrapper.__init__
+lepl.core.rewriters.AutoMemoize.__init__
+lepl.core.rewriters.ComposeTransforms.__init__
+lepl.core.rewriters.DirectEvaluation.__init__
+lepl.core.rewriters.Flatten.__init__
+lepl.core.rewriters.FullFirstMatch.__init__
+lepl.core.rewriters.LeftMemoize.__init__
+lepl.core.rewriters.NodeStats.__init__
+lepl.core.rewriters.NodeStats2.__init__
+lepl.core.rewriters.OptimizeOr.__init__
+lepl.core.rewriters.Rewriter.__init__
+lepl.core.rewriters.RightMemoize.__init__
+lepl.core.rewriters.SetArguments.__init__
+lepl.core.rewriters.TraceVariables.__init__
+lepl.core.trace._RecordDeepest.__init__
+lepl.core.trace._TraceStack.__init__
+lepl.lexer.lexer.Lexer.__init__
+lepl.lexer.lines.lexer._OffsideLexer.__init__
+lepl.lexer.lines.matchers.Block.__init__
+lepl.lexer.lines.matchers.LineEnd.__init__
+lepl.lexer.lines.matchers.LineStart.__init__
+lepl.lexer.lines.monitor.BlockMonitor.__init__
+lepl.lexer.matchers.BaseToken.__init__
+lepl.lexer.matchers.Token.__init__
+lepl.lexer.operators.TokenNamespace.__init__
+lepl.lexer.rewriters.AddLexer.__init__
+lepl.lexer.stream.FilteredTokenHelper.__init__
+lepl.lexer.stream.TokenHelper.__init__
+lepl.matchers._test.derived.RangeMatch.__init__
+lepl.matchers.combine._BaseCombiner.__init__
+lepl.matchers.core.Delayed.__init__
+lepl.matchers.core.Lookahead.__init__
+lepl.matchers.error.Error.__init__
+lepl.matchers.matcher.Matcher.__init__
+lepl.matchers.matcher.Relations.__init__
+lepl.matchers.memo._LMemo.__init__
+lepl.matchers.memo._RMemo.__init__
+lepl.matchers.monitor.Trace.__init__
+lepl.matchers.operators.DroppedSpace.__init__
+lepl.matchers.operators.OperatorMixin.__init__
+lepl.matchers.operators.OperatorNamespace.__init__
+lepl.matchers.operators.Override.__init__
+lepl.matchers.operators._BaseSeparator.__init__
+lepl.matchers.support.BaseFactoryMatcher.__init__
+lepl.matchers.support.OperatorMatcher.__init__
+lepl.matchers.support.Transformable.__init__
+lepl.matchers.transform.Transform.__init__
+lepl.matchers.transform.TransformationWrapper.__init__
+lepl.regexp.binary.BinaryAlphabet.__init__
+lepl.regexp.core.Alphabet.__init__
+lepl.regexp.core.BaseGraph.__init__
+lepl.regexp.core.Compiler.__init__
+lepl.regexp.core.DfaGraph.__init__
+lepl.regexp.core.DfaPattern.__init__
+lepl.regexp.core.Labelled.__init__
+lepl.regexp.core.NfaGraph.__init__
+lepl.regexp.core.NfaPattern.__init__
+lepl.regexp.core.NfaToDfa.__init__
+lepl.regexp.core.Sequence.__init__
+lepl.regexp.interval.IntervalMap.__init__
+lepl.regexp.interval.Intervals.__init__
+lepl.regexp.interval.TaggedFragments.__init__
+lepl.regexp.interval._Character.__init__
+lepl.regexp.matchers.BaseRegexp.__init__
+lepl.regexp.matchers.DfaRegexp.__init__
+lepl.regexp.matchers.NfaRegexp.__init__
+lepl.regexp.rewriters.CompileRegexp.__init__
+lepl.regexp.rewriters.RegexpContainer.__init__
+lepl.regexp.str.StrAlphabet.__init__
+lepl.regexp.str.StrParser.__init__
+lepl.regexp.unicode.UnicodeAlphabet.__init__
+lepl.stream.core.HashKey.__init__
+lepl.stream.core.MutableMaxDepth.__init__
+lepl.stream.core.StreamHelper.__init__
+lepl.stream.facade.HelperFacade.__init__
+lepl.stream.iter.Cons.__init__
+lepl.stream.maxdepth.FullFirstMatchException.__init__
+lepl.stream.simple.BaseHelper.__init__
+lepl.stream.simple.SequenceHelper.__init__
+lepl.stream.simple.StringHelper.__init__
+lepl.support._test.graph.SimpleNode.__init__
+lepl.support.context.Namespace.__init__
+lepl.support.context.NamespaceMap.__init__
+lepl.support.context.NamespaceMixin.__init__
+lepl.support.context.OnceOnlyNamespace.__init__
+lepl.support.context.Scope.__init__
+lepl.support.graph.ArgAsAttributeMixin.__init__
+lepl.support.graph.Clone.__init__
+lepl.support.graph.ConstructorStr.__init__
+lepl.support.graph.ConstructorWalker.__init__
+lepl.support.graph.GraphStr.__init__
+lepl.support.graph.PostorderWalkerMixin.__init__
+lepl.support.graph.Proxy.__init__
+lepl.support.graph.SimpleWalker.__init__
+lepl.support.lib.CircularFifo.__init__
+lepl.support.lib.LogMixin.__init__
+lepl.support.node.Node.__init__
+lepl.support.state.State.__init__
+lepl.support.warn.Warning.__init__" class="py-name" href="#" onclick="return doclink('link-57', '__init__', 'link-44');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L360"></a><tt class="py-lineno">360</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__intervals</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L361"></a><tt class="py-lineno">361</tt>  <tt class="py-line">        <tt class="py-comment"># None is used as a flag to indicate that a new index is needed</tt> </tt>
+<a name="L362"></a><tt class="py-lineno">362</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__index</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+</div><a name="L363"></a><tt class="py-lineno">363</tt>  <tt class="py-line">         </tt>
+<a name="IntervalMap.index"></a><div id="IntervalMap.index-def"><a name="L364"></a><tt class="py-lineno">364</tt> <a class="py-toggle" href="#" id="IntervalMap.index-toggle" onclick="return toggle('IntervalMap.index');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.regexp.interval.IntervalMap-class.html#index">index</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="IntervalMap.index-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="IntervalMap.index-expanded"><a name="L365"></a><tt class="py-lineno">365</tt>  <tt class="py-line">        <tt class="py-docstring">'''</tt> </tt>
+<a name="L366"></a><tt class="py-lineno">366</tt>  <tt class="py-line"><tt class="py-docstring">        Build the internal indices.  Called automatically when necessary.</tt> </tt>
+<a name="L367"></a><tt class="py-lineno">367</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L368"></a><tt class="py-lineno">368</tt>  <tt class="py-line">        <tt class="py-name">second</tt> <tt class="py-op">=</tt> <tt class="py-keyword">lambda</tt> <tt class="py-name">x</tt><tt class="py-op">:</tt> <tt class="py-name">x</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> </tt>
+<a name="L369"></a><tt class="py-lineno">369</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__intervals</tt> <tt class="py-op">=</tt> <tt id="link-58" class="py-name"><a title="lepl.support._test.list
+lepl.support.list" class="py-name" href="#" onclick="return doclink('link-58', 'list', 'link-9');">list</a></tt><tt class="py-op">(</tt><tt class="py-name">sorted</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">keys</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt id="link-59" class="py-name" targets="Method lepl.lexer.stream.TokenHelper.key()=lepl.lexer.stream.TokenHelper-class.html#key,Method lepl.stream.core.StreamHelper.key()=lepl.stream.core.StreamHelper-class.html#key,Method lepl.stream.facade.HelperFacade.key()=lepl.stream.facade.HelperFacade-class.html#key,Method lepl.stream.simple.SequenceHelper.key()=lepl.stream.simple.SequenceHelper-class.html#key"><a title="lepl.lexer.stream.TokenHelper.key
+lepl.stream.core.StreamHelper.key
+lepl.stream.facade.HelperFacade.key
+lepl.stream.simple.SequenceHelper.key" class="py-name" href="#" onclick="return doclink('link-59', 'key', 'link-59');">key</a></tt><tt class="py-op">=</tt><tt class="py-name">second</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L370"></a><tt class="py-lineno">370</tt>  <tt class="py-line">        <tt class="py-comment"># pylint: disable-msg=W0141</tt> </tt>
+<a name="L371"></a><tt class="py-lineno">371</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__index</tt> <tt class="py-op">=</tt> <tt id="link-60" class="py-name"><a title="lepl.support._test.list
+lepl.support.list" class="py-name" href="#" onclick="return doclink('link-60', 'list', 'link-9');">list</a></tt><tt class="py-op">(</tt><tt class="py-name">map</tt><tt class="py-op">(</tt><tt class="py-name">second</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__intervals</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L372"></a><tt class="py-lineno">372</tt>  <tt class="py-line">     </tt>
+<a name="IntervalMap.__setitem__"></a><div id="IntervalMap.__setitem__-def"><a name="L373"></a><tt class="py-lineno">373</tt> <a class="py-toggle" href="#" id="IntervalMap.__setitem__-toggle" onclick="return toggle('IntervalMap.__setitem__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.regexp.interval.IntervalMap-class.html#__setitem__">__setitem__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">interval</tt><tt class="py-op">,</tt> <tt class="py-param">value</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="IntervalMap.__setitem__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="IntervalMap.__setitem__-expanded"><a name="L374"></a><tt class="py-lineno">374</tt>  <tt class="py-line">        <tt class="py-comment"># these are rather inefficient, but perhaps useful during development</tt> </tt>
+<a name="L375"></a><tt class="py-lineno">375</tt>  <tt class="py-line"><tt class="py-comment">#        assert None == self[interval[0]], 'Overlap'</tt> </tt>
+<a name="L376"></a><tt class="py-lineno">376</tt>  <tt class="py-line"><tt class="py-comment">#        assert None == self[interval[1]], 'Overlap'</tt> </tt>
+<a name="L377"></a><tt class="py-lineno">377</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__index</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L378"></a><tt class="py-lineno">378</tt>  <tt class="py-line">        <tt class="py-name">super</tt><tt class="py-op">(</tt><tt id="link-61" class="py-name"><a title="lepl.regexp.interval.IntervalMap" class="py-name" href="#" onclick="return doclink('link-61', 'IntervalMap', 'link-56');">IntervalMap</a></tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-62" class="py-name" targets="Method lepl.regexp.interval.IntervalMap.__setitem__()=lepl.regexp.interval.IntervalMap-class.html#__setitem__,Method lepl.support.node.MutableNode.__setitem__()=lepl.support.node.MutableNode-class.html#__setitem__,Method lepl.support.state.State.__setitem__()=lepl.support.state.State-class.html#__setitem__"><a title="lepl.regexp.interval.IntervalMap.__setitem__
+lepl.support.node.MutableNode.__setitem__
+lepl.support.state.State.__setitem__" class="py-name" href="#" onclick="return doclink('link-62', '__setitem__', 'link-62');">__setitem__</a></tt><tt class="py-op">(</tt><tt id="link-63" class="py-name"><a title="lepl.regexp._test.interval
+lepl.regexp.interval" class="py-name" href="#" onclick="return doclink('link-63', 'interval', 'link-6');">interval</a></tt><tt class="py-op">,</tt> <tt class="py-name">value</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L379"></a><tt class="py-lineno">379</tt>  <tt class="py-line">         </tt>
+<a name="IntervalMap.__getitem__"></a><div id="IntervalMap.__getitem__-def"><a name="L380"></a><tt class="py-lineno">380</tt> <a class="py-toggle" href="#" id="IntervalMap.__getitem__-toggle" onclick="return toggle('IntervalMap.__getitem__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.regexp.interval.IntervalMap-class.html#__getitem__">__getitem__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">point</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="IntervalMap.__getitem__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="IntervalMap.__getitem__-expanded"><a name="L381"></a><tt class="py-lineno">381</tt>  <tt class="py-line">        <tt class="py-docstring">'''</tt> </tt>
+<a name="L382"></a><tt class="py-lineno">382</tt>  <tt class="py-line"><tt class="py-docstring">        The argument here is a single value, not an interval.</tt> </tt>
+<a name="L383"></a><tt class="py-lineno">383</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L384"></a><tt class="py-lineno">384</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__index</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L385"></a><tt class="py-lineno">385</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-64" class="py-name"><a title="lepl.regexp.interval.IntervalMap.index" class="py-name" href="#" onclick="return doclink('link-64', 'index', 'link-32');">index</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L386"></a><tt class="py-lineno">386</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__index</tt><tt class="py-op">:</tt> </tt>
+<a name="L387"></a><tt class="py-lineno">387</tt>  <tt class="py-line">            <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L388"></a><tt class="py-lineno">388</tt>  <tt class="py-line">                <tt id="link-65" class="py-name"><a title="lepl.regexp.interval.IntervalMap.index" class="py-name" href="#" onclick="return doclink('link-65', 'index', 'link-32');">index</a></tt> <tt class="py-op">=</tt> <tt class="py-name">bisect_left</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__index</tt><tt class="py-op">,</tt> <tt class="py-name">point</tt><tt class="py-op">)</tt> </tt>
+<a name="L389"></a><tt class="py-lineno">389</tt>  <tt class="py-line">            <tt class="py-keyword">except</tt> <tt class="py-name">TypeError</tt> <tt class="py-keyword">as</tt> <tt class="py-name">e</tt><tt class="py-op">:</tt> </tt>
+<a name="L390"></a><tt class="py-lineno">390</tt>  <tt class="py-line">                <tt class="py-keyword">from</tt> <tt id="link-66" class="py-name"><a title="lepl" class="py-name" href="#" onclick="return doclink('link-66', 'lepl', 'link-0');">lepl</a></tt><tt class="py-op">.</tt><tt id="link-67" class="py-name" targets="Package lepl.regexp=lepl.regexp-module.html"><a title="lepl.regexp" class="py-name" href="#" onclick="return doclink('link-67', 'regexp', 'link-67');">regexp</a></tt><tt class="py-op">.</tt><tt id="link-68" class="py-name" targets="Package lepl.core=lepl.core-module.html,Module lepl.matchers._test.core=lepl.matchers._test.core-module.html,Module lepl.matchers.core=lepl.matchers.core-module.html,Module lepl.regexp._test.core=lepl.regexp._test.core-module.html,Module lepl.regexp.core=lepl.regexp.core-module.html,Module lepl.stream.core=lepl.stream.core-module.html"><a title="lepl.core
+lepl.matchers._test.core
+lepl.matchers.core
+lepl.regexp._test.core
+lepl.regexp.core
+lepl.stream.core" class="py-name" href="#" onclick="return doclink('link-68', 'core', 'link-68');">core</a></tt> <tt class="py-keyword">import</tt> <tt id="link-69" class="py-name" targets="Class lepl.regexp.core.RegexpError=lepl.regexp.core.RegexpError-class.html"><a title="lepl.regexp.core.RegexpError" class="py-name" href="#" onclick="return doclink('link-69', 'RegexpError', 'link-69');">RegexpError</a></tt> </tt>
+<a name="L391"></a><tt class="py-lineno">391</tt>  <tt class="py-line">                <tt class="py-keyword">raise</tt> <tt id="link-70" class="py-name"><a title="lepl.regexp.core.RegexpError" class="py-name" href="#" onclick="return doclink('link-70', 'RegexpError', 'link-69');">RegexpError</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L392"></a><tt class="py-lineno">392</tt>  <tt class="py-line"><tt class="py-string">"""Input characters are inconsistent with the given alphabet.</tt> </tt>
+<a name="L393"></a><tt class="py-lineno">393</tt>  <tt class="py-line"><tt class="py-string">This error is often triggered by using the default configuration with non-text input; disable with matcher.config.no_compile_to_regexp().</tt> </tt>
+<a name="L394"></a><tt class="py-lineno">394</tt>  <tt class="py-line"><tt class="py-string">Alternatively, configure with a suitable alphabet."""</tt><tt class="py-op">)</tt> </tt>
+<a name="L395"></a><tt class="py-lineno">395</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt id="link-71" class="py-name"><a title="lepl.regexp.interval.IntervalMap.index" class="py-name" href="#" onclick="return doclink('link-71', 'index', 'link-32');">index</a></tt> <tt class="py-op">&lt;</tt> <tt id="link-72" class="py-name"><a title="lepl.lexer.stream.TokenHelper.len
+lepl.regexp.interval.Intervals.len
+lepl.regexp.interval.TaggedFragments.len
+lepl.regexp.interval._Character.len
+lepl.stream.core.StreamHelper.len
+lepl.stream.facade.HelperFacade.len
+lepl.stream.iter.IterableHelper.len
+lepl.stream.simple.SequenceHelper.len" class="py-name" href="#" onclick="return doclink('link-72', 'len', 'link-31');">len</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__index</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L396"></a><tt class="py-lineno">396</tt>  <tt class="py-line">                <tt class="py-comment"># keep interval for identity on retrieval, just in case</tt> </tt>
+<a name="L397"></a><tt class="py-lineno">397</tt>  <tt class="py-line">                <tt class="py-op">(</tt><tt id="link-73" class="py-name"><a title="lepl.cairo.colour.Colour.a" class="py-name" href="#" onclick="return doclink('link-73', 'a', 'link-37');">a</a></tt><tt class="py-op">,</tt> <tt id="link-74" class="py-name"><a title="lepl.cairo.colour.Colour.b" class="py-name" href="#" onclick="return doclink('link-74', 'b', 'link-38');">b</a></tt><tt class="py-op">)</tt> <tt class="py-op">=</tt> <tt id="link-75" class="py-name"><a title="lepl.regexp._test.interval
+lepl.regexp.interval" class="py-name" href="#" onclick="return doclink('link-75', 'interval', 'link-6');">interval</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__intervals</tt><tt class="py-op">[</tt><tt id="link-76" class="py-name"><a title="lepl.regexp.interval.IntervalMap.index" class="py-name" href="#" onclick="return doclink('link-76', 'index', 'link-32');">index</a></tt><tt class="py-op">]</tt> </tt>
+<a name="L398"></a><tt class="py-lineno">398</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt id="link-77" class="py-name"><a title="lepl.cairo.colour.Colour.a" class="py-name" href="#" onclick="return doclink('link-77', 'a', 'link-37');">a</a></tt> <tt class="py-op">&lt;=</tt> <tt class="py-name">point</tt> <tt class="py-op">&lt;=</tt> <tt id="link-78" class="py-name"><a title="lepl.cairo.colour.Colour.b" class="py-name" href="#" onclick="return doclink('link-78', 'b', 'link-38');">b</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L399"></a><tt class="py-lineno">399</tt>  <tt class="py-line">                    <tt class="py-keyword">return</tt> <tt class="py-name">super</tt><tt class="py-op">(</tt><tt id="link-79" class="py-name"><a title="lepl.regexp.interval.IntervalMap" class="py-name" href="#" onclick="return doclink('link-79', 'IntervalMap', 'link-56');">IntervalMap</a></tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-80" class="py-name" targets="Method lepl.bin.bits.BitString.__getitem__()=lepl.bin.bits.BitString-class.html#__getitem__,Method lepl.matchers.operators.OperatorMixin.__getitem__()=lepl.matchers.operators.OperatorMixin-class.html#__getitem__,Method lepl.regexp.interval.IntervalMap.__getitem__()=lepl.regexp.interval.IntervalMap-class.html#__getitem__,Method lepl.regexp.interval.Intervals.__getitem__()=lepl.regexp.interval.Intervals-class.html#__getitem__,Method lepl.regexp.interval.TaggedFragments.__getitem__()=lepl.regexp.interval.TaggedFragments-class.html#__getitem__,Method lepl.regexp.interval._Character.__getitem__()=lepl.regexp.interval._Character-class.html#__getitem__,Method lepl.support._test.graph.SimpleNode.__getitem__()=lepl.support._test.graph.SimpleNode-class.html#__getitem__,Method lepl.support.node.Node.__getitem__()=lepl.support.node.Node-class.html#__getitem__,Method lepl.support.state.State.__getitem__()=lepl.support.state.State-class.html#__getitem__"><a title="lepl.bin.bits.BitString.__getitem__
+lepl.matchers.operators.OperatorMixin.__getitem__
+lepl.regexp.interval.IntervalMap.__getitem__
+lepl.regexp.interval.Intervals.__getitem__
+lepl.regexp.interval.TaggedFragments.__getitem__
+lepl.regexp.interval._Character.__getitem__
+lepl.support._test.graph.SimpleNode.__getitem__
+lepl.support.node.Node.__getitem__
+lepl.support.state.State.__getitem__" class="py-name" href="#" onclick="return doclink('link-80', '__getitem__', 'link-80');">__getitem__</a></tt><tt class="py-op">(</tt><tt id="link-81" class="py-name"><a title="lepl.regexp._test.interval
+lepl.regexp.interval" class="py-name" href="#" onclick="return doclink('link-81', 'interval', 'link-6');">interval</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L400"></a><tt class="py-lineno">400</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">None</tt> </tt>
+</div><a name="L401"></a><tt class="py-lineno">401</tt>  <tt class="py-line">     </tt>
+<a name="IntervalMap.__delitem__"></a><div id="IntervalMap.__delitem__-def"><a name="L402"></a><tt class="py-lineno">402</tt> <a class="py-toggle" href="#" id="IntervalMap.__delitem__-toggle" onclick="return toggle('IntervalMap.__delitem__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.regexp.interval.IntervalMap-class.html#__delitem__">__delitem__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">interval</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="IntervalMap.__delitem__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="IntervalMap.__delitem__-expanded"><a name="L403"></a><tt class="py-lineno">403</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__index</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L404"></a><tt class="py-lineno">404</tt>  <tt class="py-line">        <tt class="py-name">super</tt><tt class="py-op">(</tt><tt id="link-82" class="py-name"><a title="lepl.regexp.interval.IntervalMap" class="py-name" href="#" onclick="return doclink('link-82', 'IntervalMap', 'link-56');">IntervalMap</a></tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-83" class="py-name" targets="Method lepl.regexp.interval.IntervalMap.__delitem__()=lepl.regexp.interval.IntervalMap-class.html#__delitem__,Method lepl.support.state.State.__delitem__()=lepl.support.state.State-class.html#__delitem__"><a title="lepl.regexp.interval.IntervalMap.__delitem__
+lepl.support.state.State.__delitem__" class="py-name" href="#" onclick="return doclink('link-83', '__delitem__', 'link-83');">__delitem__</a></tt><tt class="py-op">(</tt><tt id="link-84" class="py-name"><a title="lepl.regexp._test.interval
+lepl.regexp.interval" class="py-name" href="#" onclick="return doclink('link-84', 'interval', 'link-6');">interval</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L405"></a><tt class="py-lineno">405</tt>  <tt class="py-line"> </tt>
+<a name="IntervalMap.__contains__"></a><div id="IntervalMap.__contains__-def"><a name="L406"></a><tt class="py-lineno">406</tt> <a class="py-toggle" href="#" id="IntervalMap.__contains__-toggle" onclick="return toggle('IntervalMap.__contains__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.regexp.interval.IntervalMap-class.html#__contains__">__contains__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">interval</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="IntervalMap.__contains__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="IntervalMap.__contains__-expanded"><a name="L407"></a><tt class="py-lineno">407</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt id="link-85" class="py-name"><a title="lepl.cairo.colour.Colour.a" class="py-name" href="#" onclick="return doclink('link-85', 'a', 'link-37');">a</a></tt><tt class="py-op">,</tt> <tt id="link-86" class="py-name"><a title="lepl.cairo.colour.Colour.b" class="py-name" href="#" onclick="return doclink('link-86', 'b', 'link-38');">b</a></tt><tt class="py-op">)</tt> <tt class="py-op">=</tt> <tt id="link-87" class="py-name"><a title="lepl.regexp._test.interval
+lepl.regexp.interval" class="py-name" href="#" onclick="return doclink('link-87', 'interval', 'link-6');">interval</a></tt> </tt>
+<a name="L408"></a><tt class="py-lineno">408</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">[</tt><tt id="link-88" class="py-name"><a title="lepl.cairo.colour.Colour.a" class="py-name" href="#" onclick="return doclink('link-88', 'a', 'link-37');">a</a></tt><tt class="py-op">]</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt> <tt class="py-keyword">or</tt> <tt class="py-name">self</tt><tt class="py-op">[</tt><tt id="link-89" class="py-name"><a title="lepl.cairo.colour.Colour.b" class="py-name" href="#" onclick="return doclink('link-89', 'b', 'link-38');">b</a></tt><tt class="py-op">]</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt> </tt>
+</div></div><a name="L409"></a><tt class="py-lineno">409</tt>  <tt class="py-line">     </tt>
+<a name="L410"></a><tt class="py-lineno">410</tt>  <tt class="py-line"> </tt>
+<a name="TaggedFragments"></a><div id="TaggedFragments-def"><a name="L411"></a><tt class="py-lineno">411</tt> <a class="py-toggle" href="#" id="TaggedFragments-toggle" onclick="return toggle('TaggedFragments');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lepl.regexp.interval.TaggedFragments-class.html">TaggedFragments</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="TaggedFragments-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="TaggedFragments-expanded"><a name="L412"></a><tt class="py-lineno">412</tt>  <tt class="py-line">    <tt class="py-docstring">'''</tt> </tt>
+<a name="L413"></a><tt class="py-lineno">413</tt>  <tt class="py-line"><tt class="py-docstring">    Similar to Fragments, but associates a value with each initial interval;</tt> </tt>
+<a name="L414"></a><tt class="py-lineno">414</tt>  <tt class="py-line"><tt class="py-docstring">    on retrieval returns a list of all values associated with fragment. </tt> </tt>
+<a name="L415"></a><tt class="py-lineno">415</tt>  <tt class="py-line"><tt class="py-docstring">    '''</tt> </tt>
+<a name="L416"></a><tt class="py-lineno">416</tt>  <tt class="py-line">     </tt>
+<a name="L417"></a><tt class="py-lineno">417</tt>  <tt class="py-line">    <tt class="py-comment"># pylint: disable-msg=C0103 </tt> </tt>
+<a name="L418"></a><tt class="py-lineno">418</tt>  <tt class="py-line">    <tt class="py-comment"># (use (a,b) variables consistently)</tt> </tt>
+<a name="L419"></a><tt class="py-lineno">419</tt>  <tt class="py-line">     </tt>
+<a name="TaggedFragments.__init__"></a><div id="TaggedFragments.__init__-def"><a name="L420"></a><tt class="py-lineno">420</tt> <a class="py-toggle" href="#" id="TaggedFragments.__init__-toggle" onclick="return toggle('TaggedFragments.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.regexp.interval.TaggedFragments-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">alphabet</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="TaggedFragments.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="TaggedFragments.__init__-expanded"><a name="L421"></a><tt class="py-lineno">421</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-90" class="py-name"><a title="lepl.core.config.ConfigBuilder.alphabet" class="py-name" href="#" onclick="return doclink('link-90', 'alphabet', 'link-4');">alphabet</a></tt> <tt class="py-op">=</tt> <tt id="link-91" class="py-name"><a title="lepl.core.config.ConfigBuilder.alphabet" class="py-name" href="#" onclick="return doclink('link-91', 'alphabet', 'link-4');">alphabet</a></tt> </tt>
+<a name="L422"></a><tt class="py-lineno">422</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__intervals</tt> <tt class="py-op">=</tt> <tt class="py-name">deque</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L423"></a><tt class="py-lineno">423</tt>  <tt class="py-line">                 </tt>
+<a name="TaggedFragments.append"></a><div id="TaggedFragments.append-def"><a name="L424"></a><tt class="py-lineno">424</tt> <a class="py-toggle" href="#" id="TaggedFragments.append-toggle" onclick="return toggle('TaggedFragments.append');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.regexp.interval.TaggedFragments-class.html#append">append</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">character</tt><tt class="py-op">,</tt> <tt class="py-param">value</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="TaggedFragments.append-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="TaggedFragments.append-expanded"><a name="L425"></a><tt class="py-lineno">425</tt>  <tt class="py-line">        <tt class="py-docstring">'''</tt> </tt>
+<a name="L426"></a><tt class="py-lineno">426</tt>  <tt class="py-line"><tt class="py-docstring">        Add a range and tag.</tt> </tt>
+<a name="L427"></a><tt class="py-lineno">427</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L428"></a><tt class="py-lineno">428</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt class="py-name">type</tt><tt class="py-op">(</tt><tt class="py-name">character</tt><tt class="py-op">)</tt> <tt class="py-keyword">is</tt> <tt id="link-92" class="py-name"><a title="lepl.regexp.interval._Character" class="py-name" href="#" onclick="return doclink('link-92', '_Character', 'link-43');">_Character</a></tt> </tt>
+<a name="L429"></a><tt class="py-lineno">429</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt id="link-93" class="py-name"><a title="lepl.regexp._test.interval
+lepl.regexp.interval" class="py-name" href="#" onclick="return doclink('link-93', 'interval', 'link-6');">interval</a></tt> <tt class="py-keyword">in</tt> <tt class="py-name">character</tt><tt class="py-op">:</tt> </tt>
+<a name="L430"></a><tt class="py-lineno">430</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-94" class="py-name"><a title="lepl.regexp.interval.Intervals.__append
+lepl.regexp.interval.TaggedFragments.__append" class="py-name" href="#" onclick="return doclink('link-94', '__append', 'link-7');">__append</a></tt><tt class="py-op">(</tt><tt id="link-95" class="py-name"><a title="lepl.regexp._test.interval
+lepl.regexp.interval" class="py-name" href="#" onclick="return doclink('link-95', 'interval', 'link-6');">interval</a></tt><tt class="py-op">,</tt> <tt class="py-op">[</tt><tt class="py-name">value</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L431"></a><tt class="py-lineno">431</tt>  <tt class="py-line">         </tt>
+<a name="TaggedFragments.__append"></a><div id="TaggedFragments.__append-def"><a name="L432"></a><tt class="py-lineno">432</tt> <a class="py-toggle" href="#" id="TaggedFragments.__append-toggle" onclick="return toggle('TaggedFragments.__append');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.regexp.interval.TaggedFragments-class.html#__append">__append</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">interval</tt><tt class="py-op">,</tt> <tt class="py-param">v1</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="TaggedFragments.__append-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="TaggedFragments.__append-expanded"><a name="L433"></a><tt class="py-lineno">433</tt>  <tt class="py-line">        <tt class="py-docstring">'''</tt> </tt>
+<a name="L434"></a><tt class="py-lineno">434</tt>  <tt class="py-line"><tt class="py-docstring">        Add an interval to the existing intervals.</tt> </tt>
+<a name="L435"></a><tt class="py-lineno">435</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L436"></a><tt class="py-lineno">436</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-name">a1</tt><tt class="py-op">,</tt> <tt class="py-name">b1</tt><tt class="py-op">)</tt> <tt class="py-op">=</tt> <tt id="link-96" class="py-name"><a title="lepl.regexp._test.interval
+lepl.regexp.interval" class="py-name" href="#" onclick="return doclink('link-96', 'interval', 'link-6');">interval</a></tt> </tt>
+<a name="L437"></a><tt class="py-lineno">437</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">b1</tt> <tt class="py-op">&lt;</tt> <tt class="py-name">a1</tt><tt class="py-op">:</tt> </tt>
+<a name="L438"></a><tt class="py-lineno">438</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-name">a1</tt><tt class="py-op">,</tt> <tt class="py-name">b1</tt><tt class="py-op">)</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-name">b1</tt><tt class="py-op">,</tt> <tt class="py-name">a1</tt><tt class="py-op">)</tt> </tt>
+<a name="L439"></a><tt class="py-lineno">439</tt>  <tt class="py-line">        <tt class="py-name">intervals</tt> <tt class="py-op">=</tt> <tt class="py-name">deque</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L440"></a><tt class="py-lineno">440</tt>  <tt class="py-line">        <tt id="link-97" class="py-name"><a title="lepl.core.config.ConfigBuilder.alphabet" class="py-name" href="#" onclick="return doclink('link-97', 'alphabet', 'link-4');">alphabet</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-98" class="py-name"><a title="lepl.core.config.ConfigBuilder.alphabet" class="py-name" href="#" onclick="return doclink('link-98', 'alphabet', 'link-4');">alphabet</a></tt> </tt>
+<a name="L441"></a><tt class="py-lineno">441</tt>  <tt class="py-line">        <tt class="py-name">done</tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L442"></a><tt class="py-lineno">442</tt>  <tt class="py-line">        <tt class="py-keyword">while</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__intervals</tt><tt class="py-op">:</tt> </tt>
+<a name="L443"></a><tt class="py-lineno">443</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-name">a0</tt><tt class="py-op">,</tt> <tt class="py-name">b0</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">v0</tt><tt class="py-op">)</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__intervals</tt><tt class="py-op">.</tt><tt class="py-name">popleft</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L444"></a><tt class="py-lineno">444</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">a0</tt> <tt class="py-op">&lt;=</tt> <tt class="py-name">a1</tt><tt class="py-op">:</tt> </tt>
+<a name="L445"></a><tt class="py-lineno">445</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">b0</tt> <tt class="py-op">&lt;</tt> <tt class="py-name">a1</tt><tt class="py-op">:</tt> </tt>
+<a name="L446"></a><tt class="py-lineno">446</tt>  <tt class="py-line">                    <tt class="py-comment"># old interval starts and ends before new interval</tt> </tt>
+<a name="L447"></a><tt class="py-lineno">447</tt>  <tt class="py-line">                    <tt class="py-comment"># so keep old interval and continue</tt> </tt>
+<a name="L448"></a><tt class="py-lineno">448</tt>  <tt class="py-line">                    <tt class="py-name">intervals</tt><tt class="py-op">.</tt><tt id="link-99" class="py-name"><a title="lepl.core._test.rewriters.append
+lepl.core.monitor.MultipleStackMonitors.append
+lepl.core.monitor.MultipleValueMonitors.append
+lepl.matchers.transform.TransformationWrapper.append
+lepl.regexp.interval.Intervals.append
+lepl.regexp.interval.TaggedFragments.append
+lepl.regexp.interval._Character.append
+lepl.support.lib.CircularFifo.append" class="py-name" href="#" onclick="return doclink('link-99', 'append', 'link-22');">append</a></tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-name">a0</tt><tt class="py-op">,</tt> <tt class="py-name">b0</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">v0</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L449"></a><tt class="py-lineno">449</tt>  <tt class="py-line">                <tt class="py-keyword">elif</tt> <tt class="py-name">b1</tt> <tt class="py-op">&lt;=</tt> <tt class="py-name">b0</tt><tt class="py-op">:</tt> </tt>
+<a name="L450"></a><tt class="py-lineno">450</tt>  <tt class="py-line">                    <tt class="py-comment"># old interval starts before or with and ends after or with </tt> </tt>
+<a name="L451"></a><tt class="py-lineno">451</tt>  <tt class="py-line">                    <tt class="py-comment"># new interval</tt> </tt>
+<a name="L452"></a><tt class="py-lineno">452</tt>  <tt class="py-line">                    <tt class="py-comment"># so we have one, two or three new intervals</tt> </tt>
+<a name="L453"></a><tt class="py-lineno">453</tt>  <tt class="py-line">                    <tt class="py-keyword">if</tt> <tt class="py-name">a0</tt> <tt class="py-op">&lt;</tt> <tt class="py-name">a1</tt><tt class="py-op">:</tt> </tt>
+<a name="L454"></a><tt class="py-lineno">454</tt>  <tt class="py-line">                        <tt class="py-comment"># first part of old</tt> </tt>
+<a name="L455"></a><tt class="py-lineno">455</tt>  <tt class="py-line">                        <tt class="py-name">intervals</tt><tt class="py-op">.</tt><tt id="link-100" class="py-name"><a title="lepl.core._test.rewriters.append
+lepl.core.monitor.MultipleStackMonitors.append
+lepl.core.monitor.MultipleValueMonitors.append
+lepl.matchers.transform.TransformationWrapper.append
+lepl.regexp.interval.Intervals.append
+lepl.regexp.interval.TaggedFragments.append
+lepl.regexp.interval._Character.append
+lepl.support.lib.CircularFifo.append" class="py-name" href="#" onclick="return doclink('link-100', 'append', 'link-22');">append</a></tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-name">a0</tt><tt class="py-op">,</tt> <tt id="link-101" class="py-name"><a title="lepl.core.config.ConfigBuilder.alphabet" class="py-name" href="#" onclick="return doclink('link-101', 'alphabet', 'link-4');">alphabet</a></tt><tt class="py-op">.</tt><tt id="link-102" class="py-name"><a title="lepl.regexp.binary.BinaryAlphabet.before
+lepl.regexp.core.Alphabet.before
+lepl.regexp.unicode.UnicodeAlphabet.before" class="py-name" href="#" onclick="return doclink('link-102', 'before', 'link-21');">before</a></tt><tt class="py-op">(</tt><tt class="py-name">a1</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">v0</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L456"></a><tt class="py-lineno">456</tt>  <tt class="py-line">                    <tt class="py-comment"># common to both</tt> </tt>
+<a name="L457"></a><tt class="py-lineno">457</tt>  <tt class="py-line">                    <tt class="py-name">intervals</tt><tt class="py-op">.</tt><tt id="link-103" class="py-name"><a title="lepl.core._test.rewriters.append
+lepl.core.monitor.MultipleStackMonitors.append
+lepl.core.monitor.MultipleValueMonitors.append
+lepl.matchers.transform.TransformationWrapper.append
+lepl.regexp.interval.Intervals.append
+lepl.regexp.interval.TaggedFragments.append
+lepl.regexp.interval._Character.append
+lepl.support.lib.CircularFifo.append" class="py-name" href="#" onclick="return doclink('link-103', 'append', 'link-22');">append</a></tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-name">a1</tt><tt class="py-op">,</tt> <tt class="py-name">b1</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">v0</tt><tt class="py-op">+</tt><tt class="py-name">v1</tt><tt class="py-op">)</tt><tt class="py-op">)</tt>  </tt>
+<a name="L458"></a><tt class="py-lineno">458</tt>  <tt class="py-line">                    <tt class="py-keyword">if</tt> <tt class="py-name">b1</tt> <tt class="py-op">&lt;</tt> <tt class="py-name">b0</tt><tt class="py-op">:</tt> </tt>
+<a name="L459"></a><tt class="py-lineno">459</tt>  <tt class="py-line">                        <tt class="py-comment"># last part of old </tt> </tt>
+<a name="L460"></a><tt class="py-lineno">460</tt>  <tt class="py-line">                        <tt class="py-name">intervals</tt><tt class="py-op">.</tt><tt id="link-104" class="py-name"><a title="lepl.core._test.rewriters.append
+lepl.core.monitor.MultipleStackMonitors.append
+lepl.core.monitor.MultipleValueMonitors.append
+lepl.matchers.transform.TransformationWrapper.append
+lepl.regexp.interval.Intervals.append
+lepl.regexp.interval.TaggedFragments.append
+lepl.regexp.interval._Character.append
+lepl.support.lib.CircularFifo.append" class="py-name" href="#" onclick="return doclink('link-104', 'append', 'link-22');">append</a></tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt id="link-105" class="py-name"><a title="lepl.core.config.ConfigBuilder.alphabet" class="py-name" href="#" onclick="return doclink('link-105', 'alphabet', 'link-4');">alphabet</a></tt><tt class="py-op">.</tt><tt id="link-106" class="py-name" targets="Method lepl.regexp.binary.BinaryAlphabet.after()=lepl.regexp.binary.BinaryAlphabet-class.html#after,Method lepl.regexp.core.Alphabet.after()=lepl.regexp.core.Alphabet-class.html#after,Method lepl.regexp.unicode.UnicodeAlphabet.after()=lepl.regexp.unicode.UnicodeAlphabet-class.html#after"><a title="lepl.regexp.binary.BinaryAlphabet.after
+lepl.regexp.core.Alphabet.after
+lepl.regexp.unicode.UnicodeAlphabet.after" class="py-name" href="#" onclick="return doclink('link-106', 'after', 'link-106');">after</a></tt><tt class="py-op">(</tt><tt class="py-name">b1</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">b0</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">v0</tt><tt class="py-op">)</tt><tt class="py-op">)</tt>  </tt>
+<a name="L461"></a><tt class="py-lineno">461</tt>  <tt class="py-line">                    <tt class="py-name">done</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L462"></a><tt class="py-lineno">462</tt>  <tt class="py-line">                    <tt class="py-keyword">break</tt> </tt>
+<a name="L463"></a><tt class="py-lineno">463</tt>  <tt class="py-line">                <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L464"></a><tt class="py-lineno">464</tt>  <tt class="py-line">                    <tt class="py-comment"># old interval starts before new, but partially overlaps</tt> </tt>
+<a name="L465"></a><tt class="py-lineno">465</tt>  <tt class="py-line">                    <tt class="py-comment"># so split old and continue</tt> </tt>
+<a name="L466"></a><tt class="py-lineno">466</tt>  <tt class="py-line">                    <tt class="py-comment"># (since new may overlap more intervals...)</tt> </tt>
+<a name="L467"></a><tt class="py-lineno">467</tt>  <tt class="py-line">                    <tt class="py-keyword">if</tt> <tt class="py-name">a0</tt> <tt class="py-op">&lt;</tt> <tt class="py-name">a1</tt><tt class="py-op">:</tt> </tt>
+<a name="L468"></a><tt class="py-lineno">468</tt>  <tt class="py-line">                        <tt class="py-comment"># first part of old</tt> </tt>
+<a name="L469"></a><tt class="py-lineno">469</tt>  <tt class="py-line">                        <tt class="py-name">intervals</tt><tt class="py-op">.</tt><tt id="link-107" class="py-name"><a title="lepl.core._test.rewriters.append
+lepl.core.monitor.MultipleStackMonitors.append
+lepl.core.monitor.MultipleValueMonitors.append
+lepl.matchers.transform.TransformationWrapper.append
+lepl.regexp.interval.Intervals.append
+lepl.regexp.interval.TaggedFragments.append
+lepl.regexp.interval._Character.append
+lepl.support.lib.CircularFifo.append" class="py-name" href="#" onclick="return doclink('link-107', 'append', 'link-22');">append</a></tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-name">a0</tt><tt class="py-op">,</tt> <tt id="link-108" class="py-name"><a title="lepl.core.config.ConfigBuilder.alphabet" class="py-name" href="#" onclick="return doclink('link-108', 'alphabet', 'link-4');">alphabet</a></tt><tt class="py-op">.</tt><tt id="link-109" class="py-name"><a title="lepl.regexp.binary.BinaryAlphabet.before
+lepl.regexp.core.Alphabet.before
+lepl.regexp.unicode.UnicodeAlphabet.before" class="py-name" href="#" onclick="return doclink('link-109', 'before', 'link-21');">before</a></tt><tt class="py-op">(</tt><tt class="py-name">a1</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">v0</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L470"></a><tt class="py-lineno">470</tt>  <tt class="py-line">                    <tt class="py-comment"># common to both </tt> </tt>
+<a name="L471"></a><tt class="py-lineno">471</tt>  <tt class="py-line">                    <tt class="py-name">intervals</tt><tt class="py-op">.</tt><tt id="link-110" class="py-name"><a title="lepl.core._test.rewriters.append
+lepl.core.monitor.MultipleStackMonitors.append
+lepl.core.monitor.MultipleValueMonitors.append
+lepl.matchers.transform.TransformationWrapper.append
+lepl.regexp.interval.Intervals.append
+lepl.regexp.interval.TaggedFragments.append
+lepl.regexp.interval._Character.append
+lepl.support.lib.CircularFifo.append" class="py-name" href="#" onclick="return doclink('link-110', 'append', 'link-22');">append</a></tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-name">a1</tt><tt class="py-op">,</tt> <tt class="py-name">b0</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">v0</tt><tt class="py-op">+</tt><tt class="py-name">v1</tt><tt class="py-op">)</tt><tt class="py-op">)</tt>  </tt>
+<a name="L472"></a><tt class="py-lineno">472</tt>  <tt class="py-line">                    <tt class="py-name">a1</tt> <tt class="py-op">=</tt> <tt id="link-111" class="py-name"><a title="lepl.core.config.ConfigBuilder.alphabet" class="py-name" href="#" onclick="return doclink('link-111', 'alphabet', 'link-4');">alphabet</a></tt><tt class="py-op">.</tt><tt id="link-112" class="py-name"><a title="lepl.regexp.binary.BinaryAlphabet.after
+lepl.regexp.core.Alphabet.after
+lepl.regexp.unicode.UnicodeAlphabet.after" class="py-name" href="#" onclick="return doclink('link-112', 'after', 'link-106');">after</a></tt><tt class="py-op">(</tt><tt class="py-name">b0</tt><tt class="py-op">)</tt> </tt>
+<a name="L473"></a><tt class="py-lineno">473</tt>  <tt class="py-line">            <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L474"></a><tt class="py-lineno">474</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">b1</tt> <tt class="py-op">&lt;</tt> <tt class="py-name">a0</tt><tt class="py-op">:</tt> </tt>
+<a name="L475"></a><tt class="py-lineno">475</tt>  <tt class="py-line">                    <tt class="py-comment"># new interval starts and ends before old</tt> </tt>
+<a name="L476"></a><tt class="py-lineno">476</tt>  <tt class="py-line">                    <tt class="py-name">intervals</tt><tt class="py-op">.</tt><tt id="link-113" class="py-name"><a title="lepl.core._test.rewriters.append
+lepl.core.monitor.MultipleStackMonitors.append
+lepl.core.monitor.MultipleValueMonitors.append
+lepl.matchers.transform.TransformationWrapper.append
+lepl.regexp.interval.Intervals.append
+lepl.regexp.interval.TaggedFragments.append
+lepl.regexp.interval._Character.append
+lepl.support.lib.CircularFifo.append" class="py-name" href="#" onclick="return doclink('link-113', 'append', 'link-22');">append</a></tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-name">a1</tt><tt class="py-op">,</tt> <tt class="py-name">b1</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">v1</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L477"></a><tt class="py-lineno">477</tt>  <tt class="py-line">                    <tt class="py-name">intervals</tt><tt class="py-op">.</tt><tt id="link-114" class="py-name"><a title="lepl.core._test.rewriters.append
+lepl.core.monitor.MultipleStackMonitors.append
+lepl.core.monitor.MultipleValueMonitors.append
+lepl.matchers.transform.TransformationWrapper.append
+lepl.regexp.interval.Intervals.append
+lepl.regexp.interval.TaggedFragments.append
+lepl.regexp.interval._Character.append
+lepl.support.lib.CircularFifo.append" class="py-name" href="#" onclick="return doclink('link-114', 'append', 'link-22');">append</a></tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-name">a0</tt><tt class="py-op">,</tt> <tt class="py-name">b0</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">v0</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L478"></a><tt class="py-lineno">478</tt>  <tt class="py-line">                    <tt class="py-name">done</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L479"></a><tt class="py-lineno">479</tt>  <tt class="py-line">                    <tt class="py-keyword">break</tt> </tt>
+<a name="L480"></a><tt class="py-lineno">480</tt>  <tt class="py-line">                <tt class="py-keyword">elif</tt> <tt class="py-name">b0</tt> <tt class="py-op">&lt;=</tt> <tt class="py-name">b1</tt><tt class="py-op">:</tt> </tt>
+<a name="L481"></a><tt class="py-lineno">481</tt>  <tt class="py-line">                    <tt class="py-comment"># new interval starts before and ends after or with old </tt> </tt>
+<a name="L482"></a><tt class="py-lineno">482</tt>  <tt class="py-line">                    <tt class="py-comment"># interval</tt> </tt>
+<a name="L483"></a><tt class="py-lineno">483</tt>  <tt class="py-line">                    <tt class="py-comment"># so split and continue if extends (since last part may </tt> </tt>
+<a name="L484"></a><tt class="py-lineno">484</tt>  <tt class="py-line">                    <tt class="py-comment"># overlap...)</tt> </tt>
+<a name="L485"></a><tt class="py-lineno">485</tt>  <tt class="py-line">                    <tt class="py-comment"># first part of new</tt> </tt>
+<a name="L486"></a><tt class="py-lineno">486</tt>  <tt class="py-line">                    <tt class="py-name">intervals</tt><tt class="py-op">.</tt><tt id="link-115" class="py-name"><a title="lepl.core._test.rewriters.append
+lepl.core.monitor.MultipleStackMonitors.append
+lepl.core.monitor.MultipleValueMonitors.append
+lepl.matchers.transform.TransformationWrapper.append
+lepl.regexp.interval.Intervals.append
+lepl.regexp.interval.TaggedFragments.append
+lepl.regexp.interval._Character.append
+lepl.support.lib.CircularFifo.append" class="py-name" href="#" onclick="return doclink('link-115', 'append', 'link-22');">append</a></tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-name">a1</tt><tt class="py-op">,</tt> <tt id="link-116" class="py-name"><a title="lepl.core.config.ConfigBuilder.alphabet" class="py-name" href="#" onclick="return doclink('link-116', 'alphabet', 'link-4');">alphabet</a></tt><tt class="py-op">.</tt><tt id="link-117" class="py-name"><a title="lepl.regexp.binary.BinaryAlphabet.before
+lepl.regexp.core.Alphabet.before
+lepl.regexp.unicode.UnicodeAlphabet.before" class="py-name" href="#" onclick="return doclink('link-117', 'before', 'link-21');">before</a></tt><tt class="py-op">(</tt><tt class="py-name">a0</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">v1</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L487"></a><tt class="py-lineno">487</tt>  <tt class="py-line">                    <tt class="py-comment"># old </tt> </tt>
+<a name="L488"></a><tt class="py-lineno">488</tt>  <tt class="py-line">                    <tt class="py-name">intervals</tt><tt class="py-op">.</tt><tt id="link-118" class="py-name"><a title="lepl.core._test.rewriters.append
+lepl.core.monitor.MultipleStackMonitors.append
+lepl.core.monitor.MultipleValueMonitors.append
+lepl.matchers.transform.TransformationWrapper.append
+lepl.regexp.interval.Intervals.append
+lepl.regexp.interval.TaggedFragments.append
+lepl.regexp.interval._Character.append
+lepl.support.lib.CircularFifo.append" class="py-name" href="#" onclick="return doclink('link-118', 'append', 'link-22');">append</a></tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-name">a0</tt><tt class="py-op">,</tt> <tt class="py-name">b0</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">v0</tt><tt class="py-op">+</tt><tt class="py-name">v1</tt><tt class="py-op">)</tt><tt class="py-op">)</tt>  </tt>
+<a name="L489"></a><tt class="py-lineno">489</tt>  <tt class="py-line">                    <tt class="py-keyword">if</tt> <tt class="py-name">b1</tt> <tt class="py-op">&gt;</tt> <tt class="py-name">b0</tt><tt class="py-op">:</tt> </tt>
+<a name="L490"></a><tt class="py-lineno">490</tt>  <tt class="py-line">                        <tt class="py-name">a1</tt> <tt class="py-op">=</tt> <tt id="link-119" class="py-name"><a title="lepl.core.config.ConfigBuilder.alphabet" class="py-name" href="#" onclick="return doclink('link-119', 'alphabet', 'link-4');">alphabet</a></tt><tt class="py-op">.</tt><tt id="link-120" class="py-name"><a title="lepl.regexp.binary.BinaryAlphabet.after
+lepl.regexp.core.Alphabet.after
+lepl.regexp.unicode.UnicodeAlphabet.after" class="py-name" href="#" onclick="return doclink('link-120', 'after', 'link-106');">after</a></tt><tt class="py-op">(</tt><tt class="py-name">b0</tt><tt class="py-op">)</tt> </tt>
+<a name="L491"></a><tt class="py-lineno">491</tt>  <tt class="py-line">                    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L492"></a><tt class="py-lineno">492</tt>  <tt class="py-line">                        <tt class="py-name">done</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L493"></a><tt class="py-lineno">493</tt>  <tt class="py-line">                        <tt class="py-keyword">break</tt> </tt>
+<a name="L494"></a><tt class="py-lineno">494</tt>  <tt class="py-line">                <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L495"></a><tt class="py-lineno">495</tt>  <tt class="py-line">                    <tt class="py-comment"># new interval starts before old, but partially overlaps,</tt> </tt>
+<a name="L496"></a><tt class="py-lineno">496</tt>  <tt class="py-line">                    <tt class="py-comment"># split and slurp rest</tt> </tt>
+<a name="L497"></a><tt class="py-lineno">497</tt>  <tt class="py-line">                    <tt class="py-comment"># first part of new</tt> </tt>
+<a name="L498"></a><tt class="py-lineno">498</tt>  <tt class="py-line">                    <tt class="py-name">intervals</tt><tt class="py-op">.</tt><tt id="link-121" class="py-name"><a title="lepl.core._test.rewriters.append
+lepl.core.monitor.MultipleStackMonitors.append
+lepl.core.monitor.MultipleValueMonitors.append
+lepl.matchers.transform.TransformationWrapper.append
+lepl.regexp.interval.Intervals.append
+lepl.regexp.interval.TaggedFragments.append
+lepl.regexp.interval._Character.append
+lepl.support.lib.CircularFifo.append" class="py-name" href="#" onclick="return doclink('link-121', 'append', 'link-22');">append</a></tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-name">a1</tt><tt class="py-op">,</tt> <tt id="link-122" class="py-name"><a title="lepl.core.config.ConfigBuilder.alphabet" class="py-name" href="#" onclick="return doclink('link-122', 'alphabet', 'link-4');">alphabet</a></tt><tt class="py-op">.</tt><tt id="link-123" class="py-name"><a title="lepl.regexp.binary.BinaryAlphabet.before
+lepl.regexp.core.Alphabet.before
+lepl.regexp.unicode.UnicodeAlphabet.before" class="py-name" href="#" onclick="return doclink('link-123', 'before', 'link-21');">before</a></tt><tt class="py-op">(</tt><tt class="py-name">a0</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">v1</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L499"></a><tt class="py-lineno">499</tt>  <tt class="py-line">                    <tt class="py-comment"># overlap </tt> </tt>
+<a name="L500"></a><tt class="py-lineno">500</tt>  <tt class="py-line">                    <tt class="py-name">intervals</tt><tt class="py-op">.</tt><tt id="link-124" class="py-name"><a title="lepl.core._test.rewriters.append
+lepl.core.monitor.MultipleStackMonitors.append
+lepl.core.monitor.MultipleValueMonitors.append
+lepl.matchers.transform.TransformationWrapper.append
+lepl.regexp.interval.Intervals.append
+lepl.regexp.interval.TaggedFragments.append
+lepl.regexp.interval._Character.append
+lepl.support.lib.CircularFifo.append" class="py-name" href="#" onclick="return doclink('link-124', 'append', 'link-22');">append</a></tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-name">a0</tt><tt class="py-op">,</tt> <tt class="py-name">b1</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">v0</tt><tt class="py-op">+</tt><tt class="py-name">v1</tt><tt class="py-op">)</tt><tt class="py-op">)</tt>  </tt>
+<a name="L501"></a><tt class="py-lineno">501</tt>  <tt class="py-line">                    <tt class="py-comment"># last part of old</tt> </tt>
+<a name="L502"></a><tt class="py-lineno">502</tt>  <tt class="py-line">                    <tt class="py-name">intervals</tt><tt class="py-op">.</tt><tt id="link-125" class="py-name"><a title="lepl.core._test.rewriters.append
+lepl.core.monitor.MultipleStackMonitors.append
+lepl.core.monitor.MultipleValueMonitors.append
+lepl.matchers.transform.TransformationWrapper.append
+lepl.regexp.interval.Intervals.append
+lepl.regexp.interval.TaggedFragments.append
+lepl.regexp.interval._Character.append
+lepl.support.lib.CircularFifo.append" class="py-name" href="#" onclick="return doclink('link-125', 'append', 'link-22');">append</a></tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt id="link-126" class="py-name"><a title="lepl.core.config.ConfigBuilder.alphabet" class="py-name" href="#" onclick="return doclink('link-126', 'alphabet', 'link-4');">alphabet</a></tt><tt class="py-op">.</tt><tt id="link-127" class="py-name"><a title="lepl.regexp.binary.BinaryAlphabet.after
+lepl.regexp.core.Alphabet.after
+lepl.regexp.unicode.UnicodeAlphabet.after" class="py-name" href="#" onclick="return doclink('link-127', 'after', 'link-106');">after</a></tt><tt class="py-op">(</tt><tt class="py-name">b1</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">b0</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">v0</tt><tt class="py-op">)</tt><tt class="py-op">)</tt>  </tt>
+<a name="L503"></a><tt class="py-lineno">503</tt>  <tt class="py-line">                    <tt class="py-name">done</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L504"></a><tt class="py-lineno">504</tt>  <tt class="py-line">                    <tt class="py-keyword">break</tt> </tt>
+<a name="L505"></a><tt class="py-lineno">505</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">done</tt><tt class="py-op">:</tt> </tt>
+<a name="L506"></a><tt class="py-lineno">506</tt>  <tt class="py-line">            <tt class="py-name">intervals</tt><tt class="py-op">.</tt><tt id="link-128" class="py-name"><a title="lepl.core._test.rewriters.append
+lepl.core.monitor.MultipleStackMonitors.append
+lepl.core.monitor.MultipleValueMonitors.append
+lepl.matchers.transform.TransformationWrapper.append
+lepl.regexp.interval.Intervals.append
+lepl.regexp.interval.TaggedFragments.append
+lepl.regexp.interval._Character.append
+lepl.support.lib.CircularFifo.append" class="py-name" href="#" onclick="return doclink('link-128', 'append', 'link-22');">append</a></tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-name">a1</tt><tt class="py-op">,</tt> <tt class="py-name">b1</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">v1</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L507"></a><tt class="py-lineno">507</tt>  <tt class="py-line">        <tt class="py-name">intervals</tt><tt class="py-op">.</tt><tt id="link-129" class="py-name"><a title="lepl.matchers.transform.TransformationWrapper.extend
+lepl.regexp.str.StrParser.extend" class="py-name" href="#" onclick="return doclink('link-129', 'extend', 'link-30');">extend</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__intervals</tt><tt class="py-op">)</tt> <tt class="py-comment"># slurp remaining</tt> </tt>
+<a name="L508"></a><tt class="py-lineno">508</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__intervals</tt> <tt class="py-op">=</tt> <tt class="py-name">intervals</tt> </tt>
+</div><a name="L509"></a><tt class="py-lineno">509</tt>  <tt class="py-line">         </tt>
+<a name="TaggedFragments.len"></a><div id="TaggedFragments.len-def"><a name="L510"></a><tt class="py-lineno">510</tt> <a class="py-toggle" href="#" id="TaggedFragments.len-toggle" onclick="return toggle('TaggedFragments.len');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.regexp.interval.TaggedFragments-class.html#len">len</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="TaggedFragments.len-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="TaggedFragments.len-expanded"><a name="L511"></a><tt class="py-lineno">511</tt>  <tt class="py-line">        <tt class="py-docstring">'''</tt> </tt>
+<a name="L512"></a><tt class="py-lineno">512</tt>  <tt class="py-line"><tt class="py-docstring">        The number of intervals contained.</tt> </tt>
+<a name="L513"></a><tt class="py-lineno">513</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L514"></a><tt class="py-lineno">514</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-130" class="py-name"><a title="lepl.lexer.stream.TokenHelper.len
+lepl.regexp.interval.Intervals.len
+lepl.regexp.interval.TaggedFragments.len
+lepl.regexp.interval._Character.len
+lepl.stream.core.StreamHelper.len
+lepl.stream.facade.HelperFacade.len
+lepl.stream.iter.IterableHelper.len
+lepl.stream.simple.SequenceHelper.len" class="py-name" href="#" onclick="return doclink('link-130', 'len', 'link-31');">len</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__intervals</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L515"></a><tt class="py-lineno">515</tt>  <tt class="py-line">     </tt>
+<a name="TaggedFragments.__getitem__"></a><div id="TaggedFragments.__getitem__-def"><a name="L516"></a><tt class="py-lineno">516</tt> <a class="py-toggle" href="#" id="TaggedFragments.__getitem__-toggle" onclick="return toggle('TaggedFragments.__getitem__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.regexp.interval.TaggedFragments-class.html#__getitem__">__getitem__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">index</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="TaggedFragments.__getitem__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="TaggedFragments.__getitem__-expanded"><a name="L517"></a><tt class="py-lineno">517</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__intervals</tt><tt class="py-op">[</tt><tt id="link-131" class="py-name"><a title="lepl.regexp.interval.IntervalMap.index" class="py-name" href="#" onclick="return doclink('link-131', 'index', 'link-32');">index</a></tt><tt class="py-op">]</tt> </tt>
+</div><a name="L518"></a><tt class="py-lineno">518</tt>  <tt class="py-line">     </tt>
+<a name="TaggedFragments.__iter__"></a><div id="TaggedFragments.__iter__-def"><a name="L519"></a><tt class="py-lineno">519</tt> <a class="py-toggle" href="#" id="TaggedFragments.__iter__-toggle" onclick="return toggle('TaggedFragments.__iter__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.regexp.interval.TaggedFragments-class.html#__iter__">__iter__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="TaggedFragments.__iter__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="TaggedFragments.__iter__-expanded"><a name="L520"></a><tt class="py-lineno">520</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-132" class="py-name"><a title="lepl.stream._test.iter
+lepl.stream.iter" class="py-name" href="#" onclick="return doclink('link-132', 'iter', 'link-33');">iter</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__intervals</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L521"></a><tt class="py-lineno">521</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lepl-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sun May 13 16:31:10 2012
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

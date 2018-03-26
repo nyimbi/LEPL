@@ -1,0 +1,417 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Line–Aware Parsing and the Offside Rule &mdash; LEPL 5.1.2 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '5.1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="LEPL 5.1.2 documentation" href="index.html" />
+    <link rel="up" title="Lepl Manual" href="manual.html" />
+    <link rel="next" title="Advanced Use" href="advanced.html" />
+    <link rel="prev" title="Lexer" href="lexer.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="advanced.html" title="Advanced Use"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="lexer.html" title="Lexer"
+             accesskey="P">previous</a> |</li>
+        <li><a href="contents.html">LEPL 5.1.2 documentation</a> &raquo;</li>
+          <li><a href="manual.html" accesskey="U">Lepl Manual</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="line-aware-parsing-and-the-offside-rule">
+<span id="offside"></span><span id="index-0"></span><h1>Line&#8211;Aware Parsing and the Offside Rule<a class="headerlink" href="#line-aware-parsing-and-the-offside-rule" title="Permalink to this headline">¶</a></h1>
+<p>From release 3.3 Lepl includes support to simplify parsing text where newlines
+and leftmost whitespace are significant.  For example, in both Python and
+Haskell, the relative indentation of lines changes the meaning of a program.
+At the end of this section is an <a class="reference internal" href="#python-example"><em>example</em></a> that handles
+indentation in a similar way to Python.</p>
+<p>Lepl also supports many simpler cases where a matcher should be applied to a
+single line (or several lines connected with a continuation character).</p>
+<p>There is nothing special about spaces and newlines, of course, so in principle
+it was always possible to handle these in Lepl, but in practice doing so was
+sometimes frustratingly complex.  The extensions described here make things
+much simpler.</p>
+<p>Note that I use the phrase &#8220;offside rule&#8221; in a general way (only) to describe
+indentation&#8211;aware parsing.  I am not claiming to support the exact parsing
+used in any one language, but instead to provide a general toolkit that should
+make a variety of different syntaxes possible.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This has changed significantly in Lepl 5.  It is now implemented by adding
+additional tokens into the token stream.  It also has new configuration
+options and slightly changed matchers.  For more details of the changes see
+<a class="reference internal" href="lepl5.0.html#lepl5"><em>Lepl 5</em></a>.</p>
+</div>
+<div class="section" id="simple-line-aware-parsing-lines-only">
+<span id="index-1"></span><h2>Simple Line&#8211;Aware Parsing (Lines Only)<a class="headerlink" href="#simple-line-aware-parsing-lines-only" title="Permalink to this headline">¶</a></h2>
+<p>If line-aware parsing is enabled using <a class="reference external" href="api/redirect.html#lepl.core.config.ConfigBuilder.lines">.config.lines()</a> (with no
+parameters) then two tokens will be added to each line: <a class="reference external" href="api/redirect.html#lepl.lexer.lines.matchers.LineStart">LineStart()</a> at the
+beginning and <a class="reference external" href="api/redirect.html#lepl.lexer.lines.matchers.LineEnd">LineEnd()</a> at the end.  Neither token will return any result,
+but they must both be matched for the line as a whole to parse correctly.</p>
+<p>For example, to split input into lines you might use:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">contents</span> <span class="o">=</span> <span class="n">Token</span><span class="p">(</span><span class="n">Any</span><span class="p">()[:,</span><span class="o">...</span><span class="p">])</span> <span class="o">&gt;</span> <span class="nb">list</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">line</span> <span class="o">=</span> <span class="n">LineStart</span><span class="p">()</span> <span class="o">&amp;</span> <span class="n">contents</span> <span class="o">&amp;</span> <span class="n">LineEnd</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lines</span> <span class="o">=</span> <span class="n">line</span><span class="p">[:]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lines</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">lines</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lines</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;line one</span><span class="se">\n</span><span class="s">line two</span><span class="se">\n</span><span class="s">line three&#39;</span><span class="p">)</span>
+<span class="go">[[&#39;line one\n&#39;], [&#39;line two\n&#39;], [&#39;line three&#39;]]</span>
+</pre></div>
+</div>
+<p>Since you will often want to define lines, the <a class="reference external" href="api/redirect.html#lepl.lexer.lines.matchers.Line">Line()</a> matcher simplifies
+this a little:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">contents</span> <span class="o">=</span> <span class="n">Token</span><span class="p">(</span><span class="n">Any</span><span class="p">()[:,</span><span class="o">...</span><span class="p">])</span> <span class="o">&gt;</span> <span class="nb">list</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">line</span> <span class="o">=</span> <span class="n">Line</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lines</span> <span class="o">=</span> <span class="n">line</span><span class="p">[:]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lines</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">lines</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lines</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;line one</span><span class="se">\n</span><span class="s">line two</span><span class="se">\n</span><span class="s">line three&#39;</span><span class="p">)</span>
+<span class="go">[[&#39;line one\n&#39;], [&#39;line two\n&#39;], [&#39;line three&#39;]]</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The contents of the <a class="reference external" href="api/redirect.html#lepl.lexer.lines.matchers.Line">Line()</a> matcher should be tokens (they can, of
+course, be specialised, as described in <a class="reference internal" href="lexer.html#lexer"><em>Lexer</em></a>).</p>
+</div>
+<div class="section" id="continued-and-extended-lines">
+<span id="index-2"></span><h3>Continued and Extended Lines<a class="headerlink" href="#continued-and-extended-lines" title="Permalink to this headline">¶</a></h3>
+<p>Sometimes you may want to have a matcher that continues over multiple lines.
+You can do this by combining <a class="reference external" href="api/redirect.html#lepl.lexer.lines.matchers.Line">Line()</a> matchers, but there is also a matcher
+for the common case of a &#8220;continuation character&#8221;.  For example, if <tt class="docutils literal"><span class="pre">\</span></tt> is
+used to mark a line that continues then:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">contents</span> <span class="o">=</span> <span class="n">Token</span><span class="p">(</span><span class="s">&#39;[a-z]+&#39;</span><span class="p">)[:]</span> <span class="o">&gt;</span> <span class="nb">list</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CLine</span> <span class="o">=</span> <span class="n">ContinuedLineFactory</span><span class="p">(</span><span class="s">r&#39;</span><span class="se">\\</span><span class="s">&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">line</span> <span class="o">=</span> <span class="n">CLine</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lines</span> <span class="o">=</span> <span class="n">line</span><span class="p">[:]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lines</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">lines</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lines</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;line one </span><span class="se">\\\n</span><span class="s">line two</span><span class="se">\n</span><span class="s">line three&#39;</span><span class="p">)</span>
+<span class="go">[[&#39;line&#39;, &#39;one&#39;, &#39;line&#39;, &#39;two&#39;], [&#39;line&#39;, &#39;three&#39;]]</span>
+</pre></div>
+</div>
+<p>The idea is that you make your own replacement for <a class="reference external" href="api/redirect.html#lepl.lexer.lines.matchers.Line">Line()</a> that works
+similarly, but can be continued if it ends in the right character (the
+continuation character is actually a regular expression which is why it&#8217;s
+written as <tt class="docutils literal"><span class="pre">r'\\'</span></tt> &#8212; the backslash must be escaped).</p>
+<p>Another common use case is that some matching should ignore lines.  For this
+you can use <a class="reference external" href="api/redirect.html#lepl.lexer.lines.matchers.Extend">Extend()</a>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">contents</span> <span class="o">=</span> <span class="n">Token</span><span class="p">(</span><span class="s">&#39;[a-z]+&#39;</span><span class="p">)[:]</span> <span class="o">&gt;</span> <span class="nb">list</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parens</span> <span class="o">=</span> <span class="n">Token</span><span class="p">(</span><span class="s">&#39;\(&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">contents</span> <span class="o">&amp;</span> <span class="n">Token</span><span class="p">(</span><span class="s">&#39;\)&#39;</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">list</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">line</span> <span class="o">=</span> <span class="n">Line</span><span class="p">(</span><span class="n">contents</span> <span class="o">&amp;</span> <span class="n">Optional</span><span class="p">(</span><span class="n">Extend</span><span class="p">(</span><span class="n">parens</span><span class="p">)))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lines</span> <span class="o">=</span> <span class="n">line</span><span class="p">[:]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lines</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">lines</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lines</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;line one (this</span><span class="se">\n</span><span class="s"> extends to line two)</span><span class="se">\n</span><span class="s">line three&#39;</span><span class="p">)</span>
+<span class="go">[[&#39;line&#39;, &#39;one&#39;], [&#39;(&#39;, [&#39;this&#39;, &#39;extends&#39;, &#39;to&#39;, &#39;line&#39;, &#39;two&#39;], &#39;)&#39;], [&#39;line&#39;, &#39;three&#39;]]</span>
+</pre></div>
+</div>
+<span class="target" id="blocks"></span></div>
+</div>
+<div class="section" id="offside-parsing-blocks-of-lines">
+<span id="index-3"></span><h2>Offside Parsing (Blocks of Lines)<a class="headerlink" href="#offside-parsing-blocks-of-lines" title="Permalink to this headline">¶</a></h2>
+<p>This extends the line&#8211;aware parsing above.  In broad terms:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Any space at the start of the line is included in the <a class="reference external" href="api/redirect.html#lepl.lexer.lines.matchers.LineStart">LineStart()</a>
+token.</li>
+<li>The <a class="reference external" href="api/redirect.html#lepl.lexer.lines.matchers.Block">Block()</a> matcher will check the start of the first line and set a
+&#8220;global&#8221; variable to that indentation level.</li>
+<li>Each <a class="reference external" href="api/redirect.html#lepl.lexer.lines.matchers.LineStart">LineStart()</a> will check the variable set by <a class="reference external" href="api/redirect.html#lepl.lexer.lines.matchers.Block">Block()</a> and only
+match if the indentation level agrees with the space at the start of that
+line.</li>
+</ul>
+</div></blockquote>
+<p>Together these modifications mean that all the <a class="reference external" href="api/redirect.html#lepl.lexer.lines.matchers.LineStart">LineStart()</a> tokens in a
+single block must have the same indentation.  In other words, all lines in
+a <a class="reference external" href="api/redirect.html#lepl.lexer.lines.matchers.Block">Block()</a> are indented the same.</p>
+<p>Since <a class="reference external" href="api/redirect.html#lepl.lexer.lines.matchers.Line">Line()</a> continues to work as before, using the modified
+<a class="reference external" href="api/redirect.html#lepl.lexer.lines.matchers.LineStart">LineStart()</a> described above, we can think of the text as being structured
+like this:</p>
+<div class="highlight-python"><pre>Block(Line()
+      Line()
+      Block(Line()
+            Line()
+            Block(Line()
+                  Line())
+            Line()
+            Block(Line()))
+      Line())</pre>
+</div>
+<p>Each line is a separate <a class="reference external" href="api/redirect.html#lepl.lexer.lines.matchers.Line">Line()</a> and groups of indented lines are collected
+inside <a class="reference external" href="api/redirect.html#lepl.lexer.lines.matchers.Block">Block()</a>.</p>
+<div class="section" id="configuration">
+<h3>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h3>
+<p>To enable the block&#8211;based parsing specify the <tt class="docutils literal"><span class="pre">block_policy</span></tt> or
+<tt class="docutils literal"><span class="pre">block_indent</span></tt> parameters in <a class="reference external" href="api/redirect.html#lepl.core.config.ConfigBuilder.lines">.config.lines()</a>.</p>
+<p>The <tt class="docutils literal"><span class="pre">block_policy</span></tt> decides what indentations are acceptable.  The default,
+<a class="reference external" href="api/redirect.html#lepl.lexer.lines.matchers.constant_indent">constant_indent()</a> expects each block to be indented an additional, fixed
+number of spaces relative to previous lines.  Other options include
+<a class="reference external" href="api/redirect.html#lepl.lexer.lines.matchers.explicit">explicit()</a>, which will accept any indent (and so is typically used
+following a line with a special syntax, like ending in <tt class="docutils literal"><span class="pre">&quot;:&quot;</span></tt>) and
+<a class="reference external" href="api/redirect.html#lepl.lexer.lines.matchers.to_right">to_right()</a> which will accept any indent as long as it is larger than what
+went before.</p>
+<p>The <tt class="docutils literal"><span class="pre">block_indent</span></tt> is used with the default <a class="reference external" href="api/redirect.html#lepl.lexer.lines.matchers.constant_indent">constant_indent()</a> policy and
+sets the indentation amount.</p>
+<p>A <tt class="docutils literal"><span class="pre">tabsize</span></tt> parameter can also be specified &#8212; any tab at the start of the
+line is replaced with this many spaces.</p>
+</div>
+<div class="section" id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
+<p>Because blocks can be nested we typically have a recursive grammar.  For
+example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">introduce</span> <span class="o">=</span> <span class="o">~</span><span class="n">Token</span><span class="p">(</span><span class="s">&#39;:&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">word</span> <span class="o">=</span> <span class="n">Token</span><span class="p">(</span><span class="n">Word</span><span class="p">(</span><span class="n">Lower</span><span class="p">()))</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">statement</span> <span class="o">=</span> <span class="n">Delayed</span><span class="p">()</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">simple</span> <span class="o">=</span> <span class="n">Line</span><span class="p">(</span><span class="n">word</span><span class="p">[:])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">empty</span> <span class="o">=</span> <span class="n">Line</span><span class="p">(</span><span class="n">Empty</span><span class="p">(),</span> <span class="n">indent</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">block</span> <span class="o">=</span> <span class="n">Line</span><span class="p">(</span><span class="n">word</span><span class="p">[:]</span> <span class="o">&amp;</span> <span class="n">introduce</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">Block</span><span class="p">(</span><span class="n">statement</span><span class="p">[:])</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">statement</span> <span class="o">+=</span> <span class="p">(</span><span class="n">simple</span> <span class="o">|</span> <span class="n">empty</span> <span class="o">|</span> <span class="n">block</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">list</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">program</span> <span class="o">=</span> <span class="n">statement</span><span class="p">[:]</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">program</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">lines</span><span class="p">(</span><span class="n">block_policy</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">program</span><span class="o">.</span><span class="n">get_parse_string</span><span class="p">()</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span><span class="p">(</span><span class="s">&#39;&#39;&#39;</span>
+<span class="gp">... </span><span class="s">abc def</span>
+<span class="gp">... </span><span class="s">ghijk:</span>
+<span class="gp">... </span><span class="s">  mno pqr:</span>
+<span class="gp">... </span><span class="s">    stu</span>
+<span class="gp">... </span><span class="s">  vwx yz</span>
+<span class="gp">... </span><span class="s">&#39;&#39;&#39;</span><span class="p">)</span>
+<span class="go">[[],</span>
+<span class="go"> [&#39;abc&#39;, &#39;def&#39;],</span>
+<span class="go"> [&#39;ghijk&#39;,</span>
+<span class="go">  [&#39;mno&#39;, &#39;pqr&#39;,</span>
+<span class="go">   [&#39;stu&#39;]],</span>
+<span class="go">  [&#39;vwx&#39;, &#39;yz&#39;]]]</span>
+</pre></div>
+</div>
+<p>The core of the parser above is the three uses of <a class="reference external" href="api/redirect.html#lepl.lexer.lines.matchers.Line">Line()</a>.  The first,
+<tt class="docutils literal"><span class="pre">simple</span></tt>, is a statement that fits in a single line.  The next, <a class="reference external" href="api/redirect.html#lepl.support.lib.empty">empty</a>,
+is an empty statement (this has <tt class="docutils literal"><span class="pre">indent=False</span></tt> because we don&#8217;t care about
+the indentation of empty lines).  Finally, <tt class="docutils literal"><span class="pre">block</span></tt> defines a block statement
+as one that is introduced by a line that ends in &#8221;:&#8221; and then contains a
+series of statements that are indented relative to the first line.</p>
+<p>So you can see that the <a class="reference external" href="api/redirect.html#lepl.lexer.lines.matchers.Block">Block()</a> matcher&#8217;s job is to collect
+together lines that are indented relative to whatever came just before.  This
+works with <a class="reference external" href="api/redirect.html#lepl.lexer.lines.matchers.Line">Line()</a> which matches a line if it is indented at the correct
+level.</p>
+</div>
+<div class="section" id="python-example">
+<span id="id18"></span><h3>Continued and Extended Lines<a class="headerlink" href="#python-example" title="Permalink to this headline">¶</a></h3>
+<p>As with simple line&#8211;aware parsing, we would sometimes like a line to continue
+over several lines if it ends with a certain matcher.  We can make a similar
+matcher to <a class="reference external" href="api/redirect.html#lepl.lexer.lines.matchers.Line">Line()</a> that
+continues over multiple lines using <a class="reference external" href="api/redirect.html#lepl.lexer.lines.matchers.ContinuedLineFactory">ContinuedLineFactory()</a>.</p>
+<p>It is also possible to use <a class="reference external" href="api/redirect.html#lepl.lexer.lines.matchers.Extend">Extend()</a> to allow some matchers to ignore line
+breaks.</p>
+<p>Using these two matchers we can write a simple, Python&#8211;like language:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Blocks are defined by relative indentation</li>
+<li>The <tt class="docutils literal"><span class="pre">\</span></tt> marker indicates that a line extends past a line break</li>
+<li>Some constructions (like parentheses) automatically allow a line
+to extend past a line break</li>
+<li>Comments can have any indentation</li>
+</ul>
+</div></blockquote>
+<p>(To keep the example simple there&#8217;s only minimal parsing apart from the
+basic structure - a useful Python parser would obviously need much more work).</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">word</span> <span class="o">=</span> <span class="n">Token</span><span class="p">(</span><span class="n">Word</span><span class="p">(</span><span class="n">Lower</span><span class="p">()))</span>
+<span class="n">continuation</span> <span class="o">=</span> <span class="n">Token</span><span class="p">(</span><span class="s">r&#39;</span><span class="se">\\</span><span class="s">&#39;</span><span class="p">)</span>
+<span class="n">symbol</span> <span class="o">=</span> <span class="n">Token</span><span class="p">(</span><span class="n">Any</span><span class="p">(</span><span class="s">&#39;()&#39;</span><span class="p">))</span>
+<span class="n">introduce</span> <span class="o">=</span> <span class="o">~</span><span class="n">Token</span><span class="p">(</span><span class="s">&#39;:&#39;</span><span class="p">)</span>
+<span class="n">comma</span> <span class="o">=</span> <span class="o">~</span><span class="n">Token</span><span class="p">(</span><span class="s">&#39;,&#39;</span><span class="p">)</span>
+<span class="nb">hash</span> <span class="o">=</span> <span class="n">Token</span><span class="p">(</span><span class="s">&#39;#.*&#39;</span><span class="p">)</span>
+
+<span class="n">CLine</span> <span class="o">=</span> <span class="n">ContinuedLineFactory</span><span class="p">(</span><span class="n">continuation</span><span class="p">)</span>
+
+<span class="n">statement</span> <span class="o">=</span> <span class="n">word</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+<span class="n">args</span> <span class="o">=</span> <span class="n">Extend</span><span class="p">(</span><span class="n">word</span><span class="p">[:,</span> <span class="n">comma</span><span class="p">])</span> <span class="o">&gt;</span> <span class="nb">tuple</span>
+<span class="n">function</span> <span class="o">=</span> <span class="n">word</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">symbol</span><span class="p">(</span><span class="s">&#39;(&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">args</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">symbol</span><span class="p">(</span><span class="s">&#39;)&#39;</span><span class="p">)</span>
+
+<span class="n">block</span> <span class="o">=</span> <span class="n">Delayed</span><span class="p">()</span>
+<span class="n">blank</span> <span class="o">=</span> <span class="o">~</span><span class="n">Line</span><span class="p">(</span><span class="n">Empty</span><span class="p">(),</span> <span class="n">indent</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">comment</span> <span class="o">=</span> <span class="o">~</span><span class="n">Line</span><span class="p">(</span><span class="nb">hash</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">line</span> <span class="o">=</span> <span class="n">Or</span><span class="p">((</span><span class="n">CLine</span><span class="p">(</span><span class="n">statement</span><span class="p">)</span> <span class="o">|</span> <span class="n">block</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">list</span><span class="p">,</span>
+          <span class="n">blank</span><span class="p">,</span>
+          <span class="n">comment</span><span class="p">)</span>
+<span class="n">block</span> <span class="o">+=</span> <span class="n">Line</span><span class="p">((</span><span class="n">function</span> <span class="o">|</span> <span class="n">statement</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">introduce</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">Block</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+
+<span class="n">program</span> <span class="o">=</span> <span class="p">(</span><span class="n">line</span><span class="p">[:]</span> <span class="o">&amp;</span> <span class="n">Eos</span><span class="p">())</span>
+<span class="n">program</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">lines</span><span class="p">(</span><span class="n">block_policy</span><span class="o">=</span><span class="n">explicit</span><span class="p">)</span>
+<span class="n">parser</span> <span class="o">=</span> <span class="n">program</span><span class="o">.</span><span class="n">get_parse_string</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>When applied to input like:</p>
+<div class="highlight-python"><pre># this is a grammar with a similar
+# line structure to python
+
+if something:
+  then we indent
+else:
+    something else
+    # note a different indent size here
+
+def function(a, b, c):
+  we can nest blocks:
+    like this
+  and we can also \
+    have explicit continuations \
+    with \
+any \
+       indentation
+
+same for (argument,
+                    lists):
+  which do not need the
+  continuation marker
+  # and we can have blank lines inside a block:
+
+  like this
+    # along with strangely placed comments
+  but still keep blocks tied together</pre>
+</div>
+<p>The following structure is generated:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">[</span>
+  <span class="p">[</span><span class="s">&#39;if&#39;</span><span class="p">,</span> <span class="s">&#39;something&#39;</span><span class="p">,</span>
+    <span class="p">[</span><span class="s">&#39;then&#39;</span><span class="p">,</span> <span class="s">&#39;we&#39;</span><span class="p">,</span> <span class="s">&#39;indent&#39;</span><span class="p">]</span>
+  <span class="p">],</span>
+  <span class="p">[</span><span class="s">&#39;else&#39;</span><span class="p">,</span>
+    <span class="p">[</span><span class="s">&#39;something&#39;</span><span class="p">,</span> <span class="s">&#39;else&#39;</span><span class="p">],</span>
+  <span class="p">],</span>
+  <span class="p">[</span><span class="s">&#39;def&#39;</span><span class="p">,</span> <span class="s">&#39;function&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">,</span> <span class="s">&#39;c&#39;</span><span class="p">),</span>
+    <span class="p">[</span><span class="s">&#39;we&#39;</span><span class="p">,</span> <span class="s">&#39;can&#39;</span><span class="p">,</span> <span class="s">&#39;nest&#39;</span><span class="p">,</span> <span class="s">&#39;blocks&#39;</span><span class="p">,</span>
+      <span class="p">[</span><span class="s">&#39;like&#39;</span><span class="p">,</span> <span class="s">&#39;this&#39;</span><span class="p">]</span>
+    <span class="p">],</span>
+    <span class="p">[</span><span class="s">&#39;and&#39;</span><span class="p">,</span> <span class="s">&#39;we&#39;</span><span class="p">,</span> <span class="s">&#39;can&#39;</span><span class="p">,</span> <span class="s">&#39;also&#39;</span><span class="p">,</span> <span class="s">&#39;have&#39;</span><span class="p">,</span> <span class="s">&#39;explicit&#39;</span><span class="p">,</span> <span class="s">&#39;continuations&#39;</span><span class="p">,</span>
+     <span class="s">&#39;with&#39;</span><span class="p">,</span> <span class="s">&#39;any&#39;</span><span class="p">,</span> <span class="s">&#39;indentation&#39;</span><span class="p">],</span>
+  <span class="p">],</span>
+  <span class="p">[</span><span class="s">&#39;same&#39;</span><span class="p">,</span> <span class="s">&#39;for&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s">&#39;argument&#39;</span><span class="p">,</span> <span class="s">&#39;lists&#39;</span><span class="p">),</span>
+    <span class="p">[</span><span class="s">&#39;which&#39;</span><span class="p">,</span> <span class="s">&#39;do&#39;</span><span class="p">,</span> <span class="s">&#39;not&#39;</span><span class="p">,</span> <span class="s">&#39;need&#39;</span><span class="p">,</span> <span class="s">&#39;the&#39;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s">&#39;continuation&#39;</span><span class="p">,</span> <span class="s">&#39;marker&#39;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s">&#39;like&#39;</span><span class="p">,</span> <span class="s">&#39;this&#39;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s">&#39;but&#39;</span><span class="p">,</span> <span class="s">&#39;still&#39;</span><span class="p">,</span> <span class="s">&#39;keep&#39;</span><span class="p">,</span> <span class="s">&#39;blocks&#39;</span><span class="p">,</span> <span class="s">&#39;tied&#39;</span><span class="p">,</span> <span class="s">&#39;together&#39;</span><span class="p">]</span>
+  <span class="p">]</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>The important thing to notice here is that the nesting of lists in the final
+result matches the indentation of the original source.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="contents.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Line&#8211;Aware Parsing and the Offside Rule</a><ul>
+<li><a class="reference internal" href="#simple-line-aware-parsing-lines-only">Simple Line&#8211;Aware Parsing (Lines Only)</a><ul>
+<li><a class="reference internal" href="#continued-and-extended-lines">Continued and Extended Lines</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#offside-parsing-blocks-of-lines">Offside Parsing (Blocks of Lines)</a><ul>
+<li><a class="reference internal" href="#configuration">Configuration</a></li>
+<li><a class="reference internal" href="#example">Example</a></li>
+<li><a class="reference internal" href="#python-example">Continued and Extended Lines</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="lexer.html"
+                        title="previous chapter">Lexer</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="advanced.html"
+                        title="next chapter">Advanced Use</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/offside.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="advanced.html" title="Advanced Use"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="lexer.html" title="Lexer"
+             >previous</a> |</li>
+        <li><a href="contents.html">LEPL 5.1.2 documentation</a> &raquo;</li>
+          <li><a href="manual.html" >Lepl Manual</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2009-2011, Andrew Cooke.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

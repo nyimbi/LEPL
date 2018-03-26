@@ -1,0 +1,557 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Part 2 - Handling Spaces, Repetition &mdash; LEPL 5.1.2 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '5.1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="LEPL 5.1.2 documentation" href="index.html" />
+    <link rel="up" title="A Tutorial for Lepl" href="intro.html" />
+    <link rel="next" title="Part 3 - Recursion, Abstract Syntax Trees" href="intro-3.html" />
+    <link rel="prev" title="Part 1 - Basic Matching" href="intro-1.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="intro-3.html" title="Part 3 - Recursion, Abstract Syntax Trees"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="intro-1.html" title="Part 1 - Basic Matching"
+             accesskey="P">previous</a> |</li>
+        <li><a href="contents.html">LEPL 5.1.2 documentation</a> &raquo;</li>
+          <li><a href="intro.html" accesskey="U">A Tutorial for Lepl</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="part-2-handling-spaces-repetition">
+<h1>Part 2 - Handling Spaces, Repetition<a class="headerlink" href="#part-2-handling-spaces-repetition" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="recap">
+<h2>Recap<a class="headerlink" href="#recap" title="Permalink to this headline">¶</a></h2>
+<p>In the previous chapter we defined a parser that could identify the different
+parts of an addition, separate out the numbers, and return their sum:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">lepl</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">number</span> <span class="o">=</span> <span class="n">Real</span><span class="p">()</span> <span class="o">&gt;&gt;</span> <span class="nb">float</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add</span> <span class="o">=</span> <span class="n">number</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">Literal</span><span class="p">(</span><span class="s">&#39;+&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">number</span> <span class="o">&gt;</span> <span class="nb">sum</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;12+30&#39;</span><span class="p">)</span>
+<span class="go">[42.0]</span>
+</pre></div>
+</div>
+<p>(remember that I will not repeat the import statement in the examples below).</p>
+<p>An obvious problem with this parser is that it does not handle spaces:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">add</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;12 + 30&#39;</span><span class="p">)</span>
+<span class="go">[...]</span>
+<span class="go">lepl.stream.maxdepth.FullFirstMatchException: The match failed in &lt;string&gt; at &#39;+ 30&#39; (line 1, character 4).</span>
+</pre></div>
+</div>
+<p>So in this section we&#8217;ll look at the various ways we can handle spaces (and
+learn more about other features of Lepl along the way).</p>
+</div>
+<div class="section" id="explicit-spaces">
+<span id="index-0"></span><h2>Explicit Spaces<a class="headerlink" href="#explicit-spaces" title="Permalink to this headline">¶</a></h2>
+<p>The simplest way to handle spaces is to add them to the parser.  Lepl includes
+the <a class="reference external" href="api/redirect.html#lepl.matchers.derived.Space">Space()</a> matcher which
+recognises a single space:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">number</span> <span class="o">=</span> <span class="n">Real</span><span class="p">()</span> <span class="o">&gt;&gt;</span> <span class="nb">float</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add</span> <span class="o">=</span> <span class="n">number</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">Space</span><span class="p">()</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">Literal</span><span class="p">(</span><span class="s">&#39;+&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">Space</span><span class="p">()</span> <span class="o">&amp;</span> <span class="n">number</span> <span class="o">&gt;</span> <span class="nb">sum</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;12 + 30&#39;</span><span class="p">)</span>
+<span class="go">[42.0]</span>
+</pre></div>
+</div>
+<p>But now our parser won&#8217;t work without spaces!</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">add</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;12+30&#39;</span><span class="p">)</span>
+<span class="go">[...]</span>
+<span class="go">lepl.stream.maxdepth.FullFirstMatchException: The match failed in &lt;string&gt; at &#39;30&#39; (line 1, character 4).</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="the-star-matcher">
+<span id="index-1"></span><h2>The Star Matcher<a class="headerlink" href="#the-star-matcher" title="Permalink to this headline">¶</a></h2>
+<p>To fix the problem described above, where we can match only a single space, we
+would like to match any number of spaces.  There are various ways of doing
+this.  If you are used to using regular expressions you may realise that this
+is what the &#8220;*&#8221; symbol does.  And in Lepl we have something similar.</p>
+<p>The <a class="reference external" href="api/redirect.html#lepl.matchers.derived.Star">Star()</a> matcher repeats its
+argument as many times as necessary (including none at all).  This is what we
+need for our spaces:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">number</span> <span class="o">=</span> <span class="n">Real</span><span class="p">()</span> <span class="o">&gt;&gt;</span> <span class="nb">float</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">spaces</span> <span class="o">=</span> <span class="o">~</span><span class="n">Star</span><span class="p">(</span><span class="n">Space</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add</span> <span class="o">=</span> <span class="n">number</span> <span class="o">&amp;</span> <span class="n">spaces</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">Literal</span><span class="p">(</span><span class="s">&#39;+&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">spaces</span> <span class="o">&amp;</span> <span class="n">number</span> <span class="o">&gt;</span> <span class="nb">sum</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;12 + 30&#39;</span><span class="p">)</span>
+<span class="go">[42.0]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;12+30&#39;</span><span class="p">)</span>
+<span class="go">[42.0]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;12+     30&#39;</span><span class="p">)</span>
+<span class="go">[42.0]</span>
+</pre></div>
+</div>
+<p>Note that I included a <tt class="docutils literal"><span class="pre">~</span></tt> in the definition of <tt class="docutils literal"><span class="pre">spaces</span></tt> so that they are
+dropped from the results.</p>
+</div>
+<div class="section" id="repetition">
+<span id="index-2"></span><h2>Repetition<a class="headerlink" href="#repetition" title="Permalink to this headline">¶</a></h2>
+<p>As well as <a class="reference external" href="api/redirect.html#lepl.matchers.derived.Star">Star()</a>, Lepl
+supports a more general way of specifying repetitions.  This uses Python&#8217;s
+array syntax, which looks a bit odd at first, but turns out to be a really
+neat, compact, powerful way of describing what we want.</p>
+<p>The easiest way to show how this works is with some examples.</p>
+<p>First, here&#8217;s how we specify that exactly three things are matched:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">Literal</span><span class="p">(</span><span class="s">&#39;a&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;aaa&#39;</span><span class="p">)</span>
+<span class="go">[&#39;a&#39;, &#39;a&#39;, &#39;a&#39;]</span>
+</pre></div>
+</div>
+<p>and here&#8217;s how we specify that 2 to 4 should be matched:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;aa&#39;</span><span class="p">)</span>
+<span class="go">[&#39;a&#39;, &#39;a&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;aaaa&#39;</span><span class="p">)</span>
+<span class="go">[&#39;a&#39;, &#39;a&#39;, &#39;a&#39;, &#39;a&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">parse_all</span><span class="p">(</span><span class="s">&#39;aaaa&#39;</span><span class="p">))</span>
+<span class="go">[[&#39;a&#39;, &#39;a&#39;, &#39;a&#39;, &#39;a&#39;], [&#39;a&#39;, &#39;a&#39;, &#39;a&#39;], [&#39;a&#39;, &#39;a&#39;]]</span>
+</pre></div>
+</div>
+<p>As we saw earlier <a class="reference external" href="api/redirect.html#lepl.core.config.ParserMixin.parse_all">parse_all()</a> returns a generator (which we convert to a
+list) that contains all the different possible combinations: 2, 3 and 4
+letters, while <a class="reference external" href="api/redirect.html#lepl.core.config.ParserMixin.parse">parse()</a> returns just the first result (repetition with
+<tt class="docutils literal"><span class="pre">[]</span></tt> returns the largest number of matches first).</p>
+<p>If we give a range with a missing start value then the minimum number of
+matches is zero:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">a</span><span class="p">[:</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">parse_all</span><span class="p">(</span><span class="s">&#39;a&#39;</span><span class="p">))</span>
+<span class="go">[[&#39;a&#39;], []]</span>
+</pre></div>
+</div>
+<p>so here we have 0 or 1 matches (zero matches means we get an empty list of
+results &#8212; that&#8217;s <cite>not</cite> the same as failing to match).</p>
+<p>And if the end value is missing as many as possible will be matched:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">4</span><span class="p">:]</span><span class="o">.</span><span class="n">parse_all</span><span class="p">(</span><span class="s">&#39;aaaaa&#39;</span><span class="p">))</span>
+<span class="go">[[&#39;a&#39;, &#39;a&#39;, &#39;a&#39;, &#39;a&#39;, &#39;a&#39;], [&#39;a&#39;, &#39;a&#39;, &#39;a&#39;, &#39;a&#39;]]</span>
+</pre></div>
+</div>
+<p>Finally, we can get the shortest number of matches first by specifying an
+array index &#8220;step&#8221; of <tt class="docutils literal"><span class="pre">'b'</span></tt> (short for &#8220;breadth&#8211;first search&#8221;; the default
+is <tt class="docutils literal"><span class="pre">'d'</span></tt> for &#8220;depth&#8211;first&#8221;):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a24</span> <span class="o">=</span> <span class="n">Literal</span><span class="p">(</span><span class="s">&#39;a&#39;</span><span class="p">)[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">:</span><span class="s">&#39;b&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a24</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">no_full_first_match</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">a24</span><span class="o">.</span><span class="n">parse_all</span><span class="p">(</span><span class="s">&#39;aaaa&#39;</span><span class="p">))</span>
+<span class="go">[[&#39;a&#39;, &#39;a&#39;], [&#39;a&#39;, &#39;a&#39;, &#39;a&#39;], [&#39;a&#39;, &#39;a&#39;, &#39;a&#39;, &#39;a&#39;]]</span>
+</pre></div>
+</div>
+<p>Putting all that together, <a class="reference external" href="api/redirect.html#lepl.matchers.derived.Star">Star()</a> is the same as <tt class="docutils literal"><span class="pre">[:]</span></tt> (which
+starts at zero, takes as many as possible, and returns the longest match
+first).</p>
+<p>So we can write our parser like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">number</span> <span class="o">=</span> <span class="n">Real</span><span class="p">()</span> <span class="o">&gt;&gt;</span> <span class="nb">float</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">spaces</span> <span class="o">=</span> <span class="o">~</span><span class="n">Space</span><span class="p">()[:]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add</span> <span class="o">=</span> <span class="n">number</span> <span class="o">&amp;</span> <span class="n">spaces</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">Literal</span><span class="p">(</span><span class="s">&#39;+&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">spaces</span> <span class="o">&amp;</span> <span class="n">number</span> <span class="o">&gt;</span> <span class="nb">sum</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;12 + 30&#39;</span><span class="p">)</span>
+<span class="go">[42.0]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;12+30&#39;</span><span class="p">)</span>
+<span class="go">[42.0]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;12+     30&#39;</span><span class="p">)</span>
+<span class="go">[42.0]</span>
+</pre></div>
+</div>
+<p>That&#8217;s perhaps not as clear as using <a class="reference external" href="api/redirect.html#lepl.matchers.derived.Star">Star()</a>, but personally I prefer this
+approach so I&#8217;ll continue to use it below.</p>
+</div>
+<div class="section" id="more-repetition">
+<span id="index-3"></span><h2>More Repetition<a class="headerlink" href="#more-repetition" title="Permalink to this headline">¶</a></h2>
+<p>While we are looking at <tt class="docutils literal"><span class="pre">[]</span></tt> I should quickly explain two extra features
+which are often useful.</p>
+<p>First, including <tt class="docutils literal"><span class="pre">...</span></tt> will join together the results:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;aaa&#39;</span><span class="p">)</span>
+<span class="go">[&#39;a&#39;, &#39;a&#39;, &#39;a&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="o">...</span><span class="p">]</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;aaa&#39;</span><span class="p">)</span>
+<span class="go">[&#39;aaa&#39;]</span>
+</pre></div>
+</div>
+<p>Second, we can specify a &#8220;separator&#8221; that is useful when matching lists.  This
+is used to match &#8220;in-between&#8221; whatever we are repeating.  For example, we
+might have a sequence of &#8220;a&#8221;s separated by &#8220;x&#8221;s, which we want to ignore:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="n">Drop</span><span class="p">(</span><span class="s">&#39;x&#39;</span><span class="p">)]</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;axaxa&#39;</span><span class="p">)</span>
+<span class="go">[&#39;a&#39;, &#39;a&#39;, &#39;a&#39;]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="separators">
+<span id="index-4"></span><span id="id4"></span><h2>Separators<a class="headerlink" href="#separators" title="Permalink to this headline">¶</a></h2>
+<p>Enough about repetition; let&#8217;s return to our main example.</p>
+<p>The solution above works fine, but it gets a bit tedious adding <tt class="docutils literal"><span class="pre">spaces</span></tt>
+everywhere.  It would be much easier if we could just say that they should be
+added wherever there is a <tt class="docutils literal"><span class="pre">&amp;</span></tt>.  Luckily, we can do that in Lepl:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">number</span> <span class="o">=</span> <span class="n">Real</span><span class="p">()</span> <span class="o">&gt;&gt;</span> <span class="nb">float</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">spaces</span> <span class="o">=</span> <span class="o">~</span><span class="n">Space</span><span class="p">()[:]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">Separator</span><span class="p">(</span><span class="n">spaces</span><span class="p">):</span>
+<span class="gp">... </span>  <span class="n">add</span> <span class="o">=</span> <span class="n">number</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">Literal</span><span class="p">(</span><span class="s">&#39;+&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">number</span> <span class="o">&gt;</span> <span class="nb">sum</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;12 + 30&#39;</span><span class="p">)</span>
+<span class="go">[42.0]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;12+30&#39;</span><span class="p">)</span>
+<span class="go">[42.0]</span>
+</pre></div>
+</div>
+<p>Which works as before, but can save some typing in longer programs.</p>
+<p><a class="reference external" href="api/redirect.html#lepl.matchers.operators.Separator">Separator()</a>
+redefines the <tt class="docutils literal"><span class="pre">&amp;</span></tt> and <tt class="docutils literal"><span class="pre">[]</span></tt> operators to include spaces.  The matcher
+associated with any operator can be redefined in Lepl, but doing so is pretty
+advanced and outside the scope of this tutorial.</p>
+<p>Because <a class="reference external" href="api/redirect.html#lepl.matchers.operators.Separator">Separator()</a>
+changes everything &#8220;inside&#8221; the &#8220;with&#8221; it&#8217;s usually best to define matchers
+that <em>don&#8217;t</em> need spaces beforehand.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p><a class="reference external" href="api/redirect.html#lepl.matchers.operators.Separator">Separator()</a> only
+modifies <tt class="docutils literal"><span class="pre">&amp;</span></tt> and <tt class="docutils literal"><span class="pre">[]</span></tt>, which can lead to (at least) two surprising
+results.</p>
+<p>First, there&#8217;s nothing added before or after any pattern that&#8217;s defined.
+For that, you still need to explicitly add spaces as described earlier.
+<a class="reference external" href="api/redirect.html#lepl.matchers.operators.Separator">Separator()</a> only
+adds spaces <em>between</em> items joined with <tt class="docutils literal"><span class="pre">&amp;</span></tt>.</p>
+<p>Second, if you specify <em>at least one</em> space (rather than <em>zero or more</em>)
+then <em>every</em> <tt class="docutils literal"><span class="pre">&amp;</span></tt> in the separator&#8217;s context <em>must</em> have a space.  This
+can be surprising if you have, for example, <tt class="docutils literal"><span class="pre">&amp;</span> <span class="pre">Eos()</span></tt> because it means
+that there <em>must</em> be a space before the end of the stream.</p>
+<p class="last">You can avoid spaces in two ways.  Either define matchers that don&#8217;t need
+spaces <em>before</em> you use <a class="reference external" href="api/redirect.html#lepl.matchers.operators.Separator">Separator()</a>, or use <a class="reference external" href="api/redirect.html#lepl.matchers.combine.And">And()</a> instead.</p>
+</div>
+<p>Finally, because this is so common, <a class="reference external" href="api/redirect.html#lepl.matchers.operators.DroppedSpace">DroppedSpace()</a>, is pre&#8211;defined:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">number</span> <span class="o">=</span> <span class="n">Real</span><span class="p">()</span> <span class="o">&gt;&gt;</span> <span class="nb">float</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">DroppedSpace</span><span class="p">():</span>
+<span class="gp">... </span>  <span class="n">add</span> <span class="o">=</span> <span class="n">number</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">Literal</span><span class="p">(</span><span class="s">&#39;+&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">number</span> <span class="o">&gt;</span> <span class="nb">sum</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;12 + 30&#39;</span><span class="p">)</span>
+<span class="go">[42.0]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;12+30&#39;</span><span class="p">)</span>
+<span class="go">[42.0]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="regular-expressions">
+<span id="index-5"></span><h2>Regular Expressions<a class="headerlink" href="#regular-expressions" title="Permalink to this headline">¶</a></h2>
+<p>I&#8217;m going to take a small diversion now to discuss regular expressions.  Once
+I&#8217;ve finished I&#8217;ll return to the issue of spaces with a different approach.</p>
+<p>Regular expressions are like &#8220;mini-parsers&#8221;.  They are used in a variety of
+languages, and Python has a <a class="reference external" href="http://docs.python.org/3.0/library/re.html">module</a> that supports them.  I don&#8217;t
+have space here (or the time and energy) to explain them in detail, but the
+basic idea is that you can write description (an &#8220;expression&#8221;) for a sequence
+of letters to be matched.  This expression can contain things like &#8221;.&#8221; which
+matches any letter, or &#8220;[a-m]&#8221; which matches any letter between &#8220;a&#8221; and &#8220;m&#8221;,
+for example.</p>
+<p>So regular expressions are very like a parser.  But a parser can usually
+(exact details depend on the language and parser) describe more complicated
+structures and tends to be easier to use for &#8220;big&#8221; problems.</p>
+<p>That doesn&#8217;t mean that regular expressions don&#8217;t play a part in Lepl.  In
+fact, Lepl supports three kinds of regular expressions, and I will describe
+these below.  But please note that all the options below have limitations &#8212;
+Lepl is a parser in its own right and does not need powerful regular
+expressions.</p>
+</div>
+<div class="section" id="regexp">
+<span id="index-6"></span><h2>Regexp()<a class="headerlink" href="#regexp" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference external" href="api/redirect.html#lepl.matchers.core.Regexp">Regexp()</a> matcher calls
+the Python regular expression library.  So if you are experienced at using
+that you may find it useful.</p>
+<p>However, there are some limitations.  First, the interface exposed by Lepl
+doesn&#8217;t include all Python&#8217;s options (it would make things too complicated and
+Lepl has other ways of doing things &#8212; sorry!).</p>
+<p>Second, the expression is only matched against the &#8220;current line&#8221;.  Exactly
+what the &#8220;current line&#8221; is depends on some internal details (sorry again), but
+you should work on the assumption that the regular expression will only
+receive data up to the next newline character.</p>
+<p>The reason for this second limitation is that Lepl is quite careful about how
+it manages memory.  In theory it should be possible to process huge amounts of
+text, because only a section of the document is held in memory at any one
+time.  Unfortunately that doesn&#8217;t play well with Python&#8217;s regular expressions,
+which expect all the data to be in a single string.</p>
+<p>Here are some examples showing what is possible:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span> <span class="o">=</span> <span class="n">Regexp</span><span class="p">(</span><span class="s">&#39;a+&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">no_full_first_match</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;aaabb&#39;</span><span class="p">)</span>
+<span class="go">[&#39;aaa&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span> <span class="o">=</span> <span class="n">Regexp</span><span class="p">(</span><span class="s">r&#39;\w+&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">no_full_first_match</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;abc def&#39;</span><span class="p">)</span>
+<span class="go">[&#39;abc&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span> <span class="o">=</span> <span class="n">Regexp</span><span class="p">(</span><span class="s">&#39;a*(b*)c*(d*)e*&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">no_full_first_match</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;abbcccddddeeeeee&#39;</span><span class="p">)</span>
+<span class="go">[&#39;bb&#39;, &#39;dddd&#39;]</span>
+</pre></div>
+</div>
+<p>The last example above shows how groups can be used to define results.</p>
+</div>
+<div class="section" id="dfaregexp">
+<span id="index-7"></span><h2>DfaRegexp()<a class="headerlink" href="#dfaregexp" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference external" href="api/redirect.html#lepl.regexp.matchers.DfaRegexp">DfaRegexp()</a> matcher
+calls Lepl&#8217;s own regular expression library.  It understands simple regular
+expressions, but it does not support grouping, references, etc.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span> <span class="o">=</span> <span class="n">DfaRegexp</span><span class="p">(</span><span class="s">&#39;a*b&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">no_full_first_match</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;aabbcc&#39;</span><span class="p">)</span>
+<span class="go">[&#39;aab&#39;]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="nfaregexp">
+<span id="index-8"></span><h2>NfaRegexp()<a class="headerlink" href="#nfaregexp" title="Permalink to this headline">¶</a></h2>
+<p>This is implemented by Lepl&#8217;s own regular expression library and, like
+<a class="reference external" href="api/redirect.html#lepl.regexp.matchers.DfaRegexp">DfaRegexp()</a>, is limited
+in what it supports.</p>
+<p><a class="reference external" href="api/redirect.html#lepl.regexp.matchers.NfaRegexp">NfaRegexp()</a> differs from
+&#8220;normal&#8221; regular expressions in that it can return multiple matches (usually a
+regular expression returns only the &#8220;longest match&#8221;):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">NfaRegexp</span><span class="p">(</span><span class="s">&#39;a*&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">parse_all</span><span class="p">(</span><span class="s">&#39;aaa&#39;</span><span class="p">))</span>
+<span class="go">[[&#39;aaa&#39;], [&#39;aa&#39;], [&#39;a&#39;], [&#39;&#39;]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">DfaRegexp</span><span class="p">(</span><span class="s">&#39;a*&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">parse_all</span><span class="p">(</span><span class="s">&#39;aaa&#39;</span><span class="p">))</span>
+<span class="go">[[&#39;aaa&#39;]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">Regexp</span><span class="p">(</span><span class="s">&#39;a*&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">parse_all</span><span class="p">(</span><span class="s">&#39;aaa&#39;</span><span class="p">))</span>
+<span class="go">[[&#39;aaa&#39;]]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="tokens-first-attempt">
+<span id="index-9"></span><h2>Tokens (First Attempt)<a class="headerlink" href="#tokens-first-attempt" title="Permalink to this headline">¶</a></h2>
+<p>Now that we have discussed regular expressions I can explain the final
+alternative for handling spaces.</p>
+<p>This approach uses regular expressions to classify the input into different
+&#8220;tokens&#8221;.  It then lets us match both the token type and, optionally, the
+token contents.</p>
+<p>By itself, this doesn&#8217;t make handling spaces any simpler, but we can also tell
+Lepl to ignore certain values.  So if we define tokens for the different
+&#8220;words&#8221; we will need, we can then tell Lepl to discard any spaces that occur
+between (in fact, by default, spaces are discarded, so we don&#8217;t need to
+actually say that below).</p>
+<p>For more detailed information on tokens, see <a class="reference internal" href="lexer.html#lexer"><em>Lexer</em></a> in the manual.</p>
+<p>First, let&#8217;s define the tokens we will match.  We don&#8217;t have to be very
+precise here because we can add more conditions later &#8212; it&#8217;s enough to
+identify the basic types of input.  For our parser these will be values and
+symbols:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">value</span> <span class="o">=</span> <span class="n">Token</span><span class="p">(</span><span class="n">Real</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">symbol</span> <span class="o">=</span> <span class="n">Token</span><span class="p">(</span><span class="s">&#39;[^0-9a-zA-Z </span><span class="se">\t\r\n</span><span class="s">]&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>I said that we defined tokens with regular expressions, but the definition of
+<tt class="docutils literal"><span class="pre">value</span></tt> above seems to use the matcher <a class="reference external" href="api/redirect.html#lepl.matchers.derived.Real">Real()</a>.  This is because Lepl
+can automatically convert some matchers into regular expressions, saving us
+the work (it really does convert them, piece by piece, so it is not limited to
+the built&#8211;in matchers, but it is limited by how the matcher is constructed &#8211;
+it cannot see &#8220;inside&#8221; arbitrary function calls, for example, so any matcher
+that includes <tt class="docutils literal"><span class="pre">&gt;</span></tt> or <tt class="docutils literal"><span class="pre">&gt;&gt;</span></tt> won&#8217;t work).</p>
+<p>The second token, defined with the regular expression &#8220;[^0-9a-zA-Z \t\r\n]&#8221;
+means &#8220;any single character that is not a digit, letter, or space&#8221;.  Obviously
+we will need to add extra conditions for matching &#8220;+&#8221; and, later, &#8220;*&#8221;, &#8220;-&#8221;,
+etc.</p>
+<p>With those tokens we can now try to rewrite our parser:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">number</span> <span class="o">=</span> <span class="n">value</span> <span class="o">&gt;&gt;</span> <span class="nb">float</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add</span> <span class="o">=</span> <span class="n">number</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">symbol</span><span class="p">(</span><span class="s">&#39;+&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">number</span> <span class="o">&gt;</span> <span class="nb">sum</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;12+30&#39;</span><span class="p">)</span>
+<span class="go">[...]</span>
+<span class="go">lepl.stream.maxdepth.FullFirstMatchException: The match failed in &lt;string&gt; at &#39;+30&#39; (line 1, character 3).</span>
+</pre></div>
+</div>
+<p>Ooops.  That is not what we wanted!</p>
+<p>Before we fix the problem, though, I need to explain a detail above.</p>
+<p>The matcher, <tt class="docutils literal"><span class="pre">symbol('+')</span></tt> is the same as <tt class="docutils literal"><span class="pre">symbol(Literal('+'))</span></tt> and means
+that we require a symbol token <em>and</em> that the text in that token matches &#8220;+&#8221;
+(this is what I was referring to when I said that we match both the <em>type</em> of
+token and it&#8217;s <em>contents</em>).  A token used like this can contain any Lepl
+matcher as a constraint (well, anything except <a class="reference external" href="api/redirect.html#lepl.lexer.matchers.Token">Token()</a> itself).</p>
+</div>
+<div class="section" id="debugging">
+<span id="index-10"></span><h2>Debugging<a class="headerlink" href="#debugging" title="Permalink to this headline">¶</a></h2>
+<p>What went wrong in the example above?</p>
+<p>There is a clue in the error message &#8212; when we use tokens the &#8220;match failed
+at&#8221; message shows the token:</p>
+<div class="highlight-python"><pre>lepl.stream.maxdepth.FullFirstMatchException: The match failed in &lt;string&gt; at '+30' (line 1, character 3).</pre>
+</div>
+<p>That means that we have a token whose value is &#8220;+30&#8221;, which is not what we
+were expecting.  We expected that the tokens would be &#8220;12&#8221;, &#8220;+&#8221;, and &#8220;30&#8221;.
+Instead, it seems that the tokens generated are &#8220;12&#8221; and &#8220;+30&#8221;.</p>
+<p>So we can see that the lexer (the part of Lepl that generates the tokens) is
+identifying two <a class="reference external" href="api/redirect.html#lepl.matchers.derived.Real">Real()</a> matches.  Matching &#8220;+&#8221;
+as a <tt class="docutils literal"><span class="pre">symbol</span></tt> is ignored because <cite>the lexer chooses the token with the
+longest match</cite> and &#8220;+30&#8221; is longer than &#8220;+&#8221;.</p>
+<p>In a little more detail: the lexer takes the input and breaks it down into
+tokens, from left to right.  So in this case it starts with &#8220;12+30&#8221;, tries
+matching the various tokens, and finds that &#8220;12&#8221; is the longest (and only)
+match.  It then starts again with what remains, &#8220;+30&#8221; and finds a match of &#8220;+&#8221;
+for <tt class="docutils literal"><span class="pre">symbol</span></tt> and a match of &#8220;+30&#8221; for <tt class="docutils literal"><span class="pre">value</span></tt>.  It chooses the latter
+because it is longest, and is done.</p>
+<p>This illustrates an important restriction on the use of tokens: you have to be
+careful to avoid ambiguity.  This might make them seem pointless, but in
+practice their advantages &#8212; in particular, simplifying handling spaces &#8212;
+often make them worthwhile.</p>
+</div>
+<div class="section" id="tokens-second-attempt">
+<span id="token-example"></span><span id="index-11"></span><h2>Tokens (Second Attempt)<a class="headerlink" href="#tokens-second-attempt" title="Permalink to this headline">¶</a></h2>
+<p>We can avoid the problem above by using unsigned numbers.  But that means that
+we need to worry about signs that are &#8220;part of the number&#8221; in the parser
+itself.  Since people don&#8217;t really care about a leading &#8220;+&#8221; I&#8217;ve only included
+the &#8220;-&#8221; case (negative numbers) below:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">value</span> <span class="o">=</span> <span class="n">Token</span><span class="p">(</span><span class="n">UnsignedReal</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">symbol</span> <span class="o">=</span> <span class="n">Token</span><span class="p">(</span><span class="s">&#39;[^0-9a-zA-Z </span><span class="se">\t\r\n</span><span class="s">]&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">number</span> <span class="o">=</span> <span class="n">Optional</span><span class="p">(</span><span class="n">symbol</span><span class="p">(</span><span class="s">&#39;-&#39;</span><span class="p">))</span> <span class="o">+</span> <span class="n">value</span> <span class="o">&gt;&gt;</span> <span class="nb">float</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add</span> <span class="o">=</span> <span class="n">number</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">symbol</span><span class="p">(</span><span class="s">&#39;+&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">number</span> <span class="o">&gt;</span> <span class="nb">sum</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;12+30&#39;</span><span class="p">)</span>
+<span class="go">[42.0]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;12 + -30&#39;</span><span class="p">)</span>
+<span class="go">[-18.0]</span>
+</pre></div>
+</div>
+<p>The important changes here are:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">value</span></tt> is changed to an <a class="reference external" href="api/redirect.html#lepl.matchers.derived.UnsignedReal">UnsignedReal()</a></li>
+<li>number has an <a class="reference external" href="api/redirect.html#lepl.matchers.derived.Optional">Optional()</a> minus (we could also
+have written this <tt class="docutils literal"><span class="pre">symbol('-')[0:1]</span></tt>)</li>
+<li>the <tt class="docutils literal"><span class="pre">+</span></tt> joins the optional <tt class="docutils literal"><span class="pre">-</span></tt> and <tt class="docutils literal"><span class="pre">value</span></tt> together into a single
+string, so that when passed to <tt class="docutils literal"><span class="pre">float()</span></tt> a negative number will be
+created</li>
+</ul>
+</div>
+<div class="section" id="alternative-spaces">
+<h2>Alternative Spaces<a class="headerlink" href="#alternative-spaces" title="Permalink to this headline">¶</a></h2>
+<p>Finally, it is worth noting that you can specify an alternative regular
+expression that will be used to match spaces between tokens.  The way that
+Lepl works is as follows:</p>
+<ol class="arabic simple">
+<li>An attempt is made to match a token.</li>
+<li>If no token matches, an attempt is made to match spaces.</li>
+<li>If no spaces could be matched, an error is raised.</li>
+</ol>
+<p>The spaces matched in step 2 are defined via a regular expression, which can
+be passed to the <a class="reference internal" href="advanced.html#configuration"><em>Configuration</em></a> (the <tt class="docutils literal"><span class="pre">discard</span></tt> parameter to
+<a class="reference external" href="api/redirect.html#lepl.core.config.ConfigBuilder.lexer">.config.lexer()</a>).
+If no value value is given, &#8220;[\r\n\t ]+&#8221; is used.</p>
+</div>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>What more have we learnt?</p>
+<ul class="simple">
+<li>To handle spaces, we can specify them explicitly.</li>
+<li>The <tt class="docutils literal"><span class="pre">[]</span></tt> syntax for repetition is compact and powerful.</li>
+<li><a class="reference external" href="api/redirect.html#lepl.matchers.operators.Separator">Separator()</a> can
+automate the addition of spaces wherever we use <tt class="docutils literal"><span class="pre">&amp;</span></tt> or <tt class="docutils literal"><span class="pre">[]</span></tt>.</li>
+<li>Regular expressions are supported, in various different ways.</li>
+<li>Lepl has an optional lexer, which generates tokens using regular
+expressions.</li>
+<li>Because regular expressions are &#8220;greedy&#8221;, always matching the longest amount
+of text possible, we need to be careful exactly how we define our tokens.</li>
+<li>In particular, we should worry when two different tokens overlap (in our
+case, a possible <tt class="docutils literal"><span class="pre">symbol</span></tt>, &#8220;+&#8221;, was also the start of a valid <tt class="docutils literal"><span class="pre">value</span></tt>,
+&#8220;+3.0&#8221;).</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="contents.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Part 2 - Handling Spaces, Repetition</a><ul>
+<li><a class="reference internal" href="#recap">Recap</a></li>
+<li><a class="reference internal" href="#explicit-spaces">Explicit Spaces</a></li>
+<li><a class="reference internal" href="#the-star-matcher">The Star Matcher</a></li>
+<li><a class="reference internal" href="#repetition">Repetition</a></li>
+<li><a class="reference internal" href="#more-repetition">More Repetition</a></li>
+<li><a class="reference internal" href="#separators">Separators</a></li>
+<li><a class="reference internal" href="#regular-expressions">Regular Expressions</a></li>
+<li><a class="reference internal" href="#regexp">Regexp()</a></li>
+<li><a class="reference internal" href="#dfaregexp">DfaRegexp()</a></li>
+<li><a class="reference internal" href="#nfaregexp">NfaRegexp()</a></li>
+<li><a class="reference internal" href="#tokens-first-attempt">Tokens (First Attempt)</a></li>
+<li><a class="reference internal" href="#debugging">Debugging</a></li>
+<li><a class="reference internal" href="#tokens-second-attempt">Tokens (Second Attempt)</a></li>
+<li><a class="reference internal" href="#alternative-spaces">Alternative Spaces</a></li>
+<li><a class="reference internal" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="intro-1.html"
+                        title="previous chapter">Part 1 - Basic Matching</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="intro-3.html"
+                        title="next chapter">Part 3 - Recursion, Abstract Syntax Trees</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/intro-2.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="intro-3.html" title="Part 3 - Recursion, Abstract Syntax Trees"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="intro-1.html" title="Part 1 - Basic Matching"
+             >previous</a> |</li>
+        <li><a href="contents.html">LEPL 5.1.2 documentation</a> &raquo;</li>
+          <li><a href="intro.html" >A Tutorial for Lepl</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2009-2011, Andrew Cooke.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

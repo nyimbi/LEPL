@@ -1,0 +1,328 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Debugging &mdash; LEPL 5.1.2 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '5.1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="LEPL 5.1.2 documentation" href="index.html" />
+    <link rel="up" title="Lepl Manual" href="manual.html" />
+    <link rel="next" title="Lexer" href="lexer.html" />
+    <link rel="prev" title="Error Reporting" href="errors.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="lexer.html" title="Lexer"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="errors.html" title="Error Reporting"
+             accesskey="P">previous</a> |</li>
+        <li><a href="contents.html">LEPL 5.1.2 documentation</a> &raquo;</li>
+          <li><a href="manual.html" accesskey="U">Lepl Manual</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="debugging">
+<span id="index-0"></span><span id="id1"></span><h1>Debugging<a class="headerlink" href="#debugging" title="Permalink to this headline">¶</a></h1>
+<p>When a parser fails to match some text it can be difficult (slow, frustrating
+work) to understand why.  Fortunately, Lepl includes some features that make
+life easier.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This section does not describe <em>known errors</em> (for example, generating an
+error message for the user when they enter text that is wrong in an expected
+way).  That issue is addressed in <a class="reference internal" href="errors.html#errors"><em>Error Reporting</em></a>.  What is discussed here are
+the <em>unknown errors</em> you face when a parser fails to work with good input.</p>
+</div>
+<div class="section" id="logging">
+<span id="index-1"></span><h2>Logging<a class="headerlink" href="#logging" title="Permalink to this headline">¶</a></h2>
+<p>Lepl uses the standard <a class="reference external" href="http://docs.python.org/3.1/library/logging.html">Python logging library</a> and so will display the
+message:</p>
+<div class="highlight-python"><pre>No handlers could be found for logger ...</pre>
+</div>
+<p>if no logging has been configured.</p>
+<p>The simplest way to configure logging is to add the following to your
+program:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">logging</span> <span class="kn">import</span> <span class="n">basicConfig</span><span class="p">,</span> <span class="n">DEBUG</span>
+<span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">DEBUG</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To reduce the amount of logging displayed, you can use levels like <tt class="docutils literal"><span class="pre">ERROR</span></tt>
+and <tt class="docutils literal"><span class="pre">WARN</span></tt>.</p>
+<p>Logging is sent to loggers named after modules and classes.  You can tailor
+the logging configuration to only display messages from certain modules or
+classes.  See the <a class="reference external" href="http://docs.python.org/3.1/library/logging.html">Python logging documentation</a> for more details.</p>
+<p>Errors (indicating that the program has failed) use the <tt class="docutils literal"><span class="pre">ERROR</span></tt> level,
+warnings (indicating that you may be mis-using the library) and stack traces
+for errors use the <tt class="docutils literal"><span class="pre">WARN</span></tt> level, and general debug messages use the
+<tt class="docutils literal"><span class="pre">DEBUG</span></tt> level.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Whenever you have a problem with Lepl, the first thing to do is enable
+<tt class="docutils literal"><span class="pre">DEBUG</span></tt> logging (see above).  And then read the logs.  Common messages and
+errors are described below.</p>
+</div>
+</div>
+<div class="section" id="stack-traces">
+<span id="index-2"></span><h2>Stack Traces<a class="headerlink" href="#stack-traces" title="Permalink to this headline">¶</a></h2>
+<p>Lepl 4 has improved trampolining which should give exceptions whose traceback
+information identifies the source of any problem (earlier versions printed a
+separate stack trace to the log &#8212; that is no longer necessary).</p>
+</div>
+<div class="section" id="variable-traces">
+<span id="index-3"></span><h2>Variable Traces<a class="headerlink" href="#variable-traces" title="Permalink to this headline">¶</a></h2>
+<p>The traces described later in this section give a very detailed picture of the
+processing that occurs  within Lepl, but they are  difficult to understand and
+show an overwhelming amount of information.</p>
+<p>Often, to understand a problem, it is sufficient to see how the matchers
+associated with variables are being matched.  This is displayed when the
+variables are defined inside a <tt class="docutils literal"><span class="pre">with</span> <span class="pre">TraceVariables()</span></tt> scope:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">TraceVariables</span><span class="p">():</span>
+<span class="gp">... </span>    <span class="n">word</span> <span class="o">=</span> <span class="o">~</span><span class="n">Lookahead</span><span class="p">(</span><span class="s">&#39;OR&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">Word</span><span class="p">()</span>
+<span class="gp">... </span>    <span class="n">phrase</span> <span class="o">=</span> <span class="n">String</span><span class="p">()</span>
+<span class="gp">... </span>    <span class="k">with</span> <span class="n">DroppedSpace</span><span class="p">():</span>
+<span class="gp">... </span>        <span class="n">text</span> <span class="o">=</span> <span class="p">(</span><span class="n">phrase</span> <span class="o">|</span> <span class="n">word</span><span class="p">)[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">&gt;</span> <span class="nb">list</span>
+<span class="gp">... </span>        <span class="n">query</span> <span class="o">=</span> <span class="n">text</span><span class="p">[:,</span> <span class="n">Drop</span><span class="p">(</span><span class="s">&#39;OR&#39;</span><span class="p">)]</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;spicy meatballs OR &quot;el bulli restaurant&quot;&#39;</span><span class="p">)</span>
+<span class="go">      phrase failed                             stream = &#39;spicy meatballs OR...</span>
+<span class="go">        word = [&#39;spicy&#39;]                        stream = &#39; meatballs OR &quot;el ...</span>
+<span class="go">      phrase failed                             stream = &#39;meatballs OR &quot;el b...</span>
+<span class="go">        word = [&#39;meatballs&#39;]                    stream = &#39; OR &quot;el bulli rest...</span>
+<span class="go">      phrase failed                             stream = &#39;OR &quot;el bulli resta...</span>
+<span class="go">        word failed                             stream = &#39;OR &quot;el bulli resta...</span>
+<span class="go">      phrase failed                             stream = &#39; OR &quot;el bulli rest...</span>
+<span class="go">        word failed                             stream = &#39; OR &quot;el bulli rest...</span>
+<span class="go">        text = [[&#39;spicy&#39;, &#39;meatballs&#39;]]         stream = &#39; OR &quot;el bulli rest...</span>
+<span class="go">      phrase = [&#39;el bulli restaurant&#39;]          stream = &#39;&#39;</span>
+<span class="go">      phrase failed                             stream = &#39;&#39;</span>
+<span class="go">        word failed                             stream = &#39;&#39;</span>
+<span class="go">        text = [[&#39;el bulli restaurant&#39;]]        stream = &#39;&#39;</span>
+<span class="go">       query = [[&#39;spicy&#39;, &#39;meatballs&#39;], [&#39;el... stream = &#39;&#39;</span>
+<span class="go">[[&#39;spicy&#39;, &#39;meatballs&#39;], [&#39;el bulli restaurant&#39;]]</span>
+</pre></div>
+</div>
+<p>The display above shows, on the left, the current match.  On the right is the
+head of the stream (what is left after being matched).</p>
+</div>
+<div class="section" id="deepest-matches">
+<span id="deepest-match"></span><span id="index-4"></span><h2>Deepest Matches<a class="headerlink" href="#deepest-matches" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference external" href="api/redirect.html#lepl.core.config.ConfigBuilder.full_first_match">.config.full_first_match()</a> option,
+enabled by default, gives a simple error indicating the deepest match within
+the stream.  A more detailed report is also possible via
+<a class="reference external" href="api/redirect.html#lepl.core.config.ConfigBuilder.record_deepest">.config.record_deepest()</a>.</p>
+<p>The following code is similar to that used in <a class="reference internal" href="started.html#getting-started"><em>Getting Started</em></a>, but
+fails to match the given input.  It has been modified to print information
+about the longest match:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">logging</span> <span class="kn">import</span> <span class="n">basicConfig</span><span class="p">,</span> <span class="n">INFO</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">INFO</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">name</span>    <span class="o">=</span> <span class="n">Word</span><span class="p">()</span>              <span class="o">&gt;</span> <span class="s">&#39;name&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">phone</span>   <span class="o">=</span> <span class="n">Integer</span><span class="p">()</span>           <span class="o">&gt;</span> <span class="s">&#39;phone&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">line</span>    <span class="o">=</span> <span class="n">name</span> <span class="o">/</span> <span class="s">&#39;,&#39;</span> <span class="o">/</span> <span class="n">phone</span>  <span class="o">&gt;</span> <span class="n">make_dict</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">:,</span><span class="o">~</span><span class="n">Newline</span><span class="p">()]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span><span class="o">.</span><span class="n">record_deepest</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;andrew, 3333253</span><span class="se">\n</span><span class="s"> bob, 12345&#39;</span><span class="p">)</span>
+<span class="go">INFO:lepl.core.trace._RecordDeepest:</span>
+<span class="go">Up to 6 matches before and including longest match:</span>
+<span class="go">00105 &#39;3333253\n&#39; 8/1.9 (0008) 006 ([&#39;3333253&#39;], (15, &lt;helper&gt;))  -&gt;  Transform(And, TransformationWrapper(&lt;add&gt;))(8:&#39;3&#39;)  -&gt;  ([&#39;3333253&#39;], (15, &lt;helper&gt;))</span>
+<span class="go">00106 &#39;3333253\n&#39; 8/1.9 (0008) 005 ([&#39;3333253&#39;], (15, &lt;helper&gt;))  -&gt;  Transform(Transform, TransformationWrapper(&lt;apply&gt;))(8:&#39;3&#39;)  -&gt;  ([(&#39;phone&#39;, &#39;3333253&#39;)], (15, &lt;helper&gt;))</span>
+<span class="go">00107 &#39;andrew...&#39; 0/1.1 (0000) 004 ([(&#39;phone&#39;, &#39;3333253&#39;)], (15, &lt;helper&gt;))  -&gt;  And(And, Transform, Transform)(0:&#39;a&#39;)  -&gt;  ([(&#39;name&#39;, &#39;andrew&#39;), &#39;,&#39;, &#39; &#39;, (&#39;phone&#39;, &#39;3333253&#39;)], (15, &lt;helper&gt;))</span>
+<span class="go">00108 &#39;andrew...&#39; 0/1.1 (0000) 003 ([(&#39;name&#39;, &#39;andrew&#39;), &#39;,&#39;, &#39; &#39;, (&#39;phone&#39;, &#39;3333253&#39;)], (15, &lt;helper&gt;))  -&gt;  Transform(And, TransformationWrapper(&lt;apply&gt;))(0:&#39;a&#39;)  -&gt;  ([{&#39;phone&#39;: &#39;3333253&#39;, &#39;name&#39;: &#39;andrew&#39;}], (15, &lt;helper&gt;))</span>
+<span class="go">00113 &#39;\n&#39;        15/1.16 (0015) 004 next(Literal(&#39;\n&#39;)(15:&#39;\n&#39;))  -&gt;  ([&#39;\n&#39;], (16, &lt;helper&gt;))</span>
+<span class="go">00114 &#39;\n&#39;        15/1.16 (0015) 005 ([&#39;\n&#39;], (16, &lt;helper&gt;))  -&gt;  Or(Literal, Literal)(15:&#39;\n&#39;)  -&gt;  ([&#39;\n&#39;], (16, &lt;helper&gt;))</span>
+<span class="go">Up to 2 failures following longest match:</span>
+<span class="go">00123 &#39; bob, ...&#39; 16/2.1 (0016) 008 next(NfaRegexp(&#39;[^ \t\n\r\x0b\x0c]&#39;, &lt;Unicode&gt;)(16:&#39; &#39;))  -&gt;  stop</span>
+<span class="go">00124 &#39; bob, ...&#39; 16/2.1 (0016) 009 stop  -&gt;  And(NfaRegexp, DepthFirst)(16:&#39; &#39;)  -&gt;  stop</span>
+<span class="go">Up to 2 successful matches following longest match:</span>
+<span class="go">00139 &#39;andrew...&#39; 0/1.1 (0000) 002 stop  -&gt;  DepthFirst(None, None, ([], &lt;built-in function __add__&gt;), rest=And, 0, first=Transform)(0:&#39;a&#39;)  -&gt;  ([{&#39;phone&#39;: &#39;3333253&#39;, &#39;name&#39;: &#39;andrew&#39;}], (15, &lt;helper&gt;))</span>
+</pre></div>
+</div>
+<p>This looks a little daunting, but is extremely useful once you understand it.</p>
+<p>The left column is a counter that increases with time.  The next column is the
+stream, with offset information (line.character and total characters in
+parentheses).  After that is the current stack depth.  Finally, there is a
+description of the current action.</p>
+<p>Lines are generated <em>after</em> matching, so the innermost of a set of nested
+matchers is shown first.</p>
+<p>The number of entries displayed is controlled by optional parameters supplied
+to <a class="reference external" href="api/redirect.html#lepl.core.config.ConfigBuilder.record_deepest">.config.record_deepest()</a>.</p>
+<p>Looking at the output we can see that the first failure after the deepest
+match was a <a class="reference external" href="api/redirect.html#lepl.matchers.core.Lookahead">Lookahead()</a> on the
+input <tt class="docutils literal"><span class="pre">'</span> <span class="pre">bob,</span> <span class="pre">...'</span></tt>, after matching a newline, <a class="reference external" href="api/redirect.html#lepl.matchers.core.Literal">Literal(&#8216;n&#8217;)</a>.  So we are failing to match a
+space after the newline that separates lines &#8212; this is why the original (see
+<a class="reference internal" href="started.html#repetition"><em>Repetition</em></a>) had:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">newline</span> <span class="o">=</span> <span class="n">spaces</span> <span class="o">&amp;</span> <span class="n">Newline</span><span class="p">()</span> <span class="o">&amp;</span> <span class="n">spaces</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">:,</span><span class="o">~</span><span class="n">newline</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you have a matcher that is failing you will need to use
+<a class="reference external" href="api/redirect.html#lepl.core.config.ConfigBuilder.no_full_first_match">.config.no_full_first_match()</a> to disable the error message, or you will
+not see the expected output.</p>
+</div>
+</div>
+<div class="section" id="trace-output">
+<span id="index-5"></span><h2>Trace Output<a class="headerlink" href="#trace-output" title="Permalink to this headline">¶</a></h2>
+<p>The same data can also be displayed to the logs with the <a class="reference external" href="api/redirect.html#lepl.matchers.monitor.Trace">Trace()</a> matcher.  This takes a
+matcher as an argument &#8212; tracing is enabled when the selected matcher is
+called:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">logging</span> <span class="kn">import</span> <span class="n">basicConfig</span><span class="p">,</span> <span class="n">INFO</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">INFO</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">name</span>    <span class="o">=</span> <span class="n">Word</span><span class="p">()</span>                   <span class="o">&gt;</span> <span class="s">&#39;name&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">phone</span>   <span class="o">=</span> <span class="n">Trace</span><span class="p">(</span><span class="n">Integer</span><span class="p">())</span>         <span class="o">&gt;</span> <span class="s">&#39;phone&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">line</span>    <span class="o">=</span> <span class="n">name</span> <span class="o">/</span> <span class="s">&#39;,&#39;</span> <span class="o">/</span> <span class="n">phone</span>       <span class="o">&gt;</span> <span class="n">make_dict</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">:,</span><span class="o">~</span><span class="n">Newline</span><span class="p">()]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span><span class="o">.</span><span class="n">trace_stack</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;andrew, 3333253</span><span class="se">\n</span><span class="s"> bob, 12345&#39;</span><span class="p">)</span>
+<span class="go">INFO:lepl.core.trace._TraceResults:00176 &#39;3333253\n&#39;   1.8   (0008) 013 stop  -&gt;  DepthFirst(0, 1, rest=Any, first=Any)(&#39;andrew, 3333253\n&#39;[8:])  -&gt;  ([], &#39;andrew, 3333253\n&#39;[8:])</span>
+<span class="go">INFO:lepl.core.trace._TraceResults:00177 &#39;3333253\n&#39;   1.8   (0008) 012 ([], &#39;andrew, 3333253\n&#39;[8:])  -&gt;  DepthFirst(0, 1, rest=Any, first=Any)(&#39;andrew, 3333253\n&#39;[8:])  -&gt;  ([], &#39;andrew, 3333253\n&#39;[8:])</span>
+<span class="go">INFO:lepl.core.trace._TraceResults:00182 &#39;3333253\n&#39;   1.8   (0008) 013 next(Any(&#39;0123456789&#39;)(&#39;andrew, 3333253\n&#39;[8:]))  -&gt;  ([&#39;3&#39;], &#39;andrew, 3333253\n&#39;[9:])</span>
+<span class="go">INFO:lepl.core.trace._TraceResults:00184 &#39;333253\n&#39;    1.9   (0009) 013 next(Any(&#39;0123456789&#39;)(&#39;andrew, 3333253\n&#39;[9:]))  -&gt;  ([&#39;3&#39;], &#39;andrew, 3333253\n&#39;[10:])</span>
+<span class="go">INFO:lepl.core.trace._TraceResults:00186 &#39;33253\n&#39;     1.10  (0010) 013 next(Any(&#39;0123456789&#39;)(&#39;andrew, 3333253\n&#39;[10:]))  -&gt;  ([&#39;3&#39;], &#39;andrew, 3333253\n&#39;[11:])</span>
+<span class="go">INFO:lepl.core.trace._TraceResults:00188 &#39;3253\n&#39;      1.11  (0011) 013 next(Any(&#39;0123456789&#39;)(&#39;andrew, 3333253\n&#39;[11:]))  -&gt;  ([&#39;3&#39;], &#39;andrew, 3333253\n&#39;[12:])</span>
+<span class="go">INFO:lepl.core.trace._TraceResults:00190 &#39;253\n&#39;       1.12  (0012) 013 next(Any(&#39;0123456789&#39;)(&#39;andrew, 3333253\n&#39;[12:]))  -&gt;  ([&#39;2&#39;], &#39;andrew, 3333253\n&#39;[13:])</span>
+<span class="go">INFO:lepl.core.trace._TraceResults:00192 &#39;53\n&#39;        1.13  (0013) 013 next(Any(&#39;0123456789&#39;)(&#39;andrew, 3333253\n&#39;[13:]))  -&gt;  ([&#39;5&#39;], &#39;andrew, 3333253\n&#39;[14:])</span>
+<span class="go">INFO:lepl.core.trace._TraceResults:00194 &#39;3\n&#39;         1.14  (0014) 013 next(Any(&#39;0123456789&#39;)(&#39;andrew, 3333253\n&#39;[14:]))  -&gt;  ([&#39;3&#39;], &#39;andrew, 3333253\n&#39;[15:])</span>
+<span class="go">INFO:lepl.core.trace._TraceResults:00197 &#39;3333253\n&#39;   1.8   (0008) 014 stop  -&gt;  DepthFirst(1, None, rest=Any, first=Any)(&#39;andrew, 3333253\n&#39;[8:])  -&gt;  ([&#39;3&#39;, &#39;3&#39;, &#39;3&#39;, &#39;3&#39;, &#39;2&#39;, &#39;5&#39;, &#39;3&#39;], &#39;andrew, 3333253\n&#39;[15:])</span>
+<span class="go">INFO:lepl.core.trace._TraceResults:00198 &#39;3333253\n&#39;   1.8   (0008) 013 ([&#39;3&#39;, &#39;3&#39;, &#39;3&#39;, &#39;3&#39;, &#39;2&#39;, &#39;5&#39;, &#39;3&#39;], &#39;andrew, 3333253\n&#39;[15:])  -&gt;  DepthFirst(1, None, rest=Any, first=Any)(&#39;andrew, 3333253\n&#39;[8:])  -&gt;  ([&#39;3&#39;, &#39;3&#39;, &#39;3&#39;, &#39;3&#39;, &#39;2&#39;, &#39;5&#39;, &#39;3&#39;], &#39;andrew, 3333253\n&#39;[15:])</span>
+<span class="go">INFO:lepl.core.trace._TraceResults:00199 &#39;3333253\n&#39;   1.8   (0008) 012 ([&#39;3&#39;, &#39;3&#39;, &#39;3&#39;, &#39;3&#39;, &#39;2&#39;, &#39;5&#39;, &#39;3&#39;], &#39;andrew, 3333253\n&#39;[15:])  -&gt;  Transform(DepthFirst, TransformationWrapper(&lt;add&gt;))(&#39;andrew, 3333253\n&#39;[8:])  -&gt;  ([&#39;3333253&#39;], &#39;andrew, 3333253\n&#39;[15:])</span>
+<span class="go">INFO:lepl.core.trace._TraceResults:00200 &#39;3333253\n&#39;   1.8   (0008) 011 ([&#39;3333253&#39;], &#39;andrew, 3333253\n&#39;[15:])  -&gt;  And(DepthFirst, Transform)(&#39;andrew, 3333253\n&#39;[8:])  -&gt;  ([&#39;3333253&#39;], &#39;andrew, 3333253\n&#39;[15:])</span>
+<span class="go">INFO:lepl.core.trace._TraceResults:00201 &#39;3333253\n&#39;   1.8   (0008) 010 ([&#39;3333253&#39;], &#39;andrew, 3333253\n&#39;[15:])  -&gt;  And(DepthFirst, Transform)(&#39;andrew, 3333253\n&#39;[8:])  -&gt;  ([&#39;3333253&#39;], &#39;andrew, 3333253\n&#39;[15:])</span>
+<span class="go">INFO:lepl.core.trace._TraceResults:00202 &#39;3333253\n&#39;   1.8   (0008) 009 ([&#39;3333253&#39;], &#39;andrew, 3333253\n&#39;[15:])  -&gt;  Transform(And, TransformationWrapper(&lt;add&gt;))(&#39;andrew, 3333253\n&#39;[8:])  -&gt;  ([&#39;3333253&#39;], &#39;andrew, 3333253\n&#39;[15:])</span>
+<span class="go">INFO:lepl.core.trace._TraceResults:00203 &#39;3333253\n&#39;   1.8   (0008) 008 ([&#39;3333253&#39;], &#39;andrew, 3333253\n&#39;[15:])  -&gt;  Trace(Transform, True)(&#39;andrew, 3333253\n&#39;[8:])  -&gt;  ([&#39;3333253&#39;], &#39;andrew, 3333253\n&#39;[15:])</span>
+</pre></div>
+</div>
+<p>Unlike the deepest match output, I don&#8217;t find this very useful in most cases.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><a class="reference external" href="api/redirect.html#lepl.matchers.monitor.Trace">Trace()</a> expects the parser to be configured with the <a class="reference external" href="api/redirect.html#lepl.core.trace.TraceStack">TraceStack()</a>
+monitor.  This is done with <a class="reference external" href="api/redirect.html#lepl.core.config.ConfigBuilder.trace_stack">.config.trace_stack()</a>.</p>
+</div>
+</div>
+<div class="section" id="common-errors">
+<span id="index-6"></span><h2>Common Errors<a class="headerlink" href="#common-errors" title="Permalink to this headline">¶</a></h2>
+<p>This section is smaller than it was, because I have changed Lepl to
+automatically avoid some common problems that occurred in earlier versions.
+But please suggest new entries via the <a class="reference external" href="http://groups.google.com/group/lepl">mailing list / discussion group</a>.</p>
+<div class="section" id="missing-tokens">
+<span id="index-7"></span><h3>Missing Tokens<a class="headerlink" href="#missing-tokens" title="Permalink to this headline">¶</a></h3>
+<p>The default <a class="reference external" href="api/redirect.html#lepl.core.config.Configuration">Configuration()</a> includes processing for
+lexers.  If no lexers are present, this message is logged:</p>
+<div class="highlight-python"><pre>Lexer rewriter used, but no tokens found.</pre>
+</div>
+<p>This is not a problem (assuming you didn&#8217;t intend to use lexing, of course).</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="contents.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Debugging</a><ul>
+<li><a class="reference internal" href="#logging">Logging</a></li>
+<li><a class="reference internal" href="#stack-traces">Stack Traces</a></li>
+<li><a class="reference internal" href="#variable-traces">Variable Traces</a></li>
+<li><a class="reference internal" href="#deepest-matches">Deepest Matches</a></li>
+<li><a class="reference internal" href="#trace-output">Trace Output</a></li>
+<li><a class="reference internal" href="#common-errors">Common Errors</a><ul>
+<li><a class="reference internal" href="#missing-tokens">Missing Tokens</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="errors.html"
+                        title="previous chapter">Error Reporting</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="lexer.html"
+                        title="next chapter">Lexer</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/debugging.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="lexer.html" title="Lexer"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="errors.html" title="Error Reporting"
+             >previous</a> |</li>
+        <li><a href="contents.html">LEPL 5.1.2 documentation</a> &raquo;</li>
+          <li><a href="manual.html" >Lepl Manual</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2009-2011, Andrew Cooke.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

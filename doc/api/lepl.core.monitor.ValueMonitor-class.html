@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lepl.core.monitor.ValueMonitor</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lepl-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lepl-module.html">Package&nbsp;lepl</a> ::
+        <a href="lepl.core-module.html">Package&nbsp;core</a> ::
+        <a href="lepl.core.monitor-module.html">Module&nbsp;monitor</a> ::
+        Class&nbsp;ValueMonitor
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lepl.core.monitor.ValueMonitor-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class ValueMonitor</h1><p class="nomargin-top"><span class="codelink"><a href="lepl.core.monitor-pysrc.html#ValueMonitor">source&nbsp;code</a></span></p>
+<center>
+<center>  <map id="uml_class_diagram_for_lepl_cor_29" name="uml_class_diagram_for_lepl_cor_29">
+<area shape="rect" id="node1_10" href="lepl.core.monitor.ValueMonitor-class.html#next_iteration" title="Called at the start of each iteration." alt="" coords="17,39,317,57"/>
+<area shape="rect" id="node1_11" href="lepl.core.monitor.ValueMonitor-class.html#before_next" title="Called before invoking next on a generator." alt="" coords="17,57,317,76"/>
+<area shape="rect" id="node1_12" href="lepl.core.monitor.ValueMonitor-class.html#after_next" title="Called after invoking next on a generator." alt="" coords="17,76,317,95"/>
+<area shape="rect" id="node1_13" href="lepl.core.monitor.ValueMonitor-class.html#before_throw" title="Called before invoking throw on a generator." alt="" coords="17,95,317,113"/>
+<area shape="rect" id="node1_14" href="lepl.core.monitor.ValueMonitor-class.html#after_throw" title="Called after invoking throw on a generator." alt="" coords="17,113,317,132"/>
+<area shape="rect" id="node1_15" href="lepl.core.monitor.ValueMonitor-class.html#before_send" title="Called before invoking send on a generator." alt="" coords="17,132,317,151"/>
+<area shape="rect" id="node1_16" href="lepl.core.monitor.ValueMonitor-class.html#after_send" title="Called after invoking send on a generator." alt="" coords="17,151,317,169"/>
+<area shape="rect" id="node1_17" href="lepl.core.monitor.ValueMonitor-class.html#exception" title="Called when an exception is caught (instead of any &#39;after&#39; method)." alt="" coords="17,169,317,188"/>
+<area shape="rect" id="node1_18" href="lepl.core.monitor.ValueMonitor-class.html#raise_" title="Called before raising an exception to the caller." alt="" coords="17,188,317,207"/>
+<area shape="rect" id="node1_19" href="lepl.core.monitor.ValueMonitor-class.html#yield_" title="Called before yielding a value to the caller." alt="" coords="17,207,317,225"/>
+<area shape="rect" id="node1" href="lepl.core.monitor.ValueMonitor-class.html" title="An interface expected by trampoline(), called to track data flow." alt="" coords="5,6,329,231"/>
+</map>
+  <img src="uml_class_diagram_for_lepl_cor_29.gif" alt='' usemap="#uml_class_diagram_for_lepl_cor_29" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
+<hr />
+An interface expected by <code class="link">trampoline()</code>, called to track data flow.
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="next_iteration"></a><span class="summary-sig-name">next_iteration</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">epoch</span>,
+        <span class="summary-sig-arg">value</span>,
+        <span class="summary-sig-arg">exception</span>,
+        <span class="summary-sig-arg">stack</span>)</span><br />
+      Called at the start of each iteration.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.monitor-pysrc.html#ValueMonitor.next_iteration">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="before_next"></a><span class="summary-sig-name">before_next</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">generator</span>)</span><br />
+      Called before invoking <tt class="rst-docutils literal">next</tt> on a generator.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.monitor-pysrc.html#ValueMonitor.before_next">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="after_next"></a><span class="summary-sig-name">after_next</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">value</span>)</span><br />
+      Called after invoking <tt class="rst-docutils literal">next</tt> on a generator.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.monitor-pysrc.html#ValueMonitor.after_next">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="before_throw"></a><span class="summary-sig-name">before_throw</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">generator</span>,
+        <span class="summary-sig-arg">value</span>)</span><br />
+      Called before invoking <tt class="rst-docutils literal">throw</tt> on a generator.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.monitor-pysrc.html#ValueMonitor.before_throw">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="after_throw"></a><span class="summary-sig-name">after_throw</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">value</span>)</span><br />
+      Called after invoking <tt class="rst-docutils literal">throw</tt> on a generator.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.monitor-pysrc.html#ValueMonitor.after_throw">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="before_send"></a><span class="summary-sig-name">before_send</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">generator</span>,
+        <span class="summary-sig-arg">value</span>)</span><br />
+      Called before invoking <tt class="rst-docutils literal">send</tt> on a generator.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.monitor-pysrc.html#ValueMonitor.before_send">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="after_send"></a><span class="summary-sig-name">after_send</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">value</span>)</span><br />
+      Called after invoking <tt class="rst-docutils literal">send</tt> on a generator.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.monitor-pysrc.html#ValueMonitor.after_send">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="exception"></a><span class="summary-sig-name">exception</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">value</span>)</span><br />
+      Called when an exception is caught (instead of any 'after' method).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.monitor-pysrc.html#ValueMonitor.exception">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="raise_"></a><span class="summary-sig-name">raise_</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">value</span>)</span><br />
+      Called before raising an exception to the caller.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.monitor-pysrc.html#ValueMonitor.raise_">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="yield_"></a><span class="summary-sig-name">yield_</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">value</span>)</span><br />
+      Called before yielding a value to the caller.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.core.monitor-pysrc.html#ValueMonitor.yield_">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__init__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__str__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lepl-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sun May 13 16:31:01 2012
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

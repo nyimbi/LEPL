@@ -1,0 +1,706 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Operators &mdash; LEPL 5.1.2 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '5.1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="LEPL 5.1.2 documentation" href="index.html" />
+    <link rel="up" title="Lepl Manual" href="manual.html" />
+    <link rel="next" title="Results" href="nodes.html" />
+    <link rel="prev" title="Matchers" href="matchers.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="nodes.html" title="Results"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="matchers.html" title="Matchers"
+             accesskey="P">previous</a> |</li>
+        <li><a href="contents.html">LEPL 5.1.2 documentation</a> &raquo;</li>
+          <li><a href="manual.html" accesskey="U">Lepl Manual</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="operators">
+<span id="id1"></span><h1>Operators<a class="headerlink" href="#operators" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="caveats-and-limitations">
+<span id="caveatsandlimitations"></span><span id="index-0"></span><h2>Caveats and Limitations<a class="headerlink" href="#caveats-and-limitations" title="Permalink to this headline">¶</a></h2>
+<p>It is unfortunate, but realistic, that the chapter on operators should start
+with some warnings to the user.</p>
+<p>Operators &#8212; things like <tt class="docutils literal"><span class="pre">&amp;</span></tt> and <tt class="docutils literal"><span class="pre">|</span></tt>, used to join matchers &#8212; can help
+produce grammars that are easier to read, easier to understand, and so less
+likely to contain errors.  But their implementation pushes Python&#8217;s
+boundaries, giving problems with precedence and applicability.  This is
+exacerbated by the automatic coercion of strings to <a class="reference external" href="api/redirect.html#lepl.matchers.core.Literal">Literal()</a> matchers wherever possible.</p>
+<p>For example, because operators are effectively methods on <em>neighbouring
+objects</em>, the following will fail:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">name</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;Mr&#39;</span> <span class="o">|</span> <span class="s">&#39;Ms&#39;</span><span class="p">)</span> <span class="o">//</span> <span class="n">Word</span><span class="p">()</span>
+<span class="go">[...]</span>
+<span class="go">TypeError: unsupported operand type(s) for |: &#39;str&#39; and &#39;str&#39;</span>
+</pre></div>
+</div>
+<p>This is because neither <tt class="docutils literal"><span class="pre">'Mr'</span></tt> nor <tt class="docutils literal"><span class="pre">'Ms'</span></tt> subclass <a class="reference external" href="api/redirect.html#lepl.matchers.support.OperatorMatcher">OperatorMatcher()</a> (which is where
+<tt class="docutils literal"><span class="pre">|</span></tt> is defined, via <tt class="docutils literal"><span class="pre">__or__</span></tt> and <tt class="docutils literal"><span class="pre">__ror__</span></tt>).</p>
+<p>Another example, where precedence is not as we might hope:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">name</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;Mr&#39;</span> <span class="o">//</span> <span class="n">Word</span><span class="p">()</span> <span class="o">&gt;</span> <span class="s">&#39;man&#39;</span> <span class="o">|</span> <span class="s">&#39;Ms&#39;</span> <span class="o">//</span> <span class="n">Word</span><span class="p">()</span> <span class="o">&gt;</span> <span class="s">&#39;woman&#39;</span><span class="p">)</span>
+<span class="go">[...]</span>
+<span class="go">SyntaxError: The operator &gt; for And(&#39;Mr&#39;, Transform, Transform) was applied to a matcher (Or(&#39;man&#39;, And)). Check syntax and parentheses.</span>
+</pre></div>
+</div>
+<p>because the expression is parsed by Python as:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">name</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;Mr&#39;</span> <span class="o">//</span> <span class="n">Word</span><span class="p">())</span> <span class="o">&gt;</span> <span class="p">(</span><span class="s">&#39;man&#39;</span> <span class="o">|</span> <span class="p">(</span><span class="s">&#39;Ms&#39;</span> <span class="o">//</span> <span class="n">Word</span><span class="p">())</span> <span class="o">&gt;</span> <span class="s">&#39;woman&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>and the SyntaxError was generated by Lepl, in an attempt to detect this kind
+of error before the parser is called.</p>
+<p>In short, then: use operators with care.  Many of the guidelines in the
+<a class="reference internal" href="style.html#style"><em>Patterns</em></a> chapter are intended to help manage these problems.</p>
+</div>
+<div class="section" id="binary-operators-between-matchers">
+<span id="index-1"></span><h2>Binary Operators Between Matchers<a class="headerlink" href="#binary-operators-between-matchers" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="4%" />
+<col width="96%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Operator</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">&amp;</span></tt></td>
+<td>Joins matchers in sequence.  The result is a single list containing the results from all functions.  Identical (without separators) to <a class="reference external" href="api/redirect.html#lepl.matchers.combine.And">And()</a>.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">+</span></tt></td>
+<td>As <tt class="docutils literal"><span class="pre">&amp;</span></tt>, but the results are then joined together with the standard Python <tt class="docutils literal"><span class="pre">+</span></tt> operator.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">/</span></tt></td>
+<td>As <tt class="docutils literal"><span class="pre">&amp;</span></tt>, but with optional spaces (0 or more) between functions.  If no space is found, no result is added, otherwise any found spaces are joined together into a single result.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">//</span></tt></td>
+<td>As <tt class="docutils literal"><span class="pre">&amp;</span></tt>, but with required spaces (1 or more) between functions.  The spaces are joined together into a single result.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">|</span></tt></td>
+<td>Matches one matcher from a list.  The result is the result of the chosen matcher.  Identical to <a class="reference external" href="api/redirect.html#lepl.matchers.combine.Or">Or()</a>.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">%</span></tt></td>
+<td>As <tt class="docutils literal"><span class="pre">|</span></tt>, but without backtracking between functions.  Identical to <a class="reference external" href="api/redirect.html#lepl.matchers.combine.First">First()</a>.</td>
+</tr>
+</tbody>
+</table>
+<p>For a discussion of backtracking see <a class="reference internal" href="advanced.html#backtracking"><em>Search and Backtracking</em></a>.</p>
+</div>
+<div class="section" id="prefix-and-postfix-operators-on-matchers">
+<span id="index-2"></span><h2>Prefix And Postfix Operators On Matchers<a class="headerlink" href="#prefix-and-postfix-operators-on-matchers" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Operator</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">~</span></tt></td>
+<td>Discards the result from the matcher.
+Identical to <a class="reference external" href="api/redirect.html#lepl.matchers.derived.Drop">Drop()</a>.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">[]</span></tt></td>
+<td>Repeats the matcher, with optional concatenation and separator.
+Identical to (without separators)
+<a class="reference external" href="api/redirect.html#lepl.matchers.derived.Repeat">Repeat()</a>
+(see <a class="reference internal" href="matchers.html#repeat"><em>previous section</em></a>).</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="operators-that-apply-functions-to-results">
+<span id="ge"></span><span id="index-3"></span><h2>Operators That Apply Functions To Results<a class="headerlink" href="#operators-that-apply-functions-to-results" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="2%" />
+<col width="98%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Operator</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">&gt;=</span></tt></td>
+<td>Pass the results of the matcher (left) to the given function (right) and use the result as the new result.  Identical to <a class="reference external" href="api/redirect.html#lepl.matchers.derived.Apply">Apply(raw=True)</a>.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">&gt;</span></tt></td>
+<td>Pass the results of the matcher (left) to the given function (right) and use the result, <em>within a new list</em>,  as the result.  If the function is a string a <tt class="docutils literal"><span class="pre">(string,</span> <span class="pre">result)</span></tt> pair is generated instead.  Identical to <a class="reference external" href="api/redirect.html#lepl.matchers.derived.Apply">Apply()</a>.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">args</span></tt></td>
+<td>Not an operator, but used with <tt class="docutils literal"><span class="pre">&gt;</span></tt> to expand the list of results to be arguments (like Python&#8217;s <tt class="docutils literal"><span class="pre">*args</span></tt> convention).  For example <tt class="docutils literal"><span class="pre">&gt;</span> <span class="pre">args(myFunc)</span></tt> invokes <tt class="docutils literal"><span class="pre">myFunc(*results)</span></tt>.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">&gt;&gt;</span></tt></td>
+<td>As <tt class="docutils literal"><span class="pre">&gt;</span></tt>, but the function is applied to each result in turn (instead of all results being supplied in a single list argument).  Identical to <a class="reference external" href="api/redirect.html#lepl.matchers.derived.Map">Map()</a>.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">**</span></tt></td>
+<td>As <tt class="docutils literal"><span class="pre">&gt;</span></tt>, but the results are passed as the named parameter <em>results</em>.  Additional keyword arguments are <em>stream_in</em> (the stream passed to the matcher), <em>stream_out</em> (the stream returned from the matcher) and <em>core</em> (see <a class="reference internal" href="resources.html#resources"><em>Resource Management</em></a>).  Identical to <a class="reference external" href="api/redirect.html#lepl.matchers.derived.KApply">KApply()</a>.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">^</span></tt></td>
+<td>Raise a Syntax error.  The argument to the right is a string that is treated as a format template for the same named arguments as <tt class="docutils literal"><span class="pre">**</span></tt>.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="replacement">
+<span id="id2"></span><h2>Replacement<a class="headerlink" href="#replacement" title="Permalink to this headline">¶</a></h2>
+<p>Operators can be replaced inside a <tt class="docutils literal"><span class="pre">with</span></tt> context using <a class="reference external" href="api/redirect.html#lepl.matchers.operators.Override">Override()</a>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">Override</span><span class="p">(</span><span class="n">or_</span><span class="o">=</span><span class="n">And</span><span class="p">,</span> <span class="n">and_</span><span class="o">=</span><span class="n">Or</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">abcd</span> <span class="o">=</span> <span class="p">(</span><span class="n">Literal</span><span class="p">(</span><span class="s">&#39;a&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">Literal</span><span class="p">(</span><span class="s">&#39;b&#39;</span><span class="p">))</span> <span class="o">|</span> <span class="p">(</span> <span class="n">Literal</span><span class="p">(</span><span class="s">&#39;c&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">Literal</span><span class="p">(</span><span class="s">&#39;d&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">abcd</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;ac&#39;</span><span class="p">))</span>
+<span class="go">[&#39;a&#39;, &#39;c&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">abcd</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;ab&#39;</span><span class="p">))</span>
+<span class="go">[...]</span>
+<span class="go">lepl.stream.maxdepth.FullFirstMatchException: The match failed in &lt;string&gt; at &#39;&#39; (line 1, character 3).</span>
+</pre></div>
+</div>
+<p>(think about it).</p>
+<p>It is also possible to provide a separator that is used for <tt class="docutils literal"><span class="pre">&amp;</span></tt> and <tt class="docutils literal"><span class="pre">[]</span></tt>.
+With a little care (define matchers for characters before, and matchers for
+sentences after, the <em>with</em> statement) this can handle the common case of
+space&#8211;separated words in a transparent manner:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">word</span> <span class="o">=</span> <span class="n">Letter</span><span class="p">()[:,</span><span class="o">...</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">Separator</span><span class="p">(</span><span class="s">r&#39;\s+&#39;</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">sentence</span> <span class="o">=</span> <span class="n">word</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sentence</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;hello world&#39;</span><span class="p">)</span>
+<span class="go">[&#39;hello&#39;, &#39; &#39;, &#39;world&#39;]</span>
+</pre></div>
+</div>
+<p>Note that there was no need to specify a separator in <tt class="docutils literal"><span class="pre">word[1:]</span></tt>, and that
+this the argument of <a class="reference external" href="api/redirect.html#lepl.matchers.operators.Separator">Separator()</a> is a rare example of a
+string being coerced to something other than a <a class="reference external" href="api/redirect.html#lepl.matchers.core.Literal">Literal()</a> (here <a class="reference external" href="api/redirect.html#lepl.matchers.core.Regexp">Regexp()</a> is used).</p>
+<p>The use of separators to handle spaces is discussed in more detail below.</p>
+</div>
+<div class="section" id="spaces">
+<span id="index-4"></span><span id="id4"></span><h2>Spaces<a class="headerlink" href="#spaces" title="Permalink to this headline">¶</a></h2>
+<p>There&#8217;s a wide variety of ways to handle spaces in Lepl.  A large part of the
+<a class="reference internal" href="intro.html#tutorial"><em>Tutorial</em></a> is spent discussing this, and it&#8217;s probably the
+best place to look for a basic understanding.</p>
+<p>The main conclusion of the <a class="reference internal" href="intro.html#tutorial"><em>Tutorial</em></a> is that the <a class="reference internal" href="lexer.html#lexer"><em>Lexer</em></a>
+(ie using <a class="reference external" href="api/redirect.html#lepl.lexer.matchers.Token">Token()</a>) is the
+best approach in most circumstances.  It usually hits the sweet spot between
+flexibility and simplicity.</p>
+<p>Alternatively, to handle optional spaces (zero or more), without tokens, use
+<a class="reference external" href="api/redirect.html#lepl.matchers.operators.DroppedSpace">DroppedSpace()</a>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">with</span> <span class="n">DroppedSpace</span><span class="p">():</span>
+    <span class="n">addition</span> <span class="o">=</span> <span class="n">value</span> <span class="o">&amp;</span> <span class="s">&quot;+&quot;</span> <span class="o">&amp;</span> <span class="n">value</span>
+</pre></div>
+</div>
+<p>But sometimes these are not the right solution.  One case is
+<a class="reference internal" href="examples.html#table-example"><em>Tabular Data</em></a>, when the <a class="reference external" href="api/redirect.html#lepl.matchers.complex.Columns">Columns()</a> matcher is a good fit.
+Another is when spaces are <em>required</em>.</p>
+<p>It is something of a &#8220;beginner&#8217;s mistake&#8221; to enforce the use of spaces in the
+grammar &#8212; it makes the parsing more complex (and more fragile, even to
+&#8220;good&#8221; input), and typically doesn&#8217;t help the end user much.  But even so, it
+is sometimes necessary.</p>
+<p>In such cases, the only real solution is to specify all the spaces by hand.
+One option is to use the <tt class="docutils literal"><span class="pre">/</span></tt> and <tt class="docutils literal"><span class="pre">//</span></tt> operators (which match zero&#8211; and
+one&#8211;or&#8211;more spaces respectively).  Alternatively, to save typing, Lepl
+includes various <em>separators</em> (<a class="reference external" href="api/redirect.html#lepl.matchers.operators.DroppedSpace">DroppedSpace()</a>, above, is a
+separator).  The <a class="reference internal" href="intro-2.html#separators"><em>Tutorial</em></a> introduced the basic
+<a class="reference external" href="api/redirect.html#lepl.matchers.operators.Separator">Separator()</a> (as
+described in the previous section, above), which requires a user&#8211;specified
+space wherever <cite>&amp;</cite> is used (and also in <cite>[]</cite> repetition).</p>
+<p>But even this is often not sufficent when optional matchers are used, because
+the spaces remain even when the optional matcher is ignored.</p>
+<p>So, to help automate the (rare) case of <em>required</em> spaces, <em>automatic</em>
+addition of spaces for each <cite>&amp;</cite>, and <em>optional</em> matchers, two &#8220;smart&#8221;
+separators are also available.  The first, <a class="reference external" href="api/redirect.html#lepl.matchers.operators.SmartSeparator1">SmartSeparator1()</a>, checks whether
+a matcher is used by seeing whether it consumes input; spaces are only added
+when <cite>&amp;</cite> is between two matchers that both &#8220;move along&#8221; the input stream.  The
+second, <a class="reference external" href="api/redirect.html#lepl.contrib.matchers.SmartSeparator2">SmartSeparator2()</a>, takes a more
+pro&#8211;active approach and examines the matchers to see whether they inherit
+from the base class used in Lepl to implement &#8220;optionality&#8221;.</p>
+<p>All separators are implemented using <a class="reference internal" href="#replacement"><em>operator replacement</em></a>, described above.</p>
+<p>If you really, really need such functionality, the best thing to do is try
+these various separators and see which has the behaviour you require (but
+please first consider whether you absolutely need to check that spaces are
+present, or whether you can do what you want more simply and reliably with the
+<a class="reference internal" href="lexer.html#lexer"><em>Lexer</em></a>).</p>
+<p>The following tables show the results of some simple tests for different
+separators, spaces, and functions.  They also illustrate two separate, but
+related, issues: the difference between <a class="reference external" href="api/redirect.html#lepl.matchers.combine.And">And()</a> and <tt class="docutils literal"><span class="pre">&amp;</span></tt> when separators are
+present; and how matchers like <a class="reference external" href="api/redirect.html#lepl.matchers.core.Eos">Eos()</a> function (which is not optional,
+but consumes no input).</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head" colspan="13">Optional(&#8216;a&#8217;) &amp; Optional(&#8216;b&#8217;)</th>
+</tr>
+<tr class="row-even"><th class="head" rowspan="3">&nbsp;</th>
+<th class="head" colspan="4">Separator</th>
+<th class="head" colspan="4">SmartSeparator1</th>
+<th class="head" colspan="4">SmartSeparator2</th>
+</tr>
+<tr class="row-odd"><th class="head" colspan="2">And(..., Eos())</th>
+<th class="head" colspan="2">... &amp; Eos()</th>
+<th class="head" colspan="2">And(..., Eos())</th>
+<th class="head" colspan="2">... &amp; Eos()</th>
+<th class="head" colspan="2">And(..., Eos())</th>
+<th class="head" colspan="2">... &amp; Eos()</th>
+</tr>
+<tr class="row-even"><th class="head">&#8216; &#8216;</th>
+<th class="head">&#8216; &#8216;[:]</th>
+<th class="head">&#8216; &#8216;</th>
+<th class="head">&#8216; &#8216;[:]</th>
+<th class="head">&#8216; &#8216;</th>
+<th class="head">&#8216; &#8216;[:]</th>
+<th class="head">&#8216; &#8216;</th>
+<th class="head">&#8216; &#8216;[:]</th>
+<th class="head">&#8216; &#8216;</th>
+<th class="head">&#8216; &#8216;[:]</th>
+<th class="head">&#8216; &#8216;</th>
+<th class="head">&#8216; &#8216;[:]</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-odd"><td>&#8216;a b &#8216;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>yes</td>
+<td>yes</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr class="row-even"><td>&#8216;a b&#8217;</td>
+<td>yes</td>
+<td>yes</td>
+<td>&nbsp;</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>&nbsp;</td>
+<td>yes</td>
+</tr>
+<tr class="row-odd"><td>&#8216;ab&#8217;</td>
+<td>&nbsp;</td>
+<td>yes</td>
+<td>&nbsp;</td>
+<td>yes</td>
+<td>&nbsp;</td>
+<td>yes</td>
+<td>&nbsp;</td>
+<td>yes</td>
+<td>&nbsp;</td>
+<td>yes</td>
+<td>&nbsp;</td>
+<td>yes</td>
+</tr>
+<tr class="row-even"><td>&#8216; b&#8217;</td>
+<td>yes</td>
+<td>yes</td>
+<td>&nbsp;</td>
+<td>yes</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>&#8216;b&#8217;</td>
+<td>&nbsp;</td>
+<td>yes</td>
+<td>&nbsp;</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>&nbsp;</td>
+<td>yes</td>
+</tr>
+<tr class="row-even"><td>&#8216;a &#8216;</td>
+<td>yes</td>
+<td>yes</td>
+<td>&nbsp;</td>
+<td>yes</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr class="row-odd"><td>&#8216;a&#8217;</td>
+<td>&nbsp;</td>
+<td>yes</td>
+<td>&nbsp;</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>&nbsp;</td>
+<td>yes</td>
+</tr>
+<tr class="row-even"><td>&#8216;&#8217;</td>
+<td>&nbsp;</td>
+<td>yes</td>
+<td>&nbsp;</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr class="row-odd"><td>&#8216; &#8216;</td>
+<td>yes</td>
+<td>yes</td>
+<td>&nbsp;</td>
+<td>yes</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<p>Each table has a &#8220;yes&#8221; when the parser (at the top of the table) matchers the
+input stream (on the left).  Pay careful attention to spaces in the input.</p>
+<p>Different columns of results correspond to the different spearators, whether
+they are matching a single space or &#8220;zero or more&#8221; spaces, and whether the
+final <a class="reference external" href="api/redirect.html#lepl.matchers.core.Eos">Eos()</a> matcher is added with <tt class="docutils literal"><span class="pre">&amp;</span></tt> (which will include the spaces
+from the separator) or <a class="reference external" href="api/redirect.html#lepl.matchers.combine.And">And()</a> (which won&#8217;t).</p>
+<p>So, for example, the final column on the right, below, has results for this
+parser:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">with</span> <span class="n">SmartSeparator2</span><span class="p">(</span><span class="n">Literal</span><span class="p">(</span><span class="s">&#39; &#39;</span><span class="p">)[:]):</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">Optional</span><span class="p">(</span><span class="s">&#39;a&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">Optional</span><span class="p">(</span><span class="s">&#39;b&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="s">&#39;c&#39;</span> <span class="o">&amp;</span> <span class="n">Eos</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>(where <a class="reference external" href="api/redirect.html#lepl.matchers.core.Literal">Literal( )</a> is missing from the column heading to save space).</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head" colspan="13">Optional(&#8216;a&#8217;) &amp; Optional(&#8216;b&#8217;) &amp; &#8216;c&#8217;</th>
+</tr>
+<tr class="row-even"><th class="head" rowspan="3">&nbsp;</th>
+<th class="head" colspan="4">Separator</th>
+<th class="head" colspan="4">SmartSeparator1</th>
+<th class="head" colspan="4">SmartSeparator2</th>
+</tr>
+<tr class="row-odd"><th class="head" colspan="2">And(..., Eos())</th>
+<th class="head" colspan="2">... &amp; Eos()</th>
+<th class="head" colspan="2">And(..., Eos())</th>
+<th class="head" colspan="2">... &amp; Eos()</th>
+<th class="head" colspan="2">And(..., Eos())</th>
+<th class="head" colspan="2">... &amp; Eos()</th>
+</tr>
+<tr class="row-even"><th class="head">&#8216; &#8216;</th>
+<th class="head">&#8216; &#8216;[:]</th>
+<th class="head">&#8216; &#8216;</th>
+<th class="head">&#8216; &#8216;[:]</th>
+<th class="head">&#8216; &#8216;</th>
+<th class="head">&#8216; &#8216;[:]</th>
+<th class="head">&#8216; &#8216;</th>
+<th class="head">&#8216; &#8216;[:]</th>
+<th class="head">&#8216; &#8216;</th>
+<th class="head">&#8216; &#8216;[:]</th>
+<th class="head">&#8216; &#8216;</th>
+<th class="head">&#8216; &#8216;[:]</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-odd"><td>&#8216;a b c &#8216;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>yes</td>
+<td>yes</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr class="row-even"><td>&#8216;a b c&#8217;</td>
+<td>yes</td>
+<td>yes</td>
+<td>&nbsp;</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>&nbsp;</td>
+<td>yes</td>
+</tr>
+<tr class="row-odd"><td>&#8216; b c&#8217;</td>
+<td>yes</td>
+<td>yes</td>
+<td>&nbsp;</td>
+<td>yes</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>&#8216;b c&#8217;</td>
+<td>&nbsp;</td>
+<td>yes</td>
+<td>&nbsp;</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>&nbsp;</td>
+<td>yes</td>
+</tr>
+<tr class="row-odd"><td>&#8216;ab c&#8217;</td>
+<td>&nbsp;</td>
+<td>yes</td>
+<td>&nbsp;</td>
+<td>yes</td>
+<td>&nbsp;</td>
+<td>yes</td>
+<td>&nbsp;</td>
+<td>yes</td>
+<td>&nbsp;</td>
+<td>yes</td>
+<td>&nbsp;</td>
+<td>yes</td>
+</tr>
+<tr class="row-even"><td>&#8216;a c&#8217;</td>
+<td>&nbsp;</td>
+<td>yes</td>
+<td>&nbsp;</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>&nbsp;</td>
+<td>yes</td>
+</tr>
+<tr class="row-odd"><td>&#8216;a  c&#8217;</td>
+<td>yes</td>
+<td>yes</td>
+<td>&nbsp;</td>
+<td>yes</td>
+<td>&nbsp;</td>
+<td>yes</td>
+<td>&nbsp;</td>
+<td>yes</td>
+<td>&nbsp;</td>
+<td>yes</td>
+<td>&nbsp;</td>
+<td>yes</td>
+</tr>
+<tr class="row-even"><td>&#8216;c&#8217;</td>
+<td>&nbsp;</td>
+<td>yes</td>
+<td>&nbsp;</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>&nbsp;</td>
+<td>yes</td>
+</tr>
+<tr class="row-odd"><td>&#8216; c&#8217;</td>
+<td>&nbsp;</td>
+<td>yes</td>
+<td>&nbsp;</td>
+<td>yes</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<p>Finally, note that offside (significant whitespace) parsing is only supported
+with tokens.  If you want to do it without, you need to somehow work out how
+to track the level and match the spaces yourself.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="contents.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Operators</a><ul>
+<li><a class="reference internal" href="#caveats-and-limitations">Caveats and Limitations</a></li>
+<li><a class="reference internal" href="#binary-operators-between-matchers">Binary Operators Between Matchers</a></li>
+<li><a class="reference internal" href="#prefix-and-postfix-operators-on-matchers">Prefix And Postfix Operators On Matchers</a></li>
+<li><a class="reference internal" href="#operators-that-apply-functions-to-results">Operators That Apply Functions To Results</a></li>
+<li><a class="reference internal" href="#replacement">Replacement</a></li>
+<li><a class="reference internal" href="#spaces">Spaces</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="matchers.html"
+                        title="previous chapter">Matchers</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="nodes.html"
+                        title="next chapter">Results</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/operators.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="nodes.html" title="Results"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="matchers.html" title="Matchers"
+             >previous</a> |</li>
+        <li><a href="contents.html">LEPL 5.1.2 documentation</a> &raquo;</li>
+          <li><a href="manual.html" >Lepl Manual</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2009-2011, Andrew Cooke.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,786 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lepl.matchers.support</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lepl-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lepl-module.html">Package&nbsp;lepl</a> ::
+        <a href="lepl.matchers-module.html">Package&nbsp;matchers</a> ::
+        Module&nbsp;support
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lepl.matchers.support-module.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module support</h1><p class="nomargin-top"><span class="codelink"><a href="lepl.matchers.support-pysrc.html">source&nbsp;code</a></span></p>
+Support classes for matchers.
+
+<!-- ==================== CLASSES ==================== -->
+<a name="section-Classes"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Classes</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Classes"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lepl.matchers.support.BaseMatcher-class.html" class="summary-name">BaseMatcher</a><br />
+      A base class that provides support to all matchers.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lepl.matchers.support.TreeStr-class.html" class="summary-name">TreeStr</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lepl.matchers.support.OperatorMatcher-class.html" class="summary-name">OperatorMatcher</a><br />
+      A base class that provides support to all matchers with operators.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lepl.matchers.support.Transformable-class.html" class="summary-name">Transformable</a><br />
+      All subclasses must expose and apply wrapper, and implement compose.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lepl.matchers.support.BaseFactoryMatcher-class.html" class="summary-name">BaseFactoryMatcher</a><br />
+      This must be used as a mixin with something that inherits from
+ArgsAsAttribute (ie the usual matcher classes).
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lepl.matchers.support.TransformableWrapper-class.html" class="summary-name">TransformableWrapper</a><br />
+      A common support class for various wrappers.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lepl.matchers.support.TransformableTrampolineWrapper-class.html" class="summary-name">TransformableTrampolineWrapper</a><br />
+      A wrapper for source of generators that evaluate other matchers via
+the trampoline (ie for generators that evaluate matchers via yield).
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lepl.matchers.support.TrampolineWrapper-class.html" class="summary-name">TrampolineWrapper</a><br />
+      A wrapper for source of generators that evaluate other matchers via
+the trampoline (ie for generators that evaluate matchers via yield).
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lepl.matchers.support.NoTrampoline-class.html" class="summary-name">NoTrampoline</a><br />
+      A matcher that does not require the trampoline.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lepl.matchers.support.NoTrampolineWrapper-class.html" class="summary-name">NoTrampolineWrapper</a><br />
+      A wrapper for source of generators that do not evaluate other matchers via
+the trampoline.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lepl.matchers.support.SequenceWrapper-class.html" class="summary-name">SequenceWrapper</a><br />
+      A wrapper for simple generator factories, where the final matcher is a
+function that yields a series of matches without evaluating other matchers
+via the trampoline.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lepl.matchers.support.FunctionWrapper-class.html" class="summary-name">FunctionWrapper</a><br />
+      A wrapper for simple function factories, where the final matcher is a
+function that returns a single match or None.
+    </td>
+  </tr>
+</table>
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Functions</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Functions"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="check_matcher"></a><span class="summary-sig-name">check_matcher</span>(<span class="summary-sig-arg">matcher</span>)</span><br />
+      Check that the signature takes support + stream.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.matchers.support-pysrc.html#check_matcher">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="check_args"></a><span class="summary-sig-name">check_args</span>(<span class="summary-sig-arg">func</span>)</span><br />
+      Check that the factory doesn't use any of those modern haifalutin
+extensions...</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.matchers.support-pysrc.html#check_args">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="check_modifiers"></a><span class="summary-sig-name">check_modifiers</span>(<span class="summary-sig-arg">func</span>,
+        <span class="summary-sig-arg">modifiers</span>)</span><br />
+      Check that any modifiers match the function declaration.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.matchers.support-pysrc.html#check_modifiers">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="apply_modifiers"></a><span class="summary-sig-name">apply_modifiers</span>(<span class="summary-sig-arg">func</span>,
+        <span class="summary-sig-arg">args</span>,
+        <span class="summary-sig-arg">kargs</span>,
+        <span class="summary-sig-arg">modifiers</span>,
+        <span class="summary-sig-arg">margs</span>,
+        <span class="summary-sig-arg">mkargs</span>)</span><br />
+      Modify values in args and kargs.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.matchers.support-pysrc.html#apply_modifiers">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.matchers.support-module.html#make_wrapper_factory" class="summary-sig-name">make_wrapper_factory</a>(<span class="summary-sig-arg">wrapper</span>,
+        <span class="summary-sig-arg">factory</span>,
+        <span class="summary-sig-arg">modifiers</span>,
+        <span class="summary-sig-arg">margs</span>=<span class="summary-sig-default">identity</span>,
+        <span class="summary-sig-arg">mkargs</span>=<span class="summary-sig-default">identity</span>,
+        <span class="summary-sig-arg">memo</span>=<span class="summary-sig-default">True</span>)</span><br />
+      A helper function that assembles a matcher from a wrapper class and
+a factory function that contains the logic.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.matchers.support-pysrc.html#make_wrapper_factory">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.matchers.support-module.html#make_factory" class="summary-sig-name">make_factory</a>(<span class="summary-sig-arg">maker</span>,
+        <span class="summary-sig-arg">matcher</span>)</span><br />
+      A helper function that assembles a matcher from a wrapper class and
+a function that contains the logic.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.matchers.support-pysrc.html#make_factory">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="keep_gate"></a><span class="summary-sig-name">keep_gate</span>(<span class="summary-sig-arg">gatekeeper</span>,
+        <span class="summary-sig-arg">name</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.matchers.support-pysrc.html#keep_gate">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.matchers.support-module.html#trampoline_matcher_factory" class="summary-sig-name">trampoline_matcher_factory</a>(<span class="summary-sig-arg">gatekeeper_</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">args_</span>=<span class="summary-sig-default">identity</span>,
+        <span class="summary-sig-arg">kargs_</span>=<span class="summary-sig-default">identity</span>,
+        <span class="summary-sig-arg">**kargs</span>)</span><br />
+      Decorator that allows matchers to be defined using a nested pair
+of functions.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.matchers.support-pysrc.html#trampoline_matcher_factory">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.matchers.support-module.html#trampoline_matcher" class="summary-sig-name">trampoline_matcher</a>(<span class="summary-sig-arg">matcher</span>)</span><br />
+      Decorator that allows matchers to be defined using a single function
+to implement the matcher logic.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.matchers.support-pysrc.html#trampoline_matcher">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.matchers.support-module.html#sequence_matcher_factory" class="summary-sig-name">sequence_matcher_factory</a>(<span class="summary-sig-arg">gatekeeper_</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">args_</span>=<span class="summary-sig-default">identity</span>,
+        <span class="summary-sig-arg">kargs_</span>=<span class="summary-sig-default">identity</span>,
+        <span class="summary-sig-arg">**kargs</span>)</span><br />
+      Decorator that allows matchers to be defined using a nested pair
+of functions.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.matchers.support-pysrc.html#sequence_matcher_factory">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.matchers.support-module.html#sequence_matcher" class="summary-sig-name">sequence_matcher</a>(<span class="summary-sig-arg">matcher</span>)</span><br />
+      Decorator that allows matchers to be defined using a single function
+to implement the matcher logic.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.matchers.support-pysrc.html#sequence_matcher">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.matchers.support-module.html#function_matcher_factory" class="summary-sig-name">function_matcher_factory</a>(<span class="summary-sig-arg">gatekeeper_</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">args_</span>=<span class="summary-sig-default">identity</span>,
+        <span class="summary-sig-arg">kargs_</span>=<span class="summary-sig-default">identity</span>,
+        <span class="summary-sig-arg">**kargs</span>)</span><br />
+      Decorator that allows matchers to be defined using a nested pair
+of functions.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.matchers.support-pysrc.html#function_matcher_factory">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lepl.matchers.support-module.html#function_matcher" class="summary-sig-name">function_matcher</a>(<span class="summary-sig-arg">matcher</span>)</span><br />
+      Decorator that allows matchers to be defined using a single function
+to implement the matcher logic.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.matchers.support-pysrc.html#function_matcher">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="coerce_"></a><span class="summary-sig-name">coerce_</span>(<span class="summary-sig-arg">arg</span>,
+        <span class="summary-sig-arg">function</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Many arguments can take a string which is implicitly converted (via this
+function) to a literal (or similar).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.matchers.support-pysrc.html#coerce_">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="to"></a><span class="summary-sig-name">to</span>(<span class="summary-sig-arg">function</span>)</span><br />
+      Generate a coercion for later application.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lepl.matchers.support-pysrc.html#to">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== VARIABLES ==================== -->
+<a name="section-Variables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Variables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="NoMemo"></a><span class="summary-name">NoMemo</span> = <code title="ABCMeta('NoMemo', (object,), {})">ABCMeta('NoMemo', (object,), {})</code><br />
+      ABC used to indicate that memoisation should not be applied.
+    </td>
+  </tr>
+</table>
+<!-- ==================== FUNCTION DETAILS ==================== -->
+<a name="section-FunctionDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Function Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-FunctionDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="make_wrapper_factory"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">make_wrapper_factory</span>(<span class="sig-arg">wrapper</span>,
+        <span class="sig-arg">factory</span>,
+        <span class="sig-arg">modifiers</span>,
+        <span class="sig-arg">margs</span>=<span class="sig-default">identity</span>,
+        <span class="sig-arg">mkargs</span>=<span class="sig-default">identity</span>,
+        <span class="sig-arg">memo</span>=<span class="sig-default">True</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.matchers.support-pysrc.html#make_wrapper_factory">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>A helper function that assembles a matcher from a wrapper class and
+a factory function that contains the logic.</p>
+<p><code class="link">wrapper</code> is the class that will be constructed, and which will contain
+the functionality defined in <code class="link">factory</code>.</p>
+<p><code class="link">modifiers</code> is a map of functions applied to arguments of the given name.
+Similarly, <code class="link">margs</code> and <code class="link">mkargs</code> apply to varargs.</p>
+<p><a href="lepl.matchers.memo-module.html" class="link">memo</a> should be set to False for matchers that do not want memoisation.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="make_factory"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">make_factory</span>(<span class="sig-arg">maker</span>,
+        <span class="sig-arg">matcher</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.matchers.support-pysrc.html#make_factory">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>A helper function that assembles a matcher from a wrapper class and
+a function that contains the logic.</p>
+<p>This works by generating a dummy factory and delegating to
+<a href="lepl.matchers.support-module.html#make_wrapper_factory" class="link">make_wrapper_factory</a>.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="trampoline_matcher_factory"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">trampoline_matcher_factory</span>(<span class="sig-arg">gatekeeper_</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">args_</span>=<span class="sig-default">identity</span>,
+        <span class="sig-arg">kargs_</span>=<span class="sig-default">identity</span>,
+        <span class="sig-arg">**kargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.matchers.support-pysrc.html#trampoline_matcher_factory">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <blockquote>
+<p>Decorator that allows matchers to be defined using a nested pair
+of functions.  The outer function acts like a constructor; the inner
+function implements the matcher logic.</p>
+<p>The matcher code can evaluate sub-matchers by yielding the generator
+created by <code class="link">matcher._match()</code> to the trampoline.  Matches should also
+be yielded.</p>
+<p>Other keyword arguments should match factory arguments and identify
+functions of one argument that are applied to the arguments when the
+matcher is created as part of a grammar (eg coercion).  Similarly,</p>
+</blockquote>
+<p><code class="link">args_</code> and <code class="link">kargs_</code> are applied to varargs.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="trampoline_matcher"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">trampoline_matcher</span>(<span class="sig-arg">matcher</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.matchers.support-pysrc.html#trampoline_matcher">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Decorator that allows matchers to be defined using a single function
+to implement the matcher logic.</p>
+<p>The matcher code can evaluate sub-matchers by yielding the generator
+created by <code class="link">matcher._match()</code> to the trampoline.  Matches should also
+be yielded.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="sequence_matcher_factory"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">sequence_matcher_factory</span>(<span class="sig-arg">gatekeeper_</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">args_</span>=<span class="sig-default">identity</span>,
+        <span class="sig-arg">kargs_</span>=<span class="sig-default">identity</span>,
+        <span class="sig-arg">**kargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.matchers.support-pysrc.html#sequence_matcher_factory">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Decorator that allows matchers to be defined using a nested pair
+of functions.  The outer function acts like a constructor; the inner
+function implements the matcher logic.</p>
+<p>The matcher must yield matches (multiple times if required).  It
+<em>cannot</em> evaluate sub-matchers.</p>
+<p><code class="link">args_</code>, <code class="link">kargs_</code> and named arguments define modifiers, which are applied
+to the corresponding arguments when the matcher is first used in a grammar
+(eg to coerce strings to <a href="lepl-module.html#Literal" class="link">Literal</a> instances).</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="sequence_matcher"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">sequence_matcher</span>(<span class="sig-arg">matcher</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.matchers.support-pysrc.html#sequence_matcher">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Decorator that allows matchers to be defined using a single function
+to implement the matcher logic.</p>
+<p>The matcher must yield matches (multiple times if required).  It
+<em>cannot</em> evaluate sub-matchers.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="function_matcher_factory"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">function_matcher_factory</span>(<span class="sig-arg">gatekeeper_</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">args_</span>=<span class="sig-default">identity</span>,
+        <span class="sig-arg">kargs_</span>=<span class="sig-default">identity</span>,
+        <span class="sig-arg">**kargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.matchers.support-pysrc.html#function_matcher_factory">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Decorator that allows matchers to be defined using a nested pair
+of functions.  The outer function acts like a constructor; the inner
+function implements the matcher logic.</p>
+<p>The matcher must return a single match.  It <em>cannot</em> evaluate sub-matchers.</p>
+<p><code class="link">args_</code>, <code class="link">kargs_</code> and named arguments define modifiers, which are applied
+to the corresponding arguments when the matcher is first used in a grammar
+(eg to coerce strings to <a href="lepl-module.html#Literal" class="link">Literal</a> instances).</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="function_matcher"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">function_matcher</span>(<span class="sig-arg">matcher</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lepl.matchers.support-pysrc.html#function_matcher">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Decorator that allows matchers to be defined using a single function
+to implement the matcher logic.</p>
+<p>The matcher must return a single match.  It <em>cannot</em> evaluate sub-matchers.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lepl-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sun May 13 16:30:59 2012
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

@@ -1,0 +1,365 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Lepl 5 - Better Shape for the Future &mdash; LEPL 5.1.2 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '5.1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="LEPL 5.1.2 documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="contents.html">LEPL 5.1.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="lepl-5-better-shape-for-the-future">
+<span id="lepl5"></span><h1>Lepl 5 - Better Shape for the Future<a class="headerlink" href="#lepl-5-better-shape-for-the-future" title="Permalink to this headline">¶</a></h1>
+<p>I&#8217;ve simplified how Lepl handles strings (or lists, or iterables, or...).  As
+a consequence, some of the API has changed.  So moving from Lepl 4 to 5 may
+break your code.  I&#8217;m sorry!  But hopefully it should be easy to fix (see
+below) and, once running again, should be a little faster.</p>
+<p>In the longer term these changes help me maintain Lepl and continue to expand
+it.</p>
+<p>As part of the stream work I also revisited how Lepl handles memoisation,
+particularly for left-recursive grammars.</p>
+<div class="section" id="the-big-picture">
+<h2>The Big Picture<a class="headerlink" href="#the-big-picture" title="Permalink to this headline">¶</a></h2>
+<p>Understanding what happened &#8220;under the hood&#8221; may explain the API changes.  But
+if you&#8217;d rather just have a list of issues please skip to &#8220;Changes&#8221; below.</p>
+<div class="section" id="streams">
+<h3>Streams<a class="headerlink" href="#streams" title="Permalink to this headline">¶</a></h3>
+<p>Originally, Lepl pretended that all inputs were strings.  Indeed, it was
+possible (using <tt class="docutils literal"><span class="pre">parse_null()</span></tt>) to send a string directly to the matchers:
+each matcher then passed a new string, containing whatever remained to be
+parsed, to the next matcher.  One advantage of this was that it allowed Lepl&#8217;s
+regular expression code to be used with general sequences.</p>
+<p>In practice, however, this approach wasn&#8217;t so useful.  For example, there was
+no way to tell how far you are through the data.  So in most cases (ie. using
+<a class="reference external" href="api/redirect.html#lepl.core.config.ParserMixin.parse">parse()</a>) Lepl
+constructed a wrapper that carried the string and the extra location
+information together, but which still looked sufficiently string-like for the
+matchers to work correctly.</p>
+<p>This solved the problem of knowing where you were, but made the code more
+complicated.  To avoid duplicating that complex code I used the same wrapper
+for many different input types.  And that only made things more complicated.
+Worse, the &#8220;strings&#8221; slowly accumulated extra non-string methods to do other
+useful things.</p>
+<p>Eventually it became clear that always pretending that things were strings was
+a bad idea.  The extra complexity of defining an interface for &#8220;a stream of
+input data&#8221; might complicate matchers a little, but made everything else too
+brittle.</p>
+<p>Hence Lepl 5, in which I dropped the pretence that the input is &#8220;just&#8221; a
+string.  Instead, matchers work with a &#8220;stream&#8221; using functions like <a class="reference external" href="api/redirect.html#lepl.stream.core.s_next">s_next()</a> to get the next character, or
+<a class="reference external" href="api/redirect.html#lepl.stream.core.s_line">s_line()</a> to read a line.</p>
+<p>You may be surprised to hear that those are functions, and not methods, so I
+will take a moment to sketch the implementation.  A stream is now implemented
+as a tuple; a pair of values.  The first value is &#8220;state&#8221; and the second value
+is a &#8220;helper&#8221;.  Exactly what the state and helper are depend on the input, but
+the helper must implement a standard interface and the <tt class="docutils literal"><span class="pre">s_xxx()</span></tt> functions
+call that interface with the state.</p>
+<p>That sounds more complex than it is.  Essentially:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">s_next</span><span class="p">(</span><span class="n">stream</span><span class="p">):</span>
+    <span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">helper</span><span class="p">)</span> <span class="o">=</span> <span class="n">stream</span>
+    <span class="k">return</span> <span class="n">helper</span><span class="o">.</span><span class="n">next</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>and the reason for <em>that</em> is efficiency.  For a string, for example, state is
+the current index into the string.  So every time the stream advances (and
+this happens a <em>lot</em>) we only have to construct a new tuple with a different
+integer value.  The helper remains the same (in the case of a string it&#8217;s a
+wrapper round the the string itself).  This is much more efficient than
+constructing a new, heavyweight object at every step (there is a downside,
+which is an extra function invocation, but I think that will be insignificant
+once PyPy becomes widely adopted).</p>
+</div>
+<div class="section" id="memoisation">
+<h3>Memoisation<a class="headerlink" href="#memoisation" title="Permalink to this headline">¶</a></h3>
+<p>Once I had simplified the streams code I started working through the unit
+tests, fixing bugs.  At first, of course, I was fixing bugs in my new code and
+because that was simpler than before it wasn&#8217;t too hard to fix.  Then I
+started hitting bugs that didn&#8217;t seem to be in the new code, but in the old.
+There were several mistakes / confusions / bugs in the old stream and
+memoisation code that, together, &#8220;cancelled each other out&#8221; for at least some
+inputs.</p>
+<p>A less charitable way of describing the above is that I had &#8220;balanced&#8221; the
+code well enough to pass the tests I had, but that the end result was still
+broken.</p>
+<p>In retrospect this isn&#8217;t a huge surprise - worrying about this kind of problem
+is what motivated the work to simplify stream handling.</p>
+<p>So I have also rewritten much of the memoisation code, trying to simplify it,
+adding new tests, and generally trying to understand in more detail what is
+happening.  It now appears to be working, but I am still not convinced that I
+understand everything, so I have changed the default configuration to more
+actively discourage left-recursion.  These changes are described below.</p>
+</div>
+<div class="section" id="resource-management">
+<h3>Resource Management<a class="headerlink" href="#resource-management" title="Permalink to this headline">¶</a></h3>
+<p>While working on the above I also needed to check how the new streams
+interacted with Python&#8217;s garbage collection.  It turned out that, despite the
+intention of the original design, Lepl had never been able to parse input
+larger than the available memory.  So I added additional tests for this and
+fixed things as necessary.</p>
+<p>I also added support for avoiding consuming too much memory with the output.
+See <a class="reference internal" href="resources.html#resources"><em>Resource Management</em></a> for more details.</p>
+</div>
+</div>
+<div class="section" id="changes">
+<h2>Changes<a class="headerlink" href="#changes" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3>Streams<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Some <a class="reference external" href="api/redirect.html#lepl.core.config.ParserMixin.parse">parse()</a>
+methods have changed:<ul>
+<li><tt class="docutils literal"><span class="pre">parse_null()</span></tt> no longer exists.  <a class="reference external" href="api/redirect.html#lepl.core.config.ParserMixin.parse_sequence">parse_sequence()</a> might be
+the best replacement (see above).</li>
+<li><tt class="docutils literal"><span class="pre">parse_items()</span></tt> no longer exists.  You will probably want either
+<a class="reference external" href="api/redirect.html#lepl.core.config.ParserMixin.parse_list">parse_list()</a> (for lists)
+or <a class="reference external" href="api/redirect.html#lepl.core.config.ParserMixin.parse_iterable">parse_iterable()</a> (for
+iterables).</li>
+</ul>
+</li>
+<li>The idea of a <em>line</em> is more clearly defined.  This has two effects:<ul>
+<li>You may need to care more about which <a class="reference external" href="api/redirect.html#lepl.core.config.ParserMixin.parse">parse()</a> method to use.  A
+list or sequence (the only difference between those is that the formatting
+for displaying lists is a little prettier) treats all the data as one
+line, but a string uses the newline (<tt class="docutils literal"><span class="pre">'\n'</span></tt>) character to define lines.
+And an iterable assumes that each value is a new line (which matches the
+way iterating over files works).  In most cases the generic <a class="reference external" href="api/redirect.html#lepl.core.config.ParserMixin.parse">parse()</a> will do the right
+thing for you by dispatching on type.</li>
+<li>Regular expressions don&#8217;t match across lines.  There is no way to pass a
+general &#8220;stream&#8221; to regular expressions, so I pass a &#8220;line&#8221; instead.  If
+you really want to match multiple lines in a string then use
+<a class="reference external" href="api/redirect.html#lepl.core.config.ParserMixin.parse_sequence">parse_sequence()</a> which,
+as I just explained, treats the entire input as a single line.</li>
+</ul>
+</li>
+<li><tt class="docutils literal"><span class="pre">parse_items()</span></tt> had an option to add an extra list around each value.
+This is not present in <a class="reference external" href="api/redirect.html#lepl.core.config.ParserMixin.parse_list">parse_list()</a> because the
+way that a character is accessed has changed.  In Lepl 4 the first character
+was <tt class="docutils literal"><span class="pre">stream[0]</span></tt>, but in Lepl 5 it is <tt class="docutils literal"><span class="pre">stream[0:1]</span></tt>.  This has no impact
+on strings, but for lists it fixes a subtle bug (the problem was a confusion
+between &#8220;first character&#8221; and &#8220;a sub-section of the input stream containing
+the first character&#8221; - the latter approach makes lists and strings
+consistent).</li>
+<li>Line-aware and offside parsing have changed.  These should make things
+simpler and more consistent:<ul>
+<li>Both offside parsing (where the indentation is significant) and simpler
+line&#8211;aware parsing (which has lines, but doesn&#8217;t care about indentation)
+use the same matchers.  So <tt class="docutils literal"><span class="pre">BLine()</span></tt> no longer exists, for example &#8212;
+use <a class="reference external" href="api/redirect.html#lepl.lexer.lines.matchers.Line">Line()</a> instead.</li>
+<li>For configuration, use <a class="reference external" href="api/redirect.html#lepl.core.config.ConfigBuilder.lines">.config.lines()</a>.</li>
+<li>If you have specified <tt class="docutils literal"><span class="pre">block_policy</span></tt> or <tt class="docutils literal"><span class="pre">block_indent</span></tt> in
+<a class="reference external" href="api/redirect.html#lepl.core.config.ConfigBuilder.lines">.config.lines()</a> then the
+<a class="reference external" href="api/redirect.html#lepl.lexer.lines.matchers.LineStart">LineStart()</a>
+token will include leading white spaces and Lepl will automatically check
+that the indentation is consistent with the <a class="reference external" href="api/redirect.html#lepl.lexer.lines.matchers.Block">Block()</a>.  To disable this,
+use <tt class="docutils literal"><span class="pre">indent=False</span></tt> as a parameter in <a class="reference external" href="api/redirect.html#lepl.lexer.lines.matchers.Line">Line()</a> or <a class="reference external" href="api/redirect.html#lepl.lexer.lines.matchers.LineStart">LineStart()</a>.  So, for
+example, to match a blank line with any indentation, use <tt class="docutils literal"><span class="pre">Line(Empty(),</span>
+<span class="pre">indent=False)</span></tt>.</li>
+<li>Lines are now handled by adding extra tokens (before, the lexer added
+extra &#8220;characters&#8221; which were then matched by special tokens).  That means
+that you can no longer match <tt class="docutils literal"><span class="pre">(\*SOL\*)</span></tt> and <tt class="docutils literal"><span class="pre">(\*EOL\*)</span></tt> in regular
+expressions (more generally, you must use tokens with line aware and
+offside parsing - before it was technically possible to not do so).</li>
+</ul>
+</li>
+<li>The values available when generating an error message inside the parser have
+changed.  The value names are <a class="reference external" href="api/lepl.stream.core-pysrc.html#StreamHelper.kargs">documented here</a>, and typically are
+prefixed by <tt class="docutils literal"><span class="pre">in_</span></tt> and <tt class="docutils literal"><span class="pre">out_</span></tt> for the input and output streams.</li>
+<li>The configuration for &#8220;managed generators&#8221; has changed from
+<a class="reference external" href="api/redirect.html#lepl.core.config.ConfigBuilder.manage">.config.manage()</a> to
+<a class="reference external" href="api/redirect.html#lepl.core.config.ConfigBuilder.low_memory">.config.low_memory()</a>.  This also
+adds some additional settings that are needed to reduce memory use and
+restricts the size of &#8220;secondary&#8221; stacks used in search / repetition.  The
+result is that Lepl really can handle inputs larger than available memory -
+see <a class="reference internal" href="resources.html#resources"><em>Resource Management</em></a>.</li>
+<li>If you define your own matchers you will need to use <a class="reference external" href="api/redirect.html#lepl.stream.core.s_next">s_next()</a> and friends instead of
+accessing the &#8220;string&#8221;.  So replace:: char = stream[0] next_stream =
+stream[1:] with <tt class="docutils literal"><span class="pre">(char,</span> <span class="pre">next_stream)</span> <span class="pre">=</span> <span class="pre">s_next(stream)</span></tt>.  The full set of
+functions is documented in <a class="reference external" href="api/redirect.html#lepl.stream.core">lepl.stream.core</a> and the source is full of
+examples.</li>
+<li><a class="reference external" href="api/redirect.html#lepl.core.trace.TraceResults">TraceResults()</a>,
+configured by <tt class="docutils literal"><span class="pre">config.trace()</span></tt>, is now <a class="reference external" href="api/redirect.html#lepl.core.trace.TraceStack">TraceStack()</a>, configured by
+<a class="reference external" href="api/redirect.html#lepl.core.config.ConfigBuilder.trace_stack">.config.trace_stack()</a>.  The
+output will not show the stream when <a class="reference external" href="api/redirect.html#lepl.core.config.ConfigBuilder.low_memory">.config.low_memory()</a> has been
+called because retaining the streams for debug display introduces a memory
+&#8220;leak&#8221;.</li>
+<li>Repetition joins values using a &#8220;repeat&#8221; operator.  By default this joins
+lists, as before, but you can redefine it to define a fold over results.
+See the example <em class="xref std std-ref">low_memory</em>.</li>
+<li>(Implementation detail) The &#8220;wrapper&#8221; around trampolining matchers is no
+longer &#8220;transformable&#8221;.  This should have no effect on your code unless you
+are looking at the detailed structure of the matcher tree (it should make
+your code faster as it removes the need to call a generator that does
+nothing but call another generator - something anyone who has watched Lepl
+in a debugger cannot fail to have wondered about...)</li>
+</ul>
+</div>
+<div class="section" id="id12">
+<h3>Memoisation<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>The default configuration now <em>includes</em> memoisation for right-recursive
+grammars.  For many problems this will make the parser slower.  It can be
+removed with <a class="reference external" href="api/redirect.html#lepl.core.config.ConfigBuilder.no_memoize">.config.no_memoize()</a>, but is
+included by default because it detects left-recursive grammars (which would
+otherwise loop indefinitely) and raises an error with helpful text.<ul>
+<li><strong>To repeat, the first thing to try when optimising your code is</strong>
+<a class="reference external" href="api/redirect.html#lepl.core.config.ConfigBuilder.no_memoize">.config.no_memoize()</a>.</li>
+</ul>
+</li>
+<li>To enable handling of (some) left-recursive grammars, the simplest option is
+to use <a class="reference external" href="api/redirect.html#lepl.core.config.ConfigBuilder.auto_memoize">.config.auto_memoize()</a> which will
+add <a class="reference external" href="api/redirect.html#lepl.matchers.memo.LMemo">LMemo()</a> caches where
+required.</li>
+<li>For more detailed control, you can also use:<ul>
+<li><a class="reference external" href="api/redirect.html#lepl.core.config.ConfigBuilder.left_memoize">.config.left_memoize()</a> - add
+<a class="reference external" href="api/redirect.html#lepl.matchers.memo.LMemo">LMemo()</a> everywhere</li>
+<li><tt class="docutils literal"><span class="pre">config.auto_memoize(full=True)</span></tt> - add <a class="reference external" href="api/redirect.html#lepl.matchers.memo.RMemo">RMemo()</a> in addition to <a class="reference external" href="api/redirect.html#lepl.matchers.memo.LMemo">LMemo()</a>.</li>
+<li><a class="reference external" href="api/redirect.html#lepl.core.config.ConfigBuilder.optimize_or">.config.optimize_or()</a> -
+re-arrange <a class="reference external" href="api/redirect.html#lepl.matchers.combine.Or">Or()</a> contents.
+This has the potential to make left-recursive parsers much faster (it will
+change the order of multiple results - generally for the better).</li>
+</ul>
+</li>
+<li>Both <a class="reference external" href="api/redirect.html#lepl.core.config.ConfigBuilder.left_memoize">.config.left_memoize()</a> and
+<a class="reference external" href="api/redirect.html#lepl.core.config.ConfigBuilder.auto_memoize">.config.auto_memoize()</a> take a
+<tt class="docutils literal"><span class="pre">d</span></tt> parameter that can be used to specify a maximum recursion depth.  If
+this is not given the length of the remaining input is used - generally this
+is much too large, so <tt class="docutils literal"><span class="pre">d</span></tt> can significantly reduce time spent exploring
+incorrect matches.  However, if too small, it has the potential to exclude a
+correct match.</li>
+</ul>
+<p>The left-memoisation code does the following:</p>
+<ul class="simple">
+<li>Wrappers (<a class="reference external" href="api/redirect.html#lepl.matchers.memo.LMemo">LMemo()</a> instances)
+are added to the matcher DAG.  These are do two things:<ul>
+<li>Most simply cache values.  Cached values are stored by input and call
+depth.</li>
+<li>Wrappers around <a class="reference external" href="api/redirect.html#lepl.matchers.core.Delayed">Delayed()</a> instances, which
+represent &#8220;entry points&#8221; into loops, curtail the number of calls
+(according to either the length of the remaining input or the <tt class="docutils literal"><span class="pre">d</span></tt>
+parameter described earlier).</li>
+</ul>
+</li>
+<li>In addition, <a class="reference external" href="api/redirect.html#lepl.matchers.core.Delayed">Delayed()</a>
+instances (and the <a class="reference external" href="api/redirect.html#lepl.matchers.memo.LMemo">LMemo()</a>
+wrappers) are duplicated when multiple references exist.  This is necessary
+so that the &#8220;curtailment&#8221; is not duplicated at multiple points in the
+matcher graph (in general it doe snot matter of the same node is used at
+various point in the parser, because the parser is &#8220;pure&#8221;, but memoisation
+adds state).</li>
+</ul>
+<p>This is my interpretation of the approach described in Frost and Hafiz 2006.
+However, the extra complexity implied by the generated / objects based
+approach used here means that I am not completely sure that it is correct.</p>
+</div>
+</div>
+<div class="section" id="further-reading">
+<h2>Further Reading<a class="headerlink" href="#further-reading" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="index.html">Front Page</a></li>
+<li><a class="reference internal" href="manual.html#manual"><em>Lepl Manual</em></a></li>
+<li><a class="reference internal" href="intro.html#tutorial"><em>A Tutorial for Lepl</em></a></li>
+<li><a class="reference internal" href="contents.html#contents"><em>Lepl - Documentation</em></a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="contents.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Lepl 5 - Better Shape for the Future</a><ul>
+<li><a class="reference internal" href="#the-big-picture">The Big Picture</a><ul>
+<li><a class="reference internal" href="#streams">Streams</a></li>
+<li><a class="reference internal" href="#memoisation">Memoisation</a></li>
+<li><a class="reference internal" href="#resource-management">Resource Management</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#changes">Changes</a><ul>
+<li><a class="reference internal" href="#id1">Streams</a></li>
+<li><a class="reference internal" href="#id12">Memoisation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#further-reading">Further Reading</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/lepl5.0.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="contents.html">LEPL 5.1.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2009-2011, Andrew Cooke.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

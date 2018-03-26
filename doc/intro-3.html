@@ -1,0 +1,331 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Part 3 - Recursion, Abstract Syntax Trees &mdash; LEPL 5.1.2 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '5.1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="LEPL 5.1.2 documentation" href="index.html" />
+    <link rel="up" title="A Tutorial for Lepl" href="intro.html" />
+    <link rel="next" title="Part 4 - Evaluation, Efficiency" href="intro-4.html" />
+    <link rel="prev" title="Part 2 - Handling Spaces, Repetition" href="intro-2.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="intro-4.html" title="Part 4 - Evaluation, Efficiency"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="intro-2.html" title="Part 2 - Handling Spaces, Repetition"
+             accesskey="P">previous</a> |</li>
+        <li><a href="contents.html">LEPL 5.1.2 documentation</a> &raquo;</li>
+          <li><a href="intro.html" accesskey="U">A Tutorial for Lepl</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="part-3-recursion-abstract-syntax-trees">
+<h1>Part 3 - Recursion, Abstract Syntax Trees<a class="headerlink" href="#part-3-recursion-abstract-syntax-trees" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="recap">
+<h2>Recap<a class="headerlink" href="#recap" title="Permalink to this headline">¶</a></h2>
+<p>In the previous section we defined a parser that could add two numbers, even
+if the expression contained spaces.  Our final version used tokens:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">lepl</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">value</span> <span class="o">=</span> <span class="n">Token</span><span class="p">(</span><span class="n">UnsignedReal</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">symbol</span> <span class="o">=</span> <span class="n">Token</span><span class="p">(</span><span class="s">&#39;[^0-9a-zA-Z </span><span class="se">\t\r\n</span><span class="s">]&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">number</span> <span class="o">=</span> <span class="n">Optional</span><span class="p">(</span><span class="n">symbol</span><span class="p">(</span><span class="s">&#39;-&#39;</span><span class="p">))</span> <span class="o">+</span> <span class="n">value</span> <span class="o">&gt;&gt;</span> <span class="nb">float</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add</span> <span class="o">=</span> <span class="n">number</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">symbol</span><span class="p">(</span><span class="s">&#39;+&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">number</span> <span class="o">&gt;</span> <span class="nb">sum</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;12 + -30&#39;</span><span class="p">)</span>
+<span class="go">[-18.0]</span>
+</pre></div>
+</div>
+<p>(remember that I will not repeat the import statement in the examples below).</p>
+<p>In this part of the tutorial we will extend this slightly, to handle a series
+of additions, and then look at how to construct an internal representation of
+the data &#8212; an abstract syntax tree (AST).</p>
+</div>
+<div class="section" id="back-to-basics">
+<h2>Back to Basics<a class="headerlink" href="#back-to-basics" title="Permalink to this headline">¶</a></h2>
+<p>Since our aim is to construct an AST, I am going to stop calling <tt class="docutils literal"><span class="pre">sum</span></tt> to
+process the results.  And to make clear exactly what rules we&#8217;re matching,
+I&#8217;ll keep the addition symbol.</p>
+<p>So here&#8217;s what we&#8217;re starting with:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">value</span> <span class="o">=</span> <span class="n">Token</span><span class="p">(</span><span class="n">UnsignedReal</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">symbol</span> <span class="o">=</span> <span class="n">Token</span><span class="p">(</span><span class="s">&#39;[^0-9a-zA-Z </span><span class="se">\t\r\n</span><span class="s">]&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">number</span> <span class="o">=</span> <span class="n">Optional</span><span class="p">(</span><span class="n">symbol</span><span class="p">(</span><span class="s">&#39;-&#39;</span><span class="p">))</span> <span class="o">+</span> <span class="n">value</span> <span class="o">&gt;&gt;</span> <span class="nb">float</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add</span> <span class="o">=</span> <span class="n">number</span> <span class="o">&amp;</span> <span class="n">symbol</span><span class="p">(</span><span class="s">&#39;+&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">number</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;12 + -30&#39;</span><span class="p">)</span>
+<span class="go">[12.0, &#39;+&#39;, -30.0]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="adding-subtraction">
+<h2>Adding Subtraction<a class="headerlink" href="#adding-subtraction" title="Permalink to this headline">¶</a></h2>
+<p>This doesn&#8217;t involve anything new; we just need to add the alternative to our
+parser.  We could do this in various ways.  One way would be to change
+<tt class="docutils literal"><span class="pre">symbol('+')</span></tt> to <tt class="docutils literal"><span class="pre">symbol(Any('+-'))</span></tt>.  But that will make constructing the
+AST harder (it&#8217;s better to have one line per AST node), so instead I&#8217;m going
+to go with:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">value</span> <span class="o">=</span> <span class="n">Token</span><span class="p">(</span><span class="n">UnsignedReal</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">symbol</span> <span class="o">=</span> <span class="n">Token</span><span class="p">(</span><span class="s">&#39;[^0-9a-zA-Z </span><span class="se">\t\r\n</span><span class="s">]&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">number</span> <span class="o">=</span> <span class="n">Optional</span><span class="p">(</span><span class="n">symbol</span><span class="p">(</span><span class="s">&#39;-&#39;</span><span class="p">))</span> <span class="o">+</span> <span class="n">value</span> <span class="o">&gt;&gt;</span> <span class="nb">float</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add</span> <span class="o">=</span> <span class="n">number</span> <span class="o">&amp;</span> <span class="n">symbol</span><span class="p">(</span><span class="s">&#39;+&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">number</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sub</span> <span class="o">=</span> <span class="n">number</span> <span class="o">&amp;</span> <span class="n">symbol</span><span class="p">(</span><span class="s">&#39;-&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">number</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span> <span class="o">=</span> <span class="n">add</span> <span class="o">|</span> <span class="n">sub</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;12 + -30&#39;</span><span class="p">)</span>
+<span class="go">[12.0, &#39;+&#39;, -30.0]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;12 -30&#39;</span><span class="p">)</span>
+<span class="go">[12.0, &#39;-&#39;, 30.0]</span>
+</pre></div>
+</div>
+<p>That should be clear enough, I hope.  Remember that <tt class="docutils literal"><span class="pre">|</span></tt> is another way of
+writing <a class="reference external" href="api/redirect.html#lepl.matchers.combine.Or">Or()</a>.</p>
+</div>
+<div class="section" id="recursion">
+<span id="index-0"></span><h2>Recursion<a class="headerlink" href="#recursion" title="Permalink to this headline">¶</a></h2>
+<p>One limitation of our parser is that it doesn&#8217;t handle repeated addition and
+subtraction.  There&#8217;s a neat trick that can fix that: in the definition of
+<a class="reference external" href="api/redirect.html#lepl.matchers.derived.add">add</a> and <tt class="docutils literal"><span class="pre">sub</span></tt> we can replace the second <tt class="docutils literal"><span class="pre">number</span></tt> with <tt class="docutils literal"><span class="pre">expr</span></tt>, which
+will allow us to match more and more additions / subtractions.  The only
+problem with that is that we have no way to stop &#8212; each time we try to match
+<a class="reference external" href="api/redirect.html#lepl.matchers.derived.add">add</a>, say, we need to match another <tt class="docutils literal"><span class="pre">expr</span></tt>, which means matching another
+<a class="reference external" href="api/redirect.html#lepl.matchers.derived.add">add</a> or <tt class="docutils literal"><span class="pre">sub</span></tt>...  To allow the cycle to end we must allow <tt class="docutils literal"><span class="pre">expr</span></tt> to be
+a simple <tt class="docutils literal"><span class="pre">number</span></tt> (which we needed anyway, if we want our expression parser
+to be general enough to match a single value).</p>
+<p>What I&#8217;ve just described above is easy to implement, but unfortunately won&#8217;t
+work:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">value</span> <span class="o">=</span> <span class="n">Token</span><span class="p">(</span><span class="n">UnsignedReal</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">symbol</span> <span class="o">=</span> <span class="n">Token</span><span class="p">(</span><span class="s">&#39;[^0-9a-zA-Z </span><span class="se">\t\r\n</span><span class="s">]&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">number</span> <span class="o">=</span> <span class="n">Optional</span><span class="p">(</span><span class="n">symbol</span><span class="p">(</span><span class="s">&#39;-&#39;</span><span class="p">))</span> <span class="o">+</span> <span class="n">value</span> <span class="o">&gt;&gt;</span> <span class="nb">float</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add</span> <span class="o">=</span> <span class="n">number</span> <span class="o">&amp;</span> <span class="n">symbol</span><span class="p">(</span><span class="s">&#39;+&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">expr</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sub</span> <span class="o">=</span> <span class="n">number</span> <span class="o">&amp;</span> <span class="n">symbol</span><span class="p">(</span><span class="s">&#39;-&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">expr</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span> <span class="o">=</span> <span class="n">add</span> <span class="o">|</span> <span class="n">sub</span> <span class="o">|</span> <span class="n">number</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The parser above is broken.  Do not use it!  Depending on what you have
+already typed in to Python, it may not even compile.</p>
+</div>
+<p>What is wrong with the code above?</p>
+<p>The problem is that <tt class="docutils literal"><span class="pre">expr</span></tt> is used before it is defined.  So either it won&#8217;t
+compile or (worse!) it will use a definition of <tt class="docutils literal"><span class="pre">expr</span></tt> from an earlier
+example that you had typed into Python.  There&#8217;s no simple fix, because if you
+put <tt class="docutils literal"><span class="pre">expr</span></tt> before the <a class="reference external" href="api/redirect.html#lepl.matchers.derived.add">add</a>, for example, then the <a class="reference external" href="api/redirect.html#lepl.matchers.derived.add">add</a> in the
+definition of <tt class="docutils literal"><span class="pre">expr</span></tt> won&#8217;t have been defined...</p>
+<p>More generally, the problem is that we have a circular set of references,
+because we have a recursive grammar.</p>
+<p>But it&#8217;s unfair to call this a &#8220;problem&#8221;.  Recursive grammars are very useful.
+The real problem is that I haven&#8217;t shown how to handle recursive definitions
+in Lepl.</p>
+</div>
+<div class="section" id="delayed-matchers">
+<span id="index-1"></span><h2>Delayed Matchers<a class="headerlink" href="#delayed-matchers" title="Permalink to this headline">¶</a></h2>
+<p>The solution to our problem is to use the <a class="reference external" href="api/redirect.html#lepl.matchers.core.Delayed">Delayed()</a> matcher.  This lets us
+introduce something, so that we can use it, and then add a definition later.
+That might sound odd, but it&#8217;s really simple to use:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">value</span> <span class="o">=</span> <span class="n">Token</span><span class="p">(</span><span class="n">UnsignedReal</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">symbol</span> <span class="o">=</span> <span class="n">Token</span><span class="p">(</span><span class="s">&#39;[^0-9a-zA-Z </span><span class="se">\t\r\n</span><span class="s">]&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">number</span> <span class="o">=</span> <span class="n">Optional</span><span class="p">(</span><span class="n">symbol</span><span class="p">(</span><span class="s">&#39;-&#39;</span><span class="p">))</span> <span class="o">+</span> <span class="n">value</span> <span class="o">&gt;&gt;</span> <span class="nb">float</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span> <span class="o">=</span> <span class="n">Delayed</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add</span> <span class="o">=</span> <span class="n">number</span> <span class="o">&amp;</span> <span class="n">symbol</span><span class="p">(</span><span class="s">&#39;+&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">expr</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sub</span> <span class="o">=</span> <span class="n">number</span> <span class="o">&amp;</span> <span class="n">symbol</span><span class="p">(</span><span class="s">&#39;-&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">expr</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span> <span class="o">+=</span> <span class="n">add</span> <span class="o">|</span> <span class="n">sub</span> <span class="o">|</span> <span class="n">number</span>
+</pre></div>
+</div>
+<p>Note the use of <tt class="docutils literal"><span class="pre">+=</span></tt> when we give the final definition.  This works
+perfectly:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;1+2-3 +4-5&#39;</span><span class="p">)</span>
+<span class="go">[1.0, &#39;+&#39;, 2.0, &#39;-&#39;, 3.0, &#39;+&#39;, 4.0, &#39;-&#39;, 5.0]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="building-an-ast-with-list">
+<span id="index-2"></span><h2>Building an AST with List<a class="headerlink" href="#building-an-ast-with-list" title="Permalink to this headline">¶</a></h2>
+<p>OK, finally we are at the point where it makes sense to build an AST.  The
+motivation for the sections above (apart from the sheer joy of learning, of
+course) is that we needed something complicated enough for this to be
+worthwhile.</p>
+<p>The simplest way of building a tree is almost trivial.  We just send the
+results for the addition and subtraction to <a class="reference external" href="api/redirect.html#lepl.support.list.List">List()</a>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">value</span> <span class="o">=</span> <span class="n">Token</span><span class="p">(</span><span class="n">UnsignedReal</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">symbol</span> <span class="o">=</span> <span class="n">Token</span><span class="p">(</span><span class="s">&#39;[^0-9a-zA-Z </span><span class="se">\t\r\n</span><span class="s">]&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">number</span> <span class="o">=</span> <span class="n">Optional</span><span class="p">(</span><span class="n">symbol</span><span class="p">(</span><span class="s">&#39;-&#39;</span><span class="p">))</span> <span class="o">+</span> <span class="n">value</span> <span class="o">&gt;&gt;</span> <span class="nb">float</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span> <span class="o">=</span> <span class="n">Delayed</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add</span> <span class="o">=</span> <span class="n">number</span> <span class="o">&amp;</span> <span class="n">symbol</span><span class="p">(</span><span class="s">&#39;+&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">expr</span> <span class="o">&gt;</span> <span class="n">List</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sub</span> <span class="o">=</span> <span class="n">number</span> <span class="o">&amp;</span> <span class="n">symbol</span><span class="p">(</span><span class="s">&#39;-&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">expr</span> <span class="o">&gt;</span> <span class="n">List</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span> <span class="o">+=</span> <span class="n">add</span> <span class="o">|</span> <span class="n">sub</span> <span class="o">|</span> <span class="n">number</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;1+2-3 +4-5&#39;</span><span class="p">)</span>
+<span class="go">[List(...)]</span>
+</pre></div>
+</div>
+<p>OK, not so exciting, but let&#8217;s look at that first result:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ast</span> <span class="o">=</span> <span class="n">expr</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;1+2-3 +4-5&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">ast</span><span class="p">)</span>
+<span class="go">List</span>
+<span class="go"> +- 1.0</span>
+<span class="go"> +- &#39;+&#39;</span>
+<span class="go"> `- List</span>
+<span class="go">     +- 2.0</span>
+<span class="go">     +- &#39;-&#39;</span>
+<span class="go">     `- List</span>
+<span class="go">         +- 3.0</span>
+<span class="go">         +- &#39;+&#39;</span>
+<span class="go">         `- List</span>
+<span class="go">             +- 4.0</span>
+<span class="go">             +- &#39;-&#39;</span>
+<span class="go">             `- 5.0</span>
+</pre></div>
+</div>
+<p>That&#8217;s our first AST.  It&#8217;s a bit of a lop&#8211;sided tree, I admit &#8212; we will
+make some more attractive trees later &#8212; but if you have worked through this
+tutorial from zero, this is a major achievement.  Congratulations!</p>
+<p>(I hope it&#8217;s clear that the result above is a &#8220;picture&#8221; of a tree built with
+nested lists.  The root list has three children: the value <tt class="docutils literal"><span class="pre">1.0</span></tt>; the symbol
+<tt class="docutils literal"><span class="pre">'+'</span></tt>; a child <a class="reference external" href="api/redirect.html#lepl.support.list.List">List</a> with a first grandchild of <tt class="docutils literal"><span class="pre">2.0</span></tt> etc.)</p>
+</div>
+<div class="section" id="lists-s-expressions-and-nodes">
+<span id="index-3"></span><h2>Lists, S-Expressions, and Nodes<a class="headerlink" href="#lists-s-expressions-and-nodes" title="Permalink to this headline">¶</a></h2>
+<p>There&#8217;s a long tradition of using nested lists to represent trees of data &#8212;
+it is fundamental to the Lisp programming language, for example.  Lists used
+in this way are often called &#8220;S-Expressions&#8221;.</p>
+<p>The <a class="reference external" href="api/redirect.html#lepl.support.list.List">List()</a> class is a simple
+subclass of Python&#8217;s <tt class="docutils literal"><span class="pre">list</span></tt>.  That makes it easy to understand and use.</p>
+<p>Lepl includes tools that simplify working with nested lists, including
+<a class="reference external" href="api/redirect.html#lepl.support.list.sexpr_fold">sexpr_fold()</a>,
+<a class="reference external" href="api/redirect.html#lepl.support.list.sexpr_flatten">sexpr_flatten()</a> and
+<a class="reference external" href="api/redirect.html#lepl.support.list.sexpr_to_tree">sexpr_to_tree()</a>.  These
+all work with any kind of nested iterable (except strings, which are treated
+as single values rather than sequences of characters).  That means that you
+can also use tuples, plain old Python lists, and even sub&#8211;classes of <a class="reference external" href="api/redirect.html#lepl.support.list.List">List()</a> to structure your AST (the next
+section will use sub&#8211;classes to identify different kinds of values).</p>
+<p>For more complex cases, Lepl also includes a <a class="reference external" href="api/redirect.html#lepl.support.node.Node">Node()</a> class (this used to appear in the
+examples; <a class="reference external" href="api/redirect.html#lepl.support.list.List">List()</a> is new in Lepl
+4).  <a class="reference external" href="api/redirect.html#lepl.support.node.Node">Node()</a> tries to combine
+Python&#8217;s <tt class="docutils literal"><span class="pre">list</span></tt> and <tt class="docutils literal"><span class="pre">dict</span></tt> classes into one type, which sounds incredibly
+useful, but ends up being a little too complex.</p>
+<p>If you use <a class="reference external" href="api/redirect.html#lepl.support.node.Node">Node()</a>, your code
+will continue to work, but I would encourage you to consider switching to
+<a class="reference external" href="api/redirect.html#lepl.support.list.List">List()</a>.</p>
+</div>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>What more have we learnt?</p>
+<ul class="simple">
+<li>Recursive grammars are supported with <a class="reference external" href="api/redirect.html#lepl.matchers.core.Delayed">Delayed()</a>.</li>
+<li>The results of parsing are stored in trees of data, called Abstract Syntax
+Trees (ASTs).</li>
+<li>The simples way to build an AST is with nested lists; the <a class="reference external" href="api/redirect.html#lepl.support.list.List">List()</a> class
+subclasses Python&#8217;s list to add the ability to display the tree in a text
+diagram.</li>
+<li>A <a class="reference external" href="api/redirect.html#lepl.support.node.Node">Node()</a> combines list and
+dict behaviour.</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="contents.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Part 3 - Recursion, Abstract Syntax Trees</a><ul>
+<li><a class="reference internal" href="#recap">Recap</a></li>
+<li><a class="reference internal" href="#back-to-basics">Back to Basics</a></li>
+<li><a class="reference internal" href="#adding-subtraction">Adding Subtraction</a></li>
+<li><a class="reference internal" href="#recursion">Recursion</a></li>
+<li><a class="reference internal" href="#delayed-matchers">Delayed Matchers</a></li>
+<li><a class="reference internal" href="#building-an-ast-with-list">Building an AST with List</a></li>
+<li><a class="reference internal" href="#lists-s-expressions-and-nodes">Lists, S-Expressions, and Nodes</a></li>
+<li><a class="reference internal" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="intro-2.html"
+                        title="previous chapter">Part 2 - Handling Spaces, Repetition</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="intro-4.html"
+                        title="next chapter">Part 4 - Evaluation, Efficiency</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/intro-3.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="intro-4.html" title="Part 4 - Evaluation, Efficiency"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="intro-2.html" title="Part 2 - Handling Spaces, Repetition"
+             >previous</a> |</li>
+        <li><a href="contents.html">LEPL 5.1.2 documentation</a> &raquo;</li>
+          <li><a href="intro.html" >A Tutorial for Lepl</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2009-2011, Andrew Cooke.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,399 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Frequently Asked Questions &mdash; LEPL 5.1.2 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '5.1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="LEPL 5.1.2 documentation" href="index.html" />
+    <link rel="prev" title="Licence" href="licence.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="licence.html" title="Licence"
+             accesskey="P">previous</a> |</li>
+        <li><a href="contents.html">LEPL 5.1.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="frequently-asked-questions">
+<span id="faq"></span><h1>Frequently Asked Questions<a class="headerlink" href="#frequently-asked-questions" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference internal" href="#faq-regexp"><em>Why do I get &#8220;Cannot parse regexp...&#8221;?</em></a></li>
+<li><a class="reference internal" href="#faq-lefttoright"><em>Why isn&#8217;t my parser matching the full expression?</em></a></li>
+<li><a class="reference internal" href="#faq-or-bug"><em>Why does using Or() stop a full match from happening?</em></a></li>
+<li><a class="reference internal" href="#faq-file"><em>How do I parse an entire file?</em></a></li>
+<li><a class="reference internal" href="#faq-precedence"><em>When I change from &gt; to &gt;&gt; my function isn&#8217;t called</em></a></li>
+<li><a class="reference internal" href="#faq-apply"><em>How do I choose between &gt; and &gt;&gt; ?</em></a></li>
+<li><a class="reference internal" href="#faq-logging"><em>Why am I seeing &#8220;No handlers could be found...&#8221; messages?</em></a></li>
+<li><a class="reference internal" href="#faq-slowregexp"><em>Why does my matcher take so long to compile?</em></a></li>
+</ul>
+</div></blockquote>
+<div class="section" id="why-do-i-get-cannot-parse-regexp">
+<span id="faq-regexp"></span><h2>Why do I get &#8220;Cannot parse regexp...&#8221;?<a class="headerlink" href="#why-do-i-get-cannot-parse-regexp" title="Permalink to this headline">¶</a></h2>
+<p><em>Why do I get &#8220;Cannot parse regexp &#8216;(&#8216; using ...&#8221; for Token(&#8216;(&#8216;)?</em></p>
+<p>String arguments to <a class="reference external" href="api/redirect.html#lepl.lexer.matchers.Token">Token()</a>
+are treated as regular expressions.  Because <tt class="docutils literal"><span class="pre">(</span></tt> has a special meaning in a
+regular expression you must escape it, like this: <tt class="docutils literal"><span class="pre">Token('\\(')</span></tt>, or like
+this: <tt class="docutils literal"><span class="pre">Token(r'\(')</span></tt></p>
+</div>
+<div class="section" id="why-isn-t-my-parser-matching-the-full-expression">
+<span id="faq-lefttoright"></span><h2>Why isn&#8217;t my parser matching the full expression?<a class="headerlink" href="#why-isn-t-my-parser-matching-the-full-expression" title="Permalink to this headline">¶</a></h2>
+<p><em>In the code below</em>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">word</span> <span class="o">=</span> <span class="n">Token</span><span class="p">(</span><span class="s">&#39;[a-z]+&#39;</span><span class="p">)</span>
+<span class="n">lpar</span> <span class="o">=</span> <span class="n">Token</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\\</span><span class="s">(&#39;</span><span class="p">)</span>
+<span class="n">rpar</span> <span class="o">=</span> <span class="n">Token</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\\</span><span class="s">)&#39;</span><span class="p">)</span>
+<span class="n">expression</span> <span class="o">=</span> <span class="n">word</span> <span class="o">|</span> <span class="p">(</span><span class="n">word</span> <span class="o">&amp;</span> <span class="n">lpar</span> <span class="o">&amp;</span> <span class="n">word</span> <span class="o">&amp;</span> <span class="n">rpar</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><em>why does expression.parse(&#8216;hello(world)&#8217;) match just &#8216;hello&#8217;</em>?</p>
+<p>In general Lepl is greedy (it tries to matches the longest possible string),
+but for <a class="reference external" href="api/redirect.html#lepl.matchers.combine.Or">Or()</a> it will try alternatives left-to-right.  So in this case you
+should rewrite the parser as:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">expression</span> <span class="o">=</span> <span class="p">(</span><span class="n">word</span> <span class="o">&amp;</span> <span class="n">lpar</span> <span class="o">&amp;</span> <span class="n">word</span> <span class="o">&amp;</span> <span class="n">rpar</span><span class="p">)</span> <span class="o">|</span> <span class="n">word</span>
+</pre></div>
+</div>
+<p>Alternatively, you can force the parser to match the entire input by ending
+with <a class="reference external" href="api/redirect.html#lepl.matchers.core.Eos">Eos()</a>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">expression</span> <span class="o">=</span> <span class="n">word</span> <span class="o">|</span> <span class="p">(</span><span class="n">word</span> <span class="o">&amp;</span> <span class="n">lpar</span> <span class="o">&amp;</span> <span class="n">word</span> <span class="o">&amp;</span> <span class="n">rpar</span><span class="p">)</span>
+<span class="n">complete</span> <span class="o">=</span> <span class="n">expression</span> <span class="o">&amp;</span> <span class="n">Eos</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>See also the next answer.</p>
+</div>
+<div class="section" id="why-does-using-or-stop-a-full-match-from-happening">
+<span id="faq-or-bug"></span><h2>Why does using Or() stop a full match from happening?<a class="headerlink" href="#why-does-using-or-stop-a-full-match-from-happening" title="Permalink to this headline">¶</a></h2>
+<p><em>Why does this code</em>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span> <span class="o">=</span> <span class="n">Letter</span><span class="p">()</span> <span class="o">|</span> <span class="s">&quot;ab&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">)</span>
+<span class="go">[&#39;a&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&quot;ab&quot;</span><span class="p">)</span>
+<span class="go">lepl.stream.maxdepth.FullFirstMatchException: The match failed at &#39;b&#39;</span>
+</pre></div>
+</div>
+<p><em>fail?</em></p>
+<p>OK, so this behaviour does seem odd, I agree.  But it&#8217;s a logical consequence
+of some other design decisions, all of which seem individually reasonable.  So
+I&#8217;ll explain those and, hopefully, that will shed some light on this.</p>
+<ol class="arabic">
+<li><p class="first"><a class="reference external" href="api/redirect.html#lepl.matchers.combine.Or">Or()</a> is not greedy</p>
+<p>Repetition in Lepl is greedy by default, but Or() isn&#8217;t.  If it can match
+the first option, it will do so.  But it will try other possibilities if
+that fails, or if all possible parses are requested.</p>
+<p>This is because there is no way to predict which option will return &#8220;most&#8221;.
+So if <a class="reference external" href="api/redirect.html#lepl.matchers.combine.Or">Or()</a> were greedy it
+would need to evaluate every possible option, measure them, and return the
+&#8220;largest&#8221;.  This could require a lot of memory and time.  Instead, it
+returns the first match it finds, but then supports backtracking.</p>
+<p>(Note that this is similar to regular expressions, except that Perl regexps
+are even worse - they don&#8217;t backtrack).</p>
+<p>If that&#8217;s not what you want there is, fortunately, a solution.  Please read
+on...</p>
+</li>
+<li><p class="first">Lepl doesn&#8217;t force you to match the entire input</p>
+<p>The &#8220;fundamental&#8221; parsing operation in Lepl is <a class="reference external" href="api/redirect.html#lepl.core.config.ParserMixin.match">matcher.match()</a>.  This returns a
+list of pairs.  Each pair combines a result list with <cite>the remaining
+input</cite>.  There&#8217;s nothing in that that says you need to match the entire
+input, because that&#8217;s not the most general behaviour.</p>
+<p>For example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span> <span class="o">=</span> <span class="n">Letter</span><span class="p">()</span> <span class="o">|</span> <span class="s">&quot;ab&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">no_full_first_match</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s">&quot;ab&quot;</span><span class="p">)</span>
+<span class="go">&lt;generator object trampoline at 0x916640&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">matcher</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s">&quot;ab&quot;</span><span class="p">))</span>
+<span class="go">[([u&#39;a&#39;], (1, &lt;helper&gt;)), ([&#39;ab&#39;], (2, &lt;helper&gt;))]</span>
+</pre></div>
+</div>
+<p>Here you can see, in detail, what Lepl is doing.  The <tt class="docutils literal"><span class="pre">(n,</span> <span class="pre">&lt;helper&gt;)</span></tt>
+values are the remaining input, from index 1 and 2 respectively.</p>
+<p>If you <em>want</em> to match the whole input you can add <a class="reference external" href="api/redirect.html#lepl.matchers.core.Eos">Eos()</a> to the matcher:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">matcher</span> <span class="o">=</span> <span class="p">(</span><span class="n">Letter</span><span class="p">()</span> <span class="o">|</span> <span class="s">&quot;ab&quot;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">Eos</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">matcher</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s">&quot;ab&quot;</span><span class="p">))</span>
+<span class="go">[([&#39;ab&#39;], &#39;&#39;[0:])]</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">The &#8220;full first match&#8221; implementation is very simple.  It checks the
+remaining stream (see above) for the first match.  If it is not empty, then
+the error is raised.</p>
+<p>Why didn&#8217;t I make this also add <a class="reference external" href="api/redirect.html#lepl.matchers.core.Eos">Eos()</a>?  I could have done so, and
+then I wouldn&#8217;t have had to write this explanation, but it would have meant
+adding more &#8220;magic&#8221; to the configuration system.  I did start to do this,
+but then I realised that <em>disabling the check could change the parse
+results</em>.  And I think that&#8217;s a worse problem than the current (imperfect)
+compromise.</p>
+</li>
+</ol>
+<p>In summary then, this is a consequence of the way <a class="reference external" href="api/redirect.html#lepl.matchers.combine.Or">Or()</a> works (for efficiency), and
+the way that Lepl does backtracking (for generality) and a desire to keep the
+&#8220;full first match&#8221; code separate from &#8220;what the parser matches&#8221;.  I know it&#8217;s
+a little confusing at first, but I don&#8217;t see a better solution.  Sorry!</p>
+<p>See also the previous answer.</p>
+</div>
+<div class="section" id="how-do-i-parse-an-entire-file">
+<span id="faq-file"></span><h2>How do I parse an entire file?<a class="headerlink" href="#how-do-i-parse-an-entire-file" title="Permalink to this headline">¶</a></h2>
+<p><em>I understand how to parse a string, but how do I parse an entire file?</em></p>
+<p>Instead of <a class="reference external" href="api/redirect.html#lepl.core.config.ParserMixin.parse">matcher.parse()</a> or
+<a class="reference external" href="api/redirect.html#lepl.core.config.ParserMixin.parse_string">matcher.parse_string()</a> use
+<a class="reference external" href="api/redirect.html#lepl.core.config.ParserMixin.parse_file">matcher.parse_file()</a>.  For example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;myfile&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="nb">input</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">matcher</span><span class="o">.</span><span class="n">parse_file</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Matchers extend <a class="reference external" href="api/redirect.html#lepl.core.config.ParserMixin">ParserMixin()</a>, which provides these
+methods.</p>
+</div>
+<div class="section" id="when-i-change-from-to-my-function-isn-t-called">
+<span id="faq-precedence"></span><h2>When I change from &gt; to &gt;&gt; my function isn&#8217;t called<a class="headerlink" href="#when-i-change-from-to-my-function-isn-t-called" title="Permalink to this headline">¶</a></h2>
+<p><em>Why, when I change my code from</em>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">inverted</span> <span class="o">=</span> <span class="n">Drop</span><span class="p">(</span><span class="s">&#39;[^&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">interval</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">&amp;</span> <span class="n">Drop</span><span class="p">(</span><span class="s">&#39;]&#39;</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">invert</span>
+</pre></div>
+</div>
+<p><em>to</em>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">inverted</span> <span class="o">=</span> <span class="n">Drop</span><span class="p">(</span><span class="s">&#39;[^&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">interval</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">&amp;</span> <span class="n">Drop</span><span class="p">(</span><span class="s">&#39;]&#39;</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="n">invert</span>
+</pre></div>
+</div>
+<p><em>is the `invert` function no longer called?</em></p>
+<p>This is because of operator precedence.  <tt class="docutils literal"><span class="pre">&gt;&gt;</span></tt> binds more tightly than <tt class="docutils literal"><span class="pre">&gt;</span></tt>,
+so <tt class="docutils literal"><span class="pre">&gt;&gt;</span></tt> is applied only to the result from <a class="reference external" href="api/redirect.html#lepl.matchers.derived.Drop">Drop(&#8216;]&#8217;)</a>, which is an empty list
+(because <a class="reference external" href="api/redirect.html#lepl.matchers.derived.Drop">Drop()</a> discards the
+results).  Since the list is empty, the function <tt class="docutils literal"><span class="pre">invert</span></tt> is not called.</p>
+<p>To fix this place the entire expression in parentheses:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">inverted</span> <span class="o">=</span> <span class="p">(</span><span class="n">Drop</span><span class="p">(</span><span class="s">&#39;[^&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">interval</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">&amp;</span> <span class="n">Drop</span><span class="p">(</span><span class="s">&#39;]&#39;</span><span class="p">))</span> <span class="o">&gt;&gt;</span> <span class="n">invert</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="how-do-i-choose-between-and">
+<span id="faq-apply"></span><h2>How do I choose between &gt; and &gt;&gt; ?<a class="headerlink" href="#how-do-i-choose-between-and" title="Permalink to this headline">¶</a></h2>
+<p>To understand &gt; and &gt;&gt; it&#8217;s important that you first see that Lepl is designed
+to work with lists of results.  For example, <a class="reference external" href="api/redirect.html#lepl.matchers.core.Any">Any()</a>, the most basic
+matcher, places the matched character in a list:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">Any</span><span class="p">()</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;a&#39;</span><span class="p">)</span>
+<span class="go">[&#39;a&#39;]</span>
+</pre></div>
+</div>
+<p>Similarly, repetition returns a list of results:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">Any</span><span class="p">()[:]</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;ab&#39;</span><span class="p">)</span>
+<span class="go">[&#39;a&#39;, &#39;b&#39;]</span>
+</pre></div>
+</div>
+<p>as does <a class="reference external" href="api/redirect.html#lepl.matchers.combine.And">And()</a>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">Any</span><span class="p">()</span> <span class="o">&amp;</span> <span class="n">Any</span><span class="p">())</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;ab&#39;</span><span class="p">)</span>
+<span class="go">[&#39;a&#39;, &#39;b&#39;]</span>
+</pre></div>
+</div>
+<p>Even when the strings are joined, they are still in a list:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">Any</span><span class="p">()[:,</span> <span class="o">...</span><span class="p">]</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;ab&#39;</span><span class="p">)</span>
+<span class="go">[&#39;ab&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">Any</span><span class="p">()</span> <span class="o">+</span> <span class="n">Any</span><span class="p">())</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;ab&#39;</span><span class="p">)</span>
+<span class="go">[&#39;ab&#39;]</span>
+</pre></div>
+</div>
+<p>You may not want this &#8211; you may want a parser that returns a single object
+rather than a list.  The best way to return a single value is to wrap the
+<em>final</em> parser in an extra function that returns the first value from the
+list:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">my_letter_parser</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+<span class="gp">... </span>  <span class="k">return</span> <span class="n">Any</span><span class="p">()</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">text</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">my_letter_parser</span><span class="p">(</span><span class="s">&#39;a&#39;</span><span class="p">)</span>
+<span class="go">&#39;a&#39;</span>
+</pre></div>
+</div>
+<p>What does all this have to do with &gt; and &gt;&gt;?  It&#8217;s important because <em>you want
+the result of applying a function to return a list</em>.</p>
+<p>Given that, there are two obvious ways to apply functions to results.</p>
+<p>The first way is to take a a list of results (which might contain just one
+value &#8211; that&#8217;s completely normal and OK) and <strong>apply the function to each
+result in the list</strong>.  This is what <tt class="docutils literal"><span class="pre">&gt;&gt;</span></tt> does:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">add_x</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+<span class="gp">... </span>  <span class="k">return</span> <span class="n">text</span> <span class="o">+</span> <span class="s">&#39;x&#39;</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span> <span class="n">Any</span><span class="p">()</span> <span class="o">&gt;&gt;</span> <span class="n">add_x</span> <span class="p">)</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;a&#39;</span><span class="p">)</span>
+<span class="go">[&#39;ax&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span> <span class="p">(</span><span class="n">Any</span><span class="p">()</span> <span class="o">&amp;</span> <span class="n">Any</span><span class="p">())</span> <span class="o">&gt;&gt;</span> <span class="n">add_x</span> <span class="p">)</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;ab&#39;</span><span class="p">)</span>
+<span class="go">[&#39;ax&#39;, &#39;bx&#39;]</span>
+</pre></div>
+</div>
+<p>This (<tt class="docutils literal"><span class="pre">&gt;&gt;</span></tt>) is useful when:</p>
+<ul class="simple">
+<li>You want to modify each result, one at a time, all in the same way.</li>
+<li>You know that your matcher gives a <em>single</em> result, and you want to change
+it.  For example,<ul>
+<li>Translating escaped characters.</li>
+<li>Converting a number in a string to a float value.</li>
+</ul>
+</li>
+</ul>
+<p>Usually, if you are calling a <em>function</em> (<tt class="docutils literal"><span class="pre">float()</span></tt>, <tt class="docutils literal"><span class="pre">lambda</span></tt> etc) you
+want to use <tt class="docutils literal"><span class="pre">&gt;&gt;</span></tt>.</p>
+<p>The second way that you can process a list of results is by <strong>passing the
+entire list to a function</strong>.  Because we still want a list afterwards, Lepl
+<em>adds an extra list around the result</em>.  This is what <tt class="docutils literal"><span class="pre">&gt;</span></tt> does:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">first</span><span class="p">(</span><span class="n">my_list</span><span class="p">):</span>
+<span class="gp">... </span>  <span class="k">return</span> <span class="n">my_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span> <span class="n">Any</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">first</span> <span class="p">)</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;a&#39;</span><span class="p">)</span>
+<span class="go">[&#39;a&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span> <span class="p">(</span><span class="n">Any</span><span class="p">()</span> <span class="o">&amp;</span> <span class="n">Any</span><span class="p">())</span> <span class="o">&gt;</span> <span class="n">first</span> <span class="p">)</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;ab&#39;</span><span class="p">)</span>
+<span class="go">[&#39;a&#39;]</span>
+</pre></div>
+</div>
+<p>This is also useful for structuring results:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span> <span class="p">(</span><span class="n">Any</span><span class="p">()</span> <span class="o">&amp;</span> <span class="n">Any</span><span class="p">())</span> <span class="o">&gt;</span> <span class="nb">tuple</span> <span class="p">)</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;ab&#39;</span><span class="p">)</span>
+<span class="go">[(&#39;a&#39;, &#39;b&#39;)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span> <span class="p">(</span><span class="n">Any</span><span class="p">()</span> <span class="o">&amp;</span> <span class="n">Any</span><span class="p">())</span> <span class="o">&gt;</span> <span class="nb">list</span> <span class="p">)</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;ab&#39;</span><span class="p">)</span>
+<span class="go">[[&#39;a&#39;, &#39;b&#39;]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">((</span> <span class="p">(</span><span class="n">Any</span><span class="p">()</span> <span class="o">&amp;</span> <span class="n">Any</span><span class="p">())</span> <span class="o">&gt;</span> <span class="nb">list</span> <span class="p">)</span> <span class="o">&amp;</span> <span class="n">Any</span><span class="p">())</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;abc&#39;</span><span class="p">)</span>
+<span class="go">[[&#39;a&#39;, &#39;b&#39;], &#39;c&#39;]</span>
+</pre></div>
+</div>
+<p>So <tt class="docutils literal"><span class="pre">&gt;</span></tt> is useful when:</p>
+<ul class="simple">
+<li>You want to select some results.</li>
+<li>You want to build data structures around the results.</li>
+</ul>
+<p>Usually, if you are calling a <em>constructor</em> (<a class="reference external" href="api/redirect.html#lepl.support.node.Node">Node()</a>, <tt class="docutils literal"><span class="pre">tuple()</span></tt> etc.) you want to
+use <tt class="docutils literal"><span class="pre">&gt;</span></tt>.</p>
+</div>
+<div class="section" id="why-am-i-seeing-no-handlers-could-be-found-messages">
+<span id="faq-logging"></span><h2>Why am I seeing &#8220;No handlers could be found...&#8221; messages?<a class="headerlink" href="#why-am-i-seeing-no-handlers-could-be-found-messages" title="Permalink to this headline">¶</a></h2>
+<p><em>Why do I see this warning printed to stderr?</em></p>
+<div class="highlight-python"><pre>No handlers could be found for logger "lepl.parser.trampoline"</pre>
+</div>
+<p>This is because Lepl is sending messages to the Python logging system (usually
+debug information), but you don&#8217;t have logging configured.</p>
+<p>You can suppress the warning by adding the following somewhere in your code:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">logging</span> <span class="kn">import</span> <span class="n">basicConfig</span><span class="p">,</span> <span class="n">ERROR</span>
+<span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">ERROR</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>but only do this if you are not using the logging package!</p>
+</div>
+<div class="section" id="why-does-my-matcher-take-so-long-to-compile">
+<span id="faq-slowregexp"></span><h2>Why does my matcher take so long to compile?<a class="headerlink" href="#why-does-my-matcher-take-so-long-to-compile" title="Permalink to this headline">¶</a></h2>
+<p><em>Why is the matcher taking several seconds just to compile?</em></p>
+<p>You are probably using <a class="reference external" href="api/redirect.html#lepl.support.warn.Float">Float()</a> or <a class="reference external" href="api/redirect.html#lepl.matchers.derived.Real">Real()</a> which are being compiled
+internally to regular expressions.  The current regexp implementation is very
+ineffecient when compiling such values.</p>
+<p>In the future Lepl will move to a new regular expression engine.  For now, if
+you don&#8217;t need backtracking within the number and you are using a simple
+parser without tokens (ie. no lexer), you can use these replacements (which
+delegate to the system <tt class="docutils literal"><span class="pre">re</span></tt> library):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">Real</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">Regexp</span><span class="p">(</span><span class="s">r&#39;[\+\-]?(?:[0-9]*\.[0-9]+|[0-9]+\.|[0-9]+)(?:[eE][\+\-]?[0-9]+)?&#39;</span><span class="p">)</span>
+<span class="n">Float</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">Regexp</span><span class="p">(</span><span class="s">r&#39;[\+\-]?(?:[0-9]*\.[0-9]+(?:[eE][\+\-]?[0-9]+)?|[0-9]+\.(?:[eE][\+\-]?[0-9]+)?|[0-9]+[eE][\+\-]?[0-9]+)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>However, those will not improve the speed of the lexer (which will convert
+them back to the the internal DFA implementation).</p>
+<p>Another alternative is to use <a class="reference external" href="api/redirect.html#lepl.core.config.ConfigBuilder.no_compile_regexp">.config.no_compile_regexp()</a> which will avoid
+the compilation in some circumstances.  Again, this won&#8217;t help when the lexer
+is used.</p>
+<p>Finally, remember that you can avoid recompiling your parser by making your
+matcher just once and then re-using it.  It may be worth, for example,
+creating a matcher in a global variable (or during set-up for the entire
+suite) to re-use in a series of unit tests.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="contents.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Frequently Asked Questions</a><ul>
+<li><a class="reference internal" href="#why-do-i-get-cannot-parse-regexp">Why do I get &#8220;Cannot parse regexp...&#8221;?</a></li>
+<li><a class="reference internal" href="#why-isn-t-my-parser-matching-the-full-expression">Why isn&#8217;t my parser matching the full expression?</a></li>
+<li><a class="reference internal" href="#why-does-using-or-stop-a-full-match-from-happening">Why does using Or() stop a full match from happening?</a></li>
+<li><a class="reference internal" href="#how-do-i-parse-an-entire-file">How do I parse an entire file?</a></li>
+<li><a class="reference internal" href="#when-i-change-from-to-my-function-isn-t-called">When I change from &gt; to &gt;&gt; my function isn&#8217;t called</a></li>
+<li><a class="reference internal" href="#how-do-i-choose-between-and">How do I choose between &gt; and &gt;&gt; ?</a></li>
+<li><a class="reference internal" href="#why-am-i-seeing-no-handlers-could-be-found-messages">Why am I seeing &#8220;No handlers could be found...&#8221; messages?</a></li>
+<li><a class="reference internal" href="#why-does-my-matcher-take-so-long-to-compile">Why does my matcher take so long to compile?</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="licence.html"
+                        title="previous chapter">Licence</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/faq.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="licence.html" title="Licence"
+             >previous</a> |</li>
+        <li><a href="contents.html">LEPL 5.1.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2009-2011, Andrew Cooke.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

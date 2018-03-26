@@ -1,0 +1,147 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Features &mdash; LEPL 5.1.2 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '5.1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="LEPL 5.1.2 documentation" href="index.html" />
+    <link rel="next" title="A Tutorial for Lepl" href="intro.html" />
+    <link rel="prev" title="Lepl - Documentation" href="contents.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="intro.html" title="A Tutorial for Lepl"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="contents.html" title="Lepl - Documentation"
+             accesskey="P">previous</a> |</li>
+        <li><a href="contents.html">LEPL 5.1.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="features">
+<span id="id1"></span><h1>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h1>
+<p>Lepl combines the simplicity and ease&#8211;of&#8211;use of a recursive descent parser
+with scalability (through memoisation) and advanced (but optional) features
+like lexing, AST generation, offside&#8211;rule, robustness to ambiguous and
+left&#8211;recursive grammars, etc.</p>
+<ul class="simple">
+<li><em class="xref std std-ref">Parsers are Python code</em>, defined in Python itself.  No
+separate grammar is necessary.</li>
+<li>Friendly syntax using Python&#8217;s <a class="reference internal" href="operators.html#operators"><em>operators</em></a> allows grammars
+to be defined in a declarative style close to BNF.</li>
+<li>Optional, integrated <a class="reference internal" href="lexer.html#lexer"><em>lexer</em></a> simplifies handling whitespace.</li>
+<li>Built-in <a class="reference internal" href="nodes.html#trees"><em>AST support</em></a> with support for iteration, traversal
+and re&#8211;writing.</li>
+<li>Generic, pure-Python approach supports parsing a wide variety of data
+including <a class="reference internal" href="binary.html#binary"><em>binary data</em></a> (Python 3+ only).</li>
+<li>Well documented and extensible, modular design.</li>
+<li><a class="reference internal" href="implementation.html#trampolining"><em>Unlimited recursion depth</em></a>.  The underlying algorithm
+is recursive descent, which can exhaust the stack for complex grammars and
+large data sets.  Lepl avoids this problem by using Python generators as
+coroutines.</li>
+<li>The parser can itself be <em class="xref std std-ref">manipulated</em> by Python code.
+This gives unlimited opportunities for future expansion and optimisation.</li>
+<li>Support for <a class="reference internal" href="advanced.html#backtracking"><em>ambiguous grammars</em></a>.  A parser can return
+more than one result (&#8220;complete backtracking&#8221;, &#8220;parse forests&#8221;).</li>
+<li>Parsers can be made much more efficient with automatic <a class="reference internal" href="advanced.html#memoisation"><em>memoisation</em></a> (&#8220;packrat parsing&#8221;).</li>
+<li>Memoisation can detect and control <a class="reference internal" href="advanced.html#left-recursion"><em>left recursive grammars</em></a>.  Together with Lepl&#8217;s support for ambiguity this means
+that &#8220;any&#8221; grammar can be supported.</li>
+<li>Support for the &#8220;<a class="reference internal" href="offside.html#offside"><em>offside rule</em></a>&#8221; (significant indentation
+levels) when using the lexer.</li>
+<li>Trace and resource management, including <a class="reference internal" href="debugging.html#deepest-match"><em>deepest match</em></a> diagnostics and the ability to <a class="reference internal" href="resources.html#resources"><em>limit backtracking</em></a>.</li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="contents.html"
+                        title="previous chapter">Lepl - Documentation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="intro.html"
+                        title="next chapter">A Tutorial for Lepl</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/features.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="intro.html" title="A Tutorial for Lepl"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="contents.html" title="Lepl - Documentation"
+             >previous</a> |</li>
+        <li><a href="contents.html">LEPL 5.1.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2009-2011, Andrew Cooke.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

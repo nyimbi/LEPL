@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lepl.core._test.parser</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lepl-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lepl-module.html">Package&nbsp;lepl</a> ::
+        <a href="lepl.core-module.html">Package&nbsp;core</a> ::
+        <a href="lepl.core._test-module.html">Package&nbsp;_test</a> ::
+        Module&nbsp;parser
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lepl.core._test.parser-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="lepl.core._test.parser-module.html">Module lepl.core._test.parser</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment"># The contents of this file are subject to the Mozilla Public License</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-comment"># (MPL) Version 1.1 (the "License"); you may not use this file except</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-comment"># in compliance with the License. You may obtain a copy of the License</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-comment"># at http://www.mozilla.org/MPL/</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-comment"># Software distributed under the License is distributed on an "AS IS"</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-comment"># basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-comment"># the License for the specific language governing rights and</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-comment"># limitations under the License.</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-comment"># The Original Code is LEPL (http://www.acooke.org/lepl)</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-comment"># The Initial Developer of the Original Code is Andrew Cooke.</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-comment"># Portions created by the Initial Developer are Copyright (C) 2009-2010</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-comment"># Andrew Cooke (andrew@acooke.org). All Rights Reserved.</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-comment"># Alternatively, the contents of this file may be used under the terms</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt class="py-comment"># of the LGPL license (the GNU Lesser General Public License,</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-comment"># http://www.gnu.org/licenses/lgpl.html), in which case the provisions</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-comment"># of the LGPL License are applicable instead of those above.</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt class="py-comment"># If you wish to allow use of your version of this file only under the</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt class="py-comment"># terms of the LGPL License and not to allow others to use your version</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"><tt class="py-comment"># of this file under the MPL, indicate your decision by deleting the</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt class="py-comment"># provisions above and replace them with the notice and other provisions</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt class="py-comment"># required by the LGPL License.  If you do not delete the provisions</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"><tt class="py-comment"># above, a recipient may use your version of this file under either the</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"><tt class="py-comment"># MPL or the LGPL License.</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"><tt class="py-docstring">'''</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line"><tt class="py-docstring">Tests for the lepl.core.parser module.</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line"><tt class="py-docstring">'''</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">traceback</tt> <tt class="py-keyword">import</tt> <tt class="py-name">format_exc</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">types</tt> <tt class="py-keyword">import</tt> <tt class="py-name">MethodType</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">unittest</tt> <tt class="py-keyword">import</tt> <tt class="py-name">TestCase</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package lepl=lepl-module.html"><a title="lepl" class="py-name" href="#" onclick="return doclink('link-0', 'lepl', 'link-0');">lepl</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Module lepl.bin._test.matchers=lepl.bin._test.matchers-module.html,Module lepl.bin.matchers=lepl.bin.matchers-module.html,Module lepl.contrib.matchers=lepl.contrib.matchers-module.html,Module lepl.lexer._test.matchers=lepl.lexer._test.matchers-module.html,Module lepl.lexer.lines.matchers=lepl.lexer.lines.matchers-module.html,Module lepl.lexer.matchers=lepl.lexer.matchers-module.html,Package lepl.matchers=lepl.matchers-module.html,Module lepl.regexp._test.matchers=lepl.regexp._test.matchers-module.html,Module lepl.regexp.matchers=lepl.regexp.matchers-module.html"><a title="lepl.bin._test.matchers
+lepl.bin.matchers
+lepl.contrib.matchers
+lepl.lexer._test.matchers
+lepl.lexer.lines.matchers
+lepl.lexer.matchers
+lepl.matchers
+lepl.regexp._test.matchers
+lepl.regexp.matchers" class="py-name" href="#" onclick="return doclink('link-1', 'matchers', 'link-1');">matchers</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Package lepl.core=lepl.core-module.html,Module lepl.matchers._test.core=lepl.matchers._test.core-module.html,Module lepl.matchers.core=lepl.matchers.core-module.html,Module lepl.regexp._test.core=lepl.regexp._test.core-module.html,Module lepl.regexp.core=lepl.regexp.core-module.html,Module lepl.stream.core=lepl.stream.core-module.html"><a title="lepl.core
+lepl.matchers._test.core
+lepl.matchers.core
+lepl.regexp._test.core
+lepl.regexp.core
+lepl.stream.core" class="py-name" href="#" onclick="return doclink('link-2', 'core', 'link-2');">core</a></tt> <tt class="py-keyword">import</tt> <tt id="link-3" class="py-name" targets="Function lepl.matchers.core.Any()=lepl.matchers.core-module.html#Any"><a title="lepl.matchers.core.Any" class="py-name" href="#" onclick="return doclink('link-3', 'Any', 'link-3');">Any</a></tt><tt class="py-op">,</tt> <tt id="link-4" class="py-name" targets="Function lepl.matchers.core.Literal()=lepl.matchers.core-module.html#Literal"><a title="lepl.matchers.core.Literal" class="py-name" href="#" onclick="return doclink('link-4', 'Literal', 'link-4');">Literal</a></tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-5" class="py-name"><a title="lepl" class="py-name" href="#" onclick="return doclink('link-5', 'lepl', 'link-0');">lepl</a></tt><tt class="py-op">.</tt><tt id="link-6" class="py-name"><a title="lepl.bin._test.matchers
+lepl.bin.matchers
+lepl.contrib.matchers
+lepl.lexer._test.matchers
+lepl.lexer.lines.matchers
+lepl.lexer.matchers
+lepl.matchers
+lepl.regexp._test.matchers
+lepl.regexp.matchers" class="py-name" href="#" onclick="return doclink('link-6', 'matchers', 'link-1');">matchers</a></tt><tt class="py-op">.</tt><tt id="link-7" class="py-name" targets="Module lepl.lexer.support=lepl.lexer.support-module.html,Module lepl.matchers._test.support=lepl.matchers._test.support-module.html,Module lepl.matchers._test3.support=lepl.matchers._test3.support-module.html,Module lepl.matchers.support=lepl.matchers.support-module.html,Package lepl.support=lepl.support-module.html"><a title="lepl.lexer.support
+lepl.matchers._test.support
+lepl.matchers._test3.support
+lepl.matchers.support
+lepl.support" class="py-name" href="#" onclick="return doclink('link-7', 'support', 'link-7');">support</a></tt> <tt class="py-keyword">import</tt> <tt id="link-8" class="py-name" targets="Function lepl.matchers.support.function_matcher()=lepl.matchers.support-module.html#function_matcher"><a title="lepl.matchers.support.function_matcher" class="py-name" href="#" onclick="return doclink('link-8', 'function_matcher', 'link-8');">function_matcher</a></tt> </tt>
+<a name="InstanceMethodTest"></a><div id="InstanceMethodTest-def"><a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line"> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line"> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line"><tt class="py-comment"># pylint: disable-msg=C0103, C0111, C0301, W0702, C0324, C0102, E1101</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line"><tt class="py-comment"># (dude this is just a test)</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line"> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">     </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt> <a class="py-toggle" href="#" id="InstanceMethodTest-toggle" onclick="return toggle('InstanceMethodTest');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lepl.core._test.parser.InstanceMethodTest-class.html">InstanceMethodTest</a><tt class="py-op">(</tt><tt class="py-base-class">TestCase</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="InstanceMethodTest-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="InstanceMethodTest-expanded"><a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">     </tt>
+<a name="InstanceMethodTest.Foo"></a><div id="InstanceMethodTest.Foo-def"><a name="L48"></a><tt class="py-lineno"> 48</tt> <a class="py-toggle" href="#" id="InstanceMethodTest.Foo-toggle" onclick="return toggle('InstanceMethodTest.Foo');">-</a><tt class="py-line">    <tt class="py-keyword">class</tt> <a class="py-def-name" href="lepl.core._test.parser.InstanceMethodTest.Foo-class.html">Foo</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="InstanceMethodTest.Foo-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="InstanceMethodTest.Foo-expanded"><a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">        <tt id="link-9" class="py-name" targets="Variable lepl.core._test.parser.InstanceMethodTest.Foo.class_attribute=lepl.core._test.parser.InstanceMethodTest.Foo-class.html#class_attribute"><a title="lepl.core._test.parser.InstanceMethodTest.Foo.class_attribute" class="py-name" href="#" onclick="return doclink('link-9', 'class_attribute', 'link-9');">class_attribute</a></tt> <tt class="py-op">=</tt> <tt class="py-number">1</tt> </tt>
+<a name="InstanceMethodTest.Foo.__init__"></a><div id="InstanceMethodTest.Foo.__init__-def"><a name="L50"></a><tt class="py-lineno"> 50</tt> <a class="py-toggle" href="#" id="InstanceMethodTest.Foo.__init__-toggle" onclick="return toggle('InstanceMethodTest.Foo.__init__');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.core._test.parser.InstanceMethodTest.Foo-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="InstanceMethodTest.Foo.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++++++++++"></div><div id="InstanceMethodTest.Foo.__init__-expanded"><a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">instance_attribute</tt> <tt class="py-op">=</tt> <tt class="py-number">2</tt> </tt>
+</div><a name="InstanceMethodTest.Foo.bar"></a><div id="InstanceMethodTest.Foo.bar-def"><a name="L52"></a><tt class="py-lineno"> 52</tt> <a class="py-toggle" href="#" id="InstanceMethodTest.Foo.bar-toggle" onclick="return toggle('InstanceMethodTest.Foo.bar');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.core._test.parser.InstanceMethodTest.Foo-class.html#bar">bar</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="InstanceMethodTest.Foo.bar-collapsed" style="display:none;" pad="+++" indent="++++++++++++++++"></div><div id="InstanceMethodTest.Foo.bar-expanded"><a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-10" class="py-name"><a title="lepl.core._test.parser.InstanceMethodTest.Foo.class_attribute" class="py-name" href="#" onclick="return doclink('link-10', 'class_attribute', 'link-9');">class_attribute</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">                    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">instance_attribute</tt><tt class="py-op">,</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">                    <tt class="py-name">hasattr</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-string">'baz'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line"> </tt>
+<a name="InstanceMethodTest.test_method"></a><div id="InstanceMethodTest.test_method-def"><a name="L57"></a><tt class="py-lineno"> 57</tt> <a class="py-toggle" href="#" id="InstanceMethodTest.test_method-toggle" onclick="return toggle('InstanceMethodTest.test_method');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.core._test.parser.InstanceMethodTest-class.html#test_method">test_method</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="InstanceMethodTest.test_method-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="InstanceMethodTest.test_method-expanded"><a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">        <tt class="py-name">foo</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-11" class="py-name" targets="Class lepl.core._test.parser.InstanceMethodTest.Foo=lepl.core._test.parser.InstanceMethodTest.Foo-class.html"><a title="lepl.core._test.parser.InstanceMethodTest.Foo" class="py-name" href="#" onclick="return doclink('link-11', 'Foo', 'link-11');">Foo</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt class="py-name">foo</tt><tt class="py-op">.</tt><tt id="link-12" class="py-name" targets="Method lepl.core._test.parser.InstanceMethodTest.Foo.bar()=lepl.core._test.parser.InstanceMethodTest.Foo-class.html#bar"><a title="lepl.core._test.parser.InstanceMethodTest.Foo.bar" class="py-name" href="#" onclick="return doclink('link-12', 'bar', 'link-12');">bar</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-number">2</tt><tt class="py-op">,</tt> <tt class="py-name">False</tt><tt class="py-op">)</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">        <tt class="py-keyword">def</tt> <tt class="py-def-name">my_baz</tt><tt class="py-op">(</tt><tt class="py-param">myself</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-op">(</tt><tt class="py-name">myself</tt><tt class="py-op">.</tt><tt id="link-13" class="py-name"><a title="lepl.core._test.parser.InstanceMethodTest.Foo.class_attribute" class="py-name" href="#" onclick="return doclink('link-13', 'class_attribute', 'link-9');">class_attribute</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">                    <tt class="py-name">myself</tt><tt class="py-op">.</tt><tt class="py-name">instance_attribute</tt><tt class="py-op">,</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">                    <tt class="py-name">hasattr</tt><tt class="py-op">(</tt><tt class="py-name">myself</tt><tt class="py-op">,</tt> <tt class="py-string">'baz'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">        <tt class="py-comment"># pylint: disable-msg=W0201</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">        <tt class="py-name">foo</tt><tt class="py-op">.</tt><tt class="py-name">baz</tt> <tt class="py-op">=</tt> <tt class="py-name">MethodType</tt><tt class="py-op">(</tt><tt class="py-name">my_baz</tt><tt class="py-op">,</tt> <tt class="py-name">foo</tt><tt class="py-op">)</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt class="py-name">foo</tt><tt class="py-op">.</tt><tt class="py-name">baz</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-number">2</tt><tt class="py-op">,</tt> <tt class="py-name">True</tt><tt class="py-op">)</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt class="py-name">foo</tt><tt class="py-op">.</tt><tt id="link-14" class="py-name"><a title="lepl.core._test.parser.InstanceMethodTest.Foo.bar" class="py-name" href="#" onclick="return doclink('link-14', 'bar', 'link-12');">bar</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-number">2</tt><tt class="py-op">,</tt> <tt class="py-name">True</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line"> </tt>
+<a name="FlattenTest"></a><div id="FlattenTest-def"><a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line"> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">     </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt> <a class="py-toggle" href="#" id="FlattenTest-toggle" onclick="return toggle('FlattenTest');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lepl.core._test.parser.FlattenTest-class.html">FlattenTest</a><tt class="py-op">(</tt><tt class="py-base-class">TestCase</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="FlattenTest-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="FlattenTest-expanded"><a name="FlattenTest.test_flatten"></a><div id="FlattenTest.test_flatten-def"><a name="L72"></a><tt class="py-lineno"> 72</tt> <a class="py-toggle" href="#" id="FlattenTest.test_flatten-toggle" onclick="return toggle('FlattenTest.test_flatten');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.core._test.parser.FlattenTest-class.html#test_flatten">test_flatten</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="FlattenTest.test_flatten-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="FlattenTest.test_flatten-expanded"><a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">        <tt id="link-15" class="py-name" targets="Method lepl.matchers._test.combine.DirectionTest1.matcher()=lepl.matchers._test.combine.DirectionTest1-class.html#matcher,Method lepl.matchers._test.combine.DirectionTest2.matcher()=lepl.matchers._test.combine.DirectionTest2-class.html#matcher,Module lepl.matchers.matcher=lepl.matchers.matcher-module.html"><a title="lepl.matchers._test.combine.DirectionTest1.matcher
+lepl.matchers._test.combine.DirectionTest2.matcher
+lepl.matchers.matcher" class="py-name" href="#" onclick="return doclink('link-15', 'matcher', 'link-15');">matcher</a></tt> <tt class="py-op">=</tt> <tt id="link-16" class="py-name"><a title="lepl.matchers.core.Literal" class="py-name" href="#" onclick="return doclink('link-16', 'Literal', 'link-4');">Literal</a></tt><tt class="py-op">(</tt><tt class="py-string">'a'</tt><tt class="py-op">)</tt> <tt class="py-op">&amp;</tt> <tt id="link-17" class="py-name"><a title="lepl.matchers.core.Literal" class="py-name" href="#" onclick="return doclink('link-17', 'Literal', 'link-4');">Literal</a></tt><tt class="py-op">(</tt><tt class="py-string">'b'</tt><tt class="py-op">)</tt> <tt class="py-op">&amp;</tt> <tt id="link-18" class="py-name"><a title="lepl.matchers.core.Literal" class="py-name" href="#" onclick="return doclink('link-18', 'Literal', 'link-4');">Literal</a></tt><tt class="py-op">(</tt><tt class="py-string">'c'</tt><tt class="py-op">)</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt id="link-19" class="py-name" targets="Module lepl.regexp.str=lepl.regexp.str-module.html"><a title="lepl.regexp.str" class="py-name" href="#" onclick="return doclink('link-19', 'str', 'link-19');">str</a></tt><tt class="py-op">(</tt><tt id="link-20" class="py-name"><a title="lepl.matchers._test.combine.DirectionTest1.matcher
+lepl.matchers._test.combine.DirectionTest2.matcher
+lepl.matchers.matcher" class="py-name" href="#" onclick="return doclink('link-20', 'matcher', 'link-15');">matcher</a></tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-string">"And(And, Literal)"</tt><tt class="py-op">,</tt> <tt id="link-21" class="py-name"><a title="lepl.regexp.str" class="py-name" href="#" onclick="return doclink('link-21', 'str', 'link-19');">str</a></tt><tt class="py-op">(</tt><tt id="link-22" class="py-name"><a title="lepl.matchers._test.combine.DirectionTest1.matcher
+lepl.matchers._test.combine.DirectionTest2.matcher
+lepl.matchers.matcher" class="py-name" href="#" onclick="return doclink('link-22', 'matcher', 'link-15');">matcher</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">        <tt id="link-23" class="py-name"><a title="lepl.matchers._test.combine.DirectionTest1.matcher
+lepl.matchers._test.combine.DirectionTest2.matcher
+lepl.matchers.matcher" class="py-name" href="#" onclick="return doclink('link-23', 'matcher', 'link-15');">matcher</a></tt><tt class="py-op">.</tt><tt id="link-24" class="py-name" targets="Module lepl.core._test.config=lepl.core._test.config-module.html,Module lepl.core.config=lepl.core.config-module.html"><a title="lepl.core._test.config
+lepl.core.config" class="py-name" href="#" onclick="return doclink('link-24', 'config', 'link-24');">config</a></tt><tt class="py-op">.</tt><tt id="link-25" class="py-name" targets="Method lepl.core.config.ConfigBuilder.clear()=lepl.core.config.ConfigBuilder-class.html#clear,Method lepl.support.lib.CircularFifo.clear()=lepl.support.lib.CircularFifo-class.html#clear"><a title="lepl.core.config.ConfigBuilder.clear
+lepl.support.lib.CircularFifo.clear" class="py-name" href="#" onclick="return doclink('link-25', 'clear', 'link-25');">clear</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-26" class="py-name" targets="Method lepl.core.config.ConfigBuilder.flatten()=lepl.core.config.ConfigBuilder-class.html#flatten"><a title="lepl.core.config.ConfigBuilder.flatten" class="py-name" href="#" onclick="return doclink('link-26', 'flatten', 'link-26');">flatten</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">        <tt id="link-27" class="py-name" targets="Module lepl.core._test.parser=lepl.core._test.parser-module.html,Module lepl.core.parser=lepl.core.parser-module.html,Method lepl.lexer.lines._test.pithon.PithonTest.parser()=lepl.lexer.lines._test.pithon.PithonTest-class.html#parser,Method lepl.lexer.lines._test.text.TextTest.parser()=lepl.lexer.lines._test.text.TextTest-class.html#parser"><a title="lepl.core._test.parser
+lepl.core.parser
+lepl.lexer.lines._test.pithon.PithonTest.parser
+lepl.lexer.lines._test.text.TextTest.parser" class="py-name" href="#" onclick="return doclink('link-27', 'parser', 'link-27');">parser</a></tt> <tt class="py-op">=</tt> <tt id="link-28" class="py-name"><a title="lepl.matchers._test.combine.DirectionTest1.matcher
+lepl.matchers._test.combine.DirectionTest2.matcher
+lepl.matchers.matcher" class="py-name" href="#" onclick="return doclink('link-28', 'matcher', 'link-15');">matcher</a></tt><tt class="py-op">.</tt><tt id="link-29" class="py-name" targets="Method lepl.core.config.ParserMixin.get_parse_string()=lepl.core.config.ParserMixin-class.html#get_parse_string"><a title="lepl.core.config.ParserMixin.get_parse_string" class="py-name" href="#" onclick="return doclink('link-29', 'get_parse_string', 'link-29');">get_parse_string</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt id="link-30" class="py-name"><a title="lepl.regexp.str" class="py-name" href="#" onclick="return doclink('link-30', 'str', 'link-19');">str</a></tt><tt class="py-op">(</tt><tt id="link-31" class="py-name"><a title="lepl.core._test.parser
+lepl.core.parser
+lepl.lexer.lines._test.pithon.PithonTest.parser
+lepl.lexer.lines._test.text.TextTest.parser" class="py-name" href="#" onclick="return doclink('link-31', 'parser', 'link-27');">parser</a></tt><tt class="py-op">.</tt><tt id="link-32" class="py-name"><a title="lepl.matchers._test.combine.DirectionTest1.matcher
+lepl.matchers._test.combine.DirectionTest2.matcher
+lepl.matchers.matcher" class="py-name" href="#" onclick="return doclink('link-32', 'matcher', 'link-15');">matcher</a></tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-string">"And(Literal, Literal, Literal)"</tt><tt class="py-op">,</tt> <tt id="link-33" class="py-name"><a title="lepl.regexp.str" class="py-name" href="#" onclick="return doclink('link-33', 'str', 'link-19');">str</a></tt><tt class="py-op">(</tt><tt id="link-34" class="py-name"><a title="lepl.core._test.parser
+lepl.core.parser
+lepl.lexer.lines._test.pithon.PithonTest.parser
+lepl.lexer.lines._test.text.TextTest.parser" class="py-name" href="#" onclick="return doclink('link-34', 'parser', 'link-27');">parser</a></tt><tt class="py-op">.</tt><tt id="link-35" class="py-name"><a title="lepl.matchers._test.combine.DirectionTest1.matcher
+lepl.matchers._test.combine.DirectionTest2.matcher
+lepl.matchers.matcher" class="py-name" href="#" onclick="return doclink('link-35', 'matcher', 'link-15');">matcher</a></tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line"> </tt>
+<a name="RepeatTest"></a><div id="RepeatTest-def"><a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line"> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt> <a class="py-toggle" href="#" id="RepeatTest-toggle" onclick="return toggle('RepeatTest');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lepl.core._test.parser.RepeatTest-class.html">RepeatTest</a><tt class="py-op">(</tt><tt class="py-base-class">TestCase</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="RepeatTest-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="RepeatTest-expanded"><a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">     </tt>
+<a name="RepeatTest.test_depth"></a><div id="RepeatTest.test_depth-def"><a name="L82"></a><tt class="py-lineno"> 82</tt> <a class="py-toggle" href="#" id="RepeatTest.test_depth-toggle" onclick="return toggle('RepeatTest.test_depth');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.core._test.parser.RepeatTest-class.html#test_depth">test_depth</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="RepeatTest.test_depth-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="RepeatTest.test_depth-expanded"><a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">        <tt id="link-36" class="py-name"><a title="lepl.matchers._test.combine.DirectionTest1.matcher
+lepl.matchers._test.combine.DirectionTest2.matcher
+lepl.matchers.matcher" class="py-name" href="#" onclick="return doclink('link-36', 'matcher', 'link-15');">matcher</a></tt> <tt class="py-op">=</tt> <tt id="link-37" class="py-name"><a title="lepl.matchers.core.Any" class="py-name" href="#" onclick="return doclink('link-37', 'Any', 'link-3');">Any</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-op">:</tt><tt class="py-op">,</tt><tt class="py-op">.</tt><tt class="py-op">.</tt><tt class="py-op">.</tt><tt class="py-op">]</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">        <tt id="link-38" class="py-name"><a title="lepl.matchers._test.combine.DirectionTest1.matcher
+lepl.matchers._test.combine.DirectionTest2.matcher
+lepl.matchers.matcher" class="py-name" href="#" onclick="return doclink('link-38', 'matcher', 'link-15');">matcher</a></tt><tt class="py-op">.</tt><tt id="link-39" class="py-name"><a title="lepl.core._test.config
+lepl.core.config" class="py-name" href="#" onclick="return doclink('link-39', 'config', 'link-24');">config</a></tt><tt class="py-op">.</tt><tt id="link-40" class="py-name"><a title="lepl.core.config.ConfigBuilder.clear
+lepl.support.lib.CircularFifo.clear" class="py-name" href="#" onclick="return doclink('link-40', 'clear', 'link-25');">clear</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">        <tt id="link-41" class="py-name"><a title="lepl.matchers._test.combine.DirectionTest1.matcher
+lepl.matchers._test.combine.DirectionTest2.matcher
+lepl.matchers.matcher" class="py-name" href="#" onclick="return doclink('link-41', 'matcher', 'link-15');">matcher</a></tt> <tt class="py-op">=</tt> <tt id="link-42" class="py-name"><a title="lepl.matchers._test.combine.DirectionTest1.matcher
+lepl.matchers._test.combine.DirectionTest2.matcher
+lepl.matchers.matcher" class="py-name" href="#" onclick="return doclink('link-42', 'matcher', 'link-15');">matcher</a></tt><tt class="py-op">.</tt><tt id="link-43" class="py-name" targets="Method lepl.core.config.ParserMixin.get_match_string()=lepl.core.config.ParserMixin-class.html#get_match_string"><a title="lepl.core.config.ParserMixin.get_match_string" class="py-name" href="#" onclick="return doclink('link-43', 'get_match_string', 'link-43');">get_match_string</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">        <tt class="py-comment">#print(repr(matcher.matcher))</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">        <tt class="py-name">results</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">m</tt> <tt class="py-keyword">for</tt> <tt class="py-op">(</tt><tt class="py-name">m</tt><tt class="py-op">,</tt> <tt class="py-name">_s</tt><tt class="py-op">)</tt> <tt class="py-keyword">in</tt> <tt id="link-44" class="py-name"><a title="lepl.matchers._test.combine.DirectionTest1.matcher
+lepl.matchers._test.combine.DirectionTest2.matcher
+lepl.matchers.matcher" class="py-name" href="#" onclick="return doclink('link-44', 'matcher', 'link-15');">matcher</a></tt><tt class="py-op">(</tt><tt class="py-string">'abc'</tt><tt class="py-op">)</tt><tt class="py-op">]</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt class="py-name">results</tt> <tt class="py-op">==</tt> <tt class="py-op">[</tt><tt class="py-op">[</tt><tt class="py-string">'abc'</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-op">[</tt><tt class="py-string">'ab'</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-op">[</tt><tt class="py-string">'a'</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">results</tt> </tt>
+</div><a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line"> </tt>
+<a name="RepeatTest.test_breadth"></a><div id="RepeatTest.test_breadth-def"><a name="L90"></a><tt class="py-lineno"> 90</tt> <a class="py-toggle" href="#" id="RepeatTest.test_breadth-toggle" onclick="return toggle('RepeatTest.test_breadth');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.core._test.parser.RepeatTest-class.html#test_breadth">test_breadth</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="RepeatTest.test_breadth-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="RepeatTest.test_breadth-expanded"><a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">        <tt id="link-45" class="py-name"><a title="lepl.matchers._test.combine.DirectionTest1.matcher
+lepl.matchers._test.combine.DirectionTest2.matcher
+lepl.matchers.matcher" class="py-name" href="#" onclick="return doclink('link-45', 'matcher', 'link-15');">matcher</a></tt> <tt class="py-op">=</tt> <tt id="link-46" class="py-name"><a title="lepl.matchers.core.Any" class="py-name" href="#" onclick="return doclink('link-46', 'Any', 'link-3');">Any</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-op">:</tt><tt class="py-op">:</tt><tt class="py-string">'b'</tt><tt class="py-op">,</tt><tt class="py-op">.</tt><tt class="py-op">.</tt><tt class="py-op">.</tt><tt class="py-op">]</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">        <tt id="link-47" class="py-name"><a title="lepl.matchers._test.combine.DirectionTest1.matcher
+lepl.matchers._test.combine.DirectionTest2.matcher
+lepl.matchers.matcher" class="py-name" href="#" onclick="return doclink('link-47', 'matcher', 'link-15');">matcher</a></tt><tt class="py-op">.</tt><tt id="link-48" class="py-name"><a title="lepl.core._test.config
+lepl.core.config" class="py-name" href="#" onclick="return doclink('link-48', 'config', 'link-24');">config</a></tt><tt class="py-op">.</tt><tt id="link-49" class="py-name"><a title="lepl.core.config.ConfigBuilder.clear
+lepl.support.lib.CircularFifo.clear" class="py-name" href="#" onclick="return doclink('link-49', 'clear', 'link-25');">clear</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">        <tt id="link-50" class="py-name"><a title="lepl.matchers._test.combine.DirectionTest1.matcher
+lepl.matchers._test.combine.DirectionTest2.matcher
+lepl.matchers.matcher" class="py-name" href="#" onclick="return doclink('link-50', 'matcher', 'link-15');">matcher</a></tt> <tt class="py-op">=</tt> <tt id="link-51" class="py-name"><a title="lepl.matchers._test.combine.DirectionTest1.matcher
+lepl.matchers._test.combine.DirectionTest2.matcher
+lepl.matchers.matcher" class="py-name" href="#" onclick="return doclink('link-51', 'matcher', 'link-15');">matcher</a></tt><tt class="py-op">.</tt><tt id="link-52" class="py-name"><a title="lepl.core.config.ParserMixin.get_match_string" class="py-name" href="#" onclick="return doclink('link-52', 'get_match_string', 'link-43');">get_match_string</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">        <tt class="py-name">results</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">m</tt> <tt class="py-keyword">for</tt> <tt class="py-op">(</tt><tt class="py-name">m</tt><tt class="py-op">,</tt> <tt class="py-name">_s</tt><tt class="py-op">)</tt> <tt class="py-keyword">in</tt> <tt id="link-53" class="py-name"><a title="lepl.matchers._test.combine.DirectionTest1.matcher
+lepl.matchers._test.combine.DirectionTest2.matcher
+lepl.matchers.matcher" class="py-name" href="#" onclick="return doclink('link-53', 'matcher', 'link-15');">matcher</a></tt><tt class="py-op">(</tt><tt class="py-string">'abc'</tt><tt class="py-op">)</tt><tt class="py-op">]</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt class="py-name">results</tt> <tt class="py-op">==</tt> <tt class="py-op">[</tt><tt class="py-op">[</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-op">[</tt><tt class="py-string">'a'</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-op">[</tt><tt class="py-string">'ab'</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-op">[</tt><tt class="py-string">'abc'</tt><tt class="py-op">]</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">results</tt> </tt>
+</div></div><a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line"> </tt>
+<a name="ErrorTest"></a><div id="ErrorTest-def"><a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line"> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt> <a class="py-toggle" href="#" id="ErrorTest-toggle" onclick="return toggle('ErrorTest');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lepl.core._test.parser.ErrorTest-class.html">ErrorTest</a><tt class="py-op">(</tt><tt class="py-base-class">TestCase</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ErrorTest-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="ErrorTest-expanded"><a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">     </tt>
+<a name="ErrorTest.test_error"></a><div id="ErrorTest.test_error-def"><a name="L100"></a><tt class="py-lineno">100</tt> <a class="py-toggle" href="#" id="ErrorTest.test_error-toggle" onclick="return toggle('ErrorTest.test_error');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lepl.core._test.parser.ErrorTest-class.html#test_error">test_error</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ErrorTest.test_error-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="ErrorTest.test_error-expanded"><a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">        <tt class="py-keyword">class</tt> <tt class="py-def-name">TestException</tt><tt class="py-op">(</tt><tt class="py-base-class">Exception</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> <tt class="py-keyword">pass</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">        <tt class="py-decorator">@</tt><tt class="py-decorator">function_matcher</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">        <tt class="py-keyword">def</tt> <tt class="py-def-name">Error</tt><tt class="py-op">(</tt><tt class="py-param">supprt</tt><tt class="py-op">,</tt> <tt class="py-param">stream</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt class="py-name">TestException</tt><tt class="py-op">(</tt><tt class="py-string">'here'</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">        <tt id="link-54" class="py-name"><a title="lepl.matchers._test.combine.DirectionTest1.matcher
+lepl.matchers._test.combine.DirectionTest2.matcher
+lepl.matchers.matcher" class="py-name" href="#" onclick="return doclink('link-54', 'matcher', 'link-15');">matcher</a></tt> <tt class="py-op">=</tt> <tt id="link-55" class="py-name" targets="Class lepl.matchers.error.Error=lepl.matchers.error.Error-class.html"><a title="lepl.matchers.error.Error" class="py-name" href="#" onclick="return doclink('link-55', 'Error', 'link-55');">Error</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">        <tt id="link-56" class="py-name"><a title="lepl.matchers._test.combine.DirectionTest1.matcher
+lepl.matchers._test.combine.DirectionTest2.matcher
+lepl.matchers.matcher" class="py-name" href="#" onclick="return doclink('link-56', 'matcher', 'link-15');">matcher</a></tt><tt class="py-op">.</tt><tt id="link-57" class="py-name"><a title="lepl.core._test.config
+lepl.core.config" class="py-name" href="#" onclick="return doclink('link-57', 'config', 'link-24');">config</a></tt><tt class="py-op">.</tt><tt id="link-58" class="py-name"><a title="lepl.core.config.ConfigBuilder.clear
+lepl.support.lib.CircularFifo.clear" class="py-name" href="#" onclick="return doclink('link-58', 'clear', 'link-25');">clear</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">        <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">            <tt id="link-59" class="py-name"><a title="lepl.matchers._test.combine.DirectionTest1.matcher
+lepl.matchers._test.combine.DirectionTest2.matcher
+lepl.matchers.matcher" class="py-name" href="#" onclick="return doclink('link-59', 'matcher', 'link-15');">matcher</a></tt><tt class="py-op">.</tt><tt id="link-60" class="py-name" targets="Function lepl.bin.literal.parse()=lepl.bin.literal-module.html#parse,Method lepl.core.config.ParserMixin.parse()=lepl.core.config.ParserMixin-class.html#parse,Method lepl.regexp.core.Alphabet.parse()=lepl.regexp.core.Alphabet-class.html#parse,Method lepl.regexp.str.StrAlphabet.parse()=lepl.regexp.str.StrAlphabet-class.html#parse"><a title="lepl.bin.literal.parse
+lepl.core.config.ParserMixin.parse
+lepl.regexp.core.Alphabet.parse
+lepl.regexp.str.StrAlphabet.parse" class="py-name" href="#" onclick="return doclink('link-60', 'parse', 'link-60');">parse</a></tt><tt class="py-op">(</tt><tt class="py-string">'a'</tt><tt class="py-op">)</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt> <tt class="py-name">TestException</tt><tt class="py-op">:</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">            <tt id="link-61" class="py-name" targets="Module lepl.core.trace=lepl.core.trace-module.html"><a title="lepl.core.trace" class="py-name" href="#" onclick="return doclink('link-61', 'trace', 'link-61');">trace</a></tt> <tt class="py-op">=</tt> <tt class="py-name">format_exc</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line">            <tt class="py-keyword">assert</tt> <tt class="py-string">"TestException('here')"</tt> <tt class="py-keyword">in</tt> <tt id="link-62" class="py-name"><a title="lepl.core.trace" class="py-name" href="#" onclick="return doclink('link-62', 'trace', 'link-61');">trace</a></tt><tt class="py-op">,</tt> <tt id="link-63" class="py-name"><a title="lepl.core.trace" class="py-name" href="#" onclick="return doclink('link-63', 'trace', 'link-61');">trace</a></tt> </tt>
+</div></div><a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lepl-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sun May 13 16:31:09 2012
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>
